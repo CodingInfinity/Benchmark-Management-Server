@@ -18,7 +18,7 @@ public class Authority extends AbstractBaseEntity {
     private static final long serialVersionUID = -5809085928075081335L;
 
     @NotNull
-    @Size(min = 0, max = 50)
+    @Size(min = 1, max = 50)
     @Id
     @Column(length = 50)
     private String name;
