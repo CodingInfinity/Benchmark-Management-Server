@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.inject.Inject;
 
@@ -28,9 +29,16 @@ public class OAuthConfiguration {
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
+        @Inject
+        private LogoutSuccessHandler logoutSuccessHandler;
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http
+                    .logout()
+                    .logoutUrl("/api/logout")
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                .and()
                     .csrf()
                     .disable()
                     .headers()
@@ -58,8 +66,8 @@ public class OAuthConfiguration {
                 throws Exception {
 
             endpoints
-                    .tokenStore(tokenStore())
-                    .authenticationManager(authenticationManager);
+                .tokenStore(tokenStore())
+                .authenticationManager(authenticationManager);
         }
 
         @Override
@@ -70,13 +78,13 @@ public class OAuthConfiguration {
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients
-                    .inMemory()
-                    .withClient("acme")
-                    .scopes("read", "write")
-                    .authorities("ROLE_USER")
-                    .authorizedGrantTypes("password", "refresh_token", "authorization_code", "implicit")
-                    .secret("acmesecret")
-                    .accessTokenValiditySeconds(1800);
+                .inMemory()
+                .withClient("acme")
+                .scopes("read", "write")
+                .authorities("ROLE_USER")
+                .authorizedGrantTypes("password", "refresh_token", "authorization_code", "implicit")
+                .secret("acmesecret")
+                .accessTokenValiditySeconds(1800);
         }
     }
 }
