@@ -23,4 +23,8 @@ public final class RandomUtils {
     public static String generateResetKey() {
         return RandomStringUtils.randomNumeric(STRING_LENGTH);
     }
+
+    public static int getStringLength() {
+        return STRING_LENGTH;
+    }
 }
