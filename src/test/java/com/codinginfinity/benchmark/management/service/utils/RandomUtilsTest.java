@@ -2,12 +2,9 @@ package com.codinginfinity.benchmark.management.service.utils;
 
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import org.apache.commons.lang.StringUtils;
-import org.hsqldb.lib.StringUtil;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by andrew on 2016/06/19.
