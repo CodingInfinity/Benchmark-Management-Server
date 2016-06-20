@@ -5,6 +5,7 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.AuthorityRepository;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
+import com.codinginfinity.benchmark.managenent.security.SecurityUtils;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
@@ -120,6 +121,22 @@ public class UserManagementImpl implements UserManagement {
         newUser = userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return new CreateUserResponse(newUser);
+    }
+
+    @Override
+    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
+    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException {
+        Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
+        if (!user.isPresent()) {
+            throw new NonExistentException("User in current security context doesn't exist");
+        }
+
+        user.get().setFirstName(request.getFirstName());
+        user.get().setLastName(request.getLastName());
+        user.get().setEmail(request.getEmail());
+        User savedUser = userRepository.save(user.get());
+        log.debug("Changed Information for User: {}", user.get());
+        return new UpdateUserResponse(savedUser);
     }
 
     @Override
