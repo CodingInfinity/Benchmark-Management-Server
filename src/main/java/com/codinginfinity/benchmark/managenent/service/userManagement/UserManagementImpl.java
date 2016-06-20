@@ -1,14 +1,20 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement;
 
+import com.codinginfinity.benchmark.managenent.domain.Authority;
 import com.codinginfinity.benchmark.managenent.domain.User;
+import com.codinginfinity.benchmark.managenent.repository.AuthorityRepository;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
+import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.ActivateRegistrationRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
+import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.ActivateRegistrationResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.CompletePasswordResetResponse;
+import com.codinginfinity.benchmark.managenent.service.userManagement.response.CreateUserResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.RequestPasswordResetResponse;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +23,10 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by andrew on 2016/06/19.
@@ -29,6 +37,9 @@ public class UserManagementImpl implements UserManagement {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private AuthorityRepository authorityRepository;
 
     @Inject
     private PasswordEncoder passwordEncoder;
@@ -90,5 +101,29 @@ public class UserManagementImpl implements UserManagement {
         user.get().setResetDate(null);
         user.get().setResetKey(null);
         return new CompletePasswordResetResponse(userRepository.save(user.get()));
+    }
+
+    @Override
+    public CreateUserResponse createUser(CreateUserRequest request) throws DuplicateUsernameException {
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        if (user.isPresent()) {
+            throw new DuplicateUsernameException("Username already exists");
+        }
+
+        User newUser = new User();
+        newUser.setUsername(request.getUsername());
+        String encryptedPassword = passwordEncoder.encode(request.getPassword());
+        newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setEmail(request.getEmail());
+        newUser.setActivated(false);
+        Set<Authority> authorities = new HashSet<>();
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        authorities.add(authority);
+        newUser.setAuthorities(authorities);
+        newUser = userRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return new CreateUserResponse(newUser);
     }
 }
