@@ -149,4 +149,19 @@ public class UserManagementImpl implements UserManagement {
         log.debug("Deleted User: {}", user.get());
         return new DeleteUserResponse(user.get());
     }
+
+    @Override
+    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
+    public ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException {
+        Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
+        if (!user.isPresent()) {
+            throw new NonExistentException("User in current security context doesn't exist");
+        }
+
+        String encryptedPassword = passwordEncoder.encode(request.getPassword());
+        user.get().setPassword(encryptedPassword);
+        userRepository.save(user.get());
+        log.debug("Changed password for User: {}", user.get());
+        return new ChangePasswordResponse();
+    }
 }

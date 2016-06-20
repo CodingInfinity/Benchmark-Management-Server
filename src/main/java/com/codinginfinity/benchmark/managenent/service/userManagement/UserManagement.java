@@ -18,4 +18,5 @@ public interface UserManagement {
     CreateUserResponse createUser(CreateUserRequest request) throws DuplicateUsernameException;
     UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException;
     DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException;
+    ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException;
 }
