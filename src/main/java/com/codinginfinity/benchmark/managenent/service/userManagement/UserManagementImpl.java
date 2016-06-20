@@ -4,10 +4,13 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
+import com.codinginfinity.benchmark.managenent.service.userManagement.response.CompletePasswordResetResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.RequestPasswordResetResponse;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -24,6 +27,9 @@ public class UserManagementImpl implements UserManagement {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
@@ -46,5 +52,25 @@ public class UserManagementImpl implements UserManagement {
         user.get().setResetDate(ZonedDateTime.now());
         user = Optional.of(userRepository.save(user.get()));
         return new RequestPasswordResetResponse(user);
+    }
+
+    @Override
+    public CompletePasswordResetResponse completePasswordReset(CompletePasswordResetRequest request) throws NotAuthorizedException {
+        log.debug("Reset user password for reset key {}", request.getKey());
+
+        Optional<User> user = userRepository.findOneByResetKey(request.getKey());
+        if (!user.isPresent()) {
+            throw new NotAuthorizedException("Invalid reset key");
+        }
+
+        ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
+        if (user.get().getResetDate().isBefore(oneDayAgo)) {
+            throw new NotAuthorizedException("Reset key expired");
+        }
+
+        user.get().setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.get().setResetDate(null);
+        user.get().setResetKey(null);
+        return new CompletePasswordResetResponse(userRepository.save(user.get()));
     }
 }
