@@ -8,14 +8,9 @@ import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.ActivateRegistrationRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUserRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.response.ActivateRegistrationResponse;
-import com.codinginfinity.benchmark.managenent.service.userManagement.response.CompletePasswordResetResponse;
-import com.codinginfinity.benchmark.managenent.service.userManagement.response.CreateUserResponse;
-import com.codinginfinity.benchmark.managenent.service.userManagement.response.RequestPasswordResetResponse;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
+import com.codinginfinity.benchmark.managenent.service.userManagement.response.*;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -125,5 +120,16 @@ public class UserManagementImpl implements UserManagement {
         newUser = userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return new CreateUserResponse(newUser);
+    }
+
+    @Override
+    public DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException {
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        if (!user.isPresent()) {
+            throw new NonExistentException("User does not exist");
+        }
+        userRepository.delete(user.get());
+        log.debug("Deleted User: {}", user.get());
+        return new DeleteUserResponse(user.get());
     }
 }
