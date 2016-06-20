@@ -261,7 +261,7 @@ public class UserTest {
     @Test
     public void resetDateMustBePastTest() {
         User user = createUser();
-        user.setResetDate(ZonedDateTime.now());
+        user.setResetDate(ZonedDateTime.now().minusMinutes(1));
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(0, violations.size());
     }
