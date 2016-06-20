@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement.request;
 
-import com.codinginfinity.benchmark.managenent.Request;
+import com.codinginfinity.benchmark.managenent.service.Request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

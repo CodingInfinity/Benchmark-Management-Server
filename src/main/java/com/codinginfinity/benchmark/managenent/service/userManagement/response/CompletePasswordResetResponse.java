@@ -1,7 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement.response;
 
-import com.codinginfinity.benchmark.managenent.Response;
 import com.codinginfinity.benchmark.managenent.domain.User;
+import com.codinginfinity.benchmark.managenent.service.Response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
