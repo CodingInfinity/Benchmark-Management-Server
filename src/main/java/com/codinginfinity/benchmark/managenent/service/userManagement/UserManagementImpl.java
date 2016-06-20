@@ -4,8 +4,10 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.request.ActivateRegistrationRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
+import com.codinginfinity.benchmark.managenent.service.userManagement.response.ActivateRegistrationResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.CompletePasswordResetResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.RequestPasswordResetResponse;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
@@ -30,6 +32,22 @@ public class UserManagementImpl implements UserManagement {
 
     @Inject
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public ActivateRegistrationResponse activateRegistration(ActivateRegistrationRequest request) throws NotAuthorizedException {
+        log.debug("Activating user for activation key {}", request.getKey());
+
+        Optional<User> user = userRepository.findOneByActivationKey(request.getKey());
+        if (!user.isPresent()) {
+            throw new NotAuthorizedException("Invalid activation key");
+        }
+
+        user.get().setActivated(true);
+        user.get().setActivationKey(null);
+        User savedUser = userRepository.save(user.get());
+        log.debug("Activated user: {}", savedUser);
+        return new ActivateRegistrationResponse(savedUser);
+    }
 
     @Override
     public RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
