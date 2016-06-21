@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.service.userManagement;
+package com.codinginfinity.benchmark.managenent.service.userManagement.exceptions;
 
 /**
  * Created by andrew on 2016/06/19.

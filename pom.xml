@@ -35,6 +35,10 @@
         <sortpom-maven-plugin.version>2.5.0</sortpom-maven-plugin.version>
         <spring-framework.version>4.2.0.RELEASE</spring-framework.version>
         <spring-security-oauth2.version>2.0.10.RELEASE</spring-security-oauth2.version>
+
+        <!-- Testing environment -->
+        <jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
+        <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
     </properties>
 
     <dependencies>
@@ -164,16 +168,25 @@
                 <version>4.2.0</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m ${surefireArgLine}</argLine>
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.6.201602180812</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>pre-unit-test</id>
+                        <id>pre-unit-tests</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                         <configuration>
+                            <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
                             <propertyName>surefireArgLine</propertyName>
                         </configuration>
                     </execution>
@@ -183,6 +196,10 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <dataFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</dataFile>
+                            <outputDirectory>${project.testresult.directory}/coverage/jacoco</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
