@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.management.service.notification;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendEmailRequest;
 import org.junit.After;
@@ -8,16 +8,13 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.subethamail.wiser.Wiser;
 
 import javax.inject.Inject;
@@ -33,9 +30,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by andrew on 2016/06/21.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class SendEmailTest {
+public class SendEmailTest extends AbstractTest {
 
     private Wiser wiser;
 

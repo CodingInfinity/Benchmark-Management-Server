@@ -1,23 +1,19 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
@@ -28,9 +24,7 @@ import static org.junit.Assert.*;
 /**
  * Created by andrew on 2016/06/20.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class CompeletePasswordResetTest {
+public class CompeletePasswordResetTest extends AbstractTest {
 
     @Mock
     private UserRepository userRepository;

@@ -1,26 +1,22 @@
 package com.codinginfinity.benchmark.management.service.notification;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendPasswordResetMailRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.subethamail.wiser.Wiser;
 import org.thymeleaf.TemplateEngine;
 
@@ -40,10 +36,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by andrew on 2016/06/21.
  */
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class SendPasswordResetMailTest {
+public class SendPasswordResetMailTest extends AbstractTest {
 
     private Wiser wiser;
 
@@ -103,7 +96,7 @@ public class SendPasswordResetMailTest {
         /* Assert that the message is as expected */
         assertEquals("Activation Email", message.getSubject());
         String content = (String) message.getContent();
-        assertTrue(content.contains("email.reset.text1"));
+        assertTrue(content.contains("Reset"));
         /* We are sending a plain text message, ensure message is not multipart by trying to cast content of message,
          * which should be a string to a Multipart class. Should fail with ClassCastException
          */

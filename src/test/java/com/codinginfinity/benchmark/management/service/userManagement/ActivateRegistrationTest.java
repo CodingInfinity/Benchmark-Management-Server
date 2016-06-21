@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
@@ -12,16 +12,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
-import javax.mail.MessagingException;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -31,9 +26,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by andrew on 2016/06/20.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class ActivateRegistrationTest {
+public class ActivateRegistrationTest extends AbstractTest{
 
     @Mock
     private UserRepository userRepository;

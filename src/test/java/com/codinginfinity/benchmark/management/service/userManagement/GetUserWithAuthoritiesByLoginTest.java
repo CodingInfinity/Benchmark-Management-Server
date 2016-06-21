@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.Authority;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
@@ -12,12 +12,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.HashSet;
@@ -31,9 +28,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by andrew on 2016/06/21.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class GetUserWithAuthoritiesByLoginTest {
+public class GetUserWithAuthoritiesByLoginTest extends AbstractTest {
 
     @Mock
     private UserRepository userRepository;

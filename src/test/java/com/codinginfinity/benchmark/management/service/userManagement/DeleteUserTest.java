@@ -1,24 +1,18 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
+import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.DeleteUserRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -29,9 +23,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by andrew on 2016/06/20.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ManagementApp.class)
-public class DeleteUserTest {
+public class DeleteUserTest extends AbstractTest {
 
     private UserRepository userRepository;
 
