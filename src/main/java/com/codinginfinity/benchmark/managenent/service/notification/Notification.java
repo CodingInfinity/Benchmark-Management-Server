@@ -9,14 +9,12 @@ import com.codinginfinity.benchmark.managenent.service.notification.response.Sen
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendEmailResponse;
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
 
-import javax.mail.MessagingException;
-
 /**
  * Created by andrew on 2016/06/20.
  */
 public interface Notification {
 
-    SendEmailResponse sendEmail(SendEmailRequest request) throws MessagingException;
+    SendEmailResponse sendEmail(SendEmailRequest request);
     SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request);
     SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request);
     SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request);
