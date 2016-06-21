@@ -19,4 +19,5 @@ public interface UserManagement {
     UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException;
     DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException;
     ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException;
+    GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException;
 }

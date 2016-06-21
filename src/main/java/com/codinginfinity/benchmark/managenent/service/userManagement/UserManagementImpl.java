@@ -7,6 +7,9 @@ import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.security.SecurityUtils;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
+import com.codinginfinity.benchmark.managenent.service.notification.request.SendPasswordResetMailRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
@@ -38,6 +41,9 @@ public class UserManagementImpl implements UserManagement {
     private AuthorityRepository authorityRepository;
 
     @Inject
+    private Notification notification;
+
+    @Inject
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -52,6 +58,7 @@ public class UserManagementImpl implements UserManagement {
         user.get().setActivated(true);
         user.get().setActivationKey(null);
         User savedUser = userRepository.save(user.get());
+        notification.sendActivationEmail(new SendActivationEmailRequest(savedUser));
         log.debug("Activated user: {}", savedUser);
         return new ActivateRegistrationResponse(savedUser);
     }
@@ -76,6 +83,7 @@ public class UserManagementImpl implements UserManagement {
         user.get().setResetKey(RandomUtils.generateResetKey());
         user.get().setResetDate(ZonedDateTime.now());
         user = Optional.of(userRepository.save(user.get()));
+        notification.sendPasswordResetMail(new SendPasswordResetMailRequest(user.get()));
         return new RequestPasswordResetResponse(user);
     }
 
@@ -163,5 +171,16 @@ public class UserManagementImpl implements UserManagement {
         userRepository.save(user.get());
         log.debug("Changed password for User: {}", user.get());
         return new ChangePasswordResponse();
+    }
+
+    @Override
+    public GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException {
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        if (!user.isPresent()) {
+            throw new NonExistentException("User does not exist");
+        }
+
+        user.get().getAuthorities().size();
+        return new GetUserWithAuthoritiesByLoginResponse(user.get());
     }
 }
