@@ -183,4 +183,15 @@ public class UserManagementImpl implements UserManagement {
         user.get().getAuthorities().size();
         return new GetUserWithAuthoritiesByLoginResponse(user.get());
     }
+
+    @Override
+    public GetUserWithAuthoritiesByIdResponse getUserWithAuthoritiesById(GetUserWithAuthoritiesByIdRequest request) throws NonExistentException {
+        Optional<User> user = userRepository.findOneById(request.getId());
+        if (!user.isPresent()) {
+            throw new NonExistentException("User does not exist");
+        }
+
+        user.get().getAuthorities().size();
+        return new GetUserWithAuthoritiesByIdResponse(user.get());
+    }
 }
