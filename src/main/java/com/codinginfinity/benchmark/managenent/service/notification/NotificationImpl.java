@@ -14,10 +14,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import java.util.Locale;
 
 /**
  * Created by andrew on 2016/06/20.
@@ -63,7 +65,15 @@ public class NotificationImpl implements Notification {
 
     @Override
     public SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request) {
-       return null;
+        log.debug("Sending activation e-mail to '{}'", request.getUser().getEmail());
+        Locale locale = Locale.ENGLISH;
+        Context context = new Context(locale);
+        context.setVariable(USER, request.getUser());
+        context.setVariable(BASE_URL, WEB_BASE_URL);
+        String content = templateEngine.process("activationEmail", context);
+        String subject = messageSource.getMessage("email.activation.title", null, locale);
+        sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
+        return new SendActivationEmailResponse();
     }
 
     @Override

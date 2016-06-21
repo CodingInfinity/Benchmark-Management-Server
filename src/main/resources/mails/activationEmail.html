@@ -12,7 +12,7 @@
             Your Benchmark Service account has been created, please click on the URL below to activate it:
         </p>
         <p>
-            <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
+            <a th:href="${user.activationKey}"
                th:text="|${user.username}|">Activation Link</a>
         </p>
         <p>
