@@ -4,6 +4,8 @@ import com.codinginfinity.benchmark.managenent.ManagementApp;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
@@ -26,6 +28,10 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by andrew on 2016/06/19.
@@ -36,6 +42,9 @@ public class RequestPasswordResetTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private Notification notification;
 
     @InjectMocks
     @Inject
@@ -51,7 +60,7 @@ public class RequestPasswordResetTest {
 
     @Test
     public void userNotRegisteredTest() throws NotAuthorizedException, UserNotActivatedException {
-        Mockito.when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
         thrown.expect(NotAuthorizedException.class);
         thrown.expectMessage("Invalid email address");
 
@@ -63,7 +72,7 @@ public class RequestPasswordResetTest {
         User user = new User();
         user.setActivated(false);
 
-        Mockito.when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
         thrown.expect(UserNotActivatedException.class);
         thrown.expectMessage("User is not activated");
 
@@ -77,7 +86,7 @@ public class RequestPasswordResetTest {
         user.setResetDate(ZonedDateTime.now());
         user.setResetKey("1234567890");
 
-        Mockito.when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
         thrown.expect(NotAuthorizedException.class);
         thrown.expectMessage("User has outstanding reset requests");
 
@@ -96,8 +105,9 @@ public class RequestPasswordResetTest {
         user.setResetDate(null);
         user.setResetKey(null);
 
-        Mockito.when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+        when(notification.sendPasswordResetMail(any())).thenReturn(new SendPasswordResetMailResponse());
         Optional<User> resetUser = userManagement.requestPasswordReset(new RequestPasswordResetRequest("johndoe@example.com")).getUser();
 
         /* Assert that only required properties on the object has changed, no more and no less */
@@ -112,5 +122,9 @@ public class RequestPasswordResetTest {
         assertNotNull(resetUser.get().getResetKey());
         assertNotNull(resetUser.get().getResetDate());
         assertTrue(ZonedDateTime.now().minusHours(1).isBefore(resetUser.get().getResetDate()));
+        verify(notification, times(1)).sendPasswordResetMail(any());
+        verify(notification, times(0)).sendCreationEmail(any());
+        verify(notification, times(0)).sendActivationEmail(any());
+        verify(notification, times(0)).sendEmail(any());
     }
 }
