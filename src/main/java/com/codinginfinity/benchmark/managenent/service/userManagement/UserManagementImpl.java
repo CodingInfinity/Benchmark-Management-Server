@@ -9,6 +9,7 @@ import com.codinginfinity.benchmark.managenent.security.SecurityUtils;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
+import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendPasswordResetMailRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
@@ -127,6 +128,7 @@ public class UserManagementImpl implements UserManagement {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         newUser = userRepository.save(newUser);
+        notification.sendCreationEmail(new SendCreationEmailRequest(newUser));
         log.debug("Created Information for User: {}", newUser);
         return new CreateUserResponse(newUser);
     }
