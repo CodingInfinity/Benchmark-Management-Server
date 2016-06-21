@@ -15,7 +15,8 @@ public interface UserManagement {
     ActivateRegistrationResponse activateRegistration(ActivateRegistrationRequest request) throws NotAuthorizedException;
     RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request) throws NotAuthorizedException, UserNotActivatedException;
     CompletePasswordResetResponse completePasswordReset(CompletePasswordResetRequest request) throws NotAuthorizedException;
-    CreateUserResponse createUser(CreateUserRequest request) throws DuplicateUsernameException;
+    CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException;
+    CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException;
     UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException;
     DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException;
     ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException;

@@ -109,7 +109,7 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    public CreateUserResponse createUser(CreateUserRequest request) throws DuplicateUsernameException {
+    public CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException {
         Optional<User> user = userRepository.findOneByUsername(request.getUsername());
         if (user.isPresent()) {
             throw new DuplicateUsernameException("Username already exists");
@@ -130,7 +130,38 @@ public class UserManagementImpl implements UserManagement {
         newUser = userRepository.save(newUser);
         notification.sendCreationEmail(new SendCreationEmailRequest(newUser));
         log.debug("Created Information for User: {}", newUser);
-        return new CreateUserResponse(newUser);
+
+        return new CreateUnmanagedUserResponse(newUser);
+    }
+
+    @Override
+    public CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException {
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        if (user.isPresent()) {
+            throw new DuplicateUsernameException("Username already exists");
+        }
+
+        User newUser = new User();
+        newUser.setUsername(request.getUsername());
+        String encryptedPassword = passwordEncoder.encode(RandomUtils.generatePassword());
+        newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setEmail(request.getEmail());
+        newUser.setActivated(true);
+        if (request.getAuthorities() != null) {
+            Set<Authority> authorities = new HashSet<>();
+            request.getAuthorities().stream().forEach(
+                    authority -> authorities.add(authorityRepository.findOne(authority))
+            );
+            newUser.setAuthorities(authorities);
+        }
+        newUser.setResetKey(RandomUtils.generateResetKey());
+        newUser.setResetDate(ZonedDateTime.now());
+        newUser = userRepository.save(newUser);
+        notification.sendActivationEmail(new SendActivationEmailRequest(newUser));
+        log.debug("Created Information for User: {}", newUser);
+        return new CreateManagedUserResponse(newUser);
     }
 
     @Override
