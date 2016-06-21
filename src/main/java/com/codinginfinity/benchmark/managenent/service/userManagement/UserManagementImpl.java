@@ -194,4 +194,11 @@ public class UserManagementImpl implements UserManagement {
         user.get().getAuthorities().size();
         return new GetUserWithAuthoritiesByIdResponse(user.get());
     }
+
+    @Override
+    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
+    public GetUserWithAuthoritiesResponse getUserWithAuthorities(GetUserWithAuthoritiesRequest request) throws NonExistentException {
+        User user = getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(SecurityUtils.getCurrentUsername())).getUser();
+        return new GetUserWithAuthoritiesResponse(user);
+    }
 }
