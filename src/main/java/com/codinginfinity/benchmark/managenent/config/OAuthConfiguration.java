@@ -45,7 +45,9 @@ public class OAuthConfiguration {
                     .frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .antMatchers("/v2/api-docs/**").permitAll()
+                    .antMatchers("/swagger-ui/index.html").permitAll();
         }
     }
 
