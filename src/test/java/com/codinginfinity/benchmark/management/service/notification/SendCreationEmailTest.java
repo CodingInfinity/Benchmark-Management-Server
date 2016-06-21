@@ -86,8 +86,7 @@ public class SendCreationEmailTest {
 
         doNothing().when(javaMailSender).send((MimeMessage)anyObject());
         when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());
-        when(messageSource.getMessage(anyString(), any(), any())).thenReturn("Activation Email");
-        //when(templateEngine.process(anyString(), any(Context.class))).thenReturn("Activation Body Contents");
+        when(messageSource.getMessage(anyString(), isNull(Object[].class), any())).thenReturn("Activation Email");
         ArgumentCaptor<MimeMessage> argumentCaptor = ArgumentCaptor.forClass(MimeMessage.class);
 
         User user = new User();

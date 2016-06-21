@@ -33,9 +33,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -86,8 +84,7 @@ public class SendActivationEmailTest {
 
         doNothing().when(javaMailSender).send((MimeMessage)anyObject());
         when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());
-        when(messageSource.getMessage(anyString(), any(), any())).thenReturn("Activation Email");
-        //when(templateEngine.process(anyString(), any(Context.class))).thenReturn("Activation Body Contents");
+        when(messageSource.getMessage(anyString(), isNull(Object[].class), any())).thenReturn("Activation Email");
         ArgumentCaptor<MimeMessage> argumentCaptor = ArgumentCaptor.forClass(MimeMessage.class);
 
         User user = new User();
