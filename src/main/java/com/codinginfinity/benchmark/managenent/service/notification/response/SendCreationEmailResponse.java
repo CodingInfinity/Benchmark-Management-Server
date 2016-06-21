@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.service.notifications.response;
+package com.codinginfinity.benchmark.managenent.service.notification.response;
 
 import com.codinginfinity.benchmark.managenent.service.Response;
 import lombok.AllArgsConstructor;

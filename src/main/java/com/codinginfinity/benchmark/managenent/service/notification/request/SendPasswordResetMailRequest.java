@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.service.notifications.request;
+package com.codinginfinity.benchmark.managenent.service.notification.request;
 
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.service.Request;
@@ -10,9 +10,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class SendCreationEmailRequest extends Request {
+public class SendPasswordResetMailRequest extends Request {
 
-    private static final long serialVersionUID = 8954603250365346769L;
+    private static final long serialVersionUID = -2724103231721216098L;
 
     private User user;
 }
