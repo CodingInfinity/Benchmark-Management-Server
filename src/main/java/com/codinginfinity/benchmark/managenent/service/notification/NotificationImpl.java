@@ -84,13 +84,21 @@ public class NotificationImpl implements Notification {
         context.setVariable(USER, request.getUser());
         context.setVariable(BASE_URL, WEB_BASE_URL);
         String content = templateEngine.process("creationEmail", context);
-        String subject = messageSource.getMessage("Activation Email", null, locale);
+        String subject = messageSource.getMessage("email.activation.title", null, locale);
         sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
         return new SendCreationEmailResponse();
     }
 
     @Override
     public SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request) {
-        return null;
+        log.debug("Sending password reset e-mail to '{}'", request.getUser().getEmail());
+        Locale locale = Locale.ENGLISH;
+        Context context = new Context(locale);
+        context.setVariable(USER, request.getUser());
+        context.setVariable(BASE_URL, WEB_BASE_URL);
+        String content = templateEngine.process("passwordResetEmail", context);
+        String subject = messageSource.getMessage("email.reset.title", null, locale);
+        sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
+        return new SendPasswordResetMailResponse();
     }
 }
