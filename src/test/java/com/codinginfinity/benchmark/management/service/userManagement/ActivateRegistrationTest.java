@@ -3,6 +3,8 @@ package com.codinginfinity.benchmark.management.service.userManagement;
 import com.codinginfinity.benchmark.managenent.ManagementApp;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
+import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.response.SendActivationEmailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.ActivateRegistrationRequest;
@@ -19,9 +21,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by andrew on 2016/06/20.
@@ -32,6 +37,9 @@ public class ActivateRegistrationTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private Notification notification;
 
     @InjectMocks
     @Inject
@@ -47,7 +55,7 @@ public class ActivateRegistrationTest {
 
     @Test
     public void invalidActivationKeyTest() throws NotAuthorizedException {
-        Mockito.when(userRepository.findOneByActivationKey("0123456789")).thenReturn(Optional.empty());
+        when(userRepository.findOneByActivationKey("0123456789")).thenReturn(Optional.empty());
         thrown.expect(NotAuthorizedException.class);
         thrown.expectMessage("Invalid activation key");
 
@@ -66,8 +74,9 @@ public class ActivateRegistrationTest {
         user.setResetDate(null);
         user.setResetKey(null);
 
-        Mockito.when(userRepository.findOneByActivationKey("0123456789")).thenReturn(Optional.of(user));
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.findOneByActivationKey("0123456789")).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+        when(notification.sendActivationEmail(any())).thenReturn(new SendActivationEmailResponse());
         User resetUser = userManagement.activateRegistration(new ActivateRegistrationRequest("0123456789")).getUser();
 
         /* Assert that only required properties on the object has changed, no more and no less */
@@ -80,6 +89,10 @@ public class ActivateRegistrationTest {
         assertEquals(user.isActivated(), resetUser.isActivated());
         assertNull(resetUser.getResetKey());
         assertNull(resetUser.getResetDate());
+        verify(notification, times(0)).sendPasswordResetMail(any());
+        verify(notification, times(0)).sendCreationEmail(any());
+        verify(notification, times(1)).sendActivationEmail(any());
+        verify(notification, times(0)).sendEmail(any());
     }
 
 }
