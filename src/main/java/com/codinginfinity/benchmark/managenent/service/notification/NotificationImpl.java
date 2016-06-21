@@ -78,7 +78,15 @@ public class NotificationImpl implements Notification {
 
     @Override
     public SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request) {
-        return null;
+        log.debug("Sending creation e-mail to '{}'", request.getUser().getEmail());
+        Locale locale = Locale.ENGLISH;
+        Context context = new Context(locale);
+        context.setVariable(USER, request.getUser());
+        context.setVariable(BASE_URL, WEB_BASE_URL);
+        String content = templateEngine.process("creationEmail", context);
+        String subject = messageSource.getMessage("Activation Email", null, locale);
+        sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
+        return new SendCreationEmailResponse();
     }
 
     @Override
