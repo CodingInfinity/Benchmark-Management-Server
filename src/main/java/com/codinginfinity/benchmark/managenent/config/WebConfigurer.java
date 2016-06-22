@@ -45,7 +45,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         config.setAllowCredentials(true);
         config.setExposedHeaders(new ArrayList<>());
         config.addAllowedHeader("*");
-        source.registerCorsConfiguration("/oauth/**", config);
+        source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 }
