@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * Created by andrew on 2016/06/15.
  */
-@Component
+@Component("userDetailsService")
 @Slf4j
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 

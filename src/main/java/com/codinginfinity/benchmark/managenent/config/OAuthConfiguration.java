@@ -1,5 +1,7 @@
 package com.codinginfinity.benchmark.managenent.config;
 
+import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,9 +16,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 /**
  * Created by andrew on 2016/06/13.
@@ -55,12 +59,16 @@ public class OAuthConfiguration {
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+        @Inject
+        private DataSource dataSource;
+
         @Bean
         public TokenStore tokenStore() {
-            return new InMemoryTokenStore();
+            return new JdbcTokenStore(dataSource);
         }
 
         @Inject
+        @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
         @Override
@@ -83,7 +91,7 @@ public class OAuthConfiguration {
                 .inMemory()
                 .withClient("acme")
                 .scopes("read", "write")
-                .authorities("ROLE_USER")
+                .authorities(AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER)
                 .authorizedGrantTypes("password", "refresh_token", "authorization_code", "implicit")
                 .secret("acmesecret")
                 .accessTokenValiditySeconds(1800);
