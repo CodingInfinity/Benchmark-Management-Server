@@ -1,16 +1,16 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement.request;
 
 import com.codinginfinity.benchmark.managenent.service.Request;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-import java.util.Set;
+import lombok.*;
 
 /**
  * Created by andrew on 2016/06/21.
  */
 @Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CreateUnmanagedUserRequest extends Request {
 
     private static final long serialVersionUID = 4121774475207109238L;

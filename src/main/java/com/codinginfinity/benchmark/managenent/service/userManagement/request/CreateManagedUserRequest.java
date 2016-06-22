@@ -1,8 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement.request;
 
 import com.codinginfinity.benchmark.managenent.service.Request;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.Set;
 
@@ -10,7 +9,10 @@ import java.util.Set;
  * Created by andrew on 2016/06/21.
  */
 @Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CreateManagedUserRequest extends Request {
 
     private static final long serialVersionUID = 9022522238854779698L;
