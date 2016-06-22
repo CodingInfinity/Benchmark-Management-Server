@@ -12,7 +12,6 @@ import java.util.Optional;
  * Created by andrew on 2016/06/15.
  */
 @Getter
-@Setter
 @AllArgsConstructor
 public class RequestPasswordResetResponse extends Response {
 

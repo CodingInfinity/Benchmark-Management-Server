@@ -12,9 +12,10 @@ import java.util.Optional;
  * Created by andrew on 2016/06/15.
  */
 @Getter
-@Setter
 @AllArgsConstructor
 public class CompletePasswordResetResponse extends Response {
+
+    private static final long serialVersionUID = -8437866694889215577L;
 
     private User user;
 }

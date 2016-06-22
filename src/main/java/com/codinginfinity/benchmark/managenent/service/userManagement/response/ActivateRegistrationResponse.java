@@ -12,9 +12,10 @@ import java.util.Optional;
  * Created by andrew on 2016/06/20.
  */
 @Getter
-@Setter
 @AllArgsConstructor
 public class ActivateRegistrationResponse extends Response {
+
+    private static final long serialVersionUID = 2570342508250264670L;
 
     private User user;
 }

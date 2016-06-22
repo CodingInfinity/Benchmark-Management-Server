@@ -12,5 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class DeleteUserResponse extends Response {
 
+    private static final long serialVersionUID = 8387993882678228322L;
+
     private User user;
 }
