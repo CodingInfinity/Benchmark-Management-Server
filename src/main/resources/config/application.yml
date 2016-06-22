@@ -16,6 +16,8 @@ spring:
     test-connection: false
   thymeleaf:
     cache: false
+  messages:
+    basename: i18n/messages
 security:
   user:
     password: password
