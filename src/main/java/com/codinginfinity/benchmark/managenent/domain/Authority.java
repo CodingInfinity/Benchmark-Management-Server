@@ -5,15 +5,21 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by andrew on 2016/06/15.
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
-public class Authority extends AbstractBaseEntity {
+public class Authority implements Serializable {
 
     private static final long serialVersionUID = -5809085928075081335L;
 
@@ -22,19 +28,4 @@ public class Authority extends AbstractBaseEntity {
     @Id
     @Column(length = 50)
     private String name;
-
-    public Authority() {
-    }
-
-    public Authority(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
