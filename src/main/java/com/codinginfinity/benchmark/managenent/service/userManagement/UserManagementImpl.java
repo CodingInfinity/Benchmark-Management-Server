@@ -110,7 +110,7 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     public CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException {
-        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername().toLowerCase());
         if (user.isPresent()) {
             throw new DuplicateUsernameException("Username already exists");
         }
