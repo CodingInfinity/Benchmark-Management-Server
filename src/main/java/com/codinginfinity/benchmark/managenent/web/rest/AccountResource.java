@@ -2,8 +2,10 @@ package com.codinginfinity.benchmark.managenent.web.rest;
 
 import com.codinginfinity.benchmark.managenent.domain.Profile;
 import com.codinginfinity.benchmark.managenent.domain.User;
+import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
@@ -32,7 +34,7 @@ public class AccountResource {
      * POST  /register : register the user.
      *
      * @param request the HTTP request
-     * @return the ResponseEntity with status 201 (Created) if the user is registred or 400 (Bad Request) if the login or e-mail is already in use
+     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or e-mail is already in use
      */
     @RequestMapping(value = "/register",
             method = RequestMethod.POST,
@@ -121,9 +123,9 @@ public class AccountResource {
      */
     @RequestMapping(value = "/account/reset_password/init",
             method = RequestMethod.POST,
-            produces = MediaType.TEXT_PLAIN_VALUE)
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<?> requestPasswordReset(@RequestBody RequestPasswordResetRequest request)
-            throws NotAuthorizedException {
+            throws EmailNotRegisteredException , NotAuthorizedException, UserNotActivatedException {
         userManagement.requestPasswordReset(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }

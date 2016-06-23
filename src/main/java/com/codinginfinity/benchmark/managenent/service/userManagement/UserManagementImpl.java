@@ -12,6 +12,7 @@ import com.codinginfinity.benchmark.managenent.service.notification.request.Send
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendPasswordResetMailRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
@@ -66,11 +67,11 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     public RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
-            throws NotAuthorizedException, UserNotActivatedException {
+            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException {
 
         Optional<User> user = userRepository.findOneByEmail(request.getEmail());
         if (!user.isPresent()) {
-            throw new NotAuthorizedException("Invalid email address");
+            throw new EmailNotRegisteredException("Invalid email address");
         }
 
         if (!user.get().isActivated()) {
@@ -127,6 +128,7 @@ public class UserManagementImpl implements UserManagement {
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
         authorities.add(authority);
         newUser.setAuthorities(authorities);
+        newUser.setActivationKey(RandomUtils.generateActivationKey());
         newUser = userRepository.save(newUser);
         notification.sendCreationEmail(new SendCreationEmailRequest(newUser));
         log.debug("Created Information for User: {}", newUser);

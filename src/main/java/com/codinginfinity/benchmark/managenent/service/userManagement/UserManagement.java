@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.managenent.service.userManagement;
 
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
@@ -13,7 +14,7 @@ import com.codinginfinity.benchmark.managenent.service.userManagement.response.*
 public interface UserManagement {
 
     ActivateRegistrationResponse activateRegistration(ActivateRegistrationRequest request) throws NotAuthorizedException;
-    RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request) throws NotAuthorizedException, UserNotActivatedException;
+    RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request) throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException;
     CompletePasswordResetResponse completePasswordReset(CompletePasswordResetRequest request) throws NotAuthorizedException;
     CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException;
     CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException;

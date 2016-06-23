@@ -1,8 +1,12 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement.exceptions;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * Created by andrew on 2016/06/20.
  */
+@ResponseStatus(value= HttpStatus.PRECONDITION_FAILED, reason = "Duplicate Username")
 public class DuplicateUsernameException extends Exception {
 
     public DuplicateUsernameException() {
