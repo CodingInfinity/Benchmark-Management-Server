@@ -4,10 +4,7 @@ import com.codinginfinity.benchmark.managenent.domain.Profile;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -39,7 +36,7 @@ public class AccountResource {
     @RequestMapping(value = "/register",
             method = RequestMethod.POST,
             produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody CreateUnmanagedUserRequest request) throws DuplicateUsernameException {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody CreateUnmanagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException {
         userManagement.createUnmanagedUser(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

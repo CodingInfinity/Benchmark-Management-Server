@@ -5,6 +5,7 @@ import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailAlreadyExistsException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
@@ -60,7 +61,7 @@ public class UserResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<?> createUser(@RequestBody CreateManagedUserRequest request) throws URISyntaxException, DuplicateUsernameException {
+    public ResponseEntity<?> createUser(@RequestBody CreateManagedUserRequest request) throws URISyntaxException, DuplicateUsernameException,EmailAlreadyExistsException {
         log.debug("REST request to save User : {}", request);
         User user = userManagement.createManagedUser(request).getUser();
         return ResponseEntity.created(new URI("/api/users/" + user.getUsername())).body(new UserDTO(user));

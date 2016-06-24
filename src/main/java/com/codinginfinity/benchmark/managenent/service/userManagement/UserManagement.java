@@ -1,10 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement;
 
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.*;
 
@@ -16,8 +13,8 @@ public interface UserManagement {
     ActivateRegistrationResponse activateRegistration(ActivateRegistrationRequest request) throws NotAuthorizedException;
     RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request) throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException;
     CompletePasswordResetResponse completePasswordReset(CompletePasswordResetRequest request) throws NotAuthorizedException;
-    CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException;
-    CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException;
+    CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException;
+    CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException;
     UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException;
     DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException;
     ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException;
