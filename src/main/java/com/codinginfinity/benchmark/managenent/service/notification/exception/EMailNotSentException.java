@@ -1,8 +1,19 @@
 package com.codinginfinity.benchmark.managenent.service.notification.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
- * Created by andrew on 2016/06/25.
+ * Exception which is thrown when the system is unable to send an email due to any one or more reasons.
+ *
+ * @author Andrew Broekman
+ *
+ * @since 1.0.0
+ * @version 1.0.0
  */
+
+
+@ResponseStatus(value= HttpStatus.PRECONDITION_FAILED)
 public class EMailNotSentException extends Exception {
 
     private static final long serialVersionUID = -4369243337098740377L;

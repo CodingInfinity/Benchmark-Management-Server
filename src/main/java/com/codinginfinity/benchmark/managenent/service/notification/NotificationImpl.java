@@ -23,7 +23,14 @@ import javax.mail.internet.MimeMessage;
 import java.util.Locale;
 
 /**
- * Created by andrew on 2016/06/20.
+ * A reference implementation of the {@link Notification} service contract.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.notification.exception
+ * @see com.codinginfinity.benchmark.managenent.service.notification.request
+ * @see com.codinginfinity.benchmark.managenent.service.notification.response
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
 @Service
 @Slf4j
