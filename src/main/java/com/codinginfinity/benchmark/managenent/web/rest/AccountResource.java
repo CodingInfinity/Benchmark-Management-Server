@@ -18,8 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
- * Created by andrew on 2016/06/15.
+ * Defines RESTful API endpoints for all management related to a specific user account.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.userManagement
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
+
 @RestController
 @RequestMapping("/api")
 @Slf4j

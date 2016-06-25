@@ -33,8 +33,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by andrew on 2016/06/20.
+ * Defines RESTful API endpoints for all administration related to the management of user accounts of the system.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.userManagement
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
+
 @RestController
 @RequestMapping("/api")
 @Slf4j
