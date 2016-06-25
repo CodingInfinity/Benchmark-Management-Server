@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendActivationEmailResponse;
+import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailAlreadyExistsException;
@@ -67,6 +68,20 @@ public class CreateManagedUserTest extends AbstractTest {
     }
 
     @Test
+    public void duplicateEmailAddressTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
+        User user = new User();
+        user.setUsername("johndoe");
+        user.setEmail("johndoe@exampe.com");
+
+        when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.empty());
+        when(userRepository.findOneByEmail("johndoe@exampe.com")).thenReturn(Optional.of(user));
+        thrown.expect(EmailAlreadyExistsException.class);
+        thrown.expectMessage("Email already exists");
+
+        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
+    }
+
+    @Test
     public void createUnmanagedUserTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
         when(userRepository.save((User)any())).thenAnswer(invocation -> {
             User user = (User)invocation.getArguments()[0];
@@ -74,8 +89,9 @@ public class CreateManagedUserTest extends AbstractTest {
             return user;
         });
         when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.empty());
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
         when(passwordEncoder.encode(any())).thenReturn("encodedpassword");
-        when(notification.sendActivationEmail(any())).thenReturn(new SendActivationEmailResponse());
+        when(notification.sendPasswordResetMail(any())).thenReturn(new SendPasswordResetMailResponse());
 
         Set<String> authorities = new HashSet<>();
         authorities.add(AuthoritiesConstants.USER);
