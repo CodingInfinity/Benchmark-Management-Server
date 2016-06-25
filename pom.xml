@@ -32,6 +32,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <mockito.version>2.0.2-beta</mockito.version>
+        <powermock.version>1.6.5</powermock.version>
         <sortpom-maven-plugin.version>2.5.0</sortpom-maven-plugin.version>
         <spring-framework.version>4.2.0.RELEASE</spring-framework.version>
         <spring-security-oauth2.version>2.0.10.RELEASE</spring-security-oauth2.version>
@@ -83,9 +84,34 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp</artifactId>
             <version>3.1.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.trajano.commons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -94,6 +120,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Project Lombok -->
@@ -223,7 +250,9 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/service/**/exceptions/*.class</exclude>
+                        <exclude>**/config/**/*.class</exclude>
+                        <exclude>**/domain/**/*.class</exclude>
+                        <exclude>**/service/**/exception/*.class</exclude>
                         <exclude>**/service/**/response/*.class</exclude>
                         <exclude>**/service/**/request/*.class</exclude>
                     </excludes>
