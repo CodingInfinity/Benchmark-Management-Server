@@ -4,8 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Created by fabio on 2016/06/24.
+ * Exception which is thrown when a user tries to register an email that already exists in the system.
+ *
+ * @author Fabio Loreggian
+ *
+ * @since 1.0.0
+ * @version 1.0.0
  */
+
+
 @ResponseStatus(value= HttpStatus.PRECONDITION_FAILED, reason = "Email Already Registered")
 public class EmailAlreadyExistsException extends Exception {
 

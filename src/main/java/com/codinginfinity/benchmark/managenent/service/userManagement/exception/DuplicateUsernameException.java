@@ -4,8 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Created by andrew on 2016/06/20.
+ * Exception which is thrown when a user tries to register an username that already exists in the system.
+ *
+ * @author Andrew Broekman
+ * @author Fabio Loreggian
+ *
+ * @since 1.0.0
+ * @version 1.0.0
  */
+
+
 @ResponseStatus(value= HttpStatus.PRECONDITION_FAILED, reason = "Duplicate Username")
 public class DuplicateUsernameException extends Exception {
 

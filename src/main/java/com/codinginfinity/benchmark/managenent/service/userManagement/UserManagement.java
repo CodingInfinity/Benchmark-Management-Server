@@ -6,6 +6,22 @@ import com.codinginfinity.benchmark.managenent.service.userManagement.exception.
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.*;
 
+/**
+ * Defines the service contract for the user management modules, including all request, response and pre-conditions.
+ * Important to note that all precoditions are mapped onto exception objects.
+ *
+ * A reference implementation is provided in the {@link UserManagementImpl} class.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.userManagement.exception
+ * @see com.codinginfinity.benchmark.managenent.service.userManagement.request
+ * @see com.codinginfinity.benchmark.managenent.service.userManagement.response
+ *
+ * @author Andrew Broekman
+ * @author Fabio Loreggian
+ * @version 1.0.0
+ */
+
+
 public interface UserManagement {
 
     /**
@@ -13,6 +29,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link ActivateRegistrationRequest} object.
      * @return Returns the result in an encapsulated {@link ActivateRegistrationResponse} object.
      * @throws NotAuthorizedException Thrown when an invalid key is presented.
+     * @since 1.0.0
      */
     ActivateRegistrationResponse activateRegistration(ActivateRegistrationRequest request) throws NotAuthorizedException;
 
@@ -26,6 +43,7 @@ public interface UserManagement {
      * @throws NotAuthorizedException Thrown when the user has outstanding reset requests on their account.
      * @throws UserNotActivatedException Thrown when the user in question has not yet activated there account.
      * @throws EMailNotSentException Thrown when an email could not be sent to the user with there account detail.
+     * @since 1.0.0
      */
     RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
             throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException, EMailNotSentException;
@@ -36,6 +54,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link CompletePasswordResetRequest} object.
      * @return Returns the result in an encapsulated {@link CompletePasswordResetResponse} object.
      * @throws NotAuthorizedException Thrown when the reset key has expired or the presented token is invalid.
+     * @since 1.0.0
      */
     CompletePasswordResetResponse completePasswordReset(CompletePasswordResetRequest request)
             throws NotAuthorizedException;
@@ -50,6 +69,7 @@ public interface UserManagement {
      * @throws EmailAlreadyExistsException Thrown when  a new user tries to register an email address that already
      *         exists in the system.
      * @throws EMailNotSentException Thrown when the reset key has expired or the presented token is invalid.
+     * @since 1.0.0
      */
     CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request)
             throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
@@ -65,6 +85,7 @@ public interface UserManagement {
      * @throws EmailAlreadyExistsException Thrown when  a new user tries to register an email address that already
      *         exists in the system.
      * @throws EMailNotSentException Thrown when the reset key has expired or the presented token is invalid.
+     * @since 1.0.0
      */
     CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request)
             throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
@@ -74,6 +95,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link UpdateUserRequest} object.
      * @return Returns the result in an encapsulated {@link UpdateUserResponse} object.
      * @throws NonExistentException Thrown when the current user in the security context can't be found in the system.
+     * @since 1.0.0
      */
     UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException;
 
@@ -82,6 +104,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link DeleteUserRequest} object.
      * @return Returns the result in an encapsulated {@link DeleteUserResponse} object.
      * @throws NonExistentException Thrown when the username specified for deletion can't be found in the system.
+     * @since 1.0.0
      */
     DeleteUserResponse deleteUser(DeleteUserRequest request) throws NonExistentException;
 
@@ -90,6 +113,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link ChangePasswordRequest} object.
      * @return Returns the result in an encapsulated {@link ChangePasswordResponse} object.
      * @throws NonExistentException Thrown when the current user in the security context can't be found in the system.
+     * @since 1.0.0
      */
     ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException;
 
@@ -98,6 +122,7 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link GetUserWithAuthoritiesByLoginRequest} object.
      * @return Returns the result in an encapsulated {@link GetUserWithAuthoritiesByLoginResponse} object.
      * @throws NonExistentException Thrown when the specified username can't be found in the system.
+     * @since 1.0.0
      */
     GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException;
 
@@ -106,14 +131,16 @@ public interface UserManagement {
      * @param request The request encapsulated as an {@link GetUserWithAuthoritiesByIdRequest} object.
      * @return Returns the result in an encapsulated {@link GetUserWithAuthoritiesByIdResponse} object.
      * @throws NonExistentException Thrown when the specified user ID can't be found in the system.
+     * @since 1.0.0
      */
     GetUserWithAuthoritiesByIdResponse getUserWithAuthoritiesById(GetUserWithAuthoritiesByIdRequest request) throws NonExistentException;
 
     /**
-     * * Get the roles associated with the user in the current security context.
+     * Get the roles associated with the user in the current security context.
      * @param request The request encapsulated as an {@link GetUserWithAuthoritiesRequest} object.
      * @return Returns the result in an encapsulated {@link GetUserWithAuthoritiesResponse} object.
      * @throws NonExistentException Thrown when the current user in the security context can't be found in the system.
+     * @since 1.0.0
      */
     GetUserWithAuthoritiesResponse getUserWithAuthorities(GetUserWithAuthoritiesRequest request) throws NonExistentException;
 }

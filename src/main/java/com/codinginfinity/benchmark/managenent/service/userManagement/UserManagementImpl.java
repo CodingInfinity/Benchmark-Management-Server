@@ -28,8 +28,17 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Created by andrew on 2016/06/19.
+ * A reference implementation of the {@link UserManagement} service contract.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.notification.exception
+ * @see com.codinginfinity.benchmark.managenent.service.notification.request
+ * @see com.codinginfinity.benchmark.managenent.service.notification.response
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
+
 @Service
 @Slf4j
 public class UserManagementImpl implements UserManagement {
