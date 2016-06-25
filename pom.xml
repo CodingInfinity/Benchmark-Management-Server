@@ -40,7 +40,6 @@
 
         <!-- Testing environment -->
         <jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
-        <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
     </properties>
 
     <dependencies>
