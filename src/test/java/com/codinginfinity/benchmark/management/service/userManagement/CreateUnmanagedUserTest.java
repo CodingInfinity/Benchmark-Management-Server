@@ -56,9 +56,24 @@ public class CreateUnmanagedUserTest extends AbstractTest {
     public void duplicateUsernameTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
         User user = new User();
         user.setUsername("johndoe");
+
         when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.of(user));
         thrown.expect(DuplicateUsernameException.class);
         thrown.expectMessage("Username already exists");
+
+        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
+    }
+
+    @Test
+    public void duplicateEmailAddressTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
+        User user = new User();
+        user.setUsername("johndoe");
+        user.setEmail("johndoe@exampe.com");
+
+        when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.empty());
+        when(userRepository.findOneByEmail("johndoe@exampe.com")).thenReturn(Optional.of(user));
+        thrown.expect(EmailAlreadyExistsException.class);
+        thrown.expectMessage("Email already exists");
 
         userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
     }
@@ -71,6 +86,7 @@ public class CreateUnmanagedUserTest extends AbstractTest {
             return user;
         });
         when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.empty());
+        when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("p@$$w0rd")).thenReturn("encodedpassword");
         when(notification.sendCreationEmail(any())).thenReturn(new SendCreationEmailResponse());
 
