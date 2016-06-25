@@ -33,53 +33,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by andrew on 2016/06/21.
  */
-public class CreateManagedUserTest extends AbstractTest {
-
-    private UserRepository userRepository;
-
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @Mock
-    private Notification notification;
-
-    @InjectMocks
-    @Inject
-    private UserManagement userManagement;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Before
-    public void setup() {
-        userRepository = mock(UserRepository.class);
-        initMocks(this);
-    }
-
-    @Test
-    public void duplicateUsernameTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
-        User user = new User();
-        user.setUsername("johndoe");
-        when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.of(user));
-        thrown.expect(DuplicateUsernameException.class);
-        thrown.expectMessage("Username already exists");
-
-        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
-    }
-
-    @Test
-    public void duplicateEmailAddressTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
-        User user = new User();
-        user.setUsername("johndoe");
-        user.setEmail("johndoe@exampe.com");
-
-        when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.empty());
-        when(userRepository.findOneByEmail("johndoe@exampe.com")).thenReturn(Optional.of(user));
-        thrown.expect(EmailAlreadyExistsException.class);
-        thrown.expectMessage("Email already exists");
-
-        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
-    }
+public class CreateManagedUserTest extends AbstractCreateUserTest {
 
     @Test
     public void createUnmanagedUserTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
