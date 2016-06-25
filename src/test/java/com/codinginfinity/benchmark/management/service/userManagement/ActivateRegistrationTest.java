@@ -69,7 +69,6 @@ public class ActivateRegistrationTest extends AbstractTest{
 
         when(userRepository.findOneByActivationKey("0123456789")).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
-        when(notification.sendActivationEmail(any())).thenReturn(new SendActivationEmailResponse());
         User resetUser = userManagement.activateRegistration(new ActivateRegistrationRequest("0123456789")).getUser();
 
         /* Assert that only required properties on the object has changed, no more and no less */
@@ -82,10 +81,6 @@ public class ActivateRegistrationTest extends AbstractTest{
         assertEquals(user.isActivated(), resetUser.isActivated());
         assertNull(resetUser.getResetKey());
         assertNull(resetUser.getResetDate());
-        verify(notification, times(0)).sendPasswordResetMail(any());
-        verify(notification, times(0)).sendCreationEmail(any());
-        verify(notification, times(1)).sendActivationEmail(any());
-        verify(notification, times(0)).sendEmail(any());
     }
 
 }
