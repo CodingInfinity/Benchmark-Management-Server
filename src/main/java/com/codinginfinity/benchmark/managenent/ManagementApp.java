@@ -13,7 +13,13 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 public class ManagementApp {
 
-    public static void main(String[] args) throws UnknownHostException {
-        SpringApplication.run(ManagementApp.class, args);
+    private static SpringApplication application = new SpringApplication(ManagementApp.class);
+
+    public static void main(String[] args) {
+        application.run(args);
+    }
+
+    public static void setApplication(SpringApplication application) {
+        ManagementApp.application = application;
     }
 }
