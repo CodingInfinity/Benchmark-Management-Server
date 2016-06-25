@@ -6,9 +6,8 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.GetUserWithAuthoritiesByIdRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.GetUserWithAuthoritiesByLoginRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +23,6 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
@@ -63,9 +61,10 @@ public class GetUserWithAuthoritiesByIdTest extends AbstractTest {
         authorities.add(new Authority(AuthoritiesConstants.USER));
         user.setAuthorities(authorities);
 
-        when(userRepository.findOneByUsername(anyString())).thenReturn(Optional.of(user));
-        User retrievedUser = userManagement.getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest("johndoe")).getUser();
+        when(userRepository.findOneById(12345L)).thenReturn(Optional.of(user));
+        User retrievedUser = userManagement.getUserWithAuthoritiesById(new GetUserWithAuthoritiesByIdRequest(12345L)).getUser();
         assertEquals(user, retrievedUser);
+        assertEquals(1, retrievedUser.getAuthorities().size());
     }
 }
 
