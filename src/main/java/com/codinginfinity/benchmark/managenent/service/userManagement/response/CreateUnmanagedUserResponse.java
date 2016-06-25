@@ -5,8 +5,6 @@ import com.codinginfinity.benchmark.managenent.service.Response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Set;
-
 /**
  * Created by andrew on 2016/06/21.
  */
