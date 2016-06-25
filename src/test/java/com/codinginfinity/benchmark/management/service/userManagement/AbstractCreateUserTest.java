@@ -9,7 +9,6 @@ import com.codinginfinity.benchmark.managenent.service.notification.exception.EM
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUnmanagedUserRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

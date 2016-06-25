@@ -4,9 +4,8 @@ import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.response.SendActivationEmailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.ActivateRegistrationRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,8 +19,7 @@ import javax.inject.Inject;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by andrew on 2016/06/20.
