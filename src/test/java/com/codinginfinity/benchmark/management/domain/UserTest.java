@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
+import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import org.junit.BeforeClass;
@@ -12,6 +13,7 @@ import javax.validation.ValidatorFactory;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -294,5 +296,10 @@ public class UserTest {
         result.setResetDate(null);
         result.setResetKey(null);
         return result;
+    }
+
+    @Test
+    public void wellDefinedEntityClass() {
+        assertEntityClassWellDefined(User.class);
     }
 }
