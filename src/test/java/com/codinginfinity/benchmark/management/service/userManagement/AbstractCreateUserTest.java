@@ -2,11 +2,13 @@ package com.codinginfinity.benchmark.management.service.userManagement;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
+import com.codinginfinity.benchmark.managenent.repository.AuthorityRepository;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUnmanagedUserRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -31,6 +33,9 @@ public abstract class AbstractCreateUserTest extends AbstractTest {
     protected UserRepository userRepository;
 
     @Mock
+    protected AuthorityRepository authorityRepository;
+
+    @Mock
     protected PasswordEncoder passwordEncoder;
 
     @Mock
@@ -50,7 +55,8 @@ public abstract class AbstractCreateUserTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateUsernameTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
+    public void duplicateUsernameTest()
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
         User user = new User();
         user.setUsername("johndoe");
 
@@ -58,11 +64,12 @@ public abstract class AbstractCreateUserTest extends AbstractTest {
         thrown.expect(DuplicateUsernameException.class);
         thrown.expectMessage("Username already exists");
 
-        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
+        duplicateUsername("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com");
     }
 
     @Test
-    public void duplicateEmailAddressTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
+    public void duplicateEmailAddressTest()
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
         User user = new User();
         user.setUsername("johndoe");
         user.setEmail("johndoe@exampe.com");
@@ -72,6 +79,10 @@ public abstract class AbstractCreateUserTest extends AbstractTest {
         thrown.expect(EmailAlreadyExistsException.class);
         thrown.expectMessage("Email already exists");
 
-        userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com"));
+        duplicateEmailAddress("johndoe","p@ssw0rd","John", "Doe", "johndoe@exampe.com");
     }
+
+    public abstract void duplicateUsername(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
+
+    public abstract void duplicateEmailAddress(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
 }
