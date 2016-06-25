@@ -54,7 +54,7 @@ public class UserManagementImpl implements UserManagement {
         if (!user.isPresent()) {
             throw new NotAuthorizedException("Invalid activation key");
         }
-
+        /* Set user to activated and remove activation key, as this is a once off process */
         user.get().setActivated(true);
         user.get().setActivationKey(null);
         User savedUser = userRepository.save(user.get());
@@ -100,6 +100,7 @@ public class UserManagementImpl implements UserManagement {
             throw new NotAuthorizedException("Reset key expired");
         }
 
+        /* After successful reset, clear the reset date and key as to allow for future recovery of account */
         user.get().setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.get().setResetDate(null);
         user.get().setResetKey(null);
@@ -126,10 +127,18 @@ public class UserManagementImpl implements UserManagement {
         newUser.setLastName(request.getLastName());
         newUser.setEmail(request.getEmail());
         newUser.setActivated(false);
+        /*
+         * As this is a user registering themselves, we don't want to allow the user to assign themselves the
+         * role of administrator. Default to role of USER.
+         */
         Set<Authority> authorities = new HashSet<>();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
         authorities.add(authority);
         newUser.setAuthorities(authorities);
+        /*
+         * User will need to activate there account, hence generate an activation key and send email with link
+         * to user.
+         */
         newUser.setActivationKey(RandomUtils.generateActivationKey());
         newUser = userRepository.save(newUser);
         notification.sendCreationEmail(new SendCreationEmailRequest(newUser));
@@ -152,12 +161,20 @@ public class UserManagementImpl implements UserManagement {
 
         User newUser = new User();
         newUser.setUsername(request.getUsername());
+        /*
+         * We assign user a random password as we will send the user an email with to allow them the opportunity to
+         * select their own password,
+         */
         String encryptedPassword = passwordEncoder.encode(RandomUtils.generatePassword());
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(request.getFirstName());
         newUser.setLastName(request.getLastName());
         newUser.setEmail(request.getEmail());
         newUser.setActivated(true);
+        /*
+         * As this user is created by an administrator, we want to allow the admin the opportunity to specify a user
+         * role, if the admin specifies none, default to role of USER.
+         */
         Set<Authority> authorities = new HashSet<>();
         if (request.getAuthorities() != null && request.getAuthorities().size() > 0) {
             request.getAuthorities().stream().forEach(
@@ -167,6 +184,11 @@ public class UserManagementImpl implements UserManagement {
         } else {
             authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
         }
+        /*
+         * To provide the user with the opportunity to select their own password, is the exact same flow as though
+         * an already registered user has lost their password to their account. Hence we set the reset date and reset
+         * key on the account in question.
+         */
         newUser.setResetKey(RandomUtils.generateResetKey());
         newUser.setResetDate(ZonedDateTime.now());
         newUser = userRepository.save(newUser);
@@ -177,7 +199,7 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
-    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NotAuthorizedException, NonExistentException {
+    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException {
         Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
         if (!user.isPresent()) {
             throw new NonExistentException("User in current security context doesn't exist");
@@ -224,6 +246,10 @@ public class UserManagementImpl implements UserManagement {
             throw new NonExistentException("User does not exist");
         }
 
+        /*
+         * As this is a many-to-many relationship on the ORM, the mapper will default to lazy initialization. Issue
+         * a request on the object to force ORM to retrieve rest of object graph.
+         */
         user.get().getAuthorities().size();
         return new GetUserWithAuthoritiesByLoginResponse(user.get());
     }
@@ -235,6 +261,10 @@ public class UserManagementImpl implements UserManagement {
             throw new NonExistentException("User does not exist");
         }
 
+        /*
+         * As this is a many-to-many relationship on the ORM, the mapper will default to lazy initialization. Issue
+         * a request on the object to force ORM to retrieve rest of object graph.
+         */
         user.get().getAuthorities().size();
         return new GetUserWithAuthoritiesByIdResponse(user.get());
     }
