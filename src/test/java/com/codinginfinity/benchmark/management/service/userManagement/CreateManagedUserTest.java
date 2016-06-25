@@ -8,6 +8,7 @@ import com.codinginfinity.benchmark.managenent.service.notification.Notification
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendActivationEmailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailAlreadyExistsException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUnmanagedUserRequest;
 import org.junit.Before;
@@ -55,7 +56,7 @@ public class CreateManagedUserTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateUsernameTest() throws DuplicateUsernameException {
+    public void duplicateUsernameTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
         User user = new User();
         user.setUsername("johndoe");
         when(userRepository.findOneByUsername("johndoe")).thenReturn(Optional.of(user));
@@ -66,7 +67,7 @@ public class CreateManagedUserTest extends AbstractTest {
     }
 
     @Test
-    public void createUnmanagedUserTest() throws DuplicateUsernameException {
+    public void createUnmanagedUserTest() throws DuplicateUsernameException, EmailAlreadyExistsException {
         when(userRepository.save((User)any())).thenAnswer(invocation -> {
             User user = (User)invocation.getArguments()[0];
             user.setId(12345L);
