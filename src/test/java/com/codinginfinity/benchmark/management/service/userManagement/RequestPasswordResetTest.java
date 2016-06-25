@@ -52,7 +52,7 @@ public class RequestPasswordResetTest extends AbstractTest {
     @Test
     public void userNotRegisteredTest() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException {
         when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
-        thrown.expect(NotAuthorizedException.class);
+        thrown.expect(EmailNotRegisteredException.class);
         thrown.expectMessage("Invalid email address");
 
         userManagement.requestPasswordReset(new RequestPasswordResetRequest("johndoe@example.com"));
