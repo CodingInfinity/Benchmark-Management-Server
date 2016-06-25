@@ -3,8 +3,9 @@ package com.codinginfinity.benchmark.managenent.web.rest;
 import com.codinginfinity.benchmark.managenent.domain.Profile;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.*;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,8 @@ public class AccountResource {
     @RequestMapping(value = "/register",
             method = RequestMethod.POST,
             produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody CreateUnmanagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody CreateUnmanagedUserRequest request)
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
         userManagement.createUnmanagedUser(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -122,7 +124,8 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<?> requestPasswordReset(@RequestBody RequestPasswordResetRequest request)
-            throws EmailNotRegisteredException , NotAuthorizedException, UserNotActivatedException {
+            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException,
+            EMailNotSentException {
         userManagement.requestPasswordReset(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }

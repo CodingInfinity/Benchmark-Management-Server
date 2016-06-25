@@ -3,11 +3,12 @@ package com.codinginfinity.benchmark.managenent.web.rest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.DeleteUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.GetUserWithAuthoritiesByLoginRequest;
@@ -61,7 +62,9 @@ public class UserResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<?> createUser(@RequestBody CreateManagedUserRequest request) throws URISyntaxException, DuplicateUsernameException,EmailAlreadyExistsException {
+    public ResponseEntity<?> createUser(@RequestBody CreateManagedUserRequest request)
+            throws URISyntaxException, DuplicateUsernameException, EmailAlreadyExistsException,
+            EMailNotSentException {
         log.debug("REST request to save User : {}", request);
         User user = userManagement.createManagedUser(request).getUser();
         return ResponseEntity.created(new URI("/api/users/" + user.getUsername())).body(new UserDTO(user));
@@ -78,7 +81,8 @@ public class UserResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UpdateUserRequest request) throws NotAuthorizedException, NonExistentException {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UpdateUserRequest request)
+            throws NotAuthorizedException, NonExistentException {
         log.debug("REST request to update User : {}", request);
         User user = userManagement.updateUser(request).getUser();
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
