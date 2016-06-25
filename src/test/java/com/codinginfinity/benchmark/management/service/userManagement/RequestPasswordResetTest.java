@@ -5,10 +5,11 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.EmailNotRegisteredException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NotAuthorizedException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailNotRegisteredException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.RequestPasswordResetRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -50,7 +52,7 @@ public class RequestPasswordResetTest extends AbstractTest {
     }
 
     @Test
-    public void userNotRegisteredTest() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException {
+    public void userNotRegisteredTest() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException, EMailNotSentException {
         when(userRepository.findOneByEmail("johndoe@example.com")).thenReturn(Optional.empty());
         thrown.expect(EmailNotRegisteredException.class);
         thrown.expectMessage("Invalid email address");
@@ -59,7 +61,7 @@ public class RequestPasswordResetTest extends AbstractTest {
     }
 
     @Test
-    public void userNotActivatedTest() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException {
+    public void userNotActivatedTest() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException, EMailNotSentException {
         User user = new User();
         user.setActivated(false);
 
@@ -71,7 +73,7 @@ public class RequestPasswordResetTest extends AbstractTest {
     }
 
     @Test
-    public void userHasOutstandingResetRequests() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException {
+    public void userHasOutstandingResetRequests() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException, EMailNotSentException {
         User user = new User();
         user.setActivated(true);
         user.setResetDate(ZonedDateTime.now());
@@ -85,7 +87,7 @@ public class RequestPasswordResetTest extends AbstractTest {
     }
 
     @Test
-    public void resetUserPassword() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException {
+    public void resetUserPassword() throws NotAuthorizedException, UserNotActivatedException, EmailNotRegisteredException, MessagingException, EMailNotSentException {
         User user = new User();
         user.setUsername("johndoe");
         user.setPassword("p@$$w0rd");

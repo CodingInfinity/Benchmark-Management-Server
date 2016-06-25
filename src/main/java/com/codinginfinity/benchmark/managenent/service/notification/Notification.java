@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.managenent.service.notification;
 
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendEmailRequest;
@@ -14,8 +15,8 @@ import com.codinginfinity.benchmark.managenent.service.notification.response.Sen
  */
 public interface Notification {
 
-    SendEmailResponse sendEmail(SendEmailRequest request);
-    SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request);
-    SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request);
-    SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request);
+    SendEmailResponse sendEmail(SendEmailRequest request) throws EMailNotSentException;
+    SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request) throws EMailNotSentException;
+    SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request) throws EMailNotSentException;
+    SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request) throws EMailNotSentException;
 }

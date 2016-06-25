@@ -8,10 +8,11 @@ import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.security.SecurityUtils;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendPasswordResetMailRequest;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.*;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.*;
 import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
@@ -63,7 +64,7 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     public RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
-            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException {
+            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException, EMailNotSentException {
 
         Optional<User> user = userRepository.findOneByEmail(request.getEmail());
         if (!user.isPresent()) {
@@ -106,7 +107,7 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    public CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException {
+    public CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
         Optional<User> user = userRepository.findOneByUsername(request.getUsername().toLowerCase());
         if (user.isPresent()) {
             throw new DuplicateUsernameException("Username already exists");
@@ -138,7 +139,7 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    public CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException {
+    public CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
         Optional<User> user = userRepository.findOneByUsername(request.getUsername().toLowerCase());
         if (user.isPresent()) {
             throw new DuplicateUsernameException("Username already exists");
@@ -157,12 +158,14 @@ public class UserManagementImpl implements UserManagement {
         newUser.setLastName(request.getLastName());
         newUser.setEmail(request.getEmail());
         newUser.setActivated(true);
-        if (request.getAuthorities() != null) {
-            Set<Authority> authorities = new HashSet<>();
+        Set<Authority> authorities = new HashSet<>();
+        if (request.getAuthorities() != null && request.getAuthorities().size() > 0) {
             request.getAuthorities().stream().forEach(
                     authority -> authorities.add(authorityRepository.findOne(authority))
             );
             newUser.setAuthorities(authorities);
+        } else {
+            authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
         }
         newUser.setResetKey(RandomUtils.generateResetKey());
         newUser.setResetDate(ZonedDateTime.now());

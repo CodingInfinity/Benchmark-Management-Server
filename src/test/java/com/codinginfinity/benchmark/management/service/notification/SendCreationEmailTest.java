@@ -7,6 +7,7 @@ package com.codinginfinity.benchmark.management.service.notification;
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
@@ -75,9 +76,7 @@ public class SendCreationEmailTest extends AbstractTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Ignore
-    //ToDo: Test run successful on local dev machines but not Travis???
-    public void sendCreationEmailTest() throws MessagingException, IOException {
+    public void sendCreationEmailTest() throws MessagingException, IOException, EMailNotSentException {
 
         doNothing().when(javaMailSender).send((MimeMessage)anyObject());
         when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());
@@ -99,7 +98,8 @@ public class SendCreationEmailTest extends AbstractTest {
         /* Assert that the message is as expected */
         assertEquals("Activation Email", message.getSubject());
         String content =  (String)message.getContent();
-        assertTrue(content.contains("email.creation.text1"));
+        assertTrue(content.contains("Benchmark Service Account Activation"));
+        assertTrue(content.contains("Dear " + user.getUsername()));
         /* We are sending a plain text message, ensure message is not multipart by trying to cast content of message,
          * which should be a string to a Multipart class. Should fail with ClassCastException
          */

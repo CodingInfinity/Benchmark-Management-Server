@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.service.notification;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendEmailRequest;
 import org.junit.After;
 import org.junit.Before;
@@ -13,8 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailSendException;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.subethamail.wiser.Wiser;
 
 import javax.inject.Inject;
@@ -61,7 +65,7 @@ public class SendEmailTest extends AbstractTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void sendEmailTest() throws MessagingException, IOException {
+    public void sendEmailTest() throws MessagingException, IOException, EMailNotSentException {
 
         doNothing().when(javaMailSender).send((MimeMessage)anyObject());
         when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());
@@ -81,8 +85,20 @@ public class SendEmailTest extends AbstractTest {
          */
         thrown.expect(ClassCastException.class);
         ((Multipart)message.getContent()).getCount();
-
     }
 
+    @Test
+    public void sendEmailFailedTest() throws MessagingException, IOException, EMailNotSentException {
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((MimeMessage) anyObject());
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((MimeMessage[]) anyObject());
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((SimpleMailMessage) anyObject());
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((SimpleMailMessage[]) anyObject());
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((MimeMessagePreparator) anyObject());
+        doThrow(new MailSendException("Test string")).when(javaMailSender).send((MimeMessagePreparator[]) anyObject());
+        when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());
+        thrown.expect(EMailNotSentException.class);
+
+        notification.sendEmail(new SendEmailRequest("johndoe@example.com", "Unit Testing", "This is a test string", false, false));
+    }
 
 }
