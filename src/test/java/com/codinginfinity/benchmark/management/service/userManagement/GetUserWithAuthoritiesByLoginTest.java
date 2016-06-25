@@ -6,7 +6,7 @@ import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exceptions.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.GetUserWithAuthoritiesByLoginRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -64,5 +64,6 @@ public class GetUserWithAuthoritiesByLoginTest extends AbstractTest {
         when(userRepository.findOneByUsername(anyString())).thenReturn(Optional.of(user));
         User retrievedUser = userManagement.getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest("johndoe")).getUser();
         assertEquals(user, retrievedUser);
+        assertEquals(1, retrievedUser.getAuthorities().size());
     }
 }
