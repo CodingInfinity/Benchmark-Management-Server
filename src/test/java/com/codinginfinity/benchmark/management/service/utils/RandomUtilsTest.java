@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
+import static net.trajano.commons.testing.UtilityClassTestUtil.assertUtilityClassWellDefined;
 import static org.junit.Assert.*;
 
 /**
@@ -12,9 +13,13 @@ import static org.junit.Assert.*;
 public class RandomUtilsTest {
 
     @Test
+    public void utilityClassWellDefinedTest() {
+        assertUtilityClassWellDefined(RandomUtils.class);
+    }
+
+    @Test
     public void generatePasswordTest() {
         testString(RandomUtils.generateActivationKey());
-
     }
 
     @Test
