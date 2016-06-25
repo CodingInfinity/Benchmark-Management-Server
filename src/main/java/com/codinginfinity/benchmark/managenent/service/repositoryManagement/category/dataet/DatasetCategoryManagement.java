@@ -9,7 +9,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.cate
 public interface DatasetCategoryManagement {
 
     AddDatasetCategoryResponse addDatasetCategory(AddDatasetCategoryRequest request);
-    DeleteDatasetCategoryResponse addDatasetCategory(DeleteDatasetCategoryRequest request);
-    UpdateDatasetCategoryResponse addDatasetCategory(UpdateDatasetCategoryRequest request);
-    GetDatasetCategoryResponse addDatasetCategory(GetDatasetCategoryRequest request);
+    DeleteDatasetCategoryResponse deleteDatasetCategory(DeleteDatasetCategoryRequest request);
+    UpdateDatasetCategoryResponse updateDatasetCategory(UpdateDatasetCategoryRequest request);
+    GetDatasetCategoryResponse getDatasetCategory(GetDatasetCategoryRequest request);
 }

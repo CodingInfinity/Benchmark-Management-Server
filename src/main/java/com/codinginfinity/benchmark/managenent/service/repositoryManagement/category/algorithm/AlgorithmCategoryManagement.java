@@ -9,7 +9,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.cate
 public interface AlgorithmCategoryManagement {
 
     AddAlgorithmCategoryResponse addAlgorithmCategory(AddAlgorithmCategoryRequest request);
-    DeleteAlgorithmCategoryResponse addAlgorithmCategory(DeleteAlgorithmCategoryRequest request);
-    UpdateAlgorithmCategoryResponse addAlgorithmCategory(UpdateAlgorithmCategoryRequest request);
-    GetAlgorithmCategoryResponse addAlgorithmCategory(GetAlgorithmCategoryRequest request);
+    DeleteAlgorithmCategoryResponse deleteAlgorithmCategory(DeleteAlgorithmCategoryRequest request);
+    UpdateAlgorithmCategoryResponse updateAlgorithmCategory(UpdateAlgorithmCategoryRequest request);
+    GetAlgorithmCategoryResponse getAlgorithmCategory(GetAlgorithmCategoryRequest request);
 }
