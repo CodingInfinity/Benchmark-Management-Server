@@ -9,8 +9,11 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class GetDatasetCategoryRequest extends Request {
 
     private static final long serialVersionUID = 3379139585395320947L;
+
+    private Long id;
 }
