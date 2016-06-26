@@ -37,7 +37,7 @@ public abstract class AbstractCategoryTest {
     public void nameTooLongTest() {
         Category category = getCategory();
         category.setName("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz");
-        Set<ConstraintViolation<Category>> violations = validator.validate(new Category());
+        Set<ConstraintViolation<Category>> violations = validator.validate(category);
         assertEquals(1, violations.size());
     }
 
