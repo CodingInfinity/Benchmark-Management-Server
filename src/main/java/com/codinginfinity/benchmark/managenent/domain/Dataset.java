@@ -28,10 +28,4 @@ public class Dataset extends RepoEntity {
             joinColumns = {@JoinColumn(name = "dataset_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<DatasetCategory> categories;
-
-
-    public Dataset(Long id, String name, User user, List<DatasetCategory> categories) {
-        super(id, name, user);
-        this.categories = categories;
-    }
 }

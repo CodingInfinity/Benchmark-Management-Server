@@ -28,9 +28,4 @@ public class Algorithm extends RepoEntity {
             joinColumns = {@JoinColumn(name = "algorithm_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<AlgorithmCategory> categories;
-
-    public Algorithm(Long id, String name, User user, List<AlgorithmCategory> categories) {
-        super(id, name, user);
-        this.categories = categories;
-    }
 }
