@@ -7,8 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,19 +17,9 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Entity
-public class Algorithm implements Serializable {
+public class Algorithm extends RepoEntity {
 
     private static final long serialVersionUID = 251521771756625319L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotNull
-    private String name;
-
-    @NotNull
-    private User user;
 
     @JsonIgnore
     @ManyToMany
