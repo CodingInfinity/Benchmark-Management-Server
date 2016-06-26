@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by reinhardt on 2016/06/26.
  */
-public class RepoManagementTest <T extends RepoEntity, S extends JpaRepository<T, Long>, V extends Category>{
+public abstract class RepoManagementTest <T extends RepoEntity, S extends JpaRepository<T, Long>, V extends Category>{
 
     protected static Validator validator;
 
@@ -29,25 +29,22 @@ public class RepoManagementTest <T extends RepoEntity, S extends JpaRepository<T
         validator = factory.getValidator();
     }
 
-    //TODO: once the todo of "Find a way to instantiate an object of type T in this context" is solved we can uncomment this test
-    /*
     @Test
     public void validateTestObject() {
         Set<ConstraintViolation<T>> violations = validator.validate(createObject());
         assertEquals(0, violations.size());
     }
-    */
 
-    //TODO:Find a way to instantiate an object of type T in this context
-    /*
+    abstract T makeObjectOfType();
+    abstract void setCategoriesForType(T obj);
+
     protected T createObject() {
-        T object = new T();
+        T object = makeObjectOfType();
         object.setUser(createUser());
         object.setName("Dirty Sort");
-        //algorithm.setCategories(null);
+        setCategoriesForType(object);
         return object;
     }
-    */
 
     protected User createUser() {
         User result = new User();
