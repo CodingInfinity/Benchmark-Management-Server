@@ -1,7 +1,16 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm;
 
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.request.*;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.response.*;
+import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.AddCategoryResponse;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.DeleteCategoryResponse;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.GetCategoryResponse;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.UpdateCategoryResponse;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,22 +20,22 @@ import org.springframework.stereotype.Service;
 public class AlgorithmCategoryManagementImpl implements AlgorithmCategoryManagement {
 
     @Override
-    public AddAlgorithmCategoryResponse addAlgorithmCategory(AddAlgorithmCategoryRequest request) {
+    public AddCategoryResponse<AlgorithmCategory> addCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
         return null;
     }
 
     @Override
-    public DeleteAlgorithmCategoryResponse deleteAlgorithmCategory(DeleteAlgorithmCategoryRequest request) {
+    public DeleteCategoryResponse<AlgorithmCategory> deleteCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentException {
         return null;
     }
 
     @Override
-    public UpdateAlgorithmCategoryResponse updateAlgorithmCategory(UpdateAlgorithmCategoryRequest request) {
+    public UpdateCategoryResponse<AlgorithmCategory> updateCategory(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentException {
         return null;
     }
 
     @Override
-    public GetAlgorithmCategoryResponse getAlgorithmCategory(GetAlgorithmCategoryRequest request) {
+    public GetCategoryResponse<AlgorithmCategory> getCategory(GetCategoryRequest<AlgorithmCategory> request) throws NonExistentException {
         return null;
     }
 }
