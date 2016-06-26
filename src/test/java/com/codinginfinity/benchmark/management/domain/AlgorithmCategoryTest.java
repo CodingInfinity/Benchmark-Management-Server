@@ -1,7 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.Category;
 import org.junit.Test;
 
 import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
@@ -9,11 +8,11 @@ import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntity
 /**
  * Created by andrew on 2016/06/25.
  */
-public class AlgorithmCategoryTest extends AbstractCategoryTest {
+public class AlgorithmCategoryTest extends AbstractCategoryTest<AlgorithmCategory> {
 
     @Override
-    protected <T extends Category> T getCategory() {
-        return (T)new AlgorithmCategory();
+    protected AlgorithmCategory getCategory() {
+        return new AlgorithmCategory();
     }
 
     @Test

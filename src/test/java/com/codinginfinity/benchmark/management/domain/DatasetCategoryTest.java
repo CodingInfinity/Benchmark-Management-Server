@@ -1,7 +1,5 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import org.junit.Test;
 
@@ -10,11 +8,11 @@ import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntity
 /**
  * Created by andrew on 2016/06/25.
  */
-public class DatasetCategoryTest extends AbstractCategoryTest {
+public class DatasetCategoryTest extends AbstractCategoryTest<DatasetCategory> {
 
     @Override
-    protected <T extends Category> T getCategory() {
-        return (T)new DatasetCategory();
+    protected DatasetCategory getCategory() {
+        return new DatasetCategory();
     }
 
     @Test

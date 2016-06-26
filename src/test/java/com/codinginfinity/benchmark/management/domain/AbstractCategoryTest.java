@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by andrew on 2016/06/25.
  */
-public abstract class AbstractCategoryTest {
+public abstract class AbstractCategoryTest<T extends Category> {
 
     private static Validator validator;
 
@@ -27,7 +27,7 @@ public abstract class AbstractCategoryTest {
 
     @Test
     public void nameNotNullTest() {
-        Category category = getCategory();
+        T category = getCategory();
         category.setName(null);
         Set<ConstraintViolation<Category>> violations = validator.validate(category);
         assertEquals(1, violations.size());
@@ -35,7 +35,7 @@ public abstract class AbstractCategoryTest {
 
     @Test
     public void nameTooLongTest() {
-        Category category = getCategory();
+        T category = getCategory();
         category.setName("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz");
         Set<ConstraintViolation<Category>> violations = validator.validate(category);
         assertEquals(1, violations.size());
