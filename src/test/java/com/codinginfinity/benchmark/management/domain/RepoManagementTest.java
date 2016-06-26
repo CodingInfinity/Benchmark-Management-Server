@@ -51,18 +51,12 @@ public abstract class RepoManagementTest <T extends RepoEntity, S extends JpaRep
         assertEquals(1, violations.size());
     }
 
-    //TODO: This test should be implemented once the ORM class works
     @Test
-    public void nameNotUniqueTest() {
-        /*
-        T object1 = createObject();
-        object1.setName("TheTestName");
-        T object2 = createObject();
-        object2.setName("TheTestName");
-        Set<ConstraintViolation<T>> violations = validator.validate(object2);
+    public void descriptionNotNullTest(){
+        T object = createObject();
+        object.setDescription(null);
+        Set<ConstraintViolation<T>> violations = validator.validate(object);
         assertEquals(1, violations.size());
-        */
-        assert(true);
     }
 
     @Test
