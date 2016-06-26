@@ -2,10 +2,7 @@ package com.codinginfinity.benchmark.managenent.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -19,16 +16,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Entity
+@MappedSuperclass
 public class Category implements Serializable {
 
     private static final long serialVersionUID = -7595019597330939464L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
 
     @NotNull
     @Size(max = 50)
-    private String name;
+    @Column(unique = true)
+    protected String name;
 }
