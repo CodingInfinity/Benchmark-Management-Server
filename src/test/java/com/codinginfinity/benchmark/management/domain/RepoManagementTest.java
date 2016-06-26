@@ -35,10 +35,21 @@ public abstract class RepoManagementTest <T extends RepoEntity, S extends JpaRep
         assertEquals(0, violations.size());
     }
 
+    @Test
+    public void nameNotNullTest() {
+        T object = createObject();
+        object.setName(null);
+        //TODO: a compilation error is generated : "object" is not a valid parameter to the validate function
+        /*
+        Set<ConstraintViolation<Category>> violations = validator.validate(object);
+        assertEquals(1, violations.size());
+        */
+    }
+
     abstract T makeObjectOfType();
     abstract void setCategoriesForType(T obj);
 
-    protected T createObject() {
+    private T createObject() {
         T object = makeObjectOfType();
         object.setUser(createUser());
         object.setName("Dirty Sort");
