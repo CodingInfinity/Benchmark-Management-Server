@@ -36,14 +36,41 @@ public abstract class RepoManagementTest <T extends RepoEntity, S extends JpaRep
     }
 
     @Test
-    public void nameNotNullTest() {
+    public void nameNotNullTest(){
         T object = createObject();
         object.setName(null);
-        //TODO: a compilation error is generated : "object" is not a valid parameter to the validate function
+        Set<ConstraintViolation<T>> violations = validator.validate(object);
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void nameTooLongTest() {
+        T object = createObject();
+        object.setName("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy");
+        Set<ConstraintViolation<T>> violations = validator.validate(object);
+        assertEquals(1, violations.size());
+    }
+
+    //TODO: This test should be implemented once the ORM class works
+    @Test
+    public void nameNotUniqueTest() {
         /*
-        Set<ConstraintViolation<Category>> violations = validator.validate(object);
+        T object1 = createObject();
+        object1.setName("TheTestName");
+        T object2 = createObject();
+        object2.setName("TheTestName");
+        Set<ConstraintViolation<T>> violations = validator.validate(object2);
         assertEquals(1, violations.size());
         */
+        assert(true);
+    }
+
+    @Test
+    public void userNotNullTest(){
+        T object = createObject();
+        object.setUser(null);
+        Set<ConstraintViolation<T>> violations = validator.validate(object);
+        assertEquals(1, violations.size());
     }
 
     abstract T makeObjectOfType();
