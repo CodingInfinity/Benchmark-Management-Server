@@ -1,18 +1,15 @@
 package com.codinginfinity.common.testing;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
  * Created by andrew on 2016/06/25.
  */
-public final class EntityClassTestUtil extends Object {
+public final class EntityClassTestUtil {
 
     private static final Logger log = Logger.getLogger(EntityClassTestUtil.class.getName());
 
