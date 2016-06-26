@@ -25,9 +25,11 @@ public abstract class RepoEntity implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(unique = true)
     private String name;
 
     @NotNull
     private User user;
+
+    @NotNull
+    String description;
 }

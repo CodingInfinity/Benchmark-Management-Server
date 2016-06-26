@@ -6,8 +6,8 @@ import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.exception.DuplicateAlgorithmException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.request.AddAlgorithmRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.request.GetAlgorithmByIdRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +15,9 @@ import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -42,15 +45,27 @@ public class AddAlgorithm extends AbstractTest {
     }
 
     @Test
-    public void addDuplicateAlgorithmTest(){
-        Algorithm algorithm = new Algorithm();
-        algorithm.setName("BubbleSort");
-        algorithm.setUser(createUser());
-        algorithm.setCategories(createCategories());
-        Mockito.when(algorithmRepository.findOneByName("BubbleSort")).thenReturn(Optional.of(algorithm));
-        thrown.expect(DuplicateAlgorithmException.class);
-        algorithmManagement.addAlgorithm(new AddAlgorithmRequest("Bubblesort", createUser(), createCategories()));
+    public void addAlgoritmTest(){
+        Mockito.when(algorithmRepository.save((Algorithm)any())).thenAnswer(invocation -> {
+            Algorithm alg = (Algorithm)invocation.getArguments()[0];
+            alg.setName("BubbleSort");
+            alg.setCategories(createCategories());
+            alg.setUser(createUser());
+            alg.setDescription("Sorting using a standard Bubblesort Algorithm");
+            alg.setId(new Long(12345));
+            return alg;
+        });
+
+        Algorithm algorithm = algorithmManagement.addAlgorithm(new AddAlgorithmRequest("BubbleSort", createUser(),
+                createCategories(), "Sorting using a standard Bubblesort Algorithm")).getAlgorithm();
+        assertEquals(algorithm.getId(), new Long(12345));
+        assertEquals(algorithm.getCategories().size(), 2);
+        assertEquals(algorithm.getDescription(), "Sorting using a standard Bubblesort Algorithm");
+        assertEquals(algorithm.getName(), "BubbleSort");
+        assertEquals(algorithm.getUser().getUsername(), createUser().getUsername());
+
     }
+
 
     private User createUser() {
         User result = new User();
@@ -65,6 +80,22 @@ public class AddAlgorithm extends AbstractTest {
         result.setResetKey(null);
         return result;
     }
+
+    List<Algorithm> list = new ArrayList<Algorithm>();
+    Algorithm one = new Algorithm();
+    one.setName("BubbleSort");
+    one.setCategories(createCategories());
+    one.setUser(createUser());
+    one.setDescription("Sorting using a standard Bubblesort Algorithm");
+    list.add(one);
+    Algorithm two = new Algorithm();
+    two.setName("BubbleSort");
+    two.setCategories(createCategories());
+    two.setUser(createUser());
+    two.setDescription("Sorting using an andvance Bubblesort Algorithm");
+    list.add(two);
+    Mockito.when(algorithmRepository.findOneById("BubbleSort")).thenReturn(list);
+
 
     private List<AlgorithmCategory> createCategories() {
         List<AlgorithmCategory> categories = new ArrayList<AlgorithmCategory>();

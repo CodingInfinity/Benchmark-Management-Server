@@ -22,4 +22,6 @@ public class AddAlgorithmRequest extends Request {
     User user;
 
     List<AlgorithmCategory> categories;
+
+    String description;
 }
