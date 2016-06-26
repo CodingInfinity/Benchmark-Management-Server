@@ -16,17 +16,17 @@ public class DatasetCategoryManagementImpl implements DatasetCategoryManagement 
     }
 
     @Override
-    public DeleteDatasetCategoryResponse addDatasetCategory(DeleteDatasetCategoryRequest request) {
+    public DeleteDatasetCategoryResponse deleteDatasetCategory(DeleteDatasetCategoryRequest request) {
         return null;
     }
 
     @Override
-    public UpdateDatasetCategoryResponse addDatasetCategory(UpdateDatasetCategoryRequest request) {
+    public UpdateDatasetCategoryResponse updateDatasetCategory(UpdateDatasetCategoryRequest request) {
         return null;
     }
 
     @Override
-    public GetDatasetCategoryResponse addDatasetCategory(GetDatasetCategoryRequest request) {
+    public GetDatasetCategoryResponse getDatasetCategory(GetDatasetCategoryRequest request) {
         return null;
     }
 }
