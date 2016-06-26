@@ -36,7 +36,7 @@ public class Dataset implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "dataset_category",
+            name = "dataset_datasetCategory",
             joinColumns = {@JoinColumn(name = "dataset_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<DatasetCategory> categories;
