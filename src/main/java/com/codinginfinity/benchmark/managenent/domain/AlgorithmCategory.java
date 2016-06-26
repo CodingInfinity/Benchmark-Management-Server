@@ -12,4 +12,8 @@ import javax.persistence.Entity;
 public class AlgorithmCategory extends Category {
 
     private static final long serialVersionUID = 5172121759729855063L;
+
+    public AlgorithmCategory(Long id, String name) {
+        super(id, name);
+    }
 }
