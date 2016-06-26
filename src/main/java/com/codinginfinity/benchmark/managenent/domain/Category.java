@@ -17,7 +17,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString
 @MappedSuperclass
-public class Category implements Serializable {
+public abstract class Category implements Serializable {
 
     private static final long serialVersionUID = -7595019597330939464L;
 
