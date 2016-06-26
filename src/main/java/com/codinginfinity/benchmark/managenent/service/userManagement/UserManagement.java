@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.userManagement;
 
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;

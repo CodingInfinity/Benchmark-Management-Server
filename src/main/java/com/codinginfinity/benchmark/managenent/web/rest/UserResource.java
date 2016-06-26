@@ -7,7 +7,7 @@ import com.codinginfinity.benchmark.managenent.service.notification.exception.EM
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.DeleteUserRequest;
