@@ -42,7 +42,7 @@ public class AddAlgorithm extends AbstractTest {
     }
 
     @Test
-    public void addDuplicateUserTest(){
+    public void addDuplicateAlgorithmTest(){
         Algorithm algorithm = new Algorithm();
         algorithm.setName("BubbleSort");
         algorithm.setUser(createUser());
