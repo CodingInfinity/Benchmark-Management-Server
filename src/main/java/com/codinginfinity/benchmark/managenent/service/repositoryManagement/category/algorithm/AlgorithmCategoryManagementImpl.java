@@ -16,17 +16,17 @@ public class AlgorithmCategoryManagementImpl implements AlgorithmCategoryManagem
     }
 
     @Override
-    public DeleteAlgorithmCategoryResponse addAlgorithmCategory(DeleteAlgorithmCategoryRequest request) {
+    public DeleteAlgorithmCategoryResponse deleteAlgorithmCategory(DeleteAlgorithmCategoryRequest request) {
         return null;
     }
 
     @Override
-    public UpdateAlgorithmCategoryResponse addAlgorithmCategory(UpdateAlgorithmCategoryRequest request) {
+    public UpdateAlgorithmCategoryResponse updateAlgorithmCategory(UpdateAlgorithmCategoryRequest request) {
         return null;
     }
 
     @Override
-    public GetAlgorithmCategoryResponse addAlgorithmCategory(GetAlgorithmCategoryRequest request) {
+    public GetAlgorithmCategoryResponse getAlgorithmCategory(GetAlgorithmCategoryRequest request) {
         return null;
     }
 }
