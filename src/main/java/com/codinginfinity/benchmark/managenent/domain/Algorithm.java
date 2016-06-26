@@ -36,7 +36,7 @@ public class Algorithm implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "algorithm_category",
+            name = "algorithm_algorithmCategory",
             joinColumns = {@JoinColumn(name = "algorithm_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<DatasetCategory> categories;
