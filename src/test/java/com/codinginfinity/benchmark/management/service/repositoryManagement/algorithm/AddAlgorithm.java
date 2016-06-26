@@ -81,22 +81,6 @@ public class AddAlgorithm extends AbstractTest {
         return result;
     }
 
-    List<Algorithm> list = new ArrayList<Algorithm>();
-    Algorithm one = new Algorithm();
-    one.setName("BubbleSort");
-    one.setCategories(createCategories());
-    one.setUser(createUser());
-    one.setDescription("Sorting using a standard Bubblesort Algorithm");
-    list.add(one);
-    Algorithm two = new Algorithm();
-    two.setName("BubbleSort");
-    two.setCategories(createCategories());
-    two.setUser(createUser());
-    two.setDescription("Sorting using an andvance Bubblesort Algorithm");
-    list.add(two);
-    Mockito.when(algorithmRepository.findOneById("BubbleSort")).thenReturn(list);
-
-
     private List<AlgorithmCategory> createCategories() {
         List<AlgorithmCategory> categories = new ArrayList<AlgorithmCategory>();
         AlgorithmCategory sorting = new AlgorithmCategory(new Long(1), "Sorting");
