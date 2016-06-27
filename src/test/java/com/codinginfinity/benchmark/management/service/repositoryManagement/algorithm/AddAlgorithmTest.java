@@ -27,7 +27,7 @@ import java.util.Optional;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class AddAlgorithm extends AbstractTest {
+public class AddAlgorithmTest extends AbstractTest {
 
     private AlgorithmRepository algorithmRepository;
 
