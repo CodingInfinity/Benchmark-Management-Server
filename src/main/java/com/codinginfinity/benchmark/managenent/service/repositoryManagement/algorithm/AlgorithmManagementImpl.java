@@ -1,7 +1,8 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm;
 
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.request.*;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.response.*;
+import com.codinginfinity.benchmark.managenent.domain.Algorithm;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,44 +10,43 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AlgorithmManagementImpl implements AlgorithmManagement {
-
     @Override
-    public AddAlgorithmResponse addAlgorithm(AddAlgorithmRequest request) {
+    public AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public DeleteAlgorithmResponse deleteAlgorithm(DeleteAlgorithmRequest request) {
+    public DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public UpdateAlgorithmMetadataResponse updateAlgorithmMetaData(UpdataAlgorithmMetadataRequest request) {
+    public UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public GetAlgorithmByIdResponse getAlgorithmById(GetAlgorithmByIdRequest request) {
+    public GetRepoEntityByIdResponse<Algorithm> getRepoEntityById(GetRepoEntityByIdRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public GetAlgorithmByUsernameResponse getAlgorithmByUsername(GetAlgorithmByUsernameRequest request) {
+    public GetRepoEntityByUsernameResponse<Algorithm> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public GetAlgorithmByCategoryResponse getAlgorithmByCategory(GetAlgorithmByCategoryRequest request) {
+    public GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public GetUnusedAlgorithmsResponse getUnusedAlgorithms(GetUnusedAlgorithmsRequest request) {
+    public GetUnusedRepoEntitysResponse<Algorithm> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Algorithm> request) {
         return null;
     }
 
     @Override
-    public GetUnusedAlgorithmByUsernameResponse getUnusedAlgorithmByUsername(GetUnusedAlgorithmByUsernameRequest request) {
+    public GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request) {
         return null;
     }
 }
