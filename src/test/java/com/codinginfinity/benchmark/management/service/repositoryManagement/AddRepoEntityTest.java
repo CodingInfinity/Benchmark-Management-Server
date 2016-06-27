@@ -22,9 +22,9 @@ import static org.mockito.Matchers.any;
 /**
  * Created by reinhardt on 2016/06/27.
  */
-public abstract class AddRepoEntityTest<T extends RepoEntity<? extends Category>,
+public abstract class AddRepoEntityTest<C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
-        M extends RepositoryEntityManagement<T>> extends AbstractRepositoryManagementTest<T> {
+        M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
 
     @InjectMocks
     @Inject
@@ -49,10 +49,10 @@ public abstract class AddRepoEntityTest<T extends RepoEntity<? extends Category>
             return entity;
         });
 
-        T entity = repositoryEntityManagement.addRepoEntity(new AddRepoEntityRequest<T>(getExpectedName(),
+        T entity = (T)repositoryEntityManagement.addRepoEntity(new AddRepoEntityRequest<C,T>(getExpectedName(),
                 getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getRepoEntity();
         assertEquals(entity.getId(), new Long(12345));
-       assertEquals(entity.getCategories().size(), 2);
+        assertEquals(entity.getCategories().size(), 2);
         assertEquals(entity.getDescription(), getExpectedDescription());
         assertEquals(entity.getName(), getExpectedName());
         assertEquals(entity.getUser().getUsername(), getExpectedUser().getUsername());

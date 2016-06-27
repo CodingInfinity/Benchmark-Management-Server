@@ -14,13 +14,13 @@ import java.util.List;
  */
 @Getter
 @AllArgsConstructor
-public class AddRepoEntityRequest<T extends RepoEntity> extends Request{
+public class AddRepoEntityRequest<C extends Category, T extends RepoEntity<C>> extends Request{
 
     String name;
 
     User user;
 
-    List<Category> categories;
+    List<C> categories;
 
     String description;
 }

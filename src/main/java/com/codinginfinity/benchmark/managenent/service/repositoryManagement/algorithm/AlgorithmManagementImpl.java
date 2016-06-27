@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm;
 
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
+import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlgorithmManagementImpl implements AlgorithmManagement {
     @Override
-    public AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<Algorithm> request) {
+    public AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) {
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset;
 
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
+import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
@@ -8,9 +9,9 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
 /**
  * Created by andrew on 2016/06/24.
  */
-public interface DatasetManagement extends RepositoryEntityManagement<Dataset>{
+public interface DatasetManagement extends RepositoryEntityManagement<DatasetCategory, Dataset>{
     @Override
-    AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<Dataset> request);
+    AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request);
 
     @Override
     DeleteRepoEntityResponse<Dataset> deleteRepoEntity(DeleteRepoEntityRequest<Dataset> request);

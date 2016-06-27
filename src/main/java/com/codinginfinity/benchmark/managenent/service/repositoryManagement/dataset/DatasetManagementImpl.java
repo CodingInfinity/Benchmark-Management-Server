@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset;
 
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
+import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DatasetManagementImpl implements DatasetManagement {
     @Override
-    public AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<Dataset> request) {
+    public AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) {
         return null;
     }
 

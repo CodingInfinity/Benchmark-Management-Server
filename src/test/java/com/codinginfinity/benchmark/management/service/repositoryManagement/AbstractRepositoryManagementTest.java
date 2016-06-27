@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by reinhardt on 2016/06/27.
  */
-public abstract class AbstractRepositoryManagementTest <T extends RepoEntity<? extends Category>> extends AbstractTest {
+public abstract class AbstractRepositoryManagementTest <C extends Category, T extends RepoEntity<C>> extends AbstractTest {
     protected abstract Long getExpectedId();
 
     protected abstract String getExpectedName();
@@ -19,7 +19,7 @@ public abstract class AbstractRepositoryManagementTest <T extends RepoEntity<? e
 
     protected abstract User getExpectedUser();
 
-    protected abstract List<Category> getExpectedCategories();
+    protected abstract List<C> getExpectedCategories();
 
     protected abstract T getRepoEntity();
 }

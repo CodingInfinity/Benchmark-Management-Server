@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement;
 
+import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
@@ -7,8 +8,8 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
 /**
  * Created by reinhardt on 2016/06/27.
  */
-public interface RepositoryEntityManagement<T extends RepoEntity> {
-    AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<T> request);
+public interface RepositoryEntityManagement<C extends Category, T extends RepoEntity<C>> {
+    AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request);
     DeleteRepoEntityResponse<T> deleteRepoEntity(DeleteRepoEntityRequest<T> request);
     UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<T> request);
     GetRepoEntityByIdResponse<T> getRepoEntityById(GetRepoEntityByIdRequest<T> request);

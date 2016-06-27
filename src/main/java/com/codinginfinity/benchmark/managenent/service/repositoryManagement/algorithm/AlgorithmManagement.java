@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm;
 
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
+import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
@@ -8,9 +9,9 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
 /**
  * Created by andrew on 2016/06/25.
  */
-public interface AlgorithmManagement extends RepositoryEntityManagement<Algorithm>{
+public interface AlgorithmManagement extends RepositoryEntityManagement<AlgorithmCategory, Algorithm>{
     @Override
-    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<Algorithm> request);
+    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request);
 
     @Override
     DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request);
