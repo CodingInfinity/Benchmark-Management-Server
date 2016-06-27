@@ -25,9 +25,4 @@ public class UpdateAlgorithmCategoryTest extends UpdateCategoryTest<AlgorithmCat
     protected AlgorithmCategory getCategory() {
         return new AlgorithmCategory(getExpectedId(), getExpectedName());
     }
-
-    @Override
-    protected AlgorithmCategoryRepository getRepo() {
-        return null;
-    }
 }

@@ -5,11 +5,13 @@ import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ import static org.mockito.Mockito.when;
  */
 public abstract class UpdateCategoryTest<T extends Category,
         S extends CategoryRepository<T>,
-        R extends CategoryManagement<T>>  extends AbstractCategoryTest<T, S> {
+        R extends CategoryManagement<T>>  extends AbstractCategoryTest<T> {
 
     @Inject
     @InjectMocks
@@ -33,6 +35,11 @@ public abstract class UpdateCategoryTest<T extends Category,
 
     @Mock
     private S categoryRepository;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

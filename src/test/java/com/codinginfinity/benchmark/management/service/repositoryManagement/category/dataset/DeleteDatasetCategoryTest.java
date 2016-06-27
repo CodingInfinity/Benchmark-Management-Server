@@ -24,10 +24,4 @@ public class DeleteDatasetCategoryTest extends DeleteCategoryTest<DatasetCategor
     protected DatasetCategory getCategory() {
         return new DatasetCategory(getExpectedId(), getExpectedName());
     }
-
-    @Override
-    protected DatasetCategoryRepository getRepo() {
-        return null;
-    }
-
 }
