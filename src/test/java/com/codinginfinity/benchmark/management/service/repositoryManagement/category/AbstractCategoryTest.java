@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.Category;
+import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 
 /**
  * Created by andrew on 2016/06/26.

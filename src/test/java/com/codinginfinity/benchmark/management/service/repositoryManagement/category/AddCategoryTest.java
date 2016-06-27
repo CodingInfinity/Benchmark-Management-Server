@@ -5,11 +5,13 @@ import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -35,9 +37,14 @@ public abstract class AddCategoryTest<T extends Category,
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     public void addExistingCategoryTest() throws DuplicateCategoryException {
-        T category = getCategory();
+       T category = getCategory();
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.of(category));
 
         categoryManagement.addCategory(new AddCategoryRequest<T>(category.getName()));
@@ -46,7 +53,7 @@ public abstract class AddCategoryTest<T extends Category,
 
     @Test
     public void addNewCategoryTest() throws DuplicateCategoryException {
-        T category = getCategory();
+       T category = getCategory();
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.empty());
 
         T savedCategory = categoryManagement.addCategory(new AddCategoryRequest<T>(category.getName())).getCategory();

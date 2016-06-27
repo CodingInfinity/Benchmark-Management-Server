@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.UpdateCategoryTest;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 
 /**

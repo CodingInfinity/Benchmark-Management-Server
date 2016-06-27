@@ -3,7 +3,11 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.AddCategoryTest;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
+import org.mockito.Mock;
+
+import javax.inject.Inject;
 
 /**
  * Created by andrew on 2016/06/25.

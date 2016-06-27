@@ -6,11 +6,13 @@ import com.codinginfinity.benchmark.managenent.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryRequest;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -35,6 +37,11 @@ public abstract class DeleteCategoryTest <T extends Category,
 
     @Mock
     private S categoryRepository;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
