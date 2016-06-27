@@ -3,7 +3,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.DeleteCategoryTest;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.repository.DatasetCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataet.DatasetCategoryManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
 
 /**
  * Created by andrew on 2016/06/25.

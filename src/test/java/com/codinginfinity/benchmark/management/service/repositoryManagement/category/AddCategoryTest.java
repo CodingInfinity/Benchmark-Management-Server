@@ -3,7 +3,6 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.exception.DuplicateAlgorithmCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
 import org.junit.Rule;
@@ -42,7 +41,7 @@ public abstract class AddCategoryTest<T extends Category,
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.of(category));
 
         categoryManagement.addCategory(new AddCategoryRequest<T>(category.getName()));
-        thrown.expect(DuplicateAlgorithmCategoryException.class);
+        thrown.expect(DuplicateCategoryException.class);
     }
 
     @Test
