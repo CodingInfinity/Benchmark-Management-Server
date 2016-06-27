@@ -19,27 +19,27 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(value= HttpStatus.PRECONDITION_FAILED)
-public class NonExistentException extends Exception {
+public class NonExistentAlgorithmException extends com.codinginfinity.benchmark.managenent.service.exception.NonExistentException {
 
     private static final long serialVersionUID = 1521974978161487658L;
 
-    public NonExistentException() {
+    public NonExistentAlgorithmException() {
         super();
     }
 
-    public NonExistentException(String message) {
+    public NonExistentAlgorithmException(String message) {
         super(message);
     }
 
-    public NonExistentException(String message, Throwable cause) {
+    public NonExistentAlgorithmException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public NonExistentException(Throwable cause) {
+    public NonExistentAlgorithmException(Throwable cause) {
         super(cause);
     }
 
-    protected NonExistentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected NonExistentAlgorithmException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
