@@ -12,12 +12,5 @@ import java.util.Optional;
  * Created by reinhardt on 2016/06/25.
  */
 @Repository
-public interface AlgorithmRepository extends JpaRepository<Algorithm, Long> {
-    Optional<Algorithm> findOneById(Long id);
-
-    List<Algorithm> findByName(String name);
-
-    List<Algorithm> findByUser(String user);
-
-    List<Algorithm> findByCategory(Category category);
+public interface AlgorithmRepository extends RepoEntityRepository<Algorithm> {
 }

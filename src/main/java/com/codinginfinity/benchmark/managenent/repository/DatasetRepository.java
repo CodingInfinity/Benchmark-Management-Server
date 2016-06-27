@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by reinhardt on 2016/06/25.
  */
 @Repository
-public interface DatasetRepository extends JpaRepository<Dataset, Long> {
+public interface DatasetRepository extends RepoEntityRepository<Dataset> {
 }
