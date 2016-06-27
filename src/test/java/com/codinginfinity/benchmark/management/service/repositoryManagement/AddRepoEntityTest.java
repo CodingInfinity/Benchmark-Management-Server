@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
+import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
@@ -21,7 +22,7 @@ import static org.mockito.Matchers.any;
 /**
  * Created by reinhardt on 2016/06/27.
  */
-public abstract class AddRepoEntityTest<T extends RepoEntity,
+public abstract class AddRepoEntityTest<T extends RepoEntity<? extends Category>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<T>> extends AbstractRepositoryManagementTest<T> {
 
@@ -51,7 +52,7 @@ public abstract class AddRepoEntityTest<T extends RepoEntity,
         T entity = repositoryEntityManagement.addRepoEntity(new AddRepoEntityRequest<T>(getExpectedName(),
                 getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getRepoEntity();
         assertEquals(entity.getId(), new Long(12345));
-       // assertEquals(entity.getCategories().size(), 2);
+       assertEquals(entity.getCategories().size(), 2);
         assertEquals(entity.getDescription(), getExpectedDescription());
         assertEquals(entity.getName(), getExpectedName());
         assertEquals(entity.getUser().getUsername(), getExpectedUser().getUsername());

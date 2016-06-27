@@ -17,7 +17,9 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @MappedSuperclass
-public abstract class RepoEntity implements Serializable {
+public abstract class RepoEntity<T extends Category> implements Serializable {
+
+    private static final long serialVersionUID = 3368347492285795646L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,4 +34,6 @@ public abstract class RepoEntity implements Serializable {
 
     @NotNull
     String description;
+
+    public abstract List<T> getCategories();
 }

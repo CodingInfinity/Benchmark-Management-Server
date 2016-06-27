@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by reinhardt on 2016/06/27.
  */
-public abstract class AbstractRepositoryManagementTest <T extends RepoEntity> extends AbstractTest {
+public abstract class AbstractRepositoryManagementTest <T extends RepoEntity<? extends Category>> extends AbstractTest {
     protected abstract Long getExpectedId();
 
     protected abstract String getExpectedName();

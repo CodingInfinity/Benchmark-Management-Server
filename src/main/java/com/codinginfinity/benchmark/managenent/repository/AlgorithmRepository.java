@@ -12,5 +12,7 @@ import java.util.Optional;
  * Created by reinhardt on 2016/06/25.
  */
 @Repository
+
 public interface AlgorithmRepository extends RepoEntityRepository<Algorithm> {
+
 }

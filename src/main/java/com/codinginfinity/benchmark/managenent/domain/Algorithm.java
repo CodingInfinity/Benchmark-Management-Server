@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
-public class Algorithm extends RepoEntity {
+public class Algorithm extends RepoEntity<AlgorithmCategory> {
 
     private static final long serialVersionUID = 251521771756625319L;
 
@@ -27,5 +27,11 @@ public class Algorithm extends RepoEntity {
             name = "algorithm_algorithmCategory",
             joinColumns = {@JoinColumn(name = "algorithm_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
+
     private List<AlgorithmCategory> categories;
+
+    @Override
+    public List<AlgorithmCategory> getCategories() {
+        return categories;
+    }
 }

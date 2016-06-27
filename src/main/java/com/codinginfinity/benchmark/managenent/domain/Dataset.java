@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
-public class Dataset extends RepoEntity {
+public class Dataset extends RepoEntity<DatasetCategory> {
 
     private static final long serialVersionUID = -5132732623123018351L;
 
@@ -28,4 +28,9 @@ public class Dataset extends RepoEntity {
             joinColumns = {@JoinColumn(name = "dataset_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<DatasetCategory> categories;
+
+    @Override
+    public List<DatasetCategory> getCategories() {
+        return categories;
+    }
 }
