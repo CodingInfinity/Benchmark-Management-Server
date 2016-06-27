@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement;
 
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 
 /**
  * Created by reinhardt on 2016/06/27.
