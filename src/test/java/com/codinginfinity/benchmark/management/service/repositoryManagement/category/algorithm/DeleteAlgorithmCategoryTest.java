@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.DeleteCategoryTest;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 
 /**
@@ -23,5 +24,10 @@ public class DeleteAlgorithmCategoryTest extends DeleteCategoryTest<AlgorithmCat
     @Override
     protected AlgorithmCategory getCategory() {
         return new AlgorithmCategory(getExpectedId(), getExpectedName());
+    }
+
+    @Override
+    protected AlgorithmCategoryRepository getRepo() {
+        return null;
     }
 }

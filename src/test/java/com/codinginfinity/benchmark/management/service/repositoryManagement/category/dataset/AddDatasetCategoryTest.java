@@ -24,4 +24,9 @@ public class AddDatasetCategoryTest extends AddCategoryTest<DatasetCategory, Dat
     protected DatasetCategory getCategory() {
         return new DatasetCategory(getExpectedId(), getExpectedName());
     }
+
+    @Override
+    protected DatasetCategoryRepository getRepo() {
+        return null;
+    }
 }

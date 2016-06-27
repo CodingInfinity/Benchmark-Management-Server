@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
  */
 public abstract class AddCategoryTest<T extends Category,
         S extends CategoryRepository<T>,
-        R extends CategoryManagement<T>>  extends AbstractCategoryTest<T> {
+        R extends CategoryManagement<T>>  extends AbstractCategoryTest<T, S> {
 
     @Inject
     @InjectMocks
@@ -37,7 +37,7 @@ public abstract class AddCategoryTest<T extends Category,
 
     @Test
     public void addExistingCategoryTest() throws DuplicateCategoryException {
-        T category = getCategory();
+       T category = getCategory();
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.of(category));
 
         categoryManagement.addCategory(new AddCategoryRequest<T>(category.getName()));
@@ -46,7 +46,7 @@ public abstract class AddCategoryTest<T extends Category,
 
     @Test
     public void addNewCategoryTest() throws DuplicateCategoryException {
-        T category = getCategory();
+       T category = getCategory();
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.empty());
 
         T savedCategory = categoryManagement.addCategory(new AddCategoryRequest<T>(category.getName())).getCategory();

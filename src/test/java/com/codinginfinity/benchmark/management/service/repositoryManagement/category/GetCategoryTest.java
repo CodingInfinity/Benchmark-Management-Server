@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  */
 public abstract class GetCategoryTest<T extends Category,
         S extends CategoryRepository<T>,
-        R extends CategoryManagement<T>> extends AbstractCategoryTest<T> {
+        R extends CategoryManagement<T>> extends AbstractCategoryTest<T, S> {
 
     @Inject
     @InjectMocks
