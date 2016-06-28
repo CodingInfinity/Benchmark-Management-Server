@@ -1,20 +1,14 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm;
 
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.AddCategoryResponse;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.DeleteCategoryResponse;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.GetCategoryResponse;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.UpdateCategoryResponse;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.*;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Created by andrew on 2016/06/28.
  */
 public interface AlgorithmCategoryManagement extends CategoryManagement<AlgorithmCategory> {
 
@@ -22,11 +16,14 @@ public interface AlgorithmCategoryManagement extends CategoryManagement<Algorith
     AddCategoryResponse<AlgorithmCategory> addCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException;
 
     @Override
-    DeleteCategoryResponse<AlgorithmCategory> deleteCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentException;
+    DeleteCategoryResponse<AlgorithmCategory> deleteCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
 
     @Override
-    UpdateCategoryResponse<AlgorithmCategory> updateCategory(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentException;
+    UpdateCategoryResponse<AlgorithmCategory> updateCategory(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
 
     @Override
-    GetCategoryResponse<AlgorithmCategory> getCategory(GetCategoryRequest<AlgorithmCategory> request) throws NonExistentException;
+    GetCategoryByIdResponse<AlgorithmCategory> getCategoryById(GetCategoryByIdRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
+
+    @Override
+    GetCategoryByNameResponse<AlgorithmCategory> getCategoryByName(GetCategoryByNameRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
 }
