@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.managenent.repository;
 import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,9 @@ public interface RepoEntityRepository<T extends RepoEntity> extends JpaRepositor
     List<T> findByName(String name);
 
     List<T> findByUser(String user);
+
+    /*
+    @Query("SELECT * FROM User u WHERE u.")
+    List<T> findByCategory(Category category);
+    */
 }
