@@ -1,13 +1,12 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset;
 
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.AddCategoryTest;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.UpdateCategoryTest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByIdTest;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagementImpl;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.exception.DuplicateDatasetCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.exception.NonExistentDatasetCategoryException;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(DatasetCategorySpringTest.class)
-public class UpdateDatasetCategoryTest extends UpdateCategoryTest<DatasetCategory,
+public class GetDatasetCategoryByIdTest extends GetCategoryByIdTest<DatasetCategory,
         DatasetCategoryRepository,
         DatasetCategoryManagement> {
 

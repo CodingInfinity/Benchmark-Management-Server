@@ -4,8 +4,10 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,21 +29,15 @@ import static org.mockito.Mockito.when;
 /**
  * Created by andrew on 2016/06/26.
  */
-public abstract class DeleteCategoryTest <T extends Category,
+public abstract class DeleteCategoryTest<T extends Category,
         S extends CategoryRepository<T>,
-        R extends CategoryManagement<T>> extends AbstractCategoryTest<T> {
+        R extends CategoryManagement<T>>  extends AbstractCategoryTest<T> {
 
     @Inject
-    @InjectMocks
     private R categoryManagement;
 
-    @Mock
+    @Inject
     private S categoryRepository;
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -50,8 +46,8 @@ public abstract class DeleteCategoryTest <T extends Category,
     public void deleteNonExistantCategoryTest() throws NonExistentException {
         when(categoryRepository.findOneByName(anyString())).thenReturn(Optional.empty());
 
+        thrown.expect(NonExistentCategoryException.class);
         categoryManagement.deleteCategory(new DeleteCategoryRequest<T>(getExpectedId()));
-        thrown.expect(NonExistentException.class);
     }
 
     @Test
@@ -61,15 +57,17 @@ public abstract class DeleteCategoryTest <T extends Category,
         database.put(category.getId(), category);
 
         doAnswer(args -> database.remove((Long)args.getArguments()[0])).when(categoryRepository).delete(getExpectedId());
-        when(categoryRepository.getOne(anyLong())).thenAnswer(args -> database.get((Long)args.getArguments()[0]));
+        when(categoryRepository.findOneById(anyLong())).thenAnswer(args -> Optional.ofNullable(database.get((Long) args.getArguments()[0])));
 
-        T savedCategory = categoryManagement.getCategory(new GetCategoryRequest<T>(getExpectedId())).getCategory();
+        T savedCategory = categoryManagement.getCategoryById(new GetCategoryByIdRequest<T>(getExpectedId())).getCategory();
         assertNotNull(savedCategory);
         assertEquals(getExpectedId(), savedCategory.getId());
         assertEquals(getExpectedName(), savedCategory.getName());
 
         categoryManagement.deleteCategory(new DeleteCategoryRequest<T>(getExpectedId()));
-        savedCategory = categoryManagement.getCategory(new GetCategoryRequest<T>(getExpectedId())).getCategory();
+
+        thrown.expect(NonExistentCategoryException.class);
+        savedCategory = categoryManagement.getCategoryById(new GetCategoryByIdRequest<T>(getExpectedId())).getCategory();
         assertNull(savedCategory);
     }
 }

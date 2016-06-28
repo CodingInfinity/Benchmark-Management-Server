@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.AddCategoryTest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByNameTest;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
@@ -10,15 +10,13 @@ import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.mockito.Mockito.mock;
-
 /**
- * Created by andrew on 2016/06/25.
+ * Created by andrew on 2016/06/28.
  */
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(AlgorithmCategorySpringTest.class)
-public class AddAlgorithmCategoryTest extends AddCategoryTest<AlgorithmCategory,
+public class GetAlgorithmCategoryByNameTest extends GetCategoryByNameTest<AlgorithmCategory,
         AlgorithmCategoryRepository,
         AlgorithmCategoryManagement> {
 
