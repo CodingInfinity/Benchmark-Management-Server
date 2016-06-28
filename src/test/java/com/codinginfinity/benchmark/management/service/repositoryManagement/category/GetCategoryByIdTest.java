@@ -6,7 +6,7 @@ import com.codinginfinity.benchmark.managenent.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,19 +16,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
-import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by andrew on 2016/06/26.
  */
-public abstract class UpdateCategoryTest<T extends Category,
+public abstract class GetCategoryByIdTest<T extends Category,
         S extends CategoryRepository<T>,
         R extends CategoryManagement<T>>  extends AbstractCategoryTest<T> {
 
@@ -42,26 +39,22 @@ public abstract class UpdateCategoryTest<T extends Category,
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void updateNonExistingCategoryTest() throws NonExistentException {
+    public void getNonExistantCategoryTest() throws NonExistentException {
         when(categoryRepository.findOneById(anyLong())).thenReturn(Optional.empty());
 
         thrown.expect(NonExistentException.class);
-        categoryManagement.updateCategory(new UpdateCategoryRequest<T>(getExpectedId(), getExpectedName()));
+        categoryManagement.getCategoryById(new GetCategoryByIdRequest<T>(getExpectedId()));
+
     }
 
+
     @Test
-    public void updateExistingCategory() throws NonExistentException {
+    public void getCategoryByIdTest() throws NonExistentException {
         T category = getCategory();
-        HashMap<Long, T> database = new HashMap<>();
-        database.put(category.getId(), category);
-
-        doAnswer(args -> database.remove((Long)args.getArguments()[0])).when(categoryRepository).delete(getExpectedId());
-        //when(categoryRepository.findOneById(anyLong())).thenAnswer(args -> database.get((Long)args.getArguments()[0]));
-
         when(categoryRepository.findOneById(getExpectedId())).thenReturn(Optional.of(category));
 
-        T savedCategory = categoryManagement.updateCategory(new UpdateCategoryRequest<T>(getExpectedId(), "Second Test")).getCategory();
+        T savedCategory = categoryManagement.getCategoryById(new GetCategoryByIdRequest<T>(getExpectedId())).getCategory();
         assertEquals(getExpectedId(), category.getId());
-        assertEquals("Second Test", savedCategory.getName());
+        assertEquals(getExpectedName(), savedCategory.getName());
     }
 }
