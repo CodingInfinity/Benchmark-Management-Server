@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.DatasetManagement;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,14 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
+@SpringApplicationConfiguration(DatasetSpringTest.class)
 public class AddDatasetTest extends AddRepoEntityTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement> {
+    protected String getNonExistentExceptionMessage() {
+        return "Dataset does not Exist";
+    }
+
     @Override
     protected Long getExpectedId() {
         return new Long(12345);

@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.alg
 
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.AddRepoEntityTest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.UpdateRepoEntityMetadataTest;
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by andrew on 2016/06/25.
  */
 @SpringApplicationConfiguration(AlgorithmSpringTest.class)
-public class UpdateAlgorithmMetadata extends AddRepoEntityTest<AlgorithmCategory, Algorithm,
+public class UpdateAlgorithmMetadata extends UpdateRepoEntityMetadataTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
     @Override
