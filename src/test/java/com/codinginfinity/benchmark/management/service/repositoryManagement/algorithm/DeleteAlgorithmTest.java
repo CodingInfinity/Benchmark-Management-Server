@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class GetAlgorithmByUsername extends AddRepoEntityTest<AlgorithmCategory, Algorithm,
+public class DeleteAlgorithmTest extends AddRepoEntityTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
     @Override

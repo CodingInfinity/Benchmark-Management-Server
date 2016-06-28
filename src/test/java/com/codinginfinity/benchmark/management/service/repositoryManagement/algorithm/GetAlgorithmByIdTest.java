@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class GetAlgorithmById extends GetRepoEntityByIdTest<AlgorithmCategory,
+public class GetAlgorithmByIdTest extends GetRepoEntityByIdTest<AlgorithmCategory,
         Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {

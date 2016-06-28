@@ -1,7 +1,7 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.dataset;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.AddRepoEntityTest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.GetRepoEntityByIdTest;
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class GetDatasetByCategory extends AddRepoEntityTest<DatasetCategory, Dataset,
+public class GetDatasetByIdTest extends GetRepoEntityByIdTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement> {
     @Override

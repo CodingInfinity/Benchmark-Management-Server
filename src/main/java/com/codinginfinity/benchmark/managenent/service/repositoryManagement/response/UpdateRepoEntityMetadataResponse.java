@@ -11,4 +11,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UpdateRepoEntityMetadataResponse <T extends RepoEntity> extends Response {
+    T entity;
 }

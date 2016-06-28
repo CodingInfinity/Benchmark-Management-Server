@@ -11,4 +11,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DeleteRepoEntityRequest <T extends RepoEntity> extends Request {
+    Long id;
 }

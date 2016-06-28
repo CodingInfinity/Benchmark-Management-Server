@@ -11,4 +11,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetRepoEntityByUsernameRequest <T extends RepoEntity> extends Request {
+    String username;
 }
