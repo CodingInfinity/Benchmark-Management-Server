@@ -11,4 +11,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetRepoEntityByIdResponse <T extends RepoEntity> extends Response {
+    T repoEntity;
 }
