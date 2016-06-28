@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -25,10 +26,16 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by andrew on 2016/06/25.
  */
+@SpringApplicationConfiguration(AlgorithmSpringTest.class)
 public class GetAlgorithmByIdTest extends GetRepoEntityByIdTest<AlgorithmCategory,
         Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
+    @Override
+    protected String getNonExistentExceptionMessage() {
+        return "Algorithm does not Exist";
+    }
+
     @Override
     protected Long getExpectedId() {
         return new Long(12345);

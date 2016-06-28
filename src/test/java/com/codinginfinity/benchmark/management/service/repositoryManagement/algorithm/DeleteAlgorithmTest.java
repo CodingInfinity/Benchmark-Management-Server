@@ -7,6 +7,7 @@ import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
+@SpringApplicationConfiguration(AlgorithmSpringTest.class)
 public class DeleteAlgorithmTest extends AddRepoEntityTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
@@ -30,6 +32,11 @@ public class DeleteAlgorithmTest extends AddRepoEntityTest<AlgorithmCategory, Al
     @Override
     protected String getExpectedDescription() {
         return new String("The standard Bubble Sort Algorithm");
+    }
+
+    @Override
+    protected String getNonExistentExceptionMessage() {
+        return "Algorithm does not Exist";
     }
 
     @Override
