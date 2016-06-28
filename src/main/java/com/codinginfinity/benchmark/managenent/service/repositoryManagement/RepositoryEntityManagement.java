@@ -11,7 +11,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
 public interface RepositoryEntityManagement<C extends Category, T extends RepoEntity<C>> {
     AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request);
     DeleteRepoEntityResponse<T> deleteRepoEntity(DeleteRepoEntityRequest<T> request);
-    UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<T> request);
+    UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<C,T> request);
     GetRepoEntityByIdResponse<T> getRepoEntityById(GetRepoEntityByIdRequest<T> request);
     GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request);
     GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request);
