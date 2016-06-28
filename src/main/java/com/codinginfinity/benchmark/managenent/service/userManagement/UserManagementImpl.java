@@ -129,7 +129,7 @@ public class UserManagementImpl implements UserManagement {
         }
 
         User newUser = new User();
-        newUser.setUsername(request.getUsername());
+        newUser.setUsername(request.getUsername().toLowerCase());
         String encryptedPassword = passwordEncoder.encode(request.getPassword());
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(request.getFirstName());
@@ -169,7 +169,7 @@ public class UserManagementImpl implements UserManagement {
         }
 
         User newUser = new User();
-        newUser.setUsername(request.getUsername());
+        newUser.setUsername(request.getUsername().toLowerCase());
         /*
          * We assign user a random password as we will send the user an email with to allow them the opportunity to
          * select their own password,
@@ -250,7 +250,7 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     public GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException {
-        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername().toLowerCase());
         if (!user.isPresent()) {
             throw new NonExistentException("User does not exist");
         }
