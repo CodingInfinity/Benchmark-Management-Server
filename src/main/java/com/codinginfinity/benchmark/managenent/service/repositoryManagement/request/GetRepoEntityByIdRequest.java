@@ -11,4 +11,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetRepoEntityByIdRequest <T extends RepoEntity> extends Request {
+    Long id;
 }

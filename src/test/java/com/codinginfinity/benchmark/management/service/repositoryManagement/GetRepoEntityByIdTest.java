@@ -4,7 +4,7 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.AddRepoEntityRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,17 +15,19 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.Optional;
+
+import com.codinginfinity.benchmark.managenent.service.exception.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 
 /**
- * Created by reinhardt on 2016/06/27.
+ * Created by reinhardt on 2016/06/28.
  */
-public abstract class AddRepoEntityTest<C extends Category, T extends RepoEntity<C>,
+public abstract class GetRepoEntityByIdTest <C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
-
     @InjectMocks
     @Inject
     M repositoryEntityManagement;
@@ -42,15 +44,17 @@ public abstract class AddRepoEntityTest<C extends Category, T extends RepoEntity
     }
 
     @Test
-    public void addRepoEntityTest(){
-        Mockito.when(repoEntityRepository.save((T)any())).thenAnswer(invocation -> {
-            T entity = (T)invocation.getArguments()[0];
-            entity.setId(getExpectedId());
-            return entity;
-        });
+    public void getRepoEntityThatDoesNotExistTest(){
+        Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
+        thrown.expect(NonExistentException.class);
+        T entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+    }
 
-        T entity = (T)repositoryEntityManagement.addRepoEntity(new AddRepoEntityRequest<C,T>(getExpectedName(),
-                getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getRepoEntity();
+    @Test
+    public void getRepoEntityTest(){
+        Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
+        T entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        assertEquals(entity.getId(), getExpectedId());
         assertEquals(entity.getId(), getExpectedId());
         assertEquals(entity.getCategories().size(), 2);
         assertEquals(entity.getDescription(), getExpectedDescription());
