@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.DeleteRepoEntityRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,6 +41,7 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
     public void deleteNonExistentRepoEntityTest(){
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
+        thrown.expectMessage(getNonExistentExceptionMessage());
         repositoryEntityManagement.deleteRepoEntity(new DeleteRepoEntityRequest<T>(getExpectedId()));
     }
 
@@ -52,5 +54,11 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         assertEquals(entity.getDescription(), getExpectedDescription());
         assertEquals(entity.getName(), getExpectedName());
         assertEquals(entity.getUser().getUsername(), getExpectedUser().getUsername());
+
+        //now try to get the deleted entity
+        Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
+        thrown.expect(NonExistentException.class);
+        thrown.expectMessage(getNonExistentExceptionMessage());
+        repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId()));
     }
 }
