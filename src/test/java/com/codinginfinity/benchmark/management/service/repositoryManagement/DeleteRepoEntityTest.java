@@ -53,7 +53,6 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
         T entity = repositoryEntityManagement.deleteRepoEntity(new DeleteRepoEntityRequest<T>(getExpectedId())).getEntity();
         assertEquals(entity.getId(), getExpectedId());
-        assertEquals(entity.getId(), getExpectedId());
         assertEquals(entity.getCategories().size(), 2);
         assertEquals(entity.getDescription(), getExpectedDescription());
         assertEquals(entity.getName(), getExpectedName());

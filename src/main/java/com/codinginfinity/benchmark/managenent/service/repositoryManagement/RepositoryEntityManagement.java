@@ -14,7 +14,7 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
     UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<T> request);
     GetRepoEntityByIdResponse<T> getRepoEntityById(GetRepoEntityByIdRequest<T> request);
     GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request);
-    GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<T> request);
+    GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request);
     GetUnusedRepoEntitysResponse<T> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<T> request);
     GetUnusedRepoEntityByUsernameResponse<T> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<T> request);
 }

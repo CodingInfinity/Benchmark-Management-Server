@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.managenent.service.repositoryManagement.request;
 
+import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.service.Request;
 import lombok.AllArgsConstructor;
@@ -10,5 +11,6 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class GetRepoEntityByCategoryRequest <T extends RepoEntity> extends Request {
+public class GetRepoEntityByCategoryRequest <C extends Category, T extends RepoEntity<C>> extends Request {
+    C category;
 }
