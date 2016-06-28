@@ -22,7 +22,7 @@ public class DatasetManagementImpl implements DatasetManagement {
     }
 
     @Override
-    public UpdateRepoEntityMetadataResponse<Dataset> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<Dataset> request) {
+    public UpdateRepoEntityMetadataResponse<Dataset> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<DatasetCategory,Dataset> request) {
         return null;
     }
 
@@ -37,7 +37,7 @@ public class DatasetManagementImpl implements DatasetManagement {
     }
 
     @Override
-    public GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<Dataset> request) {
+    public GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory,Dataset> request) {
         return null;
     }
 

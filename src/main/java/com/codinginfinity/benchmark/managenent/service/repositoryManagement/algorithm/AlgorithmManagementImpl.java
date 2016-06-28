@@ -22,7 +22,7 @@ public class AlgorithmManagementImpl implements AlgorithmManagement {
     }
 
     @Override
-    public UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<Algorithm> request) {
+    public UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<AlgorithmCategory,Algorithm> request) {
         return null;
     }
 
@@ -37,7 +37,7 @@ public class AlgorithmManagementImpl implements AlgorithmManagement {
     }
 
     @Override
-    public GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<Algorithm> request) {
+    public GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory,Algorithm> request) {
         return null;
     }
 
