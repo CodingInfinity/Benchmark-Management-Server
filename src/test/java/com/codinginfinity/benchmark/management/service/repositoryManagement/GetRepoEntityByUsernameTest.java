@@ -29,20 +29,14 @@ public abstract class GetRepoEntityByUsernameTest <C extends Category, T extends
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
 
-    @InjectMocks
     @Inject
     M repositoryEntityManagement;
 
-    @Mock
+    @Inject
     R repoEntityRepository;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void getRepoEntityByCatagoryTest(){

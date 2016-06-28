@@ -28,20 +28,15 @@ import static org.junit.Assert.assertEquals;
 public abstract class GetRepoEntityByIdTest <C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
-    @InjectMocks
+
     @Inject
     M repositoryEntityManagement;
 
-    @Mock
+    @Inject
     R repoEntityRepository;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void getRepoEntityThatDoesNotExistTest(){
