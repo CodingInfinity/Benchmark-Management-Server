@@ -59,7 +59,9 @@ public abstract class DeleteCategoryTest<T extends Category,
         assertEquals(getExpectedId(), savedCategory.getId());
         assertEquals(getExpectedName(), savedCategory.getName());
 
-        categoryManagement.deleteCategory(new DeleteCategoryRequest<T>(getExpectedId()));
+        T deletedEntity = categoryManagement.deleteCategory(new DeleteCategoryRequest<T>(getExpectedId())).getCategory();
+        assertEquals(getExpectedId(), deletedEntity.getId());
+        assertEquals(getExpectedName(), deletedEntity.getName());
 
         thrown.expect(NonExistentCategoryException.class);
         savedCategory = categoryManagement.getCategoryById(new GetCategoryByIdRequest<T>(getExpectedId())).getCategory();
