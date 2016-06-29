@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by reinhardt on 2016/06/28.
  */
-@Ignore
 public abstract class UpdateRepoEntityMetadataTest <C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
