@@ -33,13 +33,15 @@ public abstract class CategoryResource<T extends Category, R extends CategoryRep
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<> deleteAlgorithmCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> deleteAlgorithmCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException {
         getCategoryManagement().deleteCategory(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<UpdateCategoryResponse<T>> updateCategoryResponseResponseEntity(UpdateCategoryRequest<T> request) {
-        return null;
+    public ResponseEntity<?> updateCategoryResponseResponseEntity(UpdateCategoryRequest<T> request)
+            throws NonExistentCategoryException {
+        getCategoryManagement().updateCategory(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ResponseEntity<GetCategoryByIdResponse<T>> getCategoryById(GetCategoryByIdRequest<T> request) {
