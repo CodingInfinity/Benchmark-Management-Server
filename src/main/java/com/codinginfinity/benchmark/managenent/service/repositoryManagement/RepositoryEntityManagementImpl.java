@@ -8,6 +8,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.requ
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by reinhardt on 2016/06/29.
@@ -38,7 +39,14 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
 
     @Override
     public DeleteRepoEntityResponse<T> deleteRepoEntity(DeleteRepoEntityRequest<T> request) throws NonExistentRepoEntityException {
-        return null;
+        R repository = getRepository();
+        Optional<T> entityDoesExist = repository.findOneById(request.getId());
+        if(!entityDoesExist.isPresent()){
+            throw getNonExistentCategoryException();
+        }
+
+        repository.delete(request.getId());
+        return new DeleteRepoEntityResponse<T>(entityDoesExist.get());
     }
 
     @Override

@@ -24,7 +24,7 @@ public class DatasetManagementImpl
 
     @Override
     protected NonExistentRepoEntityException getNonExistentCategoryException() {
-        return new NonExistentDatasetException("Dataset does not exist");
+        return new NonExistentDatasetException("Dataset does not Exist");
     }
 
     @Override

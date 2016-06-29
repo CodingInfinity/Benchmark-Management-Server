@@ -35,6 +35,6 @@ public class AlgorithmManagementImpl
 
     @Override
     protected NonExistentRepoEntityException getNonExistentCategoryException() {
-        return new NonExistentAlgorithmException("Algorithm does not exist");
+        return new NonExistentAlgorithmException("Algorithm does not Exist");
     }
 }

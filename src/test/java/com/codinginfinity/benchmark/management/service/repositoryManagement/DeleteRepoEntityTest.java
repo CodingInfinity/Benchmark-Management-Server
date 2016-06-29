@@ -19,14 +19,20 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by reinhardt on 2016/06/28.
  */
-@Ignore
 public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T>{
@@ -43,14 +49,21 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
     @Test
     public void deleteNonExistentRepoEntityTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
-        thrown.expect(NonExistentException.class);
-        thrown.expectMessage(getNonExistentExceptionMessage());
+        thrown.expect(NonExistentRepoEntityException.class);
+        //thrown.expectMessage(getNonExistentExceptionMessage());
         repositoryEntityManagement.deleteRepoEntity(new DeleteRepoEntityRequest<T>(getExpectedId()));
     }
 
+    @Ignore
     @Test
     public void deleteRepoEntityTest() throws NonExistentRepoEntityException {
-        Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
+        Map<Long, T> database = new HashMap<>();
+        database.put(getExpectedId(), getRepoEntity());
+
+
+        doAnswer(args -> database.remove((Long)args.getArguments()[0])).when(repoEntityRepository).delete(getExpectedId());
+        when(repoEntityRepository.findOneById(anyLong())).thenAnswer(args -> Optional.ofNullable(database.get((Long) args.getArguments()[0])));
+
         T entity = repositoryEntityManagement.deleteRepoEntity(new DeleteRepoEntityRequest<T>(getExpectedId())).getEntity();
         assertEquals(entity.getId(), getExpectedId());
         assertEquals(entity.getCategories().size(), 2);
@@ -59,9 +72,9 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         assertEquals(entity.getUser().getUsername(), getExpectedUser().getUsername());
 
         //now try to get the deleted entity
-        Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
         thrown.expectMessage(getNonExistentExceptionMessage());
-        repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId()));
+        T deletedEntity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        assertNull(deletedEntity);
     }
 }
