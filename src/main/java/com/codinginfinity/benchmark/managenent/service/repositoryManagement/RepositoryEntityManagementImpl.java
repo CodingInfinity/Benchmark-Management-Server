@@ -79,8 +79,10 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
     }
 
     @Override
-    public GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request) throws NonExistentRepoEntityException {
-        return null;
+    public GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request){
+        R repository = getRepository();
+        List<T> entities = repository.findByUser(request.getUsername());
+        return new GetRepoEntityByUsernameResponse<>(entities);
     }
 
     @Override

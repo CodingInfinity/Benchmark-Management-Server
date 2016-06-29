@@ -24,7 +24,7 @@ public interface DatasetManagement extends RepositoryEntityManagement<DatasetCat
     GetRepoEntityByIdResponse<Dataset> getRepoEntityById(GetRepoEntityByIdRequest<Dataset> request) throws NonExistentRepoEntityException;
 
     @Override
-    GetRepoEntityByUsernameResponse<Dataset> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Dataset> request) throws NonExistentRepoEntityException;
+    GetRepoEntityByUsernameResponse<Dataset> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Dataset> request);
 
     @Override
     GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory, Dataset> request);

@@ -52,8 +52,6 @@ public abstract class GetRepoEntityByUsernameTest <C extends Category, T extends
         entities.add(extra);
         Mockito.when(repoEntityRepository.findByUser(getExpectedUser().getUsername())).thenReturn(entities);
         List<T> responseEntities = repositoryEntityManagement.getRepoEntityByUsername(new GetRepoEntityByUsernameRequest<T>(getExpectedUser().getUsername())).getEntities();
-        T entityIn = entities.get(0);
-        T entityOut = responseEntities.get(0);
         assertEquals(entities.size(), responseEntities.size());
     }
 }
