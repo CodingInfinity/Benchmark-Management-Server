@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.GetRepoEntityByCategoryRequest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by reinhardt on 2016/06/28.
  */
+@Ignore
 public abstract class GetRepoEntityByCategoryTest <C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
