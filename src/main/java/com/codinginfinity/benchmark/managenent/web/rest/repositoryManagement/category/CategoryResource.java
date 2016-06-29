@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement;
+package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement.category;
 
 import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;

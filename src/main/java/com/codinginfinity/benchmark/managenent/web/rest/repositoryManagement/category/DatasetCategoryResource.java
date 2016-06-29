@@ -1,16 +1,12 @@
-package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement;
+package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement.category;
 
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
 import com.codinginfinity.benchmark.managenent.repository.DatasetCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
