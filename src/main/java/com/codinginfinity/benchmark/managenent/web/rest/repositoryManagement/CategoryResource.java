@@ -49,8 +49,10 @@ public abstract class CategoryResource<T extends Category, R extends CategoryRep
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    public ResponseEntity<GetCategoryByNameResponse<T>> getCategoryById(GetCategoryByNameRequest<T> request) {
-        return null;
+    public ResponseEntity<T> getCategoryById(GetCategoryByNameRequest<T> request)
+            throws NonExistentCategoryException {
+        T category = getCategoryManagement().getCategoryByName(request).getCategory();
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     protected abstract T getNewCategory();
