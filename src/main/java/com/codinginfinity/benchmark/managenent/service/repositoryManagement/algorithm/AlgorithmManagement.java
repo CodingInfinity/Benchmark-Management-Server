@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.alg
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 
@@ -14,19 +15,19 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
     AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request);
 
     @Override
-    DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request);
+    DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
-    UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<AlgorithmCategory,Algorithm> request);
+    UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdateRepoEntityMetadataRequest<AlgorithmCategory, Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
-    GetRepoEntityByIdResponse<Algorithm> getRepoEntityById(GetRepoEntityByIdRequest<Algorithm> request);
+    GetRepoEntityByIdResponse<Algorithm> getRepoEntityById(GetRepoEntityByIdRequest<Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
     GetRepoEntityByUsernameResponse<Algorithm> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Algorithm> request);
 
     @Override
-    GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory,Algorithm> request);
+    GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory, Algorithm> request);
 
     @Override
     GetUnusedRepoEntitysResponse<Algorithm> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Algorithm> request);

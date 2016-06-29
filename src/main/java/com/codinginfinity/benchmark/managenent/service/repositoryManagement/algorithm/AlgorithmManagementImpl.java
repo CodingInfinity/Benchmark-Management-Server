@@ -2,52 +2,39 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.alg
 
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
+import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagementImpl;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.exception.NonExistentAlgorithmException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 /**
  * Created by andrew on 2016/06/25.
  */
 @Service
-public class AlgorithmManagementImpl implements AlgorithmManagement {
+public class AlgorithmManagementImpl
+    extends RepositoryEntityManagementImpl<AlgorithmCategory, Algorithm, AlgorithmRepository>
+    implements AlgorithmManagement{
+
+    @Inject
+    AlgorithmRepository algorithmRepository;
+
     @Override
-    public AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) {
-        return null;
+    protected AlgorithmRepository getRepository() {
+        return this.algorithmRepository;
     }
 
     @Override
-    public DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request) {
-        return null;
+    protected Algorithm newRepoEntity() {
+        return new Algorithm();
     }
 
     @Override
-    public UpdateRepoEntityMetadataResponse<Algorithm> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<AlgorithmCategory,Algorithm> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByIdResponse<Algorithm> getRepoEntityById(GetRepoEntityByIdRequest<Algorithm> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByUsernameResponse<Algorithm> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Algorithm> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory,Algorithm> request) {
-        return null;
-    }
-
-    @Override
-    public GetUnusedRepoEntitysResponse<Algorithm> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Algorithm> request) {
-        return null;
-    }
-
-    @Override
-    public GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request) {
-        return null;
+    protected NonExistentRepoEntityException getNonExistentRepoEntityException() {
+        return new NonExistentAlgorithmException("Algorithm does not Exist");
     }
 }

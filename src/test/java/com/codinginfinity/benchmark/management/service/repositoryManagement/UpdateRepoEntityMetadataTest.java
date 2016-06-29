@@ -5,15 +5,13 @@ import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.UpdataRepoEntityMetadataRequest;
-import org.junit.Before;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.UpdateRepoEntityMetadataRequest;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -37,19 +35,18 @@ public abstract class UpdateRepoEntityMetadataTest <C extends Category, T extend
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void UpdateRepoEntityThatDoesNotExistMetadataTest(){
+    public void UpdateRepoEntityThatDoesNotExistMetadataTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
-        repositoryEntityManagement.updateRepoEntityMetaData(new UpdataRepoEntityMetadataRequest<C,T>(getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription()));
+        repositoryEntityManagement.updateRepoEntityMetaData(new UpdateRepoEntityMetadataRequest<C,T>(getExpectedId(), getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription()));
     }
 
     @Test
-    public void UpdateRepoEntityMetadataTest(){
+    public void UpdateRepoEntityMetadataTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
-        thrown.expect(NonExistentException.class);
-        T entity = repositoryEntityManagement.updateRepoEntityMetaData(new UpdataRepoEntityMetadataRequest<C,T>(getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getEntity();
+        T entity = repositoryEntityManagement.updateRepoEntityMetaData(new UpdateRepoEntityMetadataRequest<C,T>(getExpectedId(), getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getEntity();
         assertEquals(entity.getId(), getExpectedId());
-        assertEquals(entity.getCategories().size(), 2);
+        assertEquals(entity.getCategories().size(), getExpectedCategories().size());
         assertEquals(entity.getDescription(), getExpectedDescription());
         assertEquals(entity.getName(), getExpectedName());
         assertEquals(entity.getUser().getUsername(), getExpectedUser().getUsername());

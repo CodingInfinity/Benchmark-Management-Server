@@ -4,8 +4,10 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -39,14 +41,14 @@ public abstract class GetRepoEntityByIdTest <C extends Category, T extends RepoE
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void getRepoEntityThatDoesNotExistTest(){
+    public void getRepoEntityThatDoesNotExistTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
         T entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
     }
 
     @Test
-    public void getRepoEntityTest(){
+    public void getRepoEntityTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
         T entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
         assertEquals(entity.getId(), getExpectedId());

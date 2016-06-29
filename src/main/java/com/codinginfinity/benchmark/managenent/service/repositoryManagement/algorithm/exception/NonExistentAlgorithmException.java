@@ -4,12 +4,12 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.alg
  * Created by reinhardt on 2016/06/26.
  */
 
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Generic exception which is thrown when a specified entity could not be retrieved from the repository and no specific
- * information needs to be returned up the call stack.
+ * Exception which is throw when an attempt is made to access an Algorithm that does not exist
  *
  * @author Reinhardt Cromhout
  *
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(value= HttpStatus.PRECONDITION_FAILED)
-public class NonExistentAlgorithmException extends com.codinginfinity.benchmark.managenent.service.exception.NonExistentException {
+public class NonExistentAlgorithmException extends NonExistentRepoEntityException {
 
     private static final long serialVersionUID = 1521974978161487658L;
 

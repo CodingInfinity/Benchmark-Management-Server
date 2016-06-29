@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,5 +33,13 @@ public class Dataset extends RepoEntity<DatasetCategory> {
     @Override
     public List<DatasetCategory> getCategories() {
         return categories;
+    }
+
+    @Override
+    public void addCategory(DatasetCategory category) {
+        if(categories == null){
+            categories = new ArrayList<DatasetCategory>();
+        }
+        categories.add(category);
     }
 }

@@ -29,7 +29,7 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
     @Size(max = 50)
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     @NotNull
     private User user;
@@ -38,4 +38,6 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
     String description;
 
     public abstract List<T> getCategories();
+
+    public abstract void addCategory(T category);
 }
