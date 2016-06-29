@@ -34,6 +34,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Override
     public ResponseEntity<?> addCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
         return super.addCategory(request);
     }
