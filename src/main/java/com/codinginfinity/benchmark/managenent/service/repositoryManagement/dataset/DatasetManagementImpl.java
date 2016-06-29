@@ -23,7 +23,7 @@ public class DatasetManagementImpl
     DatasetRepository datasetRepository;
 
     @Override
-    protected NonExistentRepoEntityException getNonExistentCategoryException() {
+    protected NonExistentRepoEntityException getNonExistentRepoEntityException() {
         return new NonExistentDatasetException("Dataset does not Exist");
     }
 

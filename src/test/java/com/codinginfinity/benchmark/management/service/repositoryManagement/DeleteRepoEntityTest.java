@@ -54,7 +54,6 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         repositoryEntityManagement.deleteRepoEntity(new DeleteRepoEntityRequest<T>(getExpectedId()));
     }
 
-    @Ignore
     @Test
     public void deleteRepoEntityTest() throws NonExistentRepoEntityException {
         Map<Long, T> database = new HashMap<>();

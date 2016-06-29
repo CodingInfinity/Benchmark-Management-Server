@@ -19,7 +19,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
 
     protected abstract T newRepoEntity();
 
-    protected abstract NonExistentRepoEntityException getNonExistentCategoryException();
+    protected abstract NonExistentRepoEntityException getNonExistentRepoEntityException();
 
     @Override
     public AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request) {
@@ -42,7 +42,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
         R repository = getRepository();
         Optional<T> entityDoesExist = repository.findOneById(request.getId());
         if(!entityDoesExist.isPresent()){
-            throw getNonExistentCategoryException();
+            throw getNonExistentRepoEntityException();
         }
 
         repository.delete(request.getId());
@@ -56,7 +56,12 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
 
     @Override
     public GetRepoEntityByIdResponse<T> getRepoEntityById(GetRepoEntityByIdRequest<T> request) throws NonExistentRepoEntityException {
-        return null;
+        R repository = getRepository();
+        Optional<T> entityDoesExist = repository.findOneById(request.getId());
+        if(!entityDoesExist.isPresent()){
+            throw getNonExistentRepoEntityException();
+        }
+        return new GetRepoEntityByIdResponse<T>(entityDoesExist.get());
     }
 
     @Override
