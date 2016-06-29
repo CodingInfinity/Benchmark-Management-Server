@@ -7,10 +7,10 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,12 +55,12 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
         return super.updateCategory(request);
     }
 
-    @RequestMapping(value = "/algorithm",
+    @RequestMapping(value = "/algorithm/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<AlgorithmCategory> getCategoryById(GetCategoryByIdRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
-        return super.getCategoryById(request);
+    public ResponseEntity<AlgorithmCategory> getCategoryById(@PathVariable(value = "id") Long id) throws NonExistentCategoryException {
+        return super.getCategoryById(id);
     }
 
     @Override

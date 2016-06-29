@@ -5,7 +5,10 @@ import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +35,8 @@ public abstract class CategoryResource<T extends Category, S extends CategoryRep
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<T> getCategoryById(GetCategoryByIdRequest<T> request) throws NonExistentCategoryException {
-        T category = getCategoryManagement().getCategoryById(request).getCategory();
+    public ResponseEntity<T> getCategoryById(Long id) throws NonExistentCategoryException {
+        T category = getCategoryManagement().getCategoryById(new GetCategoryByIdRequest<T>(id)).getCategory();
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
