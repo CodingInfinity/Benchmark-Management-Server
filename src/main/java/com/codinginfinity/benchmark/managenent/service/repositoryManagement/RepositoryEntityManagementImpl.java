@@ -50,8 +50,22 @@ public abstract class RepositoryEntityManagementImpl<C extends Category, T exten
     }
 
     @Override
-    public UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<C, T> request) throws NonExistentRepoEntityException {
-        return null;
+    public UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdateRepoEntityMetadataRequest<C, T> request) throws NonExistentRepoEntityException {
+        R repository = getRepository();
+        Optional<T> entityDoesExist = repository.findOneById(request.getId());
+        if(!entityDoesExist.isPresent()){
+            throw getNonExistentRepoEntityException();
+        }
+        entityDoesExist.get().setName(request.getName());
+        entityDoesExist.get().setUser(request.getUser());
+        entityDoesExist.get().setDescription(request.getDescription());
+        List<C> oldCategories = entityDoesExist.get().getCategories();
+        oldCategories.clear();
+        List<C> categories = request.getCategories();
+        for (C category: categories) {
+            entityDoesExist.get().addCategory(category);
+        }
+        return new UpdateRepoEntityMetadataResponse<T>(entityDoesExist.get());
     }
 
     @Override

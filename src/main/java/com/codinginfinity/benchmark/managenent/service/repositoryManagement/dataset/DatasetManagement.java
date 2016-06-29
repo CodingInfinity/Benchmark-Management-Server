@@ -18,7 +18,7 @@ public interface DatasetManagement extends RepositoryEntityManagement<DatasetCat
     DeleteRepoEntityResponse<Dataset> deleteRepoEntity(DeleteRepoEntityRequest<Dataset> request) throws NonExistentRepoEntityException;
 
     @Override
-    UpdateRepoEntityMetadataResponse<Dataset> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<DatasetCategory, Dataset> request) throws NonExistentRepoEntityException;
+    UpdateRepoEntityMetadataResponse<Dataset> updateRepoEntityMetaData(UpdateRepoEntityMetadataRequest<DatasetCategory, Dataset> request) throws NonExistentRepoEntityException;
 
     @Override
     GetRepoEntityByIdResponse<Dataset> getRepoEntityById(GetRepoEntityByIdRequest<Dataset> request) throws NonExistentRepoEntityException;

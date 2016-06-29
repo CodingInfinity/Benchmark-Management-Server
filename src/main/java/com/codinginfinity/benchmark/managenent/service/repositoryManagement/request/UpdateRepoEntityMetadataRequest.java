@@ -14,7 +14,9 @@ import java.util.List;
  */
 @Getter
 @AllArgsConstructor
-public class UpdataRepoEntityMetadataRequest <C extends Category, T extends RepoEntity<C>> extends Request {
+public class UpdateRepoEntityMetadataRequest<C extends Category, T extends RepoEntity<C>> extends Request {
+    Long id;
+
     String name;
 
     User user;

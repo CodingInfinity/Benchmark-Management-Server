@@ -12,7 +12,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
 public interface RepositoryEntityManagement<C extends Category, T extends RepoEntity<C>> {
     AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request);
     DeleteRepoEntityResponse<T> deleteRepoEntity(DeleteRepoEntityRequest<T> request) throws NonExistentRepoEntityException;
-    UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<C,T> request) throws NonExistentRepoEntityException;
+    UpdateRepoEntityMetadataResponse<T> updateRepoEntityMetaData(UpdateRepoEntityMetadataRequest<C,T> request) throws NonExistentRepoEntityException;
     GetRepoEntityByIdResponse<T> getRepoEntityById(GetRepoEntityByIdRequest<T> request) throws NonExistentRepoEntityException;
     GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request)throws NonExistentRepoEntityException;
     GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request);
