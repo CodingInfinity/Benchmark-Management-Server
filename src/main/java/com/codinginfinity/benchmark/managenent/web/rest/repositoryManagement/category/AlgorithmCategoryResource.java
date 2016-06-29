@@ -64,11 +64,6 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
     }
 
     @Override
-    protected AlgorithmCategory getNewCategory() {
-        return new AlgorithmCategory();
-    }
-
-    @Override
     protected AlgorithmCategoryRepository getRepository() {
         return this.repository;
     }

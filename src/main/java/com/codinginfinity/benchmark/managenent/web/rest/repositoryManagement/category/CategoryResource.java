@@ -40,8 +40,6 @@ public abstract class CategoryResource<T extends Category, S extends CategoryRep
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    protected abstract T getNewCategory();
-
     protected abstract S getRepository();
 
     protected abstract R getCategoryManagement();

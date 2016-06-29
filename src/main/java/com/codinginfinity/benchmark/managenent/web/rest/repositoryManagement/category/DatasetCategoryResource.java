@@ -64,11 +64,6 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
     }
 
     @Override
-    protected DatasetCategory getNewCategory() {
-        return new DatasetCategory();
-    }
-
-    @Override
     protected DatasetCategoryRepository getRepository() {
         return this.repository;
     }
