@@ -7,10 +7,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByNameRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,8 +33,9 @@ public abstract class CategoryResource<T extends Category, R extends CategoryRep
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<DeleteCategoryResponse<T>> deleteAlgorithmCategory(DeleteCategoryResponse<T> request) {
-        return null;
+    public ResponseEntity<> deleteAlgorithmCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException {
+        getCategoryManagement().deleteCategory(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ResponseEntity<UpdateCategoryResponse<T>> updateCategoryResponseResponseEntity(UpdateCategoryRequest<T> request) {
