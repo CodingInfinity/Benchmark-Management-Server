@@ -55,7 +55,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
         return super.updateCategory(request);
     }
 
-    @RequestMapping(value = "/dataset",
+    @RequestMapping(value = "/dataset/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
