@@ -2,52 +2,38 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.dat
 
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
+import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagementImpl;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.exception.NonExistentDatasetException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 /**
  * Created by andrew on 2016/06/24.
  */
 @Service
-public class DatasetManagementImpl implements DatasetManagement {
+public class DatasetManagementImpl
+        extends RepositoryEntityManagementImpl<DatasetCategory, Dataset,DatasetRepository>
+        implements DatasetManagement{
+    @Inject
+    DatasetRepository datasetRepository;
+
     @Override
-    public AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) {
-        return null;
+    protected NonExistentRepoEntityException getNonExistentCategoryException() {
+        return new NonExistentDatasetException("Dataset does not exist");
     }
 
     @Override
-    public DeleteRepoEntityResponse<Dataset> deleteRepoEntity(DeleteRepoEntityRequest<Dataset> request) {
-        return null;
+    protected DatasetRepository getRepository() {
+        return this.datasetRepository;
     }
 
     @Override
-    public UpdateRepoEntityMetadataResponse<Dataset> updateRepoEntityMetaData(UpdataRepoEntityMetadataRequest<DatasetCategory,Dataset> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByIdResponse<Dataset> getRepoEntityById(GetRepoEntityByIdRequest<Dataset> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByUsernameResponse<Dataset> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Dataset> request) {
-        return null;
-    }
-
-    @Override
-    public GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory,Dataset> request) {
-        return null;
-    }
-
-    @Override
-    public GetUnusedRepoEntitysResponse<Dataset> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Dataset> request) {
-        return null;
-    }
-
-    @Override
-    public GetUnusedRepoEntityByUsernameResponse<Dataset> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Dataset> request) {
-        return null;
+    protected Dataset newRepoEntity() {
+        return new Dataset();
     }
 }
