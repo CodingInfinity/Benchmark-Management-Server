@@ -34,16 +34,16 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addAlgorithmCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
-        return super.addAlgorithmCategory(request);
+    public ResponseEntity<?> addCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
+        return super.addCategory(request);
     }
 
     @RequestMapping(value = "/algorithm",
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> deleteAlgorithmCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
-        return super.deleteAlgorithmCategory(request);
+    public ResponseEntity<?> deleteCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
+        return super.deleteCategory(request);
     }
 
     @RequestMapping(value = "/algorithm",
@@ -51,8 +51,8 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> updateCategoryResponseResponseEntity(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
-        return super.updateCategoryResponseResponseEntity(request);
+    public ResponseEntity<?> updateCategory(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
+        return super.updateCategory(request);
     }
 
     @RequestMapping(value = "/algorithm",
