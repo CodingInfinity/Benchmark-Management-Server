@@ -29,6 +29,8 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
     @Size(max = 50)
     private String name;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id")
     @NotNull
     private User user;
 

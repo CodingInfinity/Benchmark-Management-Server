@@ -5,6 +5,7 @@ import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,8 +22,5 @@ public interface RepoEntityRepository<T extends RepoEntity> extends JpaRepositor
 
     List<T> findByUser(String user);
 
-    /*
-    @Query("SELECT * FROM User u WHERE u.")
-    List<T> findByCategory(Category category);
-    */
+    List<T> findByCategory(@Param("categoryId") Long categoryId);
 }
