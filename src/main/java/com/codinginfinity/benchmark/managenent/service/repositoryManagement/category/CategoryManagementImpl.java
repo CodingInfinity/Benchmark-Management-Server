@@ -43,7 +43,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
         }
 
         getRepository().delete(request.getId());
-        return new DeleteCategoryResponse<>();
+        return new DeleteCategoryResponse<>(categoryExists.get());
     }
 
     @Override

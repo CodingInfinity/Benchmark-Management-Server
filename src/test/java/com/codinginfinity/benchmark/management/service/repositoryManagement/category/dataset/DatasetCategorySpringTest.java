@@ -15,10 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatasetCategorySpringTest {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ManagementApp.class, args);
-    }
-
     @Bean
     public DatasetCategoryManagement categoryManagement() {
         return new DatasetCategoryManagementImpl();
