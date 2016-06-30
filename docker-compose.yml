@@ -1,0 +1,10 @@
+activemq:
+  image: codinginfinity/alpine-activemq
+  ports:
+      - 1883:1883
+      - 5672:5672
+      - 8161:8161
+      - 61613:61613
+      - 61614:61614
+      - 61616:61616
+
