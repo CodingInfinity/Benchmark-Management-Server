@@ -97,7 +97,7 @@ public interface UserManagement {
      * @throws NonExistentException Thrown when the current user in the security context can't be found in the system.
      * @since 1.0.0
      */
-    UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException;
+    UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException, EmailAlreadyExistsException;
 
     /**
      * Delete a user in the system.

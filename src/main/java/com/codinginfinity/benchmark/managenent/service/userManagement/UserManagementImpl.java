@@ -208,10 +208,15 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
-    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException {
+    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException, EmailAlreadyExistsException {
         Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
         if (!user.isPresent()) {
             throw new NonExistentException("User in current security context doesn't exist");
+        }
+
+        Optional<User> userWithEmail = userRepository.findOneByEmail(request.getEmail());
+        if (userWithEmail.isPresent() && !userWithEmail.get().equals(user.get())){
+            throw new EmailAlreadyExistsException();
         }
 
         user.get().setFirstName(request.getFirstName());
