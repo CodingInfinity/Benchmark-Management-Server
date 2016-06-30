@@ -101,7 +101,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> saveAccount(@Valid @RequestBody UpdateUserRequest request)
-            throws NotAuthorizedException, NonExistentException, EmailAenvlreadyExistsException {
+            throws NotAuthorizedException, NonExistentException, EmailAlreadyExistsException {
         userManagement.updateUser(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
