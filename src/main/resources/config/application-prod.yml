@@ -12,13 +12,13 @@
 
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/oauth?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:postgresql://localhost:5432/postgresql
         name:
-        username: root
+        username: postgresql
         password:
     jpa:
-        database-platform: org.hibernate.dialect.MySQLInnoDBDialect
-        database: MYSQL
+        database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+        database: POSTGRESQL
         show_sql: false
         properties:
             hibernate.cache.use_second_level_cache: false
