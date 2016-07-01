@@ -4,18 +4,20 @@ import com.codinginfinity.benchmark.managenent.ManagementApp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
-
-
 
 /**
  * Created by andrew on 2016/06/25.
@@ -46,7 +48,13 @@ public class ManagementAppTest {
     @Test
     public void managementAppMainTest() throws Exception {
         SpringApplication application = Mockito.mock(SpringApplication.class);
+        ConfigurableApplicationContext context = Mockito.mock(ConfigurableApplicationContext.class);
+        ConfigurableEnvironment environment = Mockito.mock(ConfigurableEnvironment.class);
+
         PowerMockito.whenNew(SpringApplication.class).withAnyArguments().thenReturn(application);
+        Mockito.when(application.run(Mockito.anyVararg())).thenReturn(context);
+        Mockito.when(context.getEnvironment()).thenReturn(environment);
+        Mockito.when(environment.getProperty(Mockito.anyString())).thenAnswer(invocationOnMock -> invocationOnMock.getArguments()[0]);
 
         ManagementApp.setApplication(application);
         ManagementApp.main(new String[] {"test1", "test2"});
@@ -54,7 +62,4 @@ public class ManagementAppTest {
         PowerMockito.verifyNew(SpringApplication.class).withArguments(ManagementApp.class);
         Mockito.verify(application, Mockito.times(1)).run("test1", "test2");
     }
-
-
-
 }

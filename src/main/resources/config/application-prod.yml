@@ -30,11 +30,15 @@ spring:
         broker-url: tcp://localhost:61616
         in-memory: false
         pooled: false
+
+liquibase:
+    contexts: prod
+
 server:
     port: 8081
     compression:
         enabled: true
-        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        mime-types: text/plain,application/javascript, application/json
         min-response-size: 1024
 
 # ===================================================================
