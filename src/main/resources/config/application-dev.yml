@@ -1,7 +1,7 @@
 # ===================================================================
-# Spring Boot configuration.
+# Spring Boot configuration for the "dev" profile.
 #
-# This configuration is used for unit/integration tests.
+# This configuration overrides the application.yml file.
 # ===================================================================
 
 # ===================================================================
@@ -16,32 +16,30 @@ spring:
         driver-class-name: org.h2.Driver
         username: sa
         password:
-
+        schema: classpath:schema.sql
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
     jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
         database: H2
-        open-in-view: false
         show_sql: true
-        hibernate:
-            ddl-auto: none
-            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
         properties:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.hbm2ddl.auto: validate
     mail:
         host: localhost
-        port: 55555
+        port: 25
+        test-connection: false
+    messages:
+        cache-seconds: 1800
     thymeleaf:
-        mode: XHTML
-
-security:
-    basic:
-        enabled: false
+        cache: false
 
 server:
-  port: 65500
-  address: localhost
+    port: 8081
 
 # ===================================================================
 # Benchmark Managament Server specific properties
@@ -55,19 +53,5 @@ benchmark:
                 secret: acmesecret
                 # Token is valid 30 minutes
                 tokenValidityInSeconds: 1800
-    mail:
-        from: benchmark-service@cs.up.ac.za
     swagger:
-        title: Benchmark Management Server API
-        description: Benchmark Management Server API documentation
-        version: 0.0.1
-        termsOfServiceUrl:
-        contactName: Vreda Pieterse
-        contactUrl: http://www.cs.up.ac.za/~vpieterse/
-        contactEmail: vpieterse@cs.up.ac.za
-        license: AGPLv3
-        licenseUrl: https://www.gnu.org/licenses/agpl-3.0.en.html
-        enabled: false;
-    frontend:
-        baseUrl: localhost:8080
-
+        enabled: true
