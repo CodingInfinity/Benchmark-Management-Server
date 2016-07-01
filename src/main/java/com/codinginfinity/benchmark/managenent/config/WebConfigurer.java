@@ -38,7 +38,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     }
 
     @Bean
-    @ConditionalOnProperty(name = "jhipster.cors.allowed-origins")
+    @ConditionalOnProperty(name = "benchmark.cors.allowed-origins")
     public CorsFilter corsFilter() {
         log.debug("Registering CORS filter");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
