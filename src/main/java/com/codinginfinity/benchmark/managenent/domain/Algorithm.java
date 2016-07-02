@@ -25,7 +25,7 @@ public class Algorithm extends RepoEntity<AlgorithmCategory> {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "algorithm_algorithmCategory",
+            name = "algorithm_algorithm_category",
             joinColumns = {@JoinColumn(name = "algorithm_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<AlgorithmCategory> categories;
@@ -38,7 +38,7 @@ public class Algorithm extends RepoEntity<AlgorithmCategory> {
     @Override
     public void addCategory(AlgorithmCategory category) {
         if(categories == null){
-            categories = new ArrayList<AlgorithmCategory>();
+            categories = new ArrayList<>();
         }
         categories.add(category);
     }
