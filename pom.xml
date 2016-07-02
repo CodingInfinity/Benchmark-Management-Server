@@ -2,6 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Benchmark Management Server</name>
+    <description>Management backend and co-ordination platform for the benchmark service platform</description>
+    <inceptionYear>2016</inceptionYear>
+
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
@@ -13,42 +21,75 @@
     <artifactId>management</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Benchmark Management Server</name>
 
-    <prerequisites>
-        <maven>3.0.0</maven>
-    </prerequisites>
+    <organization>
+        <name>Department of Computer Science, University of Pretoria</name>
+        <url>http://www.cs.up.ac.za</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>scm:git:git@github.com:CodingInfinity/Benchmark-Management-Server.git</url>
+        <connection>scm:git:git@github.com:CodingInfinity/Benchmark-Management-Server.git</connection>
+        <developerConnection>scm:git:git@github.com:CodingInfinity/Benchmark-Management-Server.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>AndrewBroekman@tuks.co.za</id>
+            <name>Andrew Broekman</name>
+            <organization>University of Pretoria</organization>
+            <email>AndrewBroekman@tuks.co.za</email>
+        </developer>
+    </developers>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/CodingInfinity/Benchmark-Management-Server</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/CodingInfinity/Benchmark-Management-Server/issues</url>
+    </issueManagement>
 
     <properties>
         <commons-lang.version>2.6</commons-lang.version>
         <dbh2.version>1.4.192</dbh2.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
+        <jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
         <java.version>1.8</java.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <junit.version>4.12</junit.version>
+        <liquibase-hibernate4.version>3.5</liquibase-hibernate4.version>
+        <liquibase-slf4j.version>1.2.1</liquibase-slf4j.version>
+        <liquibase.version>3.4.2</liquibase.version>
         <lombok.version>1.16.8</lombok.version>
         <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <mockito.version>2.0.2-beta</mockito.version>
         <powermock.version>1.6.5</powermock.version>
+        <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
         <sortpom-maven-plugin.version>2.5.0</sortpom-maven-plugin.version>
         <spring-framework.version>4.2.0.RELEASE</spring-framework.version>
         <spring-security-oauth2.version>2.0.10.RELEASE</spring-security-oauth2.version>
         <springfox.version>2.5.0</springfox.version>
-
-        <!-- Testing environment -->
-        <jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
     </properties>
 
     <dependencies>
 
-        <!-- -->
+        <!-- ActiveMQ Dependencies -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${dbh2.version}</version>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
         </dependency>
 
         <!-- Apache Commons Dependencies -->
@@ -56,6 +97,18 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <!-- H2 Database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${dbh2.version}</version>
         </dependency>
 
         <!-- Java EE Dependencies -->
@@ -70,73 +123,52 @@
             <version>${javax.validation.version}</version>
         </dependency>
 
-        <!-- Testing Framework Dependencies -->
+        <!-- Liquibase -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>com.mattbertolini</groupId>
+            <artifactId>liquibase-slf4j</artifactId>
+            <version>${liquibase-slf4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-core</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jetty-servlet</artifactId>
+                    <groupId>org.eclipse.jetty</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.subethamail</groupId>
-            <artifactId>subethasmtp</artifactId>
-            <version>3.1.7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.trajano.commons</groupId>
-            <artifactId>commons-testing</artifactId>
-            <version>1.0.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Mockito -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Project Lombok -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Springframework Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring-framework.version}</version>
-            <scope>test</scope>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${spring-security-oauth2.version}</version>
         </dependency>
 
         <!-- Spring Boot Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -144,6 +176,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -158,13 +194,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Springframework Dependencies -->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>${spring-security-oauth2.version}</version>
-        </dependency>
-
         <!-- Swagger Dependencies -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -172,19 +201,71 @@
             <version>${springfox.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.mapstruct</groupId>
                     <artifactId>mapstruct</artifactId>
+                    <groupId>org.mapstruct</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
+
+
+        <!-- Testing Framework Dependencies -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.trajano.commons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-framework.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.subethamail</groupId>
+            <artifactId>subethasmtp</artifactId>
+            <version>3.1.7</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
@@ -208,17 +289,50 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.2.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <requireMavenVersion>
+                            <message>You are running an older version of Maven. Benchmark Management Server requires at least Maven 3.0</message>
+                            <version>[3.0.0,)</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <message>You are running an older version of Java.  Benchmark Management Server requires at least JDK ${java.version}</message>
+                            <version>[${java.version}.0,)</version>
+                        </requireJavaVersion>
+                    </rules>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
+                    <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m ${surefireArgLine}</argLine>
                     <runOrder>alphabetical</runOrder>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -226,9 +340,26 @@
                 <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>pre-unit-test</id>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -245,8 +376,107 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <arguments>
+                        <argument>--spring.profiles.active=dev</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
+                    <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/postgresql</url>
+                    <defaultSchemaName></defaultSchemaName>
+                    <username>postgresql</username>
+                    <password></password>
+                    <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&amp;hibernate.ejb.naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy</referenceUrl>
+                    <verbose>true</verbose>
+                    <logging>debug</logging>
+                    <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                        <version>3.18.2-GA</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.liquibase.ext</groupId>
+                        <artifactId>liquibase-hibernate4</artifactId>
+                        <version>${liquibase-hibernate4.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-jpa</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.5</version>
+                <configuration>
+                    <imageName>benchmark</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.war</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.19</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <logback.loglevel>DEBUG</logback.loglevel>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>true</executable>
+                            <arguments>
+                                <argument>--spring.profiles.active=prod</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <properties>
+                <logback.loglevel>INFO</logback.loglevel>
+            </properties>
+        </profile>
+    </profiles>
 </project>
