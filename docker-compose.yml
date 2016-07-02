@@ -8,3 +8,8 @@ activemq:
       - 61614:61614
       - 61616:61616
 
+elasticsearch:
+  image: elasticsearch
+  ports:
+      - 9200:9200
+      - 9300:9300

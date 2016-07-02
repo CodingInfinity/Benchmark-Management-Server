@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.managenent.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -22,6 +26,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @EnableSwagger2
 @Slf4j
+@ConditionalOnProperty(prefix="jhipster.swagger", name="enabled")
 public class SwaggerConfiguration {
 
     public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
@@ -32,14 +37,23 @@ public class SwaggerConfiguration {
      * @return the Swagger Springfox configuration
      */
     @Bean
-    public Docket swaggerSpringfoxDocket() {
+    public Docket swaggerSpringfoxDocket(BenchmarkProperties benchmarkProperties) {
         log.debug("Starting Swagger");
         StopWatch watch = new StopWatch();
         watch.start();
-        Contact contact = new Contact("Vreda Pieterse", "http://www.cs.up.ac.za/~vpieterse/", "vpieterse@cs.up.ac.za");
+        Contact contact = new Contact(
+                benchmarkProperties.getSwagger().getContactName(),
+                benchmarkProperties.getSwagger().getContactUrl(),
+                benchmarkProperties.getSwagger().getContactEmail());
 
         ApiInfo apiInfo = new ApiInfo(
-                "Benchmark Service","","0.0.1-Alpha","",contact,"AGPLv3", "https://www.gnu.org/licenses/agpl-3.0.en.html");
+                benchmarkProperties.getSwagger().getTitle(),
+                benchmarkProperties.getSwagger().getDescription(),
+                benchmarkProperties.getSwagger().getVersion(),
+                benchmarkProperties.getSwagger().getTermsOfServiceUrl(),
+                contact,
+                benchmarkProperties.getSwagger().getLicense(),
+                benchmarkProperties.getSwagger().getLicenseUrl());
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
@@ -47,13 +61,12 @@ public class SwaggerConfiguration {
                 .genericModelSubstitutes(ResponseEntity.class)
                 .ignoredParameterTypes(Pageable.class)
                 .ignoredParameterTypes(java.sql.Date.class)
-                .directModelSubstitute(java.time.LocalDate.class, java.sql.Date.class)
-                .directModelSubstitute(java.time.ZonedDateTime.class, Date.class)
-                .directModelSubstitute(java.time.LocalDateTime.class, Date.class)
+                .directModelSubstitute(LocalDate.class, java.sql.Date.class)
+                .directModelSubstitute(ZonedDateTime.class, Date.class)
+                .directModelSubstitute(LocalDateTime.class, Date.class)
                 .select()
                 .paths(regex(DEFAULT_INCLUDE_PATTERN))
                 .build();
-        watch.stop();
         log.debug("Started Swagger in {} ms", watch.getTotalTimeMillis());
         return docket;
     }

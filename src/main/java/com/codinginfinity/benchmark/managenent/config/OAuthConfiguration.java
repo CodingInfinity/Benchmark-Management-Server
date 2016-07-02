@@ -62,6 +62,9 @@ public class OAuthConfiguration {
         @Inject
         private DataSource dataSource;
 
+        @Inject
+        private BenchmarkProperties benchmarkProperties;
+
         @Bean
         public TokenStore tokenStore() {
             return new JdbcTokenStore(dataSource);
@@ -89,12 +92,12 @@ public class OAuthConfiguration {
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients
                 .inMemory()
-                .withClient("acme")
+                .withClient(benchmarkProperties.getSecurity().getAuthentication().getOauth().getClientid())
                 .scopes("read", "write")
                 .authorities(AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER)
                 .authorizedGrantTypes("password", "refresh_token", "authorization_code", "implicit")
-                .secret("acmesecret")
-                .accessTokenValiditySeconds(1800);
+                .secret(benchmarkProperties.getSecurity().getAuthentication().getOauth().getSecret())
+                .accessTokenValiditySeconds(benchmarkProperties.getSecurity().getAuthentication().getOauth().getTokenValidityInSeconds());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.managenent.service.notification;
 
+import com.codinginfinity.benchmark.managenent.config.BenchmarkProperties;
 import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
@@ -38,8 +39,6 @@ public class NotificationImpl implements Notification {
 
     private static final String USER = "user";
     private static final String BASE_URL = "baseUrl";
-    // ToDo: Extract below property to Spring application yaml file
-    private static final String WEB_BASE_URL = "localhost:8080";
 
     @Inject
     private JavaMailSender javaMailSender;
@@ -50,6 +49,9 @@ public class NotificationImpl implements Notification {
     @Inject
     private SpringTemplateEngine templateEngine;
 
+    @Inject
+    private BenchmarkProperties properties;
+
     @Override
     public SendEmailResponse sendEmail(SendEmailRequest request) throws EMailNotSentException {
         log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
@@ -59,8 +61,7 @@ public class NotificationImpl implements Notification {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, request.isMultipart(), CharEncoding.UTF_8);
             message.setTo(request.getTo());
-            // ToDo: Extract to external properties file
-            message.setFrom("benchmarkservice@cs.up.ac.za");
+            message.setFrom(properties.getMail().getFrom());
             message.setSubject(request.getSubject());
             message.setText(request.getContent(), request.isHtml());
             javaMailSender.send(mimeMessage);
@@ -78,7 +79,7 @@ public class NotificationImpl implements Notification {
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
         context.setVariable(USER, request.getUser());
-        context.setVariable(BASE_URL, WEB_BASE_URL);
+        context.setVariable(BASE_URL, properties.getFrontend().getBaseUrl());
         String content = templateEngine.process("activationEmail", context);
         String subject = messageSource.getMessage("email.activation.title", null, locale);
         sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
@@ -91,7 +92,7 @@ public class NotificationImpl implements Notification {
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
         context.setVariable(USER, request.getUser());
-        context.setVariable(BASE_URL, WEB_BASE_URL);
+        context.setVariable(BASE_URL, properties.getFrontend().getBaseUrl());
         String content = templateEngine.process("creationEmail", context);
         String subject = messageSource.getMessage("email.activation.title", null, locale);
         sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
@@ -104,7 +105,7 @@ public class NotificationImpl implements Notification {
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
         context.setVariable(USER, request.getUser());
-        context.setVariable(BASE_URL, WEB_BASE_URL);
+        context.setVariable(BASE_URL, properties.getFrontend().getBaseUrl());
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(new SendEmailRequest(request.getUser().getEmail(), subject, content, false, true));
