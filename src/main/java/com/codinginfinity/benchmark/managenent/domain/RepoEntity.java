@@ -34,7 +34,6 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
     @NotNull
     private User user;
 
-    @NotNull
     private String description;
 
     public abstract List<T> getCategories();

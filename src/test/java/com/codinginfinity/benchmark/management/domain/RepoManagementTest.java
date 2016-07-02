@@ -52,14 +52,6 @@ public abstract class RepoManagementTest <T extends RepoEntity, S extends JpaRep
     }
 
     @Test
-    public void descriptionNotNullTest(){
-        T object = createObject();
-        object.setDescription(null);
-        Set<ConstraintViolation<T>> violations = validator.validate(object);
-        assertEquals(1, violations.size());
-    }
-
-    @Test
     public void userNotNullTest(){
         T object = createObject();
         object.setUser(null);
