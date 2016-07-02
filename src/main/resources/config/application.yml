@@ -1,25 +1,67 @@
+# ===================================================================
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
 
 spring:
-  datasource:
-    url: jdbc:h2:mem:benchmark;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-    schema: classpath:schema.sql
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  mail:
-    host: localhost
-    port: 25
-    test-connection: false
-  thymeleaf:
-    cache: false
-  messages:
-    basename: i18n/messages
+    profiles:
+       active: dev
+    datasource:
+        schema: classpath:schema.sql
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+    messages:
+        basename: i18n/messages
+    thymeleaf:
+        mode: XHTML
+
 security:
-  user:
-    password: password
+    basic:
+        enabled: false
+
+# ===================================================================
+# Benchmark Managament Server specific properties
+# ===================================================================
+
+benchmark:
+    cors: #By default CORS are not enabled. Uncomment to enable.
+        allowed-origins: "*"
+        allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        allowed-headers: "*"
+        exposed-headers:
+        allow-credentials: true
+        max-age: 1800
+    mail:
+        from: benchmark-service@cs.up.ac.za
+    swagger:
+        title: Benchmark Management Server API
+        description: Benchmark Management Server API documentation
+        version: 0.0.1
+        termsOfServiceUrl:
+        contactName: Vreda Pieterse
+        contactUrl: http://www.cs.up.ac.za/~vpieterse/
+        contactEmail: vpieterse@cs.up.ac.za
+        license: AGPLv3
+        licenseUrl: https://www.gnu.org/licenses/agpl-3.0.en.html
+    frontend:
+        baseUrl: localhost:8080
+
 server:
-  port: 8081
+    port: 8081
+

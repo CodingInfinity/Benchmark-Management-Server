@@ -89,7 +89,7 @@ public class UserResource {
     @Transactional
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> updateUser(@RequestBody UpdateUserRequest request)
-            throws NotAuthorizedException, NonExistentException {
+            throws NotAuthorizedException, NonExistentException, EmailAlreadyExistsException {
         log.debug("REST request to update User : {}", request);
         User user = userManagement.updateUser(request).getUser();
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);

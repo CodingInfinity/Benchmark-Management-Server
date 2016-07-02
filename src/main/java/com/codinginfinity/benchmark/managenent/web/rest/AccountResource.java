@@ -102,7 +102,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> saveAccount(@Valid @RequestBody UpdateUserRequest request)
-            throws NotAuthorizedException, NonExistentException {
+            throws NotAuthorizedException, NonExistentException, EmailAlreadyExistsException {
         userManagement.updateUser(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -117,7 +117,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request)
-            throws NonExistentException {
+            throws NonExistentException{
         userManagement.changePassword(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }

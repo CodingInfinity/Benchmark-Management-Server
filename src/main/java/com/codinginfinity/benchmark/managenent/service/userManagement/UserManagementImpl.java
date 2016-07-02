@@ -20,6 +20,7 @@ import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
@@ -41,6 +42,7 @@ import java.util.Set;
 
 
 @Service
+@Transactional
 @Slf4j
 public class UserManagementImpl implements UserManagement {
 
@@ -130,7 +132,7 @@ public class UserManagementImpl implements UserManagement {
         }
 
         User newUser = new User();
-        newUser.setUsername(request.getUsername());
+        newUser.setUsername(request.getUsername().toLowerCase());
         String encryptedPassword = passwordEncoder.encode(request.getPassword());
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(request.getFirstName());
@@ -170,7 +172,7 @@ public class UserManagementImpl implements UserManagement {
         }
 
         User newUser = new User();
-        newUser.setUsername(request.getUsername());
+        newUser.setUsername(request.getUsername().toLowerCase());
         /*
          * We assign user a random password as we will send the user an email with to allow them the opportunity to
          * select their own password,
@@ -209,10 +211,15 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
-    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException {
+    public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException, EmailAlreadyExistsException {
         Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
         if (!user.isPresent()) {
             throw new NonExistentException("User in current security context doesn't exist");
+        }
+
+        Optional<User> userWithEmail = userRepository.findOneByEmail(request.getEmail());
+        if (userWithEmail.isPresent() && !userWithEmail.get().equals(user.get())){
+            throw new EmailAlreadyExistsException();
         }
 
         user.get().setFirstName(request.getFirstName());
@@ -251,7 +258,7 @@ public class UserManagementImpl implements UserManagement {
 
     @Override
     public GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException {
-        Optional<User> user = userRepository.findOneByUsername(request.getUsername());
+        Optional<User> user = userRepository.findOneByUsername(request.getUsername().toLowerCase());
         if (!user.isPresent()) {
             throw new NonExistentException("User does not exist");
         }
