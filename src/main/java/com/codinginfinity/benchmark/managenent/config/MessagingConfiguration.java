@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.managenent.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,6 @@ import java.util.Objects;
  */
 @Configuration
 @EnableJms
-@Import({ActiveMQProperties.class})
 @Slf4j
 public class MessagingConfiguration {
 
@@ -26,6 +26,8 @@ public class MessagingConfiguration {
     private ActiveMQProperties properties;
 
     @Bean
+    @ConditionalOnProperty(name = "spring.activemq.in-memory",
+        havingValue = "false")
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory factory = new CachingConnectionFactory(jmsConnectionFactory());
         factory.setSessionCacheSize(20);
@@ -35,8 +37,11 @@ public class MessagingConfiguration {
         return factory;
     }
 
+
     @Bean
     @Inject
+    @ConditionalOnProperty(name = "spring.activemq.in-memory",
+            havingValue = "false")
     public ActiveMQConnectionFactory jmsConnectionFactory() {
         String username = properties.getUser();
         String password = properties.getPassword();
