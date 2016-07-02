@@ -7,6 +7,7 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import java.util.List;
 @SpringApplicationConfiguration(AlgorithmSpringTest.class)
 public class AddAlgorithmTest extends AddRepoEntityTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
-        AlgorithmManagement>{
+        AlgorithmManagement,
+        AlgorithmCategoryManagement>{
     @Override
     protected String getNonExistentExceptionMessage() {
         return "Algorithm does not Exist";

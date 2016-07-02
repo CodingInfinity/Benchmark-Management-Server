@@ -5,9 +5,8 @@ import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagementImpl;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.exception.NonExistentAlgorithmException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -17,11 +16,14 @@ import javax.inject.Inject;
  */
 @Service
 public class AlgorithmManagementImpl
-    extends RepositoryEntityManagementImpl<AlgorithmCategory, Algorithm, AlgorithmRepository>
+    extends RepositoryEntityManagementImpl<AlgorithmCategory, Algorithm, AlgorithmRepository, AlgorithmCategoryManagement>
     implements AlgorithmManagement{
 
     @Inject
     AlgorithmRepository algorithmRepository;
+
+    @Inject
+    AlgorithmCategoryManagement algorithmCategoryManagement;
 
     @Override
     protected AlgorithmRepository getRepository() {
@@ -31,6 +33,11 @@ public class AlgorithmManagementImpl
     @Override
     protected Algorithm newRepoEntity() {
         return new Algorithm();
+    }
+
+    @Override
+    protected AlgorithmCategoryManagement getCategoryManagement() {
+        return this.algorithmCategoryManagement;
     }
 
     @Override

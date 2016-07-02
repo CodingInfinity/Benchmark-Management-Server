@@ -2,35 +2,50 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement;
 
 import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
+import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
+import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
+import com.codinginfinity.benchmark.managenent.service.userManagement.request.GetUserWithAuthoritiesRequest;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by reinhardt on 2016/06/29.
  */
-public abstract class RepositoryEntityManagementImpl<C extends Category, T extends RepoEntity<C>, R extends RepoEntityRepository<T>>
-    implements RepositoryEntityManagement<C,T>{
+public abstract class RepositoryEntityManagementImpl<C extends Category,
+        T extends RepoEntity<C>,
+        R extends RepoEntityRepository<T>,
+        S extends CategoryManagement<C>> implements RepositoryEntityManagement<C,T>{
     protected abstract R getRepository();
 
     protected abstract T newRepoEntity();
 
+    protected abstract S getCategoryManagement();
+
     protected abstract NonExistentRepoEntityException getNonExistentRepoEntityException();
 
+    @Inject
+    private UserManagement userManagement;
+
     @Override
-    public AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request) {
+    public AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request) throws NonExistentException {
         R repository =  getRepository();
         T repoEntity = newRepoEntity();
 
         repoEntity.setName(request.getName());
         repoEntity.setDescription(request.getDescription());
-        repoEntity.setUser(request.getUser());
-        List<C> categories = request.getCategories();
-        for (C category:categories) {
+        User currentUser = userManagement.getUserWithAuthorities(new GetUserWithAuthoritiesRequest()).getUser();
+        repoEntity.setUser(currentUser);
+        for (Long categoryId : request.getCategories()) {
+            C category = getCategoryManagement().getCategoryById(new GetCategoryByIdRequest<C>(categoryId)).getCategory();
             repoEntity.addCategory(category);
         }
         repository.save(repoEntity);

@@ -4,10 +4,9 @@ import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagementImpl;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.exception.NonExistentDatasetException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -17,10 +16,13 @@ import javax.inject.Inject;
  */
 @Service
 public class DatasetManagementImpl
-        extends RepositoryEntityManagementImpl<DatasetCategory, Dataset,DatasetRepository>
+        extends RepositoryEntityManagementImpl<DatasetCategory, Dataset,DatasetRepository, DatasetCategoryManagement>
         implements DatasetManagement{
     @Inject
     DatasetRepository datasetRepository;
+
+    @Inject
+    DatasetCategoryManagement datasetCategoryManagement;
 
     @Override
     protected NonExistentRepoEntityException getNonExistentRepoEntityException() {
@@ -30,6 +32,11 @@ public class DatasetManagementImpl
     @Override
     protected DatasetRepository getRepository() {
         return this.datasetRepository;
+    }
+
+    @Override
+    protected DatasetCategoryManagement getCategoryManagement() {
+        return this.datasetCategoryManagement;
     }
 
     @Override

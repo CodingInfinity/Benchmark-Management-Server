@@ -3,6 +3,8 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.alg
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagementImpl;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
+import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +22,15 @@ public class AlgorithmSpringTest {
     @Bean
     public AlgorithmRepository categoryRepository() {
         return Mockito.mock(AlgorithmRepository.class);
+    }
+
+    @Bean
+    public UserManagement userManagement() {
+        return Mockito.mock(UserManagement.class);
+    }
+
+    @Bean
+    public AlgorithmCategoryManagement algorithmCategoryManagement() {
+        return Mockito.mock(AlgorithmCategoryManagement.class);
     }
 }
