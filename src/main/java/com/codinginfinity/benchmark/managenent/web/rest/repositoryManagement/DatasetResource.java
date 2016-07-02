@@ -3,6 +3,8 @@ package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement;
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
 import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.DatasetManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.AddRepoEntityRequest;
@@ -10,10 +12,8 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.requ
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.UpdateRepoEntityMetadataRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 
@@ -41,12 +41,15 @@ public class DatasetResource extends RepositoryEntityResource<DatasetCategory, D
     }
 
     @RequestMapping(value = "/dataset",
-            method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) {
-        return super.addRepoEntity(request);
+    public ResponseEntity<?> addRepoEntity(@RequestPart("name") final String name,
+                                           @RequestPart("description") final String description,
+                                           @RequestPart("categories") final Long[] categories,
+                                           @RequestPart("files") final MultipartFile[] multipartFiles) throws NonExistentException {
+        return super.addRepoEntity(name, description, categories, multipartFiles);
     }
 
     @RequestMapping(value = "/dataset",
@@ -58,7 +61,7 @@ public class DatasetResource extends RepositoryEntityResource<DatasetCategory, D
     }
 
     @RequestMapping(value = "/dataset",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override

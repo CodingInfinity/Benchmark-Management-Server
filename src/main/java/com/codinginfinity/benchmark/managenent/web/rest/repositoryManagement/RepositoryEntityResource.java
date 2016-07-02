@@ -3,14 +3,19 @@ package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement;
 import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,8 +28,11 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
 
     protected abstract M getRepositoryEntityManagement();
 
-    public ResponseEntity<?> addRepoEntity(AddRepoEntityRequest<C, T> request) {
-        getRepositoryEntityManagement().addRepoEntity(request);
+    public ResponseEntity<?> addRepoEntity(final String name,
+                                           final String description,
+                                           final Long[] categories,
+                                           final MultipartFile[] multipartFiles) throws NonExistentException {
+        getRepositoryEntityManagement().addRepoEntity(new AddRepoEntityRequest<>(name, Arrays.asList(categories), description));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
