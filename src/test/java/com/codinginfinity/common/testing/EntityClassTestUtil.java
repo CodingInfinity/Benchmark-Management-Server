@@ -46,7 +46,8 @@ public final class EntityClassTestUtil {
         Class cls = clazz;
         do {
             for (Field field : cls.getDeclaredFields()) {
-                if (!field.getName().equals("serialVersionUID") &&
+                if (!field.isSynthetic() &&
+                        !field.getName().equals("serialVersionUID") &&
                         (Modifier.isTransient(field.getModifiers()) || Modifier.isFinal(field.getModifiers()))) {
                     assert false;
                 }
@@ -74,16 +75,18 @@ public final class EntityClassTestUtil {
         boolean mappedSuperClass = false;
         do {
             for (Field field : cls.getDeclaredFields()) {
-                int e = field.getModifiers();
-                for (Annotation annotation : field.getAnnotations()) {
-                    if (annotation.annotationType().equals(javax.persistence.Transient.class)) {
-                        break;
+                if (!field.isSynthetic()) {
+                    int e = field.getModifiers();
+                    for (Annotation annotation : field.getAnnotations()) {
+                        if (annotation.annotationType().equals(javax.persistence.Transient.class)) {
+                            break;
+                        }
                     }
-                }
 
-                if (!(Modifier.isStatic(e) || Modifier.isFinal(e) || Modifier.isTransient(e))) {
-                    if (!(Modifier.isPrivate(e) || Modifier.isProtected(field.getModifiers()))) {
-                        assert false;
+                    if (!(Modifier.isStatic(e) || Modifier.isFinal(e) || Modifier.isTransient(e))) {
+                        if (!(Modifier.isPrivate(e) || Modifier.isProtected(field.getModifiers()))) {
+                            assert false;
+                        }
                     }
                 }
             }
