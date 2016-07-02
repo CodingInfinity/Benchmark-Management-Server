@@ -7,7 +7,7 @@ import com.codinginfinity.benchmark.managenent.service.notification.exception.EM
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NonExistentException;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.DeleteUserRequest;
@@ -25,10 +25,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

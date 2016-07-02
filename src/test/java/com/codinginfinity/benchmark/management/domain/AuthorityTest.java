@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
+import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.domain.Authority;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
@@ -12,6 +13,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
+import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -69,5 +71,10 @@ public class AuthorityTest {
         assertEquals(0, violations.size());
     }
 
+    @Test
+    public void wellDefinedEntityClass() {
+        assertEntityClassWellDefined(Authority.class);
+    }
 
 }
+

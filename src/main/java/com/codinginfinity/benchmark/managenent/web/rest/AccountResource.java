@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.managenent.web.rest;
 import com.codinginfinity.benchmark.managenent.domain.Profile;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.*;
