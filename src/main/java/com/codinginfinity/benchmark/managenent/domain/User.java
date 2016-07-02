@@ -48,12 +48,12 @@ public class User implements Serializable{
 
     @NotNull
     @Size(max = 50)
-    @Column(length = 50, nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
     @NotNull
     @Size(max = 50)
-    @Column(length = 50, nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
 
     @NotNull
@@ -68,15 +68,15 @@ public class User implements Serializable{
 
     @JsonIgnore
     @Size(min = 20, max = 20)
-    @Column(length = 20, nullable = true)
+    @Column(name = "activation_key", length = 20, nullable = true)
     private String activationKey;
 
     @Size(min = 20, max = 20)
-    @Column(length = 20, nullable = true)
+    @Column(name = "reset_key", length = 20, nullable = true)
     private String resetKey;
 
     @Past
-    @Column(nullable = true)
+    @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
 
     @JsonIgnore

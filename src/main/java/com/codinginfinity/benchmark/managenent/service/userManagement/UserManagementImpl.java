@@ -19,6 +19,7 @@ import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
@@ -40,6 +41,7 @@ import java.util.Set;
 
 
 @Service
+@Transactional
 @Slf4j
 public class UserManagementImpl implements UserManagement {
 
