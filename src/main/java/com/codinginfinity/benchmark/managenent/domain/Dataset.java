@@ -25,7 +25,7 @@ public class Dataset extends RepoEntity<DatasetCategory> {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "dataset_datasetCategory",
+            name = "dataset_dataset_category",
             joinColumns = {@JoinColumn(name = "dataset_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
     private List<DatasetCategory> categories;

@@ -8,5 +8,6 @@
     <include file="classpath:config/liquibase/changelog/201607021649_Adds_algorithm_category.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201607021649_Adds_dataset_category.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201607022224_Adds_algorithm.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/201607022224_Adds_dataset.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
