@@ -45,6 +45,9 @@ spring:
         cache-seconds: 1800
     thymeleaf:
         cache: false
+    activemq:
+        in-memory: true
+        pooled: false
 
 liquibase:
     contexts: dev
