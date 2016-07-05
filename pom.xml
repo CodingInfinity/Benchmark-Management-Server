@@ -47,6 +47,13 @@
             <organization>University of Pretoria</organization>
             <email>AndrewBroekman@tuks.co.za</email>
         </developer>
+
+        <developer>
+            <id>u14040426@tuks.co.za</id>
+            <name>Fabio Loreggian</name>
+            <organization>University of Pretoria</organization>
+            <email>u14040426@tuks.co.za</email>
+        </developer>
     </developers>
 
     <ciManagement>

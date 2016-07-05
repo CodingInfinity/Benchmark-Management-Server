@@ -2,7 +2,7 @@ package com.codinginfinity.benchmark.managenent.service.userManagement;
 
 import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.request.*;
 import com.codinginfinity.benchmark.managenent.service.userManagement.response.*;
@@ -43,11 +43,11 @@ public interface UserManagement {
      * @throws EmailNotRegisteredException Thrown when the email specified in the request is not registered.
      * @throws NotAuthorizedException Thrown when the user has outstanding reset requests on their account.
      * @throws UserNotActivatedException Thrown when the user in question has not yet activated there account.
-     * @throws EMailNotSentException Thrown when an email could not be sent to the user with there account detail.
+     * @throws EmailNotSentException Thrown when an email could not be sent to the user with there account detail.
      * @since 1.0.0
      */
     RequestPasswordResetResponse requestPasswordReset(RequestPasswordResetRequest request)
-            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException, EMailNotSentException;
+            throws EmailNotRegisteredException, NotAuthorizedException, UserNotActivatedException, EmailNotSentException;
 
     /**
      * Second step in the process for a user to reset their password. The user's password is replaced with a new
@@ -69,11 +69,11 @@ public interface UserManagement {
      *         system.
      * @throws EmailAlreadyExistsException Thrown when  a new user tries to register an email address that already
      *         exists in the system.
-     * @throws EMailNotSentException Thrown when the reset key has expired or the presented token is invalid.
+     * @throws EmailNotSentException Thrown when the reset key has expired or the presented token is invalid.
      * @since 1.0.0
      */
     CreateUnmanagedUserResponse createUnmanagedUser(CreateUnmanagedUserRequest request)
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException;
 
     /**
      * Used to create a user with a random generated password and roles selected by administrator. If no role is
@@ -85,11 +85,11 @@ public interface UserManagement {
      *         system.
      * @throws EmailAlreadyExistsException Thrown when  a new user tries to register an email address that already
      *         exists in the system.
-     * @throws EMailNotSentException Thrown when the reset key has expired or the presented token is invalid.
+     * @throws EmailNotSentException Thrown when the reset key has expired or the presented token is invalid.
      * @since 1.0.0
      */
     CreateManagedUserResponse createManagedUser(CreateManagedUserRequest request)
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException;
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException;
 
     /**
      * Update the user's detail who is in the current security context.

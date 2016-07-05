@@ -14,26 +14,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(value= HttpStatus.PRECONDITION_FAILED)
-public class EMailNotSentException extends Exception {
+public class EmailNotSentException extends Exception {
 
     private static final long serialVersionUID = -4369243337098740377L;
 
-    public EMailNotSentException() {
+    public EmailNotSentException() {
     }
 
-    public EMailNotSentException(String message) {
+    public EmailNotSentException(String message) {
         super(message);
     }
 
-    public EMailNotSentException(String message, Throwable cause) {
+    public EmailNotSentException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public EMailNotSentException(Throwable cause) {
+    public EmailNotSentException(Throwable cause) {
         super(cause);
     }
 
-    public EMailNotSentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public EmailNotSentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
