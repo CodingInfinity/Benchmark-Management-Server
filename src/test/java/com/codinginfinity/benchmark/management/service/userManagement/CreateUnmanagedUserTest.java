@@ -1,7 +1,7 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
 import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendCreationEmailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
@@ -21,7 +21,7 @@ public class CreateUnmanagedUserTest extends AbstractCreateUserTest {
 
     @Test
     public void createUnmanagedUserTest()
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
         when(userRepository.save((User)any())).thenAnswer(invocation -> {
             User user = (User)invocation.getArguments()[0];
             user.setId(12345L);
@@ -50,12 +50,12 @@ public class CreateUnmanagedUserTest extends AbstractCreateUserTest {
     }
 
     @Override
-    public void duplicateUsername(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+    public void duplicateUsername(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
         userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest(username, password, firstName, lastName, email));
     }
 
     @Override
-    public void duplicateEmailAddress(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+    public void duplicateEmailAddress(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
         userManagement.createUnmanagedUser(new CreateUnmanagedUserRequest(username, password, firstName, lastName, email));
     }
 }

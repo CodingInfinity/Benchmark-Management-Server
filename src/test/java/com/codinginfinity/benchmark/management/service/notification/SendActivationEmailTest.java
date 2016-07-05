@@ -3,7 +3,7 @@ package com.codinginfinity.benchmark.management.service.notification;
 import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
@@ -72,7 +72,7 @@ public class SendActivationEmailTest extends AbstractTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void sendEmailTest() throws MessagingException, IOException, EMailNotSentException {
+    public void sendEmailTest() throws MessagingException, IOException, EmailNotSentException {
 
         doNothing().when(javaMailSender).send((MimeMessage)anyObject());
         when(javaMailSender.createMimeMessage()).thenReturn(new JavaMailSenderImpl().createMimeMessage());

@@ -3,7 +3,7 @@ package com.codinginfinity.benchmark.management.service.userManagement;
 import com.codinginfinity.benchmark.managenent.domain.Authority;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
@@ -41,7 +41,7 @@ public class CreateManagedUserTest extends AbstractCreateUserTest {
 
     @Test
     public void createManagedUserTest()
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
 
         Set<String> authorities = new HashSet<>();
         authorities.add(AuthoritiesConstants.USER);
@@ -51,7 +51,7 @@ public class CreateManagedUserTest extends AbstractCreateUserTest {
 
     @Test
     public void createManagedUserWithNoRolesTest()
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
 
         User savedUser = userManagement.createManagedUser(new CreateManagedUserRequest("johndoe","John", "Doe", "johndoe@example.com", null)).getUser();
         verifyUser(savedUser);
@@ -59,7 +59,7 @@ public class CreateManagedUserTest extends AbstractCreateUserTest {
 
     @Test
     public void createManagedUserWithEmptyRolesTest()
-            throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+            throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
 
         Set<String> authorities = new HashSet<>();
         User savedUser = userManagement.createManagedUser(new CreateManagedUserRequest("johndoe","John", "Doe", "johndoe@example.com", authorities)).getUser();
@@ -67,7 +67,7 @@ public class CreateManagedUserTest extends AbstractCreateUserTest {
 
     }
 
-    private void verifyUser(User user) throws EMailNotSentException {
+    private void verifyUser(User user) throws EmailNotSentException {
         assertEquals(new Long(12345), user.getId());
         assertEquals("johndoe", user.getUsername());
         assertEquals("encodedpassword", user.getPassword());
@@ -87,12 +87,12 @@ public class CreateManagedUserTest extends AbstractCreateUserTest {
     }
 
     @Override
-    public void duplicateUsername(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+    public void duplicateUsername(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
         userManagement.createManagedUser(new CreateManagedUserRequest(username, firstName, lastName, email, null));
     }
 
     @Override
-    public void duplicateEmailAddress(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EMailNotSentException {
+    public void duplicateEmailAddress(String username, String password, String firstName, String lastName, String email) throws DuplicateUsernameException, EmailAlreadyExistsException, EmailNotSentException {
         userManagement.createManagedUser(new CreateManagedUserRequest(username, firstName, lastName, email, null));
     }
 }

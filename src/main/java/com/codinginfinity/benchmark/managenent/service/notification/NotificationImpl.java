@@ -1,7 +1,7 @@
 package com.codinginfinity.benchmark.managenent.service.notification;
 
 import com.codinginfinity.benchmark.managenent.config.BenchmarkProperties;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.managenent.service.notification.request.SendEmailRequest;
@@ -53,7 +53,7 @@ public class NotificationImpl implements Notification {
     private BenchmarkProperties properties;
 
     @Override
-    public SendEmailResponse sendEmail(SendEmailRequest request) throws EMailNotSentException {
+    public SendEmailResponse sendEmail(SendEmailRequest request) throws EmailNotSentException {
         log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
                 request.isMultipart(), request.isHtml(), request.getTo(), request.getSubject(), request.getContent());
 
@@ -68,13 +68,13 @@ public class NotificationImpl implements Notification {
             log.debug("Sent e-mail to User '{}'", request.getTo());
         } catch (Exception e) {
             log.warn("E-mail could not be sent to user '{}', exception is: {}", request.getTo(), e.getMessage());
-            throw new EMailNotSentException(e.getMessage());
+            throw new EmailNotSentException(e.getMessage());
         }
         return new SendEmailResponse();
     }
 
     @Override
-    public SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request) throws EMailNotSentException {
+    public SendActivationEmailResponse sendActivationEmail(SendActivationEmailRequest request) throws EmailNotSentException {
         log.debug("Sending activation e-mail to '{}'", request.getUser().getEmail());
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
@@ -87,7 +87,7 @@ public class NotificationImpl implements Notification {
     }
 
     @Override
-    public SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request) throws EMailNotSentException {
+    public SendCreationEmailResponse sendCreationEmail(SendCreationEmailRequest request) throws EmailNotSentException {
         log.debug("Sending creation e-mail to '{}'", request.getUser().getEmail());
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
@@ -100,7 +100,7 @@ public class NotificationImpl implements Notification {
     }
 
     @Override
-    public SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request) throws EMailNotSentException {
+    public SendPasswordResetMailResponse sendPasswordResetMail(SendPasswordResetMailRequest request) throws EmailNotSentException {
         log.debug("Sending password reset e-mail to '{}'", request.getUser().getEmail());
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);

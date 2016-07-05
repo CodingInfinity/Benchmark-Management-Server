@@ -3,7 +3,7 @@ package com.codinginfinity.benchmark.managenent.web.rest;
 import com.codinginfinity.benchmark.managenent.domain.User;
 import com.codinginfinity.benchmark.managenent.repository.UserRepository;
 import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EMailNotSentException;
+import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
 import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
@@ -25,13 +25,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,7 +71,7 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<?> createUser(@RequestBody CreateManagedUserRequest request)
             throws URISyntaxException, DuplicateUsernameException, EmailAlreadyExistsException,
-            EMailNotSentException {
+            EmailNotSentException {
         log.debug("REST request to save User : {}", request);
         User user = userManagement.createManagedUser(request).getUser();
         return ResponseEntity.created(new URI("/api/users/" + user.getUsername())).body(new UserDTO(user));
@@ -109,6 +106,7 @@ public class UserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional(readOnly = true)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable)
             throws URISyntaxException {
         Page<User> page = userRepository.findAll(pageable);
@@ -128,6 +126,7 @@ public class UserResource {
     @RequestMapping(value = "/users/{login}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) throws NonExistentException {
         log.debug("REST request to get User : {}", login);
         User user =  userManagement.getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(login)).getUser();
