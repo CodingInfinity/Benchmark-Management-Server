@@ -26,7 +26,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @EnableSwagger2
 @Slf4j
-@ConditionalOnProperty(prefix="jhipster.swagger", name="enabled")
+@ConditionalOnProperty(prefix="benchmark.swagger", name="enabled")
 public class SwaggerConfiguration {
 
     public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
