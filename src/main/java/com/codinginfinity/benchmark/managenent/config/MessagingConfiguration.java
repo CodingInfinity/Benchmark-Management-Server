@@ -1,9 +1,12 @@
 package com.codinginfinity.benchmark.managenent.config;
 
+import com.codinginfinity.benchmark.managenent.thrift.ThriftMessageDataFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.thrift.protocol.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -19,6 +22,7 @@ import java.util.Objects;
  */
 @Configuration
 @EnableJms
+@EnableConfigurationProperties({ ActiveMQProperties.class })
 @Slf4j
 public class MessagingConfiguration {
 
@@ -62,4 +66,15 @@ public class MessagingConfiguration {
         String[] tokens = brokerUrl.split("://");
         return tokens[0] + "://" + sb.toString() + tokens[1];
     }
+
+    @Bean
+    public TProtocolFactory tProtocolFactory() {
+        return new TBinaryProtocol.Factory();
+    }
+
+    @Bean
+    public ThriftMessageDataFormat thriftMessageDataFormat() {
+        return new ThriftMessageDataFormat();
+    }
+
 }
