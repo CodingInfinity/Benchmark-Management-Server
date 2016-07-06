@@ -35,14 +35,14 @@ public abstract class UpdateRepoEntityMetadataTest <C extends Category, T extend
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void UpdateRepoEntityThatDoesNotExistMetadataTest() throws NonExistentRepoEntityException {
+    public void updateRepoEntityThatDoesNotExistMetadataTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
         repositoryEntityManagement.updateRepoEntityMetaData(new UpdateRepoEntityMetadataRequest<C,T>(getExpectedId(), getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription()));
     }
 
     @Test
-    public void UpdateRepoEntityMetadataTest() throws NonExistentRepoEntityException {
+    public void updateRepoEntityMetadataTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
         T entity = repositoryEntityManagement.updateRepoEntityMetaData(new UpdateRepoEntityMetadataRequest<C,T>(getExpectedId(), getExpectedName(),getExpectedUser(), getExpectedCategories(), getExpectedDescription())).getEntity();
         assertEquals(entity.getId(), getExpectedId());
