@@ -403,6 +403,7 @@
                         <exclude>**/service/**/exception/*.class</exclude>
                         <exclude>**/service/**/response/*.class</exclude>
                         <exclude>**/service/**/request/*.class</exclude>
+                        <exclude>**/thrift/**/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
