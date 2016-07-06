@@ -24,25 +24,28 @@ public final class SecurityUtils {
         if (authentication != null) {
             if (authentication.getPrincipal() instanceof UserDetails) {
                 UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
-                userName = springSecurityUser.getUsername();
+                return springSecurityUser.getUsername();
             } else if (authentication.getPrincipal() instanceof String) {
-                userName = (String) authentication.getPrincipal();
+                return (String) authentication.getPrincipal();
             }
         }
-        return userName;
+        return null;
     }
 
     public static boolean isAuthenticated() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        Collection<? extends GrantedAuthority> authorities = securityContext.getAuthentication().getAuthorities();
-        if (authorities != null) {
-            for (GrantedAuthority authority : authorities) {
-                if (authority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)) {
-                    return false;
+        if (securityContext.getAuthentication() != null) {
+            Collection<? extends GrantedAuthority> authorities = securityContext.getAuthentication().getAuthorities();
+            if (authorities.size() > 0) {
+                for (GrantedAuthority authority : authorities) {
+                    if (authority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)) {
+                        return false;
+                    }
                 }
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean isCurrentUserInRole(String authority) {
