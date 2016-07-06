@@ -36,8 +36,8 @@ public class LogoutHandler implements LogoutSuccessHandler {
             if (accessToken != null) {
                 tokenStore.removeAccessToken(accessToken);
             }
-
-            response.setStatus(HttpServletResponse.SC_OK);
         }
+
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }
