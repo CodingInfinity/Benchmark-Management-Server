@@ -74,6 +74,8 @@
     </issueManagement>
 
     <properties>
+        <activemq.version>5.13.3</activemq.version>
+        <camel.version>2.17.1</camel.version>
         <commons-lang.version>2.6</commons-lang.version>
         <dbh2.version>1.4.192</dbh2.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
@@ -96,6 +98,7 @@
         <spring-framework.version>4.2.0.RELEASE</spring-framework.version>
         <spring-security-oauth2.version>2.0.10.RELEASE</spring-security-oauth2.version>
         <springfox.version>2.5.0</springfox.version>
+        <thrift.version>0.9.3</thrift.version>
     </properties>
 
     <dependencies>
@@ -104,6 +107,36 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-broker</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+
+        <!-- Apache Camel -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-amqp</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <!-- Apache Thrift -->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>${thrift.version}</version>
         </dependency>
 
         <!-- Apache Commons Dependencies -->
@@ -384,6 +417,7 @@
                         <exclude>**/service/**/exception/*.class</exclude>
                         <exclude>**/service/**/response/*.class</exclude>
                         <exclude>**/service/**/request/*.class</exclude>
+                        <exclude>**/thrift/**/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
