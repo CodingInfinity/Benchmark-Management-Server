@@ -54,6 +54,13 @@
             <organization>University of Pretoria</organization>
             <email>u14040426@tuks.co.za</email>
         </developer>
+
+        <developer>
+            <id>BrentonWatt@tuks.co.za</id>
+            <name>Brenton Watt</name>
+            <organization>University of Pretoria</organization>
+            <email>BrentonWatt@tuks.co.za</email>
+        </developer>
     </developers>
 
     <ciManagement>
