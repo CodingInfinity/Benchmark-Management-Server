@@ -16,9 +16,8 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(DatasetSpringTest.class)
 public class UpdateDatasetMetadataTest extends UpdateRepoEntityMetadataTest<DatasetCategory, Dataset,
-        DatasetRepository,
+       DatasetRepository,
         DatasetManagement> {
     protected String getNonExistentExceptionMessage() {
         return "Dataset does not Exist";

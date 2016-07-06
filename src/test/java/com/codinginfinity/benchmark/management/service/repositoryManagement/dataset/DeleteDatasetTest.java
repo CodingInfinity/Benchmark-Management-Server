@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(DatasetSpringTest.class)
 public class DeleteDatasetTest extends DeleteRepoEntityTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement> {

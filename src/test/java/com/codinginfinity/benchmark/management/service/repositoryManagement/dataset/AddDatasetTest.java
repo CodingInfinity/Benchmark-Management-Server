@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(DatasetSpringTest.class)
 public class AddDatasetTest extends AddRepoEntityTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement,

@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(DatasetSpringTest.class)
 public class GetDatasetByCategory extends GetRepoEntityByCategoryTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement> {

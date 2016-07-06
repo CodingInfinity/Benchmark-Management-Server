@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(AlgorithmSpringTest.class)
 public class GetAlgorithmByIdTest extends GetRepoEntityByIdTest<AlgorithmCategory,
         Algorithm,
         AlgorithmRepository,

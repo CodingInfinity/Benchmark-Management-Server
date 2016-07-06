@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@SpringApplicationConfiguration(AlgorithmSpringTest.class)
 public class GetUnusedAlgorithms extends GetUnusedRepoEntityTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
