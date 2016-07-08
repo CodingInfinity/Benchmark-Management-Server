@@ -2,6 +2,9 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.dat
 
 import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
+import com.codinginfinity.benchmark.managenent.service.exception.CorruptedFileException;
+import com.codinginfinity.benchmark.managenent.service.exception.FileFormatNotSupportedException;
+import com.codinginfinity.benchmark.managenent.service.exception.NoFileUploadedException;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
@@ -13,7 +16,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
  */
 public interface DatasetManagement extends RepositoryEntityManagement<DatasetCategory, Dataset>{
     @Override
-    AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) throws NonExistentException;
+    AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;
 
     @Override
     DeleteRepoEntityResponse<Dataset> deleteRepoEntity(DeleteRepoEntityRequest<Dataset> request) throws NonExistentRepoEntityException;

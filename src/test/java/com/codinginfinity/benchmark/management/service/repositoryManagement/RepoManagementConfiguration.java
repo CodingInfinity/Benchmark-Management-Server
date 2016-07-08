@@ -1,9 +1,9 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
-import com.codinginfinity.benchmark.managenent.domain.Algorithm;
-import com.codinginfinity.benchmark.managenent.domain.Dataset;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
+import com.codinginfinity.benchmark.managenent.repository.binary.ArchiveRepository;
+import com.codinginfinity.benchmark.managenent.repository.binary.FileRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagementImpl;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
@@ -12,8 +12,6 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.data
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.DatasetManagementImpl;
 import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
 import org.mockito.Mockito;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,5 +55,15 @@ public class RepoManagementConfiguration {
     @Bean
     public AlgorithmCategoryManagement algorithmCategoryManagement() {
         return Mockito.mock(AlgorithmCategoryManagement.class);
+    }
+
+    @Bean
+    public FileRepository fileRepository() {
+        return Mockito.mock(FileRepository.class);
+    }
+
+    @Bean
+    public ArchiveRepository archiveRepository() {
+        return Mockito.mock(ArchiveRepository.class);
     }
 }

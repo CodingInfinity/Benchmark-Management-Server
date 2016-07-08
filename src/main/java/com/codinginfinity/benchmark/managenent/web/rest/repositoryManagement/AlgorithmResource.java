@@ -3,11 +3,14 @@ package com.codinginfinity.benchmark.managenent.web.rest.repositoryManagement;
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.managenent.service.exception.CorruptedFileException;
+import com.codinginfinity.benchmark.managenent.service.exception.FileFormatNotSupportedException;
+import com.codinginfinity.benchmark.managenent.service.exception.NoFileUploadedException;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.DeleteRepoEntityRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.UpdateRepoEntityMetadataRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +50,8 @@ public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategor
             @RequestParam("name") final String name,
             @RequestParam("description") final String description,
             @RequestParam("categories") final Long[] categories,
-            @RequestParam("files") final MultipartFile[] multipartFiles) throws NonExistentException {
-        return super.addRepoEntity(name, description, categories, multipartFiles);
+            @RequestParam("file") final MultipartFile multipartFile) throws  NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException {
+        return super.addRepoEntity(name, description, categories, multipartFile);
     }
 
     @RequestMapping(value = "/algorithm",
