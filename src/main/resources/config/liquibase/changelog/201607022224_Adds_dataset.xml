@@ -29,6 +29,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="documents" type="boolean" valueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+
         </createTable>
 
         <createTable tableName="dataset_dataset_category">

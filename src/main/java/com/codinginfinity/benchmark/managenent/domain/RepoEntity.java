@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,8 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
     private User user;
 
     private String description;
+
+    private boolean documents = false;
 
     public abstract List<T> getCategories();
 

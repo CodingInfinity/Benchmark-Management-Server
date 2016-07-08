@@ -2,6 +2,9 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.alg
 
 import com.codinginfinity.benchmark.managenent.domain.Algorithm;
 import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
+import com.codinginfinity.benchmark.managenent.service.exception.CorruptedFileException;
+import com.codinginfinity.benchmark.managenent.service.exception.FileFormatNotSupportedException;
+import com.codinginfinity.benchmark.managenent.service.exception.NoFileUploadedException;
 import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
@@ -13,7 +16,7 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.resp
  */
 public interface AlgorithmManagement extends RepositoryEntityManagement<AlgorithmCategory, Algorithm>{
     @Override
-    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) throws NonExistentException;
+    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;;
 
     @Override
     DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request) throws NonExistentRepoEntityException;

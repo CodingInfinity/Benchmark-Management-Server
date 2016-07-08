@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.service.Request;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public class AddRepoEntityRequest<C extends Category, T extends RepoEntity<C>> e
     List<Long> categories;
 
     String description;
+
+    MultipartFile file;
 }

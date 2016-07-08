@@ -3,6 +3,9 @@ package com.codinginfinity.benchmark.management;
 import com.codinginfinity.benchmark.managenent.ManagementApp;
 import com.codinginfinity.benchmark.managenent.config.BenchmarkProperties;
 import com.codinginfinity.benchmark.managenent.config.ThymeleafConfiguration;
+import com.codinginfinity.benchmark.managenent.repository.binary.ArchiveRepository;
+import com.codinginfinity.benchmark.managenent.repository.binary.FileRepository;
+import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -55,6 +58,16 @@ public class ManagementTest {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public FileRepository fileRepository() {
+        return Mockito.mock(FileRepository.class);
+    }
+
+    @Bean
+    public ArchiveRepository archiveRepository() {
+        return Mockito.mock(ArchiveRepository.class);
     }
 
 }
