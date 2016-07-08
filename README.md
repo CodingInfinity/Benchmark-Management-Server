@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/CodingInfinity/Benchmark-Management-Server.svg?branch=master)](https://travis-ci.org/CodingInfinity/Benchmark-Management-Server)
+[![Coverage Status](https://coveralls.io/repos/github/CodingInfinity/Benchmark-Management-Server/badge.svg?branch=master)](https://coveralls.io/github/CodingInfinity/Benchmark-Management-Server?branch=master)
