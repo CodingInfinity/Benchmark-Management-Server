@@ -39,6 +39,8 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
 
     private boolean documents = false;
 
+    private String filename;
+
     public abstract List<T> getCategories();
 
     public abstract void addCategory(T category);

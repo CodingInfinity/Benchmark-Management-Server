@@ -33,6 +33,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="filename" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
         </createTable>
 
         <createTable tableName="algorithm_algorithm_category">

@@ -10,6 +10,7 @@ import com.codinginfinity.benchmark.managenent.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.*;
+import com.codinginfinity.benchmark.managenent.web.rest.dto.RepoEntityDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
     }
 
     public ResponseEntity<?> getRepoEntityById(Long id) throws NonExistentRepoEntityException {
-        T entity = getRepositoryEntityManagement().getRepoEntityById(new GetRepoEntityByIdRequest<T>(id)).getRepoEntity();
+        RepoEntityDTO entity = getRepositoryEntityManagement().getRepoEntityById(new GetRepoEntityByIdRequest<T>(id)).getRepoEntity();
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 

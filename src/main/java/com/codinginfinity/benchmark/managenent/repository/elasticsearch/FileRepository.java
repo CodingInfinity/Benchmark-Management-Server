@@ -1,6 +1,6 @@
-package com.codinginfinity.benchmark.managenent.repository.binary;
+package com.codinginfinity.benchmark.managenent.repository.elasticsearch;
 
-import com.codinginfinity.benchmark.managenent.domain.binary.File;
+import com.codinginfinity.benchmark.managenent.domain.elasticsearch.file.File;
 import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
 import org.springframework.stereotype.Repository;
 

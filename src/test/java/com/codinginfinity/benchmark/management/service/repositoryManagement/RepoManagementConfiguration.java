@@ -2,8 +2,8 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
 import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
-import com.codinginfinity.benchmark.managenent.repository.binary.ArchiveRepository;
-import com.codinginfinity.benchmark.managenent.repository.binary.FileRepository;
+import com.codinginfinity.benchmark.managenent.repository.elasticsearch.ArchiveRepository;
+import com.codinginfinity.benchmark.managenent.repository.elasticsearch.FileRepository;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagementImpl;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;

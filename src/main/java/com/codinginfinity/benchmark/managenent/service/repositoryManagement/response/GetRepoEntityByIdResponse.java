@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.managenent.service.repositoryManagement.res
 
 import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
 import com.codinginfinity.benchmark.managenent.service.Response;
+import com.codinginfinity.benchmark.managenent.web.rest.dto.RepoEntityDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,5 +12,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetRepoEntityByIdResponse <T extends RepoEntity> extends Response {
-    T repoEntity;
+    RepoEntityDTO repoEntity;
 }
