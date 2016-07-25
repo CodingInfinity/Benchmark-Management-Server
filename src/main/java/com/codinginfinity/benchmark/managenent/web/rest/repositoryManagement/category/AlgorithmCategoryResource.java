@@ -7,7 +7,9 @@ import com.codinginfinity.benchmark.managenent.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
+import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetAllCategoriesRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by andrew on 2016/06/29.
@@ -62,6 +65,14 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
     @Override
     public ResponseEntity<AlgorithmCategory> getCategoryById(@PathVariable(value = "id") Long id) throws NonExistentCategoryException {
         return super.getCategoryById(id);
+    }
+
+    @RequestMapping(value = "/algorithm/all",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Override
+    public ResponseEntity<List<AlgorithmCategory>> getAllCategories(GetAllCategoriesRequest<AlgorithmCategory> request)throws NonExistentCategoryException{
+        return super.getAllCategories(request);
     }
 
     @Override

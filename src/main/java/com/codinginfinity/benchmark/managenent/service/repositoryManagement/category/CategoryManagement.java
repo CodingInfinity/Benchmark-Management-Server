@@ -16,4 +16,5 @@ public interface CategoryManagement<T extends Category> {
     UpdateCategoryResponse<T> updateCategory(UpdateCategoryRequest<T> request) throws NonExistentCategoryException;
     GetCategoryByIdResponse<T> getCategoryById(GetCategoryByIdRequest<T> request) throws NonExistentCategoryException;
     GetCategoryByNameResponse<T> getCategoryByName(GetCategoryByNameRequest<T> request) throws NonExistentCategoryException;
+    GetAllCategoriesResponse<T> getAllCategories(GetAllCategoriesRequest<T> request) throws NonExistentCategoryException;
 }

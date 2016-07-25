@@ -26,4 +26,7 @@ public interface DatasetCategoryManagement extends CategoryManagement<DatasetCat
 
     @Override
     GetCategoryByNameResponse<DatasetCategory> getCategoryByName(GetCategoryByNameRequest<DatasetCategory> request) throws NonExistentCategoryException;
+
+    @Override
+    GetAllCategoriesResponse<DatasetCategory> getAllCategories(GetAllCategoriesRequest<DatasetCategory> request) throws  NonExistentCategoryException;
 }
