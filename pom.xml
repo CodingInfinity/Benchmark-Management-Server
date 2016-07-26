@@ -61,6 +61,13 @@
             <organization>University of Pretoria</organization>
             <email>BrentonWatt@tuks.co.za</email>
         </developer>
+
+        <developer>
+            <id>u14009936@tuks.co.za</id>
+            <name>Reinhardt Cromhout</name>
+            <organization>University of Pretoria</organization>
+            <email>u14009936@tuks.co.za</email>
+        </developer>
     </developers>
 
     <ciManagement>
