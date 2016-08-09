@@ -1,5 +1,14 @@
 package com.codinginfinity.benchmark.managenent.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 /**
  * Created by Brenton on 7/28/2016.
  */
