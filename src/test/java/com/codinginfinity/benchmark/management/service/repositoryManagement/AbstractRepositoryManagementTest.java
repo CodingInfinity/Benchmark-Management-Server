@@ -1,15 +1,12 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
-import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.management.domain.RepoManagementTest;
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
-import com.codinginfinity.benchmark.managenent.domain.User;
+import com.codinginfinity.benchmark.management.domain.Category;
+import com.codinginfinity.benchmark.management.domain.RepoEntity;
+import com.codinginfinity.benchmark.management.domain.User;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;

@@ -1,11 +1,10 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.repository.UserRepository;
-import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.NotAuthorizedException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CompletePasswordResetRequest;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.repository.UserRepository;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.NotAuthorizedException;
+import com.codinginfinity.benchmark.management.service.userManagement.request.CompletePasswordResetRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

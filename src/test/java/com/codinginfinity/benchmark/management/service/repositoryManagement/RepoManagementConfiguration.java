@@ -1,16 +1,16 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
-import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
-import com.codinginfinity.benchmark.managenent.repository.binary.ArchiveRepository;
-import com.codinginfinity.benchmark.managenent.repository.binary.FileRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagementImpl;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.DatasetManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.dataset.DatasetManagementImpl;
-import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
+import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.management.repository.DatasetRepository;
+import com.codinginfinity.benchmark.management.repository.binary.ArchiveRepository;
+import com.codinginfinity.benchmark.management.repository.binary.FileRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagementImpl;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagementImpl;
+import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

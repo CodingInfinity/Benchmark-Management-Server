@@ -1,14 +1,13 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.repository.AuthorityRepository;
-import com.codinginfinity.benchmark.managenent.repository.UserRepository;
-import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.UserManagement;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.repository.AuthorityRepository;
+import com.codinginfinity.benchmark.management.repository.UserRepository;
+import com.codinginfinity.benchmark.management.service.notification.Notification;
+import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailAlreadyExistsException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

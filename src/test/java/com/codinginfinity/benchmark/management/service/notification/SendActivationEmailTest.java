@@ -1,10 +1,9 @@
 package com.codinginfinity.benchmark.management.service.notification;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.managenent.service.notification.request.SendActivationEmailRequest;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
+import com.codinginfinity.benchmark.management.service.notification.request.SendActivationEmailRequest;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;

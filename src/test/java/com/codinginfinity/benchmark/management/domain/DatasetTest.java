@@ -1,8 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.Dataset;
-import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
-import com.codinginfinity.benchmark.managenent.repository.DatasetRepository;
+import com.codinginfinity.benchmark.management.repository.DatasetRepository;
 import org.junit.Test;
 
 import java.util.ArrayList;

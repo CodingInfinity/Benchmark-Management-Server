@@ -1,12 +1,10 @@
 package com.codinginfinity.benchmark.management.security;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
-import com.codinginfinity.benchmark.managenent.domain.Authority;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.repository.AuthorityRepository;
-import com.codinginfinity.benchmark.managenent.repository.UserRepository;
-import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
-import com.codinginfinity.benchmark.managenent.security.UserNotActivatedException;
+import com.codinginfinity.benchmark.management.ManagementApp;
+import com.codinginfinity.benchmark.management.domain.Authority;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.repository.AuthorityRepository;
+import com.codinginfinity.benchmark.management.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;

@@ -1,12 +1,9 @@
 package com.codinginfinity.benchmark.management.security;
 
-import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
-import com.codinginfinity.benchmark.managenent.security.SecurityUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.authentication.TestingAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

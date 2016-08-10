@@ -1,25 +1,13 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm;
 
-import com.codinginfinity.benchmark.management.AbstractTest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.GetRepoEntityByIdTest;
-import com.codinginfinity.benchmark.managenent.domain.Algorithm;
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import com.codinginfinity.benchmark.management.domain.Algorithm;
+import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 

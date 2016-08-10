@@ -1,9 +1,8 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
-import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
+import com.codinginfinity.benchmark.management.domain.Category;
+import com.codinginfinity.benchmark.management.domain.RepoEntity;
+import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;

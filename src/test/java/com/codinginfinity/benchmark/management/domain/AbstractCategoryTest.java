@@ -1,6 +1,5 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

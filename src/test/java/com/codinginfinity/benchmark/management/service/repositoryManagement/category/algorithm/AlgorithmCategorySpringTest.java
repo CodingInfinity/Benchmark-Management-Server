@@ -1,11 +1,7 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagementImpl;
+import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
 import org.mockito.Mockito;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

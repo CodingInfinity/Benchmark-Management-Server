@@ -1,0 +1,18 @@
+package com.codinginfinity.benchmark.management.repository;
+
+import com.codinginfinity.benchmark.management.domain.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+
+import java.util.Optional;
+
+/**
+ * Created by andrew on 2016/06/26.
+ */
+@NoRepositoryBean
+public interface CategoryRepository<T extends Category> extends JpaRepository<T, Long> {
+
+    Optional<T> findOneByName(String name);
+
+    Optional<T> findOneById(Long name);
+}

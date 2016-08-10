@@ -1,8 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
+import com.codinginfinity.benchmark.management.service.utils.RandomUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

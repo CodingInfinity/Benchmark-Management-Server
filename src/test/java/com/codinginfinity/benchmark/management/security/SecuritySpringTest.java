@@ -1,10 +1,8 @@
 package com.codinginfinity.benchmark.management.security;
 
-import com.codinginfinity.benchmark.managenent.security.LogoutHandler;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 

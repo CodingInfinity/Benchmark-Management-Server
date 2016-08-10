@@ -1,9 +1,8 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset;
 
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.DeleteCategoryTest;
-import com.codinginfinity.benchmark.managenent.domain.DatasetCategory;
-import com.codinginfinity.benchmark.managenent.repository.DatasetCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
+import com.codinginfinity.benchmark.management.domain.DatasetCategory;
+import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 /**

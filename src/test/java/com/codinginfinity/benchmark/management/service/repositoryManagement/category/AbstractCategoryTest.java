@@ -1,6 +1,6 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
+import com.codinginfinity.benchmark.management.domain.Category;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;

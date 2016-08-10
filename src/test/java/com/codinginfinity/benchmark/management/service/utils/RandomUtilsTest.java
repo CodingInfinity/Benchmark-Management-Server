@@ -1,6 +1,5 @@
 package com.codinginfinity.benchmark.management.service.utils;
 
-import com.codinginfinity.benchmark.managenent.service.utils.RandomUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 

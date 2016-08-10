@@ -1,6 +1,5 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
 import org.junit.Test;
 
 import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;

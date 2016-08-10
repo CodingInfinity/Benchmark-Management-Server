@@ -1,6 +1,5 @@
 package com.codinginfinity.benchmark.management.security;
 
-import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
 import com.codinginfinity.common.testing.TestingException;
 import org.junit.Test;
 

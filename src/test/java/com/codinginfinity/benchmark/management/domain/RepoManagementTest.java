@@ -1,8 +1,5 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
-import com.codinginfinity.benchmark.managenent.domain.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +10,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
 import static org.junit.Assert.assertEquals;
 
 /**

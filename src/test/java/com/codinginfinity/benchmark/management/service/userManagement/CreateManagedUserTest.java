@@ -1,13 +1,13 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.domain.Authority;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.managenent.service.notification.response.SendPasswordResetMailResponse;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateManagedUserRequest;
+import com.codinginfinity.benchmark.management.domain.Authority;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
+import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
+import com.codinginfinity.benchmark.management.service.notification.response.SendPasswordResetMailResponse;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.management.service.userManagement.request.CreateManagedUserRequest;
 import org.junit.Before;
 import org.junit.Test;
 

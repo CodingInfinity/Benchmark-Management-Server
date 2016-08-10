@@ -1,11 +1,11 @@
 package com.codinginfinity.benchmark.management.service.userManagement;
 
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.managenent.service.notification.response.SendCreationEmailResponse;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.DuplicateUsernameException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.exception.EmailAlreadyExistsException;
-import com.codinginfinity.benchmark.managenent.service.userManagement.request.CreateUnmanagedUserRequest;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
+import com.codinginfinity.benchmark.management.service.notification.response.SendCreationEmailResponse;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.management.service.userManagement.request.CreateUnmanagedUserRequest;
 import org.junit.Test;
 
 import java.util.Optional;

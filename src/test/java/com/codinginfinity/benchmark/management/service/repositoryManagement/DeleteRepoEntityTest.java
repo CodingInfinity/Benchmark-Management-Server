@@ -1,22 +1,16 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.domain.RepoEntity;
-import com.codinginfinity.benchmark.managenent.repository.RepoEntityRepository;
-import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.RepositoryEntityManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.exception.NonExistentRepoEntityException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.DeleteRepoEntityRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.request.GetRepoEntityByIdRequest;
-import org.junit.Before;
-import org.junit.Ignore;
+import com.codinginfinity.benchmark.management.domain.Category;
+import com.codinginfinity.benchmark.management.domain.RepoEntity;
+import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.request.DeleteRepoEntityRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import javax.inject.Inject;
 import java.util.HashMap;

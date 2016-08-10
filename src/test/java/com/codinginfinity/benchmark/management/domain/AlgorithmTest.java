@@ -1,17 +1,10 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.*;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
-import org.junit.BeforeClass;
+import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
 import static org.junit.Assert.assertEquals;

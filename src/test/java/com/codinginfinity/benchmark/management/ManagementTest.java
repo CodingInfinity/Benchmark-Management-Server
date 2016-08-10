@@ -1,10 +1,9 @@
 package com.codinginfinity.benchmark.management;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
-import com.codinginfinity.benchmark.managenent.config.BenchmarkProperties;
-import com.codinginfinity.benchmark.managenent.config.ThymeleafConfiguration;
-import com.codinginfinity.benchmark.managenent.repository.binary.ArchiveRepository;
-import com.codinginfinity.benchmark.managenent.repository.binary.FileRepository;
+import com.codinginfinity.benchmark.management.config.BenchmarkProperties;
+import com.codinginfinity.benchmark.management.config.ThymeleafConfiguration;
+import com.codinginfinity.benchmark.management.repository.binary.ArchiveRepository;
+import com.codinginfinity.benchmark.management.repository.binary.FileRepository;
 import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
@@ -27,8 +26,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Created by andrew on 2016/06/21.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.codinginfinity.benchmark.managenent.service",
-        "com.codinginfinity.benchmark.managenent.repository"
+@ComponentScan(basePackages = {"com.codinginfinity.benchmark.management.service",
+        "com.codinginfinity.benchmark.management.repository"
         })
 @Import({
         DataSourceAutoConfiguration.class,
@@ -37,7 +36,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         PropertyPlaceholderAutoConfiguration.class,
         ThymeleafAutoConfiguration.class,
         ThymeleafConfiguration.class})
-@EnableJpaRepositories(basePackages = "com.codinginfinity.benchmark.managenent.repository")
+@EnableJpaRepositories(basePackages = "com.codinginfinity.benchmark.management.repository")
 @EntityScan(basePackages = {"com.codinginfinity.benchmark.managenent.domain"})
 @EnableConfigurationProperties({ BenchmarkProperties.class })
 public class ManagementTest {

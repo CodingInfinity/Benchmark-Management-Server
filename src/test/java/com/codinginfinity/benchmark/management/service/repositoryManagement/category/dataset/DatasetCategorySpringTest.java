@@ -1,11 +1,7 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset;
 
-import com.codinginfinity.benchmark.managenent.ManagementApp;
-import com.codinginfinity.benchmark.managenent.repository.DatasetCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.dataset.DatasetCategoryManagementImpl;
+import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import org.mockito.Mockito;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

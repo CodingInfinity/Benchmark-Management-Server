@@ -1,9 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.Authority;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.security.AuthoritiesConstants;
+import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

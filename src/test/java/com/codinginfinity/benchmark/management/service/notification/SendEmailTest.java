@@ -1,9 +1,8 @@
 package com.codinginfinity.benchmark.management.service.notification;
 
 import com.codinginfinity.benchmark.management.AbstractTest;
-import com.codinginfinity.benchmark.managenent.service.notification.Notification;
-import com.codinginfinity.benchmark.managenent.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.managenent.service.notification.request.SendEmailRequest;
+import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
+import com.codinginfinity.benchmark.management.service.notification.request.SendEmailRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

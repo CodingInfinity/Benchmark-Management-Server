@@ -1,14 +1,11 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm;
 
 import com.codinginfinity.benchmark.management.service.repositoryManagement.AddRepoEntityTest;
-import com.codinginfinity.benchmark.managenent.domain.Algorithm;
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.domain.User;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.algorithm.AlgorithmManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import com.codinginfinity.benchmark.management.domain.Algorithm;
+import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
+import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 
 import java.util.ArrayList;
 import java.util.List;

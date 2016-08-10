@@ -1,10 +1,9 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category;
 
-import com.codinginfinity.benchmark.managenent.domain.Category;
-import com.codinginfinity.benchmark.managenent.repository.CategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.exception.NonExistentException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.CategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetCategoryByIdRequest;
+import com.codinginfinity.benchmark.management.domain.Category;
+import com.codinginfinity.benchmark.management.repository.CategoryRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
