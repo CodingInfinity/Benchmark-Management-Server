@@ -30,6 +30,6 @@ struct ResultMessage {
 }
 
 struct Measurement {
-	1: i64 timestamp
+	1: i32 timestamp
 	2: i32 value
 }
