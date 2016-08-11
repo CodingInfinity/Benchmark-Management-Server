@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
+import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -29,8 +30,13 @@ public class Job implements Serializable {
     @OneToOne
     private Experiment job;
 
-   /*@NotNull
-   private MeasurementType measurementType;*/
+   @NotNull
+   private MeasurementType measurementType;
 
     private List<ResultEntry> resultEntries;
+
+    @NotNull
+    private Algorithm algorithm;
+
+    private Dataset dataset;
 }
