@@ -29,4 +29,8 @@ public class ResultEntry implements Serializable {
 
     @NotNull
     private Double value;
+
+    @NotNull
+    @OneToOne
+    private Job job;
 }

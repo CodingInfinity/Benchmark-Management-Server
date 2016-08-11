@@ -1,10 +1,10 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.GetUnusedRepoEntityByUserNameTest;
 import com.codinginfinity.benchmark.management.domain.Algorithm;
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.GetUnusedRepoEntityByUserNameTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class GetUnusedAlgorithmByUsername extends GetUnusedRepoEntityByUserNameTest<AlgorithmCategory, Algorithm,
+public class GetUnusedAlgorithmByUsernameTest extends GetUnusedRepoEntityByUserNameTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
     @Override

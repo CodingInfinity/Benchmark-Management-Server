@@ -1,10 +1,10 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.dataset;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.GetUnusedRepoEntityTest;
 import com.codinginfinity.benchmark.management.domain.Dataset;
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.DatasetRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.GetRepoEntityByCategoryTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-public class GetUnusedDatasets extends GetUnusedRepoEntityTest<DatasetCategory, Dataset,
+public class GetDatasetByCategoryTest extends GetRepoEntityByCategoryTest<DatasetCategory, Dataset,
         DatasetRepository,
         DatasetManagement> {
     protected String getNonExistentExceptionMessage() {

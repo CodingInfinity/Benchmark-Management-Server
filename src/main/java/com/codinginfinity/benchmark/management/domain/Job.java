@@ -28,11 +28,12 @@ public class Job implements Serializable {
 
     @NotNull
     @OneToOne
-    private Experiment job;
+    private Experiment experiment;
 
    @NotNull
    private MeasurementType measurementType;
 
+    @OneToMany
     private List<ResultEntry> resultEntries;
 
     @NotNull
