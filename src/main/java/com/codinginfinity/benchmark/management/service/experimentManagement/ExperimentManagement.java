@@ -1,6 +1,8 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsRespones;
 
 /**
@@ -9,4 +11,6 @@ import com.codinginfinity.benchmark.management.service.experimentManagement.resp
 public interface ExperimentManagement {
 
     public SaveJobResultsRespones saveJobResults(SaveJobResultsRequest request);
+
+    public CreateExperimentResponse createExpriment(CreateExperimentRequest request);
 }
