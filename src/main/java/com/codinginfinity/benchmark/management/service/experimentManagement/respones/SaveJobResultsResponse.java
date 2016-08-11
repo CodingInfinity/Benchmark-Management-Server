@@ -3,5 +3,5 @@ package com.codinginfinity.benchmark.management.service.experimentManagement.res
 /**
  * Created by reinhardt on 2016/08/09.
  */
-public class SaveJobResultsRespones {
+public class SaveJobResultsResponse {
 }
