@@ -1,7 +1,10 @@
 package com.codinginfinity.benchmark.management.service.userManagement.request;
 
 import com.codinginfinity.benchmark.management.service.Request;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter

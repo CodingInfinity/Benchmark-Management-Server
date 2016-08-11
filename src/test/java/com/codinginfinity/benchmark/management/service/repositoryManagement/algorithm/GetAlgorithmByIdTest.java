@@ -1,15 +1,13 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.GetRepoEntityByIdTest;
 import com.codinginfinity.benchmark.management.domain.Algorithm;
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.GetRepoEntityByIdTest;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by andrew on 2016/06/25.

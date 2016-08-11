@@ -3,7 +3,10 @@ package com.codinginfinity.benchmark.management.service.userManagement;
 import com.codinginfinity.benchmark.management.security.UserNotActivatedException;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.notification.exception.EmailNotSentException;
-import com.codinginfinity.benchmark.management.service.userManagement.exception.*;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailNotRegisteredException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.management.service.userManagement.request.*;
 import com.codinginfinity.benchmark.management.service.userManagement.response.*;
 

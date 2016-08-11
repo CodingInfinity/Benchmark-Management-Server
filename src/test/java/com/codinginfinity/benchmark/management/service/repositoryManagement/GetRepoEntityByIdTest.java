@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement;
 import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import org.junit.Rule;
@@ -12,8 +13,6 @@ import org.mockito.Mockito;
 
 import javax.inject.Inject;
 import java.util.Optional;
-
-import com.codinginfinity.benchmark.management.service.exception.*;
 
 import static org.junit.Assert.assertEquals;
 

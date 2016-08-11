@@ -1,8 +1,8 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByIdTest;
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByIdTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 /**

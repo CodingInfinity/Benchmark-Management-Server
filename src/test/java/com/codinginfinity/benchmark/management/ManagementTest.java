@@ -37,7 +37,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         ThymeleafAutoConfiguration.class,
         ThymeleafConfiguration.class})
 @EnableJpaRepositories(basePackages = "com.codinginfinity.benchmark.management.repository")
-@EntityScan(basePackages = {"com.codinginfinity.benchmark.managenent.domain"})
+@EntityScan(basePackages = {"com.codinginfinity.benchmark.management.domain"})
 @EnableConfigurationProperties({ BenchmarkProperties.class })
 public class ManagementTest {
 

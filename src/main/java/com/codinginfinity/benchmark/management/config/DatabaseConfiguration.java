@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "com.codinginfinity.benchmark.management.repository")
-@EnableElasticsearchRepositories(basePackages = "com.codinginfinity.benchmark.managenent.repository.binary")
+@EnableElasticsearchRepositories(basePackages = "com.codinginfinity.benchmark.management.repository.binary")
 @EnableTransactionManagement
 @Slf4j
 public class DatabaseConfiguration {

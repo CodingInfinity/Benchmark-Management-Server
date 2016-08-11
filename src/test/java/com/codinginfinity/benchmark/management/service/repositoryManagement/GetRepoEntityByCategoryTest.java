@@ -9,9 +9,6 @@ import org.junit.rules.ExpectedException;
 
 import javax.inject.Inject;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by reinhardt on 2016/06/28.
  */
