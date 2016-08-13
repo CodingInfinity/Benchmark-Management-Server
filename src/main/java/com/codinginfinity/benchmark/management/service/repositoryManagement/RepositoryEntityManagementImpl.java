@@ -254,4 +254,15 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     public GetUnusedRepoEntityByUsernameResponse<T> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<T> request) {
         return null;
     }
+
+    @Override
+    public GetAllRepoEntitiesResponse<T> getAllRepoEntities(GetAllRepoEntitiesRequest<T> request)throws NonExistentRepoEntityException{
+        R repository = getRepository();
+        List<T> entities = repository.findAll();
+        if (entities.isEmpty())
+        {
+            throw getNonExistentRepoEntityException();
+        }
+        return new GetAllRepoEntitiesResponse<>(entities);
+    }
 }

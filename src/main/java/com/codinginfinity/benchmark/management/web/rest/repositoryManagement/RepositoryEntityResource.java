@@ -55,4 +55,10 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
         List<T> entities = getRepositoryEntityManagement().getRepoEntityByUsername(new GetRepoEntityByUsernameRequest<T>(userName)).getEntities();
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
+
+    public ResponseEntity<?> getAllRepoEntities()throws NonExistentRepoEntityException
+    {
+        List<T> entities = getRepositoryEntityManagement().getAllRepoEntities(new GetAllRepoEntitiesRequest<T>()).getEntities();
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
 }
