@@ -5,6 +5,7 @@ import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.domain.elasticsearch.archive.Archive;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.management.repository.elasticsearch.ArchiveRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import com.codinginfinity.benchmark.management.web.rest.dto.RepoEntityDTO;
@@ -15,8 +16,6 @@ import org.mockito.Mockito;
 
 import javax.inject.Inject;
 import java.util.Optional;
-
-import com.codinginfinity.benchmark.management.service.exception.*;
 
 import static org.junit.Assert.assertEquals;
 

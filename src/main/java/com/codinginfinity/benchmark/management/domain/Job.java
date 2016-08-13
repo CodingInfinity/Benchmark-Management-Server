@@ -1,9 +1,10 @@
 package com.codinginfinity.benchmark.management.domain;
 
+import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,11 +28,16 @@ public class Job implements Serializable {
 
     @NotNull
     @OneToOne
-    private Experiment job;
+    private Experiment experiment;
 
-   /*@NotNull
-   private MeasurementType measurementType;*/
+   @NotNull
+   private MeasurementType measurementType;
 
     @OneToMany
     private List<ResultEntry> resultEntries;
+
+    @NotNull
+    private Algorithm algorithm;
+
+    private Dataset dataset;
 }

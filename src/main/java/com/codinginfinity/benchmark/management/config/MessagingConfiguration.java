@@ -3,7 +3,8 @@ package com.codinginfinity.benchmark.management.config;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.thrift.protocol.*;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -75,5 +76,4 @@ public class MessagingConfiguration {
     public ThriftMeasurementDataFormat thriftMessageDataFormat() {
         return new ThriftMeasurementDataFormat();
     }
-
 }

@@ -13,7 +13,10 @@ import com.codinginfinity.benchmark.management.service.notification.exception.Em
 import com.codinginfinity.benchmark.management.service.notification.request.SendActivationEmailRequest;
 import com.codinginfinity.benchmark.management.service.notification.request.SendCreationEmailRequest;
 import com.codinginfinity.benchmark.management.service.notification.request.SendPasswordResetMailRequest;
-import com.codinginfinity.benchmark.management.service.userManagement.exception.*;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.DuplicateUsernameException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailAlreadyExistsException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.EmailNotRegisteredException;
+import com.codinginfinity.benchmark.management.service.userManagement.exception.NotAuthorizedException;
 import com.codinginfinity.benchmark.management.service.userManagement.request.*;
 import com.codinginfinity.benchmark.management.service.userManagement.response.*;
 import com.codinginfinity.benchmark.management.service.utils.RandomUtils;

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codinginfinity.common.testing.EntityClassTestUtil.assertEntityClassWellDefined;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by reinhardt on 2016/06/26.

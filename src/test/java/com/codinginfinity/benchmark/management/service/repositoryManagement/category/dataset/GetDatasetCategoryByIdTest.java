@@ -1,8 +1,8 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset;
 
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByIdTest;
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.GetCategoryByIdTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 /**

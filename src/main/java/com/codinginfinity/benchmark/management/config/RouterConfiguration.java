@@ -21,10 +21,8 @@ public class RouterConfiguration extends RouteBuilder {
     @Inject
     private ThriftMeasurementDataFormat thriftMessageDataFormat;
 
-
     @Override
     public void configure() throws Exception {
         camelContext.addComponent("activemq", activeMQComponent("tcp://localhost:61616"));
-        from("direct:jobs").marshal(thriftMessageDataFormat).to("activemq:jobs");
     }
 }

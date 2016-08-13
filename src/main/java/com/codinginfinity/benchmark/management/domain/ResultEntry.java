@@ -2,8 +2,8 @@ package com.codinginfinity.benchmark.management.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,4 +30,8 @@ public class ResultEntry implements Serializable {
 
     @NotNull
     private Double value;
+
+    @NotNull
+    @OneToOne
+    private Job job;
 }

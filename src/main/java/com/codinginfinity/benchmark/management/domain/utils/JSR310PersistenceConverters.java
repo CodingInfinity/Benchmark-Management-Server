@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.domain.utils;
 
-import com.codinginfinity.benchmark.management.domain.utils.JSR310DateConverters.*;
+import com.codinginfinity.benchmark.management.domain.utils.JSR310DateConverters.DateToZonedDateTimeConverter;
+import com.codinginfinity.benchmark.management.domain.utils.JSR310DateConverters.ZonedDateTimeToDateConverter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
