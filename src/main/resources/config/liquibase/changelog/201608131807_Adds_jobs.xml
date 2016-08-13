@@ -19,7 +19,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="experiment_id" type="bigint">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>
 
         </createTable>
