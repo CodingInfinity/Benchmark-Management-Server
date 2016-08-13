@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request;
+package com.codinginfinity.benchmark.management.service.repositoryManagement.category.request;
 
 import com.codinginfinity.benchmark.management.service.Request;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response;
+package com.codinginfinity.benchmark.management.service.repositoryManagement.category.response;
 
 import com.codinginfinity.benchmark.management.domain.Category;
 
