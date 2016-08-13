@@ -34,7 +34,7 @@ public interface DatasetManagement extends RepositoryEntityManagement<DatasetCat
     GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory, Dataset> request);
 
     @Override
-    GetUnusedRepoEntitysResponse<Dataset> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Dataset> request);
+    GetUnusedRepoEntitiesResponse<Dataset> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<Dataset> request);
 
     @Override
     GetUnusedRepoEntityByUsernameResponse<Dataset> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Dataset> request);

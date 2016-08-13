@@ -34,7 +34,7 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
     GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory, Algorithm> request);
 
     @Override
-    GetUnusedRepoEntitysResponse<Algorithm> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<Algorithm> request);
+    GetUnusedRepoEntitiesResponse<Algorithm> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<Algorithm> request);
 
     @Override
     GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request);

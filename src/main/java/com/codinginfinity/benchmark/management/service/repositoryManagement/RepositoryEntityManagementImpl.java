@@ -246,7 +246,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     }
 
     @Override
-    public GetUnusedRepoEntitysResponse<T> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<T> request) {
+    public GetUnusedRepoEntitiesResponse<T> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<T> request) {
         return null;
     }
 

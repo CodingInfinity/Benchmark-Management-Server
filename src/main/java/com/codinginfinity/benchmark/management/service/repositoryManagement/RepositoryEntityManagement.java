@@ -107,11 +107,11 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
      * Gets and returns the RepoEntitys that have not been used in any system
      * benchmarking jobs yet.
      *
-     * @param request The request encapsulated as an {@link GetUnusedRepoEntitysRequest} object.
-     * @return Returns the result in an encapsulated {@link GetUnusedRepoEntitysResponse} object.
+     * @param request The request encapsulated as an {@link GetUnusedRepoEntitiesRequest} object.
+     * @return Returns the result in an encapsulated {@link GetUnusedRepoEntitiesResponse} object.
      * @since 1.0.0
      */
-    GetUnusedRepoEntitysResponse<T> getUnusedRepoEntitys(GetUnusedRepoEntitysRequest<T> request);
+    GetUnusedRepoEntitiesResponse<T> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<T> request);
 
     /**
      * Gets and returns the RepoEntitys that have not been used in any system

@@ -32,5 +32,6 @@ public class Job implements Serializable {
    /*@NotNull
    private MeasurementType measurementType;*/
 
+    @OneToMany
     private List<ResultEntry> resultEntries;
 }

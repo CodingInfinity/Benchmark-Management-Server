@@ -22,6 +22,7 @@ public class ResultEntry implements Serializable {
     private static final long serialVersionUID = 8844214395918274514L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
