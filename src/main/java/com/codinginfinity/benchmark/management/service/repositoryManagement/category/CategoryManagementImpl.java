@@ -100,6 +100,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
     }
 
     @Override
+    @Secured(AuthoritiesConstants.USER)
     public GetAllCategoriesResponse<T> getAllCategories (GetAllCategoriesRequest<T> request)throws NonExistentCategoryException {
         V repository = getRepository();
 

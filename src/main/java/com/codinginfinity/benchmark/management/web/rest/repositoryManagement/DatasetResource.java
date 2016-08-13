@@ -46,10 +46,11 @@ public class DatasetResource extends RepositoryEntityResource<DatasetCategory, D
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> addRepoEntity(@RequestPart("name") final String name,
-                                           @RequestPart("description") final String description,
-                                           @RequestPart("categories") final Long[] categories,
-                                           @RequestPart("file") final MultipartFile multipartFile) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException {
+    public ResponseEntity<?> addRepoEntity(
+            @RequestParam("name") final String name,
+            @RequestParam("description") final String description,
+            @RequestParam("categories") final Long[] categories,
+            @RequestParam("file") final MultipartFile multipartFile) throws  NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException {
         return super.addRepoEntity(name, description, categories, multipartFile);
     }
 

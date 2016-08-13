@@ -30,7 +30,7 @@
             </column>
 
             <column name="job_id" type="bigint">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>
 
         </createTable>
