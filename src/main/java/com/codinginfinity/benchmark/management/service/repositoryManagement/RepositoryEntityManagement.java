@@ -122,4 +122,13 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
      * @since 1.0.0
      */
     GetUnusedRepoEntityByUsernameResponse<T> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<T> request);
+
+    /**
+     * Gets and returns all the RepoEntities that belong to a specific user.
+     *
+     * @param request The request encapsulated as an {@link GetAllEntitiesRequest} object.
+     * @return Returns the result in an encapsulated {@link GetAllEntitiesResponse} object.
+     * @since 1.0.0
+     */
+    GetAllEntitiesResponse<T> getAllEntities(GetAllEntitiesRequest<T> request) throws NonExistentRepoEntityException;
 }

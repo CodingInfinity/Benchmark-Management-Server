@@ -38,4 +38,7 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
 
     @Override
     GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request);
+
+    @Override
+    GetAllEntitiesResponse<Algorithm> getAllEntities(GetAllEntitiesRequest<Algorithm> request)throws NonExistentRepoEntityException;
 }

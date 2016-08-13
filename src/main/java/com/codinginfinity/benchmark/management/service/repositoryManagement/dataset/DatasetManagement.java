@@ -38,4 +38,7 @@ public interface DatasetManagement extends RepositoryEntityManagement<DatasetCat
 
     @Override
     GetUnusedRepoEntityByUsernameResponse<Dataset> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Dataset> request);
+
+    @Override
+    GetAllEntitiesResponse<Dataset> getAllEntities(GetAllEntitiesRequest<Dataset> request) throws NonExistentRepoEntityException;
 }
