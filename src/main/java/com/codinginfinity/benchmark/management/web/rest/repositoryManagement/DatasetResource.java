@@ -78,7 +78,7 @@ public class DatasetResource extends RepositoryEntityResource<DatasetCategory, D
         return super.getRepoEntityById(id);
     }
 
-    @RequestMapping(value = "/dataset/{userName}",
+    @RequestMapping(value = "/dataset/user/{userName}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override

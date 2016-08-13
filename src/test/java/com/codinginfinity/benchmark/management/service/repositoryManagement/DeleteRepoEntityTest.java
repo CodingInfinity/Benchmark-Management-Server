@@ -7,6 +7,7 @@ import com.codinginfinity.benchmark.management.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.DeleteRepoEntityRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
+import com.codinginfinity.benchmark.management.web.rest.dto.RepoEntityDTO;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -67,7 +68,7 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         //now try to get the deleted entity
         thrown.expect(NonExistentException.class);
         thrown.expectMessage(getNonExistentExceptionMessage());
-        T deletedEntity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        RepoEntityDTO deletedEntity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
         assertNull(deletedEntity);
     }
 }

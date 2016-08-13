@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.management.domain.binary;
+package com.codinginfinity.benchmark.management.domain.elasticsearch.archive;
 
 import lombok.*;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @EqualsAndHashCode
 @ToString
 @Document(indexName = "archive", type="archive")
-public class Archive extends Directory {
+public class Archive extends ArchiveNode {
 
     @Id
     private String id;

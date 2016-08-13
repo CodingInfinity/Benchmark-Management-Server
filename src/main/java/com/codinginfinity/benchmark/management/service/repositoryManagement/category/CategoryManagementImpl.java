@@ -15,8 +15,20 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by andrew on 2016/06/28.
+ * A reference implementation of the {@link CategoryManagement} service contract. This class is coded using generics
+ * allowing a user to simply extend this class to obtain full management functionality for categories in the backend
+ * system. It is advised to extend this class rather than implementing the {@link CategoryManagement} service contract
+ * directly.
+ *
+ * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception
+ * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request
+ * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
+
 @Secured(AuthoritiesConstants.ADMIN)
 public abstract class CategoryManagementImpl<T extends Category, V extends CategoryRepository<T>>  implements CategoryManagement<T> {
 

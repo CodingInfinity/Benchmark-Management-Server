@@ -79,7 +79,7 @@ public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategor
         return super.getRepoEntityById(id);
     }
 
-    @RequestMapping(value = "/algorithm/{userName}",
+    @RequestMapping(value = "/algorithm/user/{userName}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override

@@ -1,8 +1,9 @@
-package com.codinginfinity.benchmark.management.domain.binary;
+package com.codinginfinity.benchmark.management.domain.elasticsearch.file;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.data.elasticsearch.annotations.Document;
+
+import javax.persistence.Id;
 
 /**
  * Created by andrew on 2016/07/06.
@@ -14,8 +15,10 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @EqualsAndHashCode
 @ToString
 @Document(indexName = "file", type="file")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class File extends FileProperties {
+public class File extends INode {
+
+    @Id
+    private String id;
 
     private byte[] contents;
 }

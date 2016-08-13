@@ -85,6 +85,7 @@
         <camel.version>2.17.1</camel.version>
         <commons-compress.version>1.11</commons-compress.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <commons-io.version>2.5</commons-io.version>
         <dbh2.version>1.4.192</dbh2.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
         <jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
@@ -159,6 +160,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
 
         <dependency>

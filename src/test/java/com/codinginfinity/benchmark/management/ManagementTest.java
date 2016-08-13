@@ -2,8 +2,8 @@ package com.codinginfinity.benchmark.management;
 
 import com.codinginfinity.benchmark.management.config.BenchmarkProperties;
 import com.codinginfinity.benchmark.management.config.ThymeleafConfiguration;
-import com.codinginfinity.benchmark.management.repository.binary.ArchiveRepository;
-import com.codinginfinity.benchmark.management.repository.binary.FileRepository;
+import com.codinginfinity.benchmark.management.repository.elasticsearch.ArchiveRepository;
+import com.codinginfinity.benchmark.management.repository.elasticsearch.FileRepository;
 import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;

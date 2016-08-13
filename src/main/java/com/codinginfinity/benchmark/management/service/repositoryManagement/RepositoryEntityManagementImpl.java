@@ -3,10 +3,15 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement;
 import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.domain.User;
-import com.codinginfinity.benchmark.management.domain.binary.*;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.archive.Archive;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.archive.ArchiveFile;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.archive.ArchiveNode;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.file.Directory;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.file.File;
+import com.codinginfinity.benchmark.management.domain.elasticsearch.file.INode;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
-import com.codinginfinity.benchmark.management.repository.binary.ArchiveRepository;
-import com.codinginfinity.benchmark.management.repository.binary.FileRepository;
+import com.codinginfinity.benchmark.management.repository.elasticsearch.ArchiveRepository;
+import com.codinginfinity.benchmark.management.repository.elasticsearch.FileRepository;
 import com.codinginfinity.benchmark.management.service.exception.CorruptedFileException;
 import com.codinginfinity.benchmark.management.service.exception.FileFormatNotSupportedException;
 import com.codinginfinity.benchmark.management.service.exception.NoFileUploadedException;
@@ -18,17 +23,18 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.requ
 import com.codinginfinity.benchmark.management.service.repositoryManagement.response.*;
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
-import org.apache.commons.compress.archivers.ArchiveEntry;
-import org.apache.commons.compress.archivers.ArchiveException;
-import org.apache.commons.compress.archivers.ArchiveInputStream;
-import org.apache.commons.compress.archivers.ArchiveStreamFactory;
+import com.codinginfinity.benchmark.management.web.rest.dto.RepoEntityDTO;
+import org.apache.commons.compress.archivers.*;
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
-import java.io.BufferedInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,21 +63,35 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     @Inject
     private UserManagement userManagement;
 
+
     @Override
     public AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException {
         R repository =  getRepository();
         T repoEntity = newRepoEntity();
 
-        try (BufferedInputStream bufferedInputStream =
-                     new BufferedInputStream(request.getFile().getInputStream())) {
+        try (ByteArrayOutputStream byteArrayOutputStream =
+                     new ByteArrayOutputStream();
+             BufferedOutputStream bufferedOutputStream =
+                     new BufferedOutputStream(byteArrayOutputStream);
+             GzipCompressorOutputStream gzipCompressorOutputStream =
+                     new GzipCompressorOutputStream(bufferedOutputStream);
+             TarArchiveOutputStream tarArchiveOutputStream =
+                     new TarArchiveOutputStream(gzipCompressorOutputStream);) {
 
-            String tarBallName = request.getFile().getOriginalFilename();
-            Archive archive = new Archive();
-            archive.setName(tarBallName);
+            repackageUserArchive(request.getFile(), tarArchiveOutputStream);
+            tarArchiveOutputStream.close();
+
+            String tarBallName = FilenameUtils.getBaseName(request.getFile().getOriginalFilename()) + ".tar.gz";
+            Directory root = new Directory();
+            root.setName(tarBallName);
             ArchiveEntry entry;
 
             /* First try to decompress the file */
-            try (CompressorInputStream compressorInputStream =
+            try (ByteArrayInputStream byteArrayInputStream =
+                         new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+                 BufferedInputStream bufferedInputStream =
+                         new BufferedInputStream(byteArrayInputStream);
+                 CompressorInputStream compressorInputStream =
                          new CompressorStreamFactory().createCompressorInputStream(bufferedInputStream)) {
 
                 // Now try to extract the archive inside of the compressed file
@@ -80,31 +100,16 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
                         ArchiveInputStream archiveInputStream =
                             new ArchiveStreamFactory().createArchiveInputStream(decompressedBufferedInputStream)) {
 
-
                     while ((entry = archiveInputStream.getNextEntry()) != null) {
                         byte[] buffer = new byte[(int)entry.getSize()];
                         archiveInputStream.read(buffer, 0, buffer.length);
-                        addFileToFileSystem(archive, entry.getName(), buffer);
+                        addFileToFileSystem(root, entry.getName(), buffer);
                     }
                 } catch (ArchiveException | IllegalArgumentException e) {
                     throw new FileFormatNotSupportedException("The uploaded file format is not supported");
                 }
             } catch (CompressorException e) {
-
-                // No compressed file is present, lets assume it is an archive and try to extract files
-                try (ArchiveInputStream archiveInputStream =
-                             new ArchiveStreamFactory().createArchiveInputStream(bufferedInputStream)) {
-
-                    while ((entry = archiveInputStream.getNextEntry()) != null) {
-                        if (!entry.isDirectory()) {
-                            byte[] buffer = new byte[(int) entry.getSize()];
-                            archiveInputStream.read(buffer, 0, buffer.length);
-                            addFileToFileSystem(archive, entry.getName(), buffer);
-                        }
-                    }
-                } catch (ArchiveException e1) {
-                    throw new FileFormatNotSupportedException("The uploaded file format is not supported");
-                }
+                throw new FileFormatNotSupportedException("The uploaded file format is not supported");
             }
 
             repoEntity.setName(request.getName());
@@ -115,6 +120,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
                 C category = getCategoryManagement().getCategoryById(new GetCategoryByIdRequest<C>(categoryId)).getCategory();
                 repoEntity.addCategory(category);
             }
+            repoEntity.setFilename(tarBallName);
             repository.save(repoEntity);
 
             StringBuilder prefix = new StringBuilder();
@@ -123,15 +129,16 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
             prefix.append(repoEntity.getId());
             prefix.append("_");
 
-            saveFilesInArchive(archive, prefix.toString());
+            saveFilesInFilesystem(root, prefix.toString());
 
+            Archive archive = convertDirectoryToArchive(root);
             archive.setId(prefix + archive.getName());
             archiveRepository.save(archive);
 
             File tarBall = new File();
             tarBall.setName(tarBallName);
             tarBall.setId(prefix + tarBallName);
-            tarBall.setContents(request.getFile().getBytes());
+            tarBall.setContents(byteArrayOutputStream.toByteArray());
             fileRepository.save(tarBall);
 
             repoEntity.setDocuments(true);
@@ -145,21 +152,37 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
         return new AddRepoEntityResponse<T>(repoEntity);
     }
 
-    private void saveFilesInArchive(Directory dir, String path) {
+    private void saveFilesInFilesystem(Directory dir, String path) {
         path += dir.getName() + "_";
-        List<INode> iNodeList = new ArrayList<>(dir.getNodeList().size());
         for (INode node : dir.getNodeList()) {
             if (node instanceof Directory) {
-                saveFilesInArchive((Directory)node, path);
-                iNodeList.add(node);
+                saveFilesInFilesystem((Directory)node, path);
             } else {
                 ((File)node).setId(path + node.getName());
                 fileRepository.save((File)node);
-                FileProperties fp = (FileProperties)node;
-                iNodeList.add(new FileProperties((File)node));
             }
         }
-        dir.setNodeList(iNodeList);
+    }
+
+    private Archive convertDirectoryToArchive(Directory dir) {
+        Archive archive = new Archive();
+        archive.setName(dir.getName());
+        convertDirectoryToArchive(dir, archive);
+        return archive;
+    }
+
+    private void convertDirectoryToArchive(Directory dir, ArchiveNode archive) {
+        for (INode node : dir.getNodeList()) {
+            if (node instanceof Directory) {
+                ArchiveNode archiveDirectory = new ArchiveNode(((Directory)node).getName(), new ArrayList<>());
+                archive.getNodeList().add(archiveDirectory);
+                convertDirectoryToArchive((Directory)node, archiveDirectory);
+            } else {
+                ArchiveFile file = new ArchiveFile(((File)node).getId());
+                file.setName(((File)node).getName());
+                archive.getNodeList().add(file);
+            }
+        }
     }
 
     private void addFileToFileSystem(Directory root, String fileName, byte[] contents) {
@@ -190,6 +213,61 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
                 }
             }
         }
+    }
+
+    private void repackageUserArchive(MultipartFile request, ArchiveOutputStream archiveOutputStream) throws CorruptedFileException, NoFileUploadedException, FileFormatNotSupportedException {
+        try (BufferedInputStream bufferedInputStream =
+                     new BufferedInputStream(request.getInputStream())) {
+
+            ArchiveEntry entry;
+
+            /* First try to decompress the file */
+            try (CompressorInputStream compressorInputStream =
+                         new CompressorStreamFactory().createCompressorInputStream(bufferedInputStream)) {
+
+                // Now try to extract the archive inside of the compressed file
+                try (BufferedInputStream decompressedBufferedInputStream =
+                             new BufferedInputStream(compressorInputStream);
+                     ArchiveInputStream archiveInputStream =
+                             new ArchiveStreamFactory().createArchiveInputStream(decompressedBufferedInputStream)) {
+
+                    while ((entry = archiveInputStream.getNextEntry()) != null) {
+                        if (!entry.isDirectory()) {
+                            archiveOutputStream.putArchiveEntry(entry);
+                            byte[] buffer = new byte[(int) entry.getSize()];
+                            archiveInputStream.read(buffer, 0, buffer.length);
+                            archiveOutputStream.write(buffer);
+                            archiveOutputStream.closeArchiveEntry();
+                        }
+                    }
+                } catch (ArchiveException | IllegalArgumentException e) {
+                    throw new FileFormatNotSupportedException("The uploaded file format is not supported");
+                }
+            } catch (CompressorException e) {
+
+                // No compressed file is present, lets assume it is an archive and try to extract files
+                try (ArchiveInputStream archiveInputStream =
+                             new ArchiveStreamFactory().createArchiveInputStream(bufferedInputStream)) {
+
+                    while ((entry = archiveInputStream.getNextEntry()) != null) {
+                        if (!entry.isDirectory()) {
+                            archiveOutputStream.putArchiveEntry(entry);
+                            byte[] buffer = new byte[(int) entry.getSize()];
+                            archiveInputStream.read(buffer, 0, buffer.length);
+                            archiveOutputStream.write(buffer);
+                            archiveOutputStream.closeArchiveEntry();
+                        }
+                    }
+                } catch (ArchiveException e1) {
+                    throw new FileFormatNotSupportedException("The uploaded file format is not supported");
+                }
+            }
+        } catch (IOException e) {
+            throw new CorruptedFileException("The uploaded file is corrupted");
+        } catch (NullPointerException e) {
+            throw new NoFileUploadedException("No file uploaded");
+        }
+
     }
 
     @Override
@@ -230,7 +308,12 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
         if(!entityDoesExist.isPresent()){
             throw getNonExistentRepoEntityException();
         }
-        return new GetRepoEntityByIdResponse<T>(entityDoesExist.get());
+        Optional<Archive> archive =  archiveRepository.findOneById(entityDoesExist.get().getClass().getSimpleName().substring(0,3) + "-" + entityDoesExist.get().getId() + "_" + entityDoesExist.get().getFilename());
+        if(!entityDoesExist.isPresent()){
+            throw getNonExistentRepoEntityException();
+        }
+        RepoEntityDTO dto = new RepoEntityDTO(entityDoesExist.get(), archive.get());
+        return new GetRepoEntityByIdResponse<T>(dto);
     }
 
     @Override
