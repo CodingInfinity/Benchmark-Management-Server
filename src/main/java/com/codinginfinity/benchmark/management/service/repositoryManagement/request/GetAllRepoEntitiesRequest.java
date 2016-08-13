@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class GetAllEntitiesRequest<T extends RepoEntity> extends Request {
+public class GetAllRepoEntitiesRequest<T extends RepoEntity> extends Request {
 
     private static final long serialVersionUID = 4544026646814612593L;
 }

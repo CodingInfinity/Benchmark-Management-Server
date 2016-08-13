@@ -87,11 +87,11 @@ public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategor
         return super.getRepoEntityByUsername(userName);
     }
 
-    @RequestMapping(value = "/algorithm",
+    @RequestMapping(value = "/algorithms",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> getAllEntities()throws NonExistentRepoEntityException{
-        return super.getAllEntities();
+    public ResponseEntity<?> getAllRepoEntities()throws NonExistentRepoEntityException{
+        return super.getAllRepoEntities();
     }
 }

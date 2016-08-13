@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAllEntitiesResponse<T extends RepoEntity>extends Response
+public class GetAllRepoEntitiesResponse<T extends RepoEntity>extends Response
 {
     private static final long serialVersionUID = -1099271693727229319L;
     private List<T> entities;

@@ -256,13 +256,13 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     }
 
     @Override
-    public GetAllEntitiesResponse<T> getAllEntities(GetAllEntitiesRequest<T> request)throws NonExistentRepoEntityException{
+    public GetAllRepoEntitiesResponse<T> getAllRepoEntities(GetAllRepoEntitiesRequest<T> request)throws NonExistentRepoEntityException{
         R repository = getRepository();
         List<T> entities = repository.findAll();
         if (entities.isEmpty())
         {
             throw getNonExistentRepoEntityException();
         }
-        return new GetAllEntitiesResponse<>(entities);
+        return new GetAllRepoEntitiesResponse<>(entities);
     }
 }
