@@ -9,6 +9,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
 import org.springframework.security.access.annotation.Secured;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -82,6 +83,18 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
         }
 
         return new GetCategoryByNameResponse<>(categoryExists.get());
+    }
+
+    @Override
+    public GetAllCategoriesResponse<T> getAllCategories (GetAllCategoriesRequest<T> request)throws NonExistentCategoryException {
+        V repository = getRepository();
+
+        List<T> categories = repository.findAll();
+        if (categories.isEmpty()) {
+            throw getNonExistentCategoryException();
+        }
+
+        return new GetAllCategoriesResponse<>(categories);
     }
 
     protected abstract V getRepository();

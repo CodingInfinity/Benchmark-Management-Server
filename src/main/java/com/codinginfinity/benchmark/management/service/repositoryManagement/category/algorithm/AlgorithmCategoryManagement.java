@@ -26,4 +26,7 @@ public interface AlgorithmCategoryManagement extends CategoryManagement<Algorith
 
     @Override
     GetCategoryByNameResponse<AlgorithmCategory> getCategoryByName(GetCategoryByNameRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
+
+    @Override
+    GetAllCategoriesResponse<AlgorithmCategory> getAllCategories(GetAllCategoriesRequest<AlgorithmCategory> request)throws NonExistentCategoryException;
 }
