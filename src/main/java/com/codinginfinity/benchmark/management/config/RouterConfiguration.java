@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.config;
 
+import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,8 @@ public class RouterConfiguration extends RouteBuilder {
     @Inject
     private CamelContext camelContext;
 
+    @Inject
+    private ThriftMeasurementDataFormat thriftMessageDataFormat;
 
     @Override
     public void configure() throws Exception {

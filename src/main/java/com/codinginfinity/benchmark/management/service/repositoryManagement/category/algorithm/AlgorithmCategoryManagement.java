@@ -6,6 +6,8 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.GetAllCategoriesResponse;
 
 /**
  * Created by andrew on 2016/06/28.
@@ -26,4 +28,7 @@ public interface AlgorithmCategoryManagement extends CategoryManagement<Algorith
 
     @Override
     GetCategoryByNameResponse<AlgorithmCategory> getCategoryByName(GetCategoryByNameRequest<AlgorithmCategory> request) throws NonExistentCategoryException;
+
+    @Override
+    GetAllCategoriesResponse<AlgorithmCategory> getAllCategories(GetAllCategoriesRequest<AlgorithmCategory> request)throws NonExistentCategoryException;
 }

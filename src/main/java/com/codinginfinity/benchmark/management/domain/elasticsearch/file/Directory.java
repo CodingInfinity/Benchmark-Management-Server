@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.management.domain.binary;
+package com.codinginfinity.benchmark.management.domain.elasticsearch.file;
 
 import lombok.*;
 

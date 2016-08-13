@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.config;
 
+import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -71,4 +72,8 @@ public class MessagingConfiguration {
         return new TBinaryProtocol.Factory();
     }
 
+    @Bean
+    public ThriftMeasurementDataFormat thriftMessageDataFormat() {
+        return new ThriftMeasurementDataFormat();
+    }
 }

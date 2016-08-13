@@ -6,6 +6,8 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.GetAllCategoriesResponse;
 
 /**
  * Created by andrew on 2016/06/25.
@@ -26,4 +28,7 @@ public interface DatasetCategoryManagement extends CategoryManagement<DatasetCat
 
     @Override
     GetCategoryByNameResponse<DatasetCategory> getCategoryByName(GetCategoryByNameRequest<DatasetCategory> request) throws NonExistentCategoryException;
+
+    @Override
+    GetAllCategoriesResponse<DatasetCategory> getAllCategories(GetAllCategoriesRequest<DatasetCategory> request) throws  NonExistentCategoryException;
 }

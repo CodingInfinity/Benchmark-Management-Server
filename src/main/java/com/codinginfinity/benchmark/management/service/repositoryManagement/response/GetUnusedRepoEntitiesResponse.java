@@ -10,5 +10,5 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class GetUnusedRepoEntitysResponse <T extends RepoEntity> extends Response {
+public class GetUnusedRepoEntitiesResponse<T extends RepoEntity> extends Response {
 }

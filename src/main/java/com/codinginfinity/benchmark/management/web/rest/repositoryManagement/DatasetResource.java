@@ -78,11 +78,19 @@ public class DatasetResource extends RepositoryEntityResource<DatasetCategory, D
         return super.getRepoEntityById(id);
     }
 
-    @RequestMapping(value = "/dataset/{userName}",
+    @RequestMapping(value = "/dataset/user/{userName}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<?> getRepoEntityByUsername(@PathVariable(value = "userName") String userName) {
         return super.getRepoEntityByUsername(userName);
+    }
+
+    @RequestMapping(value = "/datasets",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Override
+    public ResponseEntity<?> getAllRepoEntities()throws NonExistentRepoEntityException{
+        return super.getAllRepoEntities();
     }
 }

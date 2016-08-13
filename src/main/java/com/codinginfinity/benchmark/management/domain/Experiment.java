@@ -41,7 +41,7 @@ public class Experiment implements Serializable {
     private ZonedDateTime requestedDate;
 
     @NotNull
-    @Column(name = "tiemout", nullable = false)
+    @Column(name = "timeout", nullable = false)
     private Integer timeout;
 
     @NotNull

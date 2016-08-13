@@ -9,9 +9,12 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.DeleteCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetCategoryByIdRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 /**
  * Created by andrew on 2016/06/29.
@@ -38,6 +41,11 @@ public abstract class CategoryResource<T extends Category, S extends CategoryRep
     public ResponseEntity<T> getCategoryById(Long id) throws NonExistentCategoryException {
         T category = getCategoryManagement().getCategoryById(new GetCategoryByIdRequest<T>(id)).getCategory();
         return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<T>> getAllCategories(GetAllCategoriesRequest<T> request)throws NonExistentCategoryException{
+        List<T> categories = getCategoryManagement().getAllCategories(request).getCategories();
+        return new ResponseEntity<List<T>>(categories, HttpStatus.OK);
     }
 
     protected abstract S getRepository();
