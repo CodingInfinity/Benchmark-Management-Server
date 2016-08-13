@@ -41,7 +41,7 @@ public abstract class CategoryResource<T extends Category, S extends CategoryRep
     }
 
     public ResponseEntity<List<T>> getAllCategories(GetAllCategoriesRequest<T> request)throws NonExistentCategoryException{
-        List<T> categories = getCategoryManagement().getAllCategories(new GetAllCategoriesRequest<T>()).getCategories();
+        List<T> categories = getCategoryManagement().getAllCategories(request).getCategories();
         return new ResponseEntity<List<T>>(categories, HttpStatus.OK);
     }
 

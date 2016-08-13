@@ -91,7 +91,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
         V repository = getRepository();
 
         List<T> categories = repository.findAll();
-        if (!categories.isEmpty()) {
+        if (categories.isEmpty()) {
             throw getNonExistentCategoryException();
         }
 

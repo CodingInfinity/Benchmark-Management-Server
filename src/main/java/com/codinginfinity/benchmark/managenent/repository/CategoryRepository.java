@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.managenent.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -15,4 +16,6 @@ public interface CategoryRepository<T extends Category> extends JpaRepository<T,
     Optional<T> findOneByName(String name);
 
     Optional<T> findOneById(Long name);
+
+    List<T> findAll();
 }
