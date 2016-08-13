@@ -1,6 +1,5 @@
 package com.codinginfinity.benchmark.management.web.rest.repositoryManagement.category;
 
-<<<<<<< HEAD:src/main/java/com/codinginfinity/benchmark/management/web/rest/repositoryManagement/category/AlgorithmCategoryResource.java
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
@@ -9,18 +8,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.DeleteCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
-=======
-import com.codinginfinity.benchmark.managenent.domain.AlgorithmCategory;
-import com.codinginfinity.benchmark.managenent.repository.AlgorithmCategoryRepository;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.DuplicateCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception.NonExistentCategoryException;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.AddCategoryRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.DeleteCategoryRequest;
 import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.GetAllCategoriesRequest;
-import com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request.UpdateCategoryRequest;
-import com.sun.org.apache.regexp.internal.RE;
->>>>>>> feature/CategoryManagement:src/main/java/com/codinginfinity/benchmark/managenent/web/rest/repositoryManagement/category/AlgorithmCategoryResource.java
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
