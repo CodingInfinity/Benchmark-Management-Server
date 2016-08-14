@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/CodingInfinity/Benchmark-Management-Server.svg?branch=master)](https://travis-ci.org/CodingInfinity/Benchmark-Management-Server)
 [![Coverage Status](https://coveralls.io/repos/github/CodingInfinity/Benchmark-Management-Server/badge.svg?branch=master)](https://coveralls.io/github/CodingInfinity/Benchmark-Management-Server?branch=master)
+[![ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)
 
 # Version Control
 This repository has adopted the [git flow branching model](http://nvie.com/posts/a-successful-git-branching-model/). The creators of git flow released a [short intro video](http://vimeo.com/16018419) to explain the model.
