@@ -90,7 +90,7 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
      * @return Returns the result in an encapsulated {@link GetRepoEntityByUsernameResponse} object.
      * @since 1.0.0
      */
-    GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request);
+    GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request) throws NonExistentException;
 
 
     /**

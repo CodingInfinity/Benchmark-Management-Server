@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.repository;
 
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
+import com.codinginfinity.benchmark.management.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +18,7 @@ public interface RepoEntityRepository<T extends RepoEntity> extends JpaRepositor
 
     List<T> findByName(String name);
 
-    List<T> findByUser(String user);
+    List<T> findByUser(User user);
 
     List<T> findByCategory(@Param("categoryId") Long categoryId);
 }

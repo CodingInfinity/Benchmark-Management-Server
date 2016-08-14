@@ -83,8 +83,16 @@ public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategor
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> getRepoEntityByUsername(@PathVariable(value = "userName") String userName) {
+    public ResponseEntity<?> getRepoEntityByUsername(@PathVariable(value = "userName") String userName) throws NonExistentException {
         return super.getRepoEntityByUsername(userName);
+    }
+
+    @RequestMapping(value = "/algorithm/user",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Override
+    public ResponseEntity<?> getRepoEntityByCurrentUser() throws NonExistentException {
+        return super.getRepoEntityByCurrentUser();
     }
 
     @RequestMapping(value = "/algorithms",

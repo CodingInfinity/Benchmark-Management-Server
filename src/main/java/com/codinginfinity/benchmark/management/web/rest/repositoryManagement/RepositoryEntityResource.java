@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.web.rest.repositoryManagement;
 import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.management.security.SecurityUtils;
 import com.codinginfinity.benchmark.management.service.exception.CorruptedFileException;
 import com.codinginfinity.benchmark.management.service.exception.FileFormatNotSupportedException;
 import com.codinginfinity.benchmark.management.service.exception.NoFileUploadedException;
@@ -48,12 +49,17 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
     }
 
     public ResponseEntity<?> getRepoEntityById(Long id) throws NonExistentRepoEntityException {
-        RepoEntityDTO entity = getRepositoryEntityManagement().getRepoEntityById(new GetRepoEntityByIdRequest<T>(id)).getRepoEntity();
+        RepoEntityDTO entity = getRepositoryEntityManagement().getRepoEntityById(new GetRepoEntityByIdRequest<T>(id)).getRepoEntityDTO();
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getRepoEntityByUsername(String userName) {
+    public ResponseEntity<?> getRepoEntityByUsername(String userName) throws NonExistentException {
         List<T> entities = getRepositoryEntityManagement().getRepoEntityByUsername(new GetRepoEntityByUsernameRequest<T>(userName)).getEntities();
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getRepoEntityByCurrentUser() throws NonExistentException {
+        List<T> entities = getRepositoryEntityManagement().getRepoEntityByUsername(new GetRepoEntityByUsernameRequest<T>(SecurityUtils.getCurrentUsername())).getEntities();
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 

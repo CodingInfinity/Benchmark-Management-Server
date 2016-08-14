@@ -74,6 +74,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
     }
 
     @Override
+    @Secured(AuthoritiesConstants.USER)
     public GetCategoryByIdResponse<T> getCategoryById(GetCategoryByIdRequest<T> request) throws NonExistentCategoryException {
         V repository = getRepository();
 
@@ -86,6 +87,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
     }
 
     @Override
+    @Secured(AuthoritiesConstants.USER)
     public GetCategoryByNameResponse<T> getCategoryByName(GetCategoryByNameRequest<T> request) throws NonExistentCategoryException {
         V repository = getRepository();
 

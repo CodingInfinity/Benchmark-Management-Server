@@ -12,6 +12,7 @@ import com.codinginfinity.benchmark.management.domain.elasticsearch.file.INode;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
 import com.codinginfinity.benchmark.management.repository.elasticsearch.ArchiveRepository;
 import com.codinginfinity.benchmark.management.repository.elasticsearch.FileRepository;
+import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.management.service.exception.CorruptedFileException;
 import com.codinginfinity.benchmark.management.service.exception.FileFormatNotSupportedException;
 import com.codinginfinity.benchmark.management.service.exception.NoFileUploadedException;
@@ -22,6 +23,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.response.*;
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
+import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesByLoginRequest;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
 import com.codinginfinity.benchmark.management.web.rest.dto.RepoEntityDTO;
 import org.apache.commons.compress.archivers.*;
@@ -31,6 +33,7 @@ import org.apache.commons.compress.compressors.CompressorInputStream;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
@@ -42,6 +45,7 @@ import java.util.Optional;
 /**
  * Created by reinhardt on 2016/06/29.
  */
+
 public abstract class RepositoryEntityManagementImpl<C extends Category,
         T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
@@ -65,6 +69,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
 
 
     @Override
+    @Secured(AuthoritiesConstants.USER)
     public AddRepoEntityResponse<T> addRepoEntity(AddRepoEntityRequest<C, T> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException {
         R repository =  getRepository();
         T repoEntity = newRepoEntity();
@@ -313,13 +318,15 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
             throw getNonExistentRepoEntityException();
         }
         RepoEntityDTO dto = new RepoEntityDTO(entityDoesExist.get(), archive.get());
-        return new GetRepoEntityByIdResponse<T>(dto);
+        return new GetRepoEntityByIdResponse<T>(dto,entityDoesExist.get());
     }
 
     @Override
-    public GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request){
+    @Secured(AuthoritiesConstants.USER)
+    public GetRepoEntityByUsernameResponse<T> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<T> request) throws NonExistentException {
         R repository = getRepository();
-        List<T> entities = repository.findByUser(request.getUsername());
+        User user = userManagement.getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(request.getUsername())).getUser();
+        List<T> entities = repository.findByUser(user);
         return new GetRepoEntityByUsernameResponse<>(entities);
     }
 
@@ -339,6 +346,7 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     }
 
     @Override
+    @Secured(AuthoritiesConstants.USER)
     public GetAllRepoEntitiesResponse<T> getAllRepoEntities(GetAllRepoEntitiesRequest<T> request)throws NonExistentRepoEntityException{
         R repository = getRepository();
         List<T> entities = repository.findAll();
