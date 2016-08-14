@@ -21,6 +21,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
  * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response
  *
  * @author Andrew Broekman
+ * @author Brenton Watt
  * @version 1.0.0
  */
 
@@ -74,5 +75,13 @@ public interface CategoryManagement<T extends Category> {
      * @since 1.0.0
      */
     GetCategoryByNameResponse<T> getCategoryByName(GetCategoryByNameRequest<T> request) throws NonExistentCategoryException;
+
+    /**
+     * Retrieves all categories from the persistence layer.
+     * @param request The request encapsulated as an {@link GetAllCategoriesRequest} object.
+     * @return Returns the result in an encapsulated {@link GetAllCategoriesResponse} object.
+     * @throws NonExistentCategoryException Thrown when a no category with the associated name exists.
+     * @since 1.0.0
+     */
     GetAllCategoriesResponse<T> getAllCategories(GetAllCategoriesRequest<T> request) throws NonExistentCategoryException;
 }

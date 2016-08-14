@@ -23,6 +23,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.resp
  * @see com.codinginfinity.benchmark.management.service.repositoryManagement.response
  *
  * @author Reinhardt Cromhout
+ * @author Brenton Watt
  * @version 1.0.0
  *
  * @param <C> A generic type that has to be a class that extends the {@link Category} abstract class.
