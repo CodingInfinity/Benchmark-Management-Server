@@ -30,6 +30,11 @@
             <column name="probe_interval" type="integer">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="language_type" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>

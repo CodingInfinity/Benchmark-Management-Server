@@ -68,7 +68,7 @@ public abstract class DeleteRepoEntityTest<C extends Category, T extends RepoEnt
         //now try to get the deleted entity
         thrown.expect(NonExistentException.class);
         thrown.expectMessage(getNonExistentExceptionMessage());
-        RepoEntityDTO deletedEntity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        RepoEntityDTO deletedEntity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntityDTO();
         assertNull(deletedEntity);
     }
 }

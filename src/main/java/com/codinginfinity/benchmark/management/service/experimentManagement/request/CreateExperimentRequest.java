@@ -1,11 +1,7 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement.request;
 
-import com.codinginfinity.benchmark.management.domain.Algorithm;
-import com.codinginfinity.benchmark.management.domain.Dataset;
-import com.codinginfinity.benchmark.management.domain.User;
+import com.codinginfinity.benchmark.management.service.Request;
 import lombok.*;
-
-import java.util.List;
 
 /**
  * Created by reinhardt on 2016/08/11.
@@ -15,14 +11,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CreateExperimentRequest {
-    User user;
-
-    Algorithm algorithm;
+public class CreateExperimentRequest extends Request{
+    Long algorithm;
 
     Integer timeout;
 
     Integer probeInterval;
 
-    List<Dataset> datasets;
+    Long[] datasets;
+
+    Integer[] measurementType;
+
+    Integer quantity;
+
+    Integer languageType;
 }

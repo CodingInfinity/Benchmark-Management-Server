@@ -31,8 +31,8 @@ public abstract class GetRepoEntityByCategoryTest <C extends Category, T extends
     @Test
     public void getRepoEntityByCatagoryTest(){
         List<T> entities = new ArrayList<T>();
-        entities.add(getRepoEntity());
-        T extra = getRepoEntity();
+        entities.add(getRepoEntityDTO());
+        T extra = getRepoEntityDTO();
         extra.setId(new Long(555));
         extra.setName("Concurrency");
         extra.setDescription("It does Concurrent Things");

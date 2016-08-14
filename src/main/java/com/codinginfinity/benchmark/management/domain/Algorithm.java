@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class Algorithm extends RepoEntity<AlgorithmCategory> {
     private static final long serialVersionUID = 251521771756625319L;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "algorithm_algorithm_category",
             joinColumns = {@JoinColumn(name = "algorithm_id", referencedColumnName = "id")},

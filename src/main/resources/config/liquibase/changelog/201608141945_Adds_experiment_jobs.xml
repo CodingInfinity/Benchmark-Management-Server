@@ -13,49 +13,30 @@
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
-    <changeSet id="201608131755" author="fabio">
-        <createTable tableName="job">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+    <changeSet id="201608141945" author="fabio">
+        <createTable tableName="experiment_jobs">
             <column name="experiment_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-
-            <column name="algorithm_id" type="bigint">
+            <column name="jobs_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-
-            <column name="dataset_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="measurement_type" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-
         </createTable>
+
+        <addPrimaryKey columnNames="experiment_id, jobs_id" tableName="experiment_jobs"/>
 
         <addForeignKeyConstraint
                 baseColumnNames="experiment_id"
-                baseTableName="job"
-                constraintName="fk_job_experiment_id"
+                baseTableName="experiment_jobs"
+                constraintName="fk_experiment_jobs_experiment_id"
                 referencedColumnNames="id"
                 referencedTableName="experiment"/>
 
         <addForeignKeyConstraint
-                baseColumnNames="algorithm_id"
-                baseTableName="job"
-                constraintName="fk_job_algorithm_id"
+                baseColumnNames="jobs_id"
+                baseTableName="experiment_jobs"
+                constraintName="fk_experiment_jobs_jobs_id"
                 referencedColumnNames="id"
-                referencedTableName="algorithm"/>
-
-        <addForeignKeyConstraint
-                baseColumnNames="dataset_id"
-                baseTableName="job"
-                constraintName="fk_job_dataset_id"
-                referencedColumnNames="id"
-                referencedTableName="dataset"/>
-
+                referencedTableName="job"/>
     </changeSet>
 </databaseChangeLog>

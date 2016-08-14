@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.config;
 
+import com.codinginfinity.benchmark.management.thrift.messages.ThriftJobSpecificationMessageDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -75,5 +76,10 @@ public class MessagingConfiguration {
     @Bean
     public ThriftMeasurementDataFormat thriftMessageDataFormat() {
         return new ThriftMeasurementDataFormat();
+    }
+
+    @Bean
+    public ThriftJobSpecificationMessageDataFormat thriftJobSpecificationMessageDataFormat(){
+        return new ThriftJobSpecificationMessageDataFormat();
     }
 }

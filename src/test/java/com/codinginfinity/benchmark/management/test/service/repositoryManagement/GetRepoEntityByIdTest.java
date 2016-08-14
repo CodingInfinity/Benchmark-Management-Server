@@ -43,14 +43,14 @@ public abstract class GetRepoEntityByIdTest <C extends Category, T extends RepoE
     public void getRepoEntityThatDoesNotExistTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.empty());
         thrown.expect(NonExistentException.class);
-        RepoEntityDTO entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        RepoEntityDTO entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntityDTO();
     }
 
     @Test
     public void getRepoEntityTest() throws NonExistentRepoEntityException {
         Mockito.when(repoEntityRepository.findOneById(getExpectedId())).thenReturn(Optional.of(getRepoEntity()));
         Mockito.when(archiveRepository.findOneById(Mockito.anyString())).thenReturn(Optional.of(new Archive()));
-        RepoEntityDTO entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntity();
+        RepoEntityDTO entity = repositoryEntityManagement.getRepoEntityById(new GetRepoEntityByIdRequest<T>(getExpectedId())).getRepoEntityDTO();
         assertEquals(entity.getId(), getExpectedId());
         assertEquals(entity.getId(), getExpectedId());
         //assertEquals(entity.getCategories().size(), 2);

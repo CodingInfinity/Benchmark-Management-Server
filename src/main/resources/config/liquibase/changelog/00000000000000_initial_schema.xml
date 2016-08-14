@@ -100,7 +100,7 @@
                   separator=";"
                   tableName="user_authority"/>
     </changeSet>
-    
+
     <!-- Manage the OAuth authentication -->
     <changeSet id="00000000000002" author="benchmark">
         <createTable tableName="oauth_client_details">

@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.domain;
 
 
+import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,6 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @Entity
 public class Experiment implements Serializable {
 
@@ -33,12 +33,12 @@ public class Experiment implements Serializable {
     @OneToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Job> jobs = new ArrayList<>();
 
     @NotNull
     @Column(name = "requested_date", nullable = false)
-    private ZonedDateTime requestedDate;
+    private ZonedDateTime requestedDate = ZonedDateTime.now();
 
     @NotNull
     @Column(name = "timeout", nullable = false)
@@ -47,4 +47,8 @@ public class Experiment implements Serializable {
     @NotNull
     @Column(name = "probe_interval", nullable = false)
     private Integer probeInterval;
+
+    @NotNull
+    @Column(name = "language_type", nullable = false)
+    private LanguageType languageType;
 }

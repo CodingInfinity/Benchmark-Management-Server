@@ -30,14 +30,17 @@ public class Job implements Serializable {
     @OneToOne
     private Experiment experiment;
 
-   @NotNull
-   private MeasurementType measurementType;
+    @NotNull
+    private MeasurementType measurementType;
 
     @OneToMany
     private List<ResultEntry> resultEntries;
 
     @NotNull
+    @OneToOne
     private Algorithm algorithm;
 
+    @NotNull
+    @OneToOne
     private Dataset dataset;
 }

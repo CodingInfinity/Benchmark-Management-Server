@@ -12,5 +12,6 @@
     <include file="classpath:config/liquibase/changelog/201608131807_Adds_experiment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608131807_Adds_jobs.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608131807_Adds_result_entry.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/201608141945_Adds_experiment_jobs.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
