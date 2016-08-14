@@ -18,3 +18,16 @@ In terms of assistance in setting up the your IDE or the app in general, one can
 For any additional information not covered here see pom.xml file or CONTRIBUTORS.md file.  
 ##For more information please read the wiki
 https://github.com/CodingInfinity/Benchmark-Service-Documentation/wiki
+
+# Sponsorships
+## ZenHub 
+
+<a href="https://zenhub.com"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+
+**ZenHub is how the world's best development teams work together.** ? 
+
+As the only project management tool integrated natively in GitHub's UI, ZenHub helps you stay in your workflow without distractions. There are no new queues to check, entries to update, or priorities to manage outside GitHub. 
+
+Because ZenHub's features are powered by native GitHub issues, it doesn't create more process - it gets out of your way so you can focus on shipping awesome products.
+
+Download the ZenHub extension for Firefox or Chrome [here](http://www.zenhub.com). It's free for public, academic, and personal repositories. 
