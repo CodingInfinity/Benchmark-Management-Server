@@ -5,8 +5,6 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.GetAllCategoriesResponse;
 
 /**
  * Defines the service contract for the repository management module, specifically the submodule of category management

@@ -7,8 +7,6 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.GetAllCategoriesResponse;
 import org.springframework.security.access.annotation.Secured;
 
 import java.util.List;

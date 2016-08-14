@@ -2,7 +2,10 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.req
 
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.service.Request;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by brenton on 8/13/16.
