@@ -7,8 +7,8 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.DeleteCategoryRequest;
-import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.GetAllCategoriesRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

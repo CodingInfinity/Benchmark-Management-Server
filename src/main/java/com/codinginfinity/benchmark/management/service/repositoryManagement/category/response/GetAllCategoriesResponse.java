@@ -1,11 +1,11 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.response;
 
 import com.codinginfinity.benchmark.management.domain.Category;
-
 import com.codinginfinity.benchmark.management.service.Response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 /**

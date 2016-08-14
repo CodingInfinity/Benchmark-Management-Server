@@ -1,7 +1,5 @@
 package com.codinginfinity.benchmark.management.repository;
 
-import com.codinginfinity.benchmark.management.domain.Algorithm;
-import com.codinginfinity.benchmark.management.domain.Dataset;
 import com.codinginfinity.benchmark.management.domain.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
