@@ -31,6 +31,8 @@ import java.util.List;
 
 /**
  * Created by reinhardt on 2016/08/11.
+ * Edited by fabio on 2016/08/14
+ * @author Fabio Loreggian
  */
 @Service
 public class ExperimentManegementImpl implements ExperimentManagement {
@@ -58,6 +60,13 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         return null;
     }
 
+    /**
+     * createExperiment creates the relevant jobs then puts the jobs onto the queue.
+     * @param request
+     * @return CreateExperimentResponse
+     * @throws NonExistentRepoEntityException
+     * @throws NonExistentException
+     */
     @Override
     public CreateExperimentResponse createExperiment(CreateExperimentRequest request) throws NonExistentRepoEntityException, NonExistentException {
         Experiment experiment = new Experiment();
@@ -76,6 +85,10 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         experiment.setProbeInterval(request.getProbeInterval());
         experiment.setTimeout(request.getTimeout());
         experiment.setLanguageType(LanguageType.findByValue(request.getLanguageType()));
+
+        /*
+        Iterates through the quantity of runs required, then through each measurement type then through each dataset
+         */
 
         for(int i=0; i< request.getQuantity(); i++){
             for (int type:request.getMeasurementType()) {

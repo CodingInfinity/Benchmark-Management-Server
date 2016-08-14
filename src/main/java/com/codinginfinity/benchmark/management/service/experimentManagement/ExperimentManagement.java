@@ -12,7 +12,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
  */
 public interface ExperimentManagement {
 
-    public SaveJobResultsResponse saveJobResults(SaveJobResultsRequest request);
+    SaveJobResultsResponse saveJobResults(SaveJobResultsRequest request);
 
-    public CreateExperimentResponse createExperiment(CreateExperimentRequest request) throws NonExistentRepoEntityException, NonExistentException;
+    CreateExperimentResponse createExperiment(CreateExperimentRequest request) throws NonExistentRepoEntityException, NonExistentException;
 }

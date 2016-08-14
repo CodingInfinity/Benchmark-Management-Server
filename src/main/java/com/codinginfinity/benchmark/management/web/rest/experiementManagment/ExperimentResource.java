@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.net.URISyntaxException;
 
 /**
  * Created by fabio on 2016/08/14.
+ * @author Fabio Loreggian
  */
 @RestController
 @RequestMapping("/api")
@@ -22,6 +24,18 @@ public class ExperimentResource {
     @Inject
     private ExperimentManagement experimentManagement;
 
+
+    /**
+     * POST  /experiment  : Creates a new experiment.
+     * <p>
+     * Creates a new experiment based on the requirements selected by the user.
+     * Throws a non existent exception if a algorithm or a dataset doesnt exist
+     * </p>
+     *
+     * @param request the HTTP request with the json representation of the parameters to be used to create the experiment
+     * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
+     * @throws URISyntaxException if the Location URI syntaxt is incorrect
+     */
     @RequestMapping(value = "/experiment",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,

@@ -21,6 +21,11 @@ public class QueueMessageUtils {
     @Inject
     private FileRepository fileRepository;
 
+    /**
+     * Transforms the job into a representation defined y thrift
+     * @param job
+     * @return JobSpecificationMessage is the Thrift representation of a job.
+     */
     public JobSpecificationMessage convertJobToJobSpecificationMessage(Job job){
         JobSpecificationMessage jobSpecificationMessage = new JobSpecificationMessage();
         jobSpecificationMessage.setMeasurementType(job.getMeasurementType());
@@ -36,6 +41,11 @@ public class QueueMessageUtils {
         return jobSpecificationMessage;
     }
 
+    /**
+     * Returns the prefeix for the repoEntity stored in elastic search
+     * @param repoEntity
+     * @return A prefix representation of the file
+     */
     public String getRepoEntityPrefix(RepoEntity repoEntity){
         StringBuilder prefix = new StringBuilder();
         prefix.append(repoEntity.getClass().getSimpleName().subSequence(0,3));
