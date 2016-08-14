@@ -16,7 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @Entity
 public class Job implements Serializable {
 
