@@ -16,9 +16,9 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
  * implementing this service contract directly, This class is coded using generics providing the user with full
  * functionality by simply extending the class.
  *
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.response
  *
  * @author Andrew Broekman
  * @author Brenton Watt

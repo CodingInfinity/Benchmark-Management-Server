@@ -18,11 +18,12 @@ import java.util.Optional;
  * system. It is advised to extend this class rather than implementing the {@link CategoryManagement} service contract
  * directly.
  *
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.exception
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.request
- * @see com.codinginfinity.benchmark.managenent.service.repositoryManagement.category.response
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.response
  *
  * @author Andrew Broekman
+ * @author Brenton Watt
  * @version 1.0.0
  */
 
