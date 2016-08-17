@@ -4,7 +4,6 @@ import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,7 +32,7 @@ public class Job implements Serializable {
     private MeasurementType measurementType;
 
     @OneToMany
-    private List<ResultEntry> resultEntries;
+    private List<Measurement> measurements;
 
     @NotNull
     @OneToOne

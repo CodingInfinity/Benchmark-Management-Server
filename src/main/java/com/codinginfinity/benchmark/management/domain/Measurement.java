@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode
 @ToString
 @Entity
-public class ResultEntry implements Serializable {
+public class Measurement implements Serializable {
 
     private static final long serialVersionUID = 8844214395918274514L;
 
