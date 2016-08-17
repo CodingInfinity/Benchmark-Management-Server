@@ -7,6 +7,10 @@
 package com.codinginfinity.benchmark.management.thrift.messages;
 
 
+import java.util.Map;
+import java.util.HashMap;
+import org.apache.thrift.TEnum;
+
 public enum LanguageType implements org.apache.thrift.TEnum {
   JAVA(0);
 
