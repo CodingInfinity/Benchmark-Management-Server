@@ -33,6 +33,7 @@ import java.util.List;
  * Created by reinhardt on 2016/08/11.
  * Edited by fabio on 2016/08/14
  * @author Fabio Loreggian
+ * @author Andrew Broekman
  */
 @Service
 public class ExperimentManegementImpl implements ExperimentManagement {

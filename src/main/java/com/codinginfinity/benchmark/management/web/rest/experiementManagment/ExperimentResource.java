@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 /**
  * Created by fabio on 2016/08/14.
  * @author Fabio Loreggian
+ * @author Andrew Broekman
  */
 @RestController
 @RequestMapping("/api")
