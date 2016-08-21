@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.management.thrift.messages.ThriftResultMessa
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties;
@@ -71,7 +72,7 @@ public class MessagingConfiguration {
 
     @Bean
     public TProtocolFactory tProtocolFactory() {
-        return new TBinaryProtocol.Factory();
+        return new TJSONProtocol.Factory();
     }
 
     @Bean
