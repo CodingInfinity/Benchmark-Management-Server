@@ -1,10 +1,8 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
-import com.codinginfinity.benchmark.management.domain.Algorithm;
-import com.codinginfinity.benchmark.management.domain.Dataset;
-import com.codinginfinity.benchmark.management.domain.Experiment;
-import com.codinginfinity.benchmark.management.domain.Job;
+import com.codinginfinity.benchmark.management.domain.*;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
+import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
@@ -17,17 +15,22 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
-import com.codinginfinity.benchmark.management.thrift.messages.JobSpecificationMessage;
-import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
-import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
+import com.codinginfinity.benchmark.management.thrift.messages.*;
+import com.codinginfinity.benchmark.management.thrift.messages.Measurement;
+import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by reinhardt on 2016/08/11.
@@ -53,12 +56,36 @@ public class ExperimentManegementImpl implements ExperimentManagement {
     @Inject
     private QueueMessageUtils queueMessageUtils;
 
+    @Inject
+    JobRepository jobRepository;
+
     @EndpointInject(uri="direct:jobs")
     private ProducerTemplate producerTemplate;
 
+    @Consume(uri="direct:results")
+    public void fetchResultsFromQueue(ResultMessage resultMessage){
+        SaveJobResultsRequest saveJobResultsRequest = new SaveJobResultsRequest(resultMessage);
+        saveJobResults(saveJobResultsRequest);
+    }
+
     @Override
     public SaveJobResultsResponse saveJobResults(SaveJobResultsRequest request) {
-        return null;
+        ResultMessage resultMessage = request.getResultMessage();
+        Job job = jobRepository.findOne((long) resultMessage.getJobId());
+        List<com.codinginfinity.benchmark.management.domain.Measurement> measurements = resultMessage.getMeasurements().stream().map(measurement -> {
+            com.codinginfinity.benchmark.management.domain.Measurement transformedMeasurement = new com.codinginfinity.benchmark.management.domain.Measurement();
+            transformedMeasurement.setJob(job);
+            transformedMeasurement.setValue((double) measurement.getValue());
+
+            Instant i = Instant.ofEpochSecond(measurement.getTimestamp());
+            ZonedDateTime z = ZonedDateTime.ofInstant( i, ZoneId.of("Africa/Johannesburg"));
+            transformedMeasurement.setTimestamp(z);
+            return transformedMeasurement;
+        }).collect(Collectors.toList());
+
+        job.setMeasurements(measurements);
+        jobRepository.save(job);
+        return new SaveJobResultsResponse(job.getId(), job.getExperiment().getId());
     }
 
     /**

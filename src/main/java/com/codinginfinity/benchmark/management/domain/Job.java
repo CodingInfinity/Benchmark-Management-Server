@@ -31,7 +31,7 @@ public class Job implements Serializable {
     @NotNull
     private MeasurementType measurementType;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Measurement> measurements;
 
     @NotNull
