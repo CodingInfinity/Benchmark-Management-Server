@@ -240,7 +240,15 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
                         if (!entry.isDirectory()) {
                             archiveOutputStream.putArchiveEntry(entry);
                             byte[] buffer = new byte[(int) entry.getSize()];
-                            archiveInputStream.read(buffer, 0, buffer.length);
+                            int totalSizeRead = 0;
+                            while (totalSizeRead != buffer.length) {
+                                int hasRead = archiveInputStream.read(buffer, totalSizeRead, buffer.length - totalSizeRead);
+                                if (hasRead == -1)
+                                    throw new ArchiveException("Internal archive exception occurred. Stream closed early.");
+                                if (hasRead == 0)
+                                    break;
+                                totalSizeRead += hasRead;
+                            }
                             archiveOutputStream.write(buffer);
                             archiveOutputStream.closeArchiveEntry();
                         }
