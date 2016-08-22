@@ -16,7 +16,6 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.requ
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
 import com.codinginfinity.benchmark.management.thrift.messages.*;
-import com.codinginfinity.benchmark.management.thrift.messages.Measurement;
 import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -33,11 +32,21 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
+ * A reference implementation of the {@link ExperimentManagement} service contract.
+ *
  * Created by reinhardt on 2016/08/11.
  * Edited by fabio on 2016/08/14
+ * Edited by reinhardt and andrew on 2016/08/21
+ *
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.exception
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.request
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
+ *
  * @author Fabio Loreggian
  * @author Andrew Broekman
+ * @author Reinhardt Cromhout
  */
+
 @Service
 public class ExperimentManegementImpl implements ExperimentManagement {
 
