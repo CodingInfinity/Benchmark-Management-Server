@@ -43,7 +43,30 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * A reference implementation of the {@link RepositoryEntityManagement} service contract. This class
+ * is coded using generics allowing a user to simply extend this class to obtain full management
+ * functionality for repository entities in the backend system. It is advised to extend this class rather
+ * than implementing the {@link RepositoryEntityManagement} service contract directly.
+ *
  * Created by reinhardt on 2016/06/29.
+ *
+ * @see com.codinginfinity.benchmark.management.service.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.response
+ *
+ * @author Reinhardt Cromhout
+ * @author Andrew Broekman
+ * @author Fabio Loreggian
+ * @version 1.0.0
+ *
+ * @param <C> A generic type that has to be a class that extends the {@link Category} abstract class.
+ * @param <T> A generic type that has to be a class that extends the {@link RepoEntity} abstract class
+ *            with a generic of type C.
+ * @param <R> A generic type that has to be a class that extends the {@link RepoEntityRepository}
+ *           interface with a generic type of type T.
+ * @param <S> A generic type that has to be a class that extends the {@link CategoryManagement}
+ *           interface with a generic type of class C.
  */
 
 public abstract class RepositoryEntityManagementImpl<C extends Category,

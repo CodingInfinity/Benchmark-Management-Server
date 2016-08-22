@@ -12,8 +12,22 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.requ
 import com.codinginfinity.benchmark.management.service.repositoryManagement.response.*;
 
 /**
+ * An interface extension of the {@link RepositoryEntityManagement} with generic
+ * types of RepositoryEntityManagement<{@link AlgorithmCategory}, {@link Algorithm}>.
+ *
+ * A reference implementation is provided in {@link AlgorithmManagementImpl}.
+ *
  * Created by andrew on 2016/06/25.
+ *
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.response
+ *
+ * @author Reinhardt Cromhout
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 public interface AlgorithmManagement extends RepositoryEntityManagement<AlgorithmCategory, Algorithm>{
     @Override
     AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;;
