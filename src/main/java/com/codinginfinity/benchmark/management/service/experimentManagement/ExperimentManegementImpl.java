@@ -1,6 +1,9 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
-import com.codinginfinity.benchmark.management.domain.*;
+import com.codinginfinity.benchmark.management.domain.Algorithm;
+import com.codinginfinity.benchmark.management.domain.Dataset;
+import com.codinginfinity.benchmark.management.domain.Experiment;
+import com.codinginfinity.benchmark.management.domain.Job;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
@@ -15,7 +18,10 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
-import com.codinginfinity.benchmark.management.thrift.messages.*;
+import com.codinginfinity.benchmark.management.thrift.messages.JobSpecificationMessage;
+import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
+import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
+import com.codinginfinity.benchmark.management.thrift.messages.ResultMessage;
 import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -28,23 +34,18 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
  * A reference implementation of the {@link ExperimentManagement} service contract.
  *
- * Created by reinhardt on 2016/08/11.
- * Edited by fabio on 2016/08/14
- * Edited by reinhardt and andrew on 2016/08/21
- *
- * @see com.codinginfinity.benchmark.management.service.experimentManagement.exception
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.request
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
  *
  * @author Fabio Loreggian
  * @author Andrew Broekman
  * @author Reinhardt Cromhout
+ * @version 1.0.0
  */
 
 @Service

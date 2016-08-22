@@ -14,14 +14,10 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
  *
  * A reference implementation is provided in the {@link ExperimentManegementImpl} class.
  *
- * Created by reinhardt on 2016/08/09.
- *
- * @see com.codinginfinity.benchmark.management.service.experimentManagement.exception
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.request
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
  *
  * @author Reinhardt Cromhout
- *
  * @version 1.0.0
  */
 
