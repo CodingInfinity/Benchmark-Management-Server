@@ -12,8 +12,16 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines logging aspects to log execution of service and repository modules. Aspects wrap around functions and show
+ * both entry and exit arguments. Exceptions are also show with cause and where exception occurred.
+ *
+ * @see com.codinginfinity.benchmark.management.repository
+ * @see com.codinginfinity.benchmark.management.service
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Aspect
 public class LoggingAspect {
 
