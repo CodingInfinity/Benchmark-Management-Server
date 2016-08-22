@@ -8,8 +8,22 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
 
 /**
+ * An interface extension of the {@link CategoryManagement} with generic
+ * types of CategoryManagement<{@link AlgorithmCategory}>.
+ *
+ * A reference implementation is provided in {@link AlgorithmCategoryManagement}.
+ *
  * Created by andrew on 2016/06/28.
+ *
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.response
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.exception
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 public interface AlgorithmCategoryManagement extends CategoryManagement<AlgorithmCategory> {
 
     @Override

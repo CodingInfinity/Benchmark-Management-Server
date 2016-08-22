@@ -8,8 +8,22 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
 
 /**
+ * An interface extension of the {@link CategoryManagement} with generic
+ * types of CategoryManagement<{@link DatasetCategory}>.
+ *
+ * A reference implementation is provided in {@link DatasetCategoryManagementImpl}.
+ *
  * Created by andrew on 2016/06/25.
+ *
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.response
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.exception
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 public interface DatasetCategoryManagement extends CategoryManagement<DatasetCategory> {
 
     @Override

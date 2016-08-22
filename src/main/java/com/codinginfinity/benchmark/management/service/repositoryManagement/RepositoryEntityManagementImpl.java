@@ -43,7 +43,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A reference implementation of the {@link RepositoryEntityManagement} service contract.
+ * A reference implementation of the {@link RepositoryEntityManagement} service contract. This class
+ * is coded using generics allowing a user to simply extend this class to obtain full management
+ * functionality for repository entities in the backend system. It is advised to extend this class rather
+ * than implementing the {@link RepositoryEntityManagement} service contract directly.
  *
  * Created by reinhardt on 2016/06/29.
  *
