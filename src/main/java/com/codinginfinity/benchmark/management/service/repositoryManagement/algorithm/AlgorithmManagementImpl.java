@@ -12,8 +12,20 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 /**
- * Created by andrew on 2016/06/25.
+ * A reference implementation of the {@link AlgorithmManagement} interface and
+ * the {@link RepositoryEntityManagementImpl} abstract class.
+ *
+ * @see com.codinginfinity.benchmark.management.service.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.exception
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.request
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.response
+ *
+ * Created by andrew on 2016/06/24.
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Service
 public class AlgorithmManagementImpl
     extends RepositoryEntityManagementImpl<AlgorithmCategory, Algorithm, AlgorithmRepository, AlgorithmCategoryManagement>
