@@ -5,8 +5,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Represent classifiers for {@link Algorithm} repository objects.
+ *
+ * @see RepoEntity
+ * @see Algorithm
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @NoArgsConstructor
 @Entity
 public class AlgorithmCategory extends Category {

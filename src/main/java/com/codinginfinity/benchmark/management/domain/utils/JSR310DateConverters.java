@@ -7,8 +7,10 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
- * Created by andrew on 2016/07/05.
+ * Utility class defining converters to allow for converting between different
+ * data formats. Used to allow serialization to persistence store.
  */
+
 public final class JSR310DateConverters {
 
     private JSR310DateConverters() {

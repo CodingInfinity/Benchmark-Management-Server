@@ -1,21 +1,22 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+
 /**
- * Created by Brenton on 7/28/2016.
+ * Represents a single measurement made by the backend on a job.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.Job
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+
+@Data
 @Entity
 public class Measurement implements Serializable {
 
@@ -26,12 +27,21 @@ public class Measurement implements Serializable {
     private Long id;
 
     @NotNull
+    /**
+     * Date and time at which the measurement was made.
+     */
     private ZonedDateTime timestamp;
 
     @NotNull
+    /**
+     * The probe/measured value.
+     */
     private Double value;
 
     @NotNull
     @OneToOne
+    /**
+     * The job on which this measurement was made.
+     */
     private Job job;
 }

@@ -5,8 +5,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Represent classifiers for {@link Dataset} repository objects.
+ *
+ * @see RepoEntity
+ * @see Dataset
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @NoArgsConstructor
 @Entity
 public class DatasetCategory extends Category {

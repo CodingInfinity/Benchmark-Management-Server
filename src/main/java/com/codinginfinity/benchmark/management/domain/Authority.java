@@ -1,6 +1,8 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +12,15 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Created by andrew on 2016/06/15.
+ * Defines a role object used to represent a roles/permissions of a user.
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
 @Entity
 public class Authority implements Serializable {
 
@@ -26,6 +29,10 @@ public class Authority implements Serializable {
     @NotNull
     @Size(min = 1, max = 50)
     @Id
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
+    /**
+     * Name of the role/permission
+     * Note: Name is the {@link javax.persistence.Id} of the object and must be unique.
+     */
     private String name;
 }

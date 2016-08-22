@@ -1,22 +1,26 @@
 package com.codinginfinity.benchmark.management.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Represents the metadata of an user uploaded dataset. The physical file is
+ * stored separately using a {@link com.codinginfinity.benchmark.management.domain.elasticsearch.file.File}
+ * object.
+ *
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @author Fabio Loreggian
+ * @version 1.0.0
  */
-@Getter
-@Setter
+
+@Data
 @EqualsAndHashCode(callSuper = true)
-@ToString
 @Entity
 public class Dataset extends RepoEntity<DatasetCategory> {
 
@@ -28,6 +32,9 @@ public class Dataset extends RepoEntity<DatasetCategory> {
             name = "dataset_dataset_category",
             joinColumns = {@JoinColumn(name = "dataset_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")})
+    /**
+     *  Classifiers associated with the object.
+     */
     private List<DatasetCategory> categories;
 
     @Override

@@ -1,9 +1,7 @@
 package com.codinginfinity.benchmark.management.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
@@ -14,10 +12,9 @@ import java.util.stream.Collectors;
 /**
  * Created by andrew on 2016/06/21.
  */
-@Getter
+
+@Data
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
 public class Profile {
 
     @NotNull

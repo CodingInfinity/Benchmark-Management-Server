@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.domain;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,13 +10,20 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by reinhardt on 2016/06/26.
+ * Represents an abstract object which will be stored in the repository system.
+ * It is suggested that new objects to be persisted to the repository system
+ * extend this object and make use of the provided service interface
+ * {@link com.codinginfinity.benchmark.management.service.repositoryManagement.RepositoryEntityManagement},
+ * more specifically making use of the provided refernce implementation
+ * {@link com.codinginfinity.benchmark.management.service.repositoryManagement.RepositoryEntityManagementImpl}.
+ *
+ * @author Reinhardt Cromhout
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 @MappedSuperclass
 public abstract class RepoEntity<T extends Category> implements Serializable {
 
@@ -27,19 +35,44 @@ public abstract class RepoEntity<T extends Category> implements Serializable {
 
     @NotNull
     @Size(max = 50)
+    /**
+     * User provided identifier of the object.
+     */
     private String name;
 
     @OneToOne
     @NotNull
+    /**
+     * The user who takes responsibility of the object.
+     */
     private User user;
 
+    /**
+     * User provided description of the object.
+     */
     private String description;
 
+    /**
+     * Whether object contains documents. In reference implementation it is
+     * set to indicate that associated objects have been uploaded to
+     * persistence store.
+     */
     private boolean documents = false;
 
+    /**
+     * Filename of the object.
+     */
     private String filename;
 
+    /**
+     * Classifiers associated with the object.
+     * @return Returns a list of categories.
+     */
     public abstract List<T> getCategories();
 
+    /**
+     * Adds a classifier to object.
+     * @param category Classifier to add to object.
+     */
     public abstract void addCategory(T category);
 }
