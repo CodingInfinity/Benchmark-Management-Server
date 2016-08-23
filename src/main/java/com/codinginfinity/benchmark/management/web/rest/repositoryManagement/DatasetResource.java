@@ -19,8 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.inject.Inject;
 
 /**
- * Created by reinhardt on 2016/06/29.
+ * Defines RESTful API endpoints for all management related to dataset
+ * repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.DatasetCategory
+ * @see com.codinginfinity.benchmark.management.domain.Dataset
+ * @see com.codinginfinity.benchmark.management.repository.DatasetRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @author Brenton Watt
+ * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("/api/repo")
 public class DatasetResource extends RepositoryEntityResource<DatasetCategory, Dataset, DatasetRepository, DatasetManagement>{

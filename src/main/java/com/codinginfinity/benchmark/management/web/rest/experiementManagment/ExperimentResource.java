@@ -15,16 +15,21 @@ import javax.inject.Inject;
 import java.net.URISyntaxException;
 
 /**
- * Created by fabio on 2016/08/14.
+ * Defines RESTful API endpoints for all management related to experiment creation and management.
+ *
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement
+ *
  * @author Fabio Loreggian
  * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("/api")
 public class ExperimentResource {
+
     @Inject
     private ExperimentManagement experimentManagement;
-
 
     /**
      * POST  /experiment  : Creates a new experiment.
@@ -35,7 +40,6 @@ public class ExperimentResource {
      *
      * @param request the HTTP request with the json representation of the parameters to be used to create the experiment
      * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
-     * @throws URISyntaxException if the Location URI syntaxt is incorrect
      */
     @RequestMapping(value = "/experiment",
             method = RequestMethod.POST,

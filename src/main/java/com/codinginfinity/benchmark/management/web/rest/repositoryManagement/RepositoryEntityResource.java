@@ -21,8 +21,21 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by reinhardt on 2016/06/29.
+ * Defines abstract RESTful API endpoints for all management related to
+ * repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.Category
+ * @see com.codinginfinity.benchmark.management.domain.RepoEntity
+ * @see com.codinginfinity.benchmark.management.repository.RepoEntityRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.RepositoryEntityManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @author Brenton Watt
+ * @version 1.0.0
  */
+
 @Slf4j
 public abstract class RepositoryEntityResource <C extends Category, T extends RepoEntity<C>,
                                         R extends RepoEntityRepository<T>, M extends RepositoryEntityManagement<C, T>>{

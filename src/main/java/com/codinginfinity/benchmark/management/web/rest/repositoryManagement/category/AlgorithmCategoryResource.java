@@ -20,8 +20,19 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by andrew on 2016/06/29.
+ * Defines abstract RESTful API endpoints for all management related to
+ * categories of algorithm repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.AlgorithmCategory
+ * @see com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("/api/repo/category")
 public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategory, AlgorithmCategoryRepository, AlgorithmCategoryManagement> {

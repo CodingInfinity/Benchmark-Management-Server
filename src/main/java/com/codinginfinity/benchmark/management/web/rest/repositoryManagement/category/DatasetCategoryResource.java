@@ -20,8 +20,19 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by andrew on 2016/06/29.
+ * Defines abstract RESTful API endpoints for all management related to
+ * categories of dataset repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.DatasetCategory
+ * @see com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("/api/repo/category")
 public class DatasetCategoryResource extends CategoryResource<DatasetCategory, DatasetCategoryRepository, DatasetCategoryManagement> {

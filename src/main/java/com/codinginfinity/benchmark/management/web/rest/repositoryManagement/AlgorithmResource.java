@@ -19,8 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.inject.Inject;
 
 /**
- * Created by reinhardt on 2016/06/29.
+ * Defines RESTful API endpoints for all management related to algorithm
+ * repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.AlgorithmCategory
+ * @see com.codinginfinity.benchmark.management.domain.Algorithm
+ * @see com.codinginfinity.benchmark.management.repository.AlgorithmRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @author Brenton Watt
+ * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("/api/repo")
 public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategory, Algorithm, AlgorithmRepository, AlgorithmManagement>{

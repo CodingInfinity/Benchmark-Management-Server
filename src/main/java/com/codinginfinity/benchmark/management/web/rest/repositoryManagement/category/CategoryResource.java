@@ -13,8 +13,19 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 /**
- * Created by andrew on 2016/06/29.
+ * Defines abstract RESTful API endpoints for all management related to
+ * categories of repository entities.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.Category
+ * @see com.codinginfinity.benchmark.management.repository.CategoryRepository
+ * @see com.codinginfinity.benchmark.management.service.repositoryManagement.category.CategoryManagement
+ *
+ * @author Fabio Loreggian
+ * @author Andrew Broekman
+ * @author Reinhardt Cromhout
+ * @version 1.0.0
  */
+
 @Slf4j
 public abstract class CategoryResource<T extends Category, S extends CategoryRepository<T>, R extends CategoryManagement<T>> {
 
