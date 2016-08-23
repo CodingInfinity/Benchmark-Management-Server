@@ -13,6 +13,7 @@ import java.util.List;
  * @see com.codinginfinity.benchmark.management.domain.Algorithm
  *
  * @author Andrew Broekman
+ * @author Reinhardt Cromhout
  * @version 1.0.0
  */
 

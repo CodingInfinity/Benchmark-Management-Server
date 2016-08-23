@@ -24,6 +24,7 @@ import java.util.Optional;
  * @see com.codinginfinity.benchmark.management.domain.RepoEntity
  *
  * @author Andrew Broekman
+ * @author Reinhardt Cromhout
  * @version 1.0.0
  */
 

@@ -13,6 +13,7 @@ import java.util.Optional;
  * @see com.codinginfinity.benchmark.management.domain.Category
  *
  * @author Andrew Broekman
+ * @author Fabio Loreggian
  * @version 1.0.0
  */
 
