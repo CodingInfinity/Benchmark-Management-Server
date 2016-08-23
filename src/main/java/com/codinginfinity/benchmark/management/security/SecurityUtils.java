@@ -10,13 +10,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * Created by andrew on 2016/06/20.
+ * Utility class to assist in easier retrieval of security information from the
+ * Spring Security context.
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
 public final class SecurityUtils {
 
     private SecurityUtils() {
     }
 
+    /**
+     * Get the username of the user in the security context.
+     *
+     * @return String with the username of current user in context
+     * @since 1.0.0
+     */
     public static String getCurrentUsername() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
@@ -32,6 +42,12 @@ public final class SecurityUtils {
         return null;
     }
 
+    /**
+     * Check if the user in the security context is authenticated.
+     *
+     * @return True if the user in the context is authenticated.
+     * @since 1.0.0
+     */
     public static boolean isAuthenticated() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         if (securityContext.getAuthentication() != null) {
@@ -48,6 +64,13 @@ public final class SecurityUtils {
         return false;
     }
 
+    /**
+     * Check if the user in the security context has a certain role.
+     *
+     * @param authority The authority we want to enquire about on current user.
+     * @return True if the user in the context has a role of {@param authority}.
+     * @since 1.0.0
+     */
     public static boolean isCurrentUserInRole(String authority) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();

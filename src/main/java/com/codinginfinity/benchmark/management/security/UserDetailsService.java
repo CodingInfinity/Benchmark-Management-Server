@@ -17,7 +17,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Created by andrew on 2016/06/15.
+ * Implements the {@link org.springframework.security.core.userdetails.UserDetailsService}
+ * Spring interface to assist the Spring Security framework in authenticating a user.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
 @Component("userDetailsService")
 @Slf4j

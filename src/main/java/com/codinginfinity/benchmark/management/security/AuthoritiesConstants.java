@@ -1,7 +1,11 @@
 package com.codinginfinity.benchmark.management.security;
 
 /**
- * Created by andrew on 2016/06/15.
+ * Class that defines the various roles within the benchmark management
+ * system.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
 public final class AuthoritiesConstants {
 
