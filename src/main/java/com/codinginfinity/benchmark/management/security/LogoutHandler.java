@@ -20,9 +20,9 @@ import java.io.IOException;
  * handler removes tokens from the persistence store to ensure if token is
  * compromised after user is finished, it is rendered useless.
  *
- * Class is injected into the {@link com.codinginfinity.benchmark.management.config.SecurityConfiguration}
+ * Class is injected into the {@link com.codinginfinity.benchmark.management.config.OAuthConfiguration.ResourceServerConfiguration}
  * configuration class and used by the
- * {@link com.codinginfinity.benchmark.management.config.SecurityConfiguration#configure(HttpSecurity)} method.
+ * {@link com.codinginfinity.benchmark.management.config.OAuthConfiguration.ResourceServerConfiguration#configure(HttpSecurity)} method.
  *
  * @author Andrew Broekman
  * @version 1.0.0
