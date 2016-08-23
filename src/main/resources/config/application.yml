@@ -13,6 +13,8 @@
 # ===================================================================
 
 spring:
+    application:
+       name: Benchmark Management Server
     profiles:
        active: dev
     datasource:
