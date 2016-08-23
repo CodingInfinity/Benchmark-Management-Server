@@ -16,8 +16,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines a Spring configuration class for web endpoints configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @Slf4j
 public class WebConfigurer implements ServletContextInitializer, EmbeddedServletContainerCustomizer {

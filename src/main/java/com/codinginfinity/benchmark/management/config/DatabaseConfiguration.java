@@ -13,8 +13,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 /**
- * Created by andrew on 2016/06/16.
+ * Defines a Spring configuration class for database configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableJpaRepositories(basePackages = "com.codinginfinity.benchmark.management.repository")
 @EnableElasticsearchRepositories(basePackages = "com.codinginfinity.benchmark.management.repository.elasticsearch")

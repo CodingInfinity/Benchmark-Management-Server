@@ -12,8 +12,12 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PreDestroy;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines a Spring configuration class for setting up Spring caching support.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableCaching
 @AutoConfigureAfter
@@ -34,6 +38,4 @@ public class CacheConfiguration {
         cacheManager = new NoOpCacheManager();
         return cacheManager;
     }
-
-
 }

@@ -5,7 +5,6 @@ import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurement
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftResultMessageDataFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,8 +20,12 @@ import javax.jms.ConnectionFactory;
 import java.util.Objects;
 
 /**
- * Created by andrew on 2016/06/30.
+ * Defines a Spring configuration class for queue messaging configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableJms
 @EnableConfigurationProperties({ ActiveMQProperties.class })
@@ -43,7 +46,6 @@ public class MessagingConfiguration {
         factory.setReconnectOnException(true);
         return factory;
     }
-
 
     @Bean
     @Inject

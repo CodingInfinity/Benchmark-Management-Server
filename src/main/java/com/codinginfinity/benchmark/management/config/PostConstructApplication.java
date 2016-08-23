@@ -11,8 +11,13 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Created by andrew on 2016/07/01.
+ * Defines a Spring configuration class for running tasks post construction
+ * of application setup.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @Slf4j
 public class PostConstructApplication {

@@ -12,8 +12,12 @@ import javax.inject.Inject;
 import static org.apache.activemq.camel.component.ActiveMQComponent.activeMQComponent;
 
 /**
- * Created by andrew on 2016/07/03.
+ * Defines a Spring configuration class for Apache Camel router integration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 public class RouterConfiguration extends RouteBuilder {
 

@@ -22,8 +22,12 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines a Spring configuration class for oAuth2 configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 public class OAuthConfiguration {
 

@@ -8,8 +8,14 @@ import org.springframework.context.annotation.Description;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 /**
- * Created by andrew on 2016/06/20.
+ * Thymeleaf configuration for the generation of emails templates used with
+ * the benchmarking system. Templates are located in the
+ * {@code /src/main/resources/mails} directory.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @Slf4j
 public class ThymeleafConfiguration {

@@ -21,8 +21,12 @@ import java.util.Date;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 /**
- * Created by andrew on 2016/06/21.
+ * Defines a Spring configuration class for Swagger configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableSwagger2
 @Slf4j

@@ -1,8 +1,12 @@
 package com.codinginfinity.benchmark.management.config;
 
 /**
- * Created by andrew on 2016/07/01.
+ * Defines a utility class for different Spring profile constants..
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 public final class Constants {
 
     // Spring profile for development and production

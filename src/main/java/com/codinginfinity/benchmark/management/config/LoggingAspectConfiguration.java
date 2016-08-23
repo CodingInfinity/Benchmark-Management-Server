@@ -6,8 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines a Spring configuration class for Logging aspects.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableAspectJAutoProxy
 public class LoggingAspectConfiguration {

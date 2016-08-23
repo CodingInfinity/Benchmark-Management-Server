@@ -14,12 +14,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.inject.Inject;
 
 /**
- * Created by andrew on 2016/06/13.
+ * Defines a Spring configuration class for security configuration.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -27,6 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private UserDetailsService userDetailsService;
+
+    @Inject
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

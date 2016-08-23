@@ -6,8 +6,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.cors.CorsConfiguration;
 
 /**
- * Created by andrew on 2016/07/01.
+ * Class which allows for the mapping of Spring properties in the resources
+ * file onto a Java object.
+ *
+ * @author Andrew Broekman
+ * @since 1.0.0
  */
+
 @Getter
 @ConfigurationProperties(prefix = "benchmark", ignoreUnknownFields = false)
 public class BenchmarkProperties {
