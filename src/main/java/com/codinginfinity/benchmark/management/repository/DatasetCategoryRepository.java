@@ -4,8 +4,14 @@ import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Repository definition for the {@link DatasetCategory} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.DatasetCategory
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface DatasetCategoryRepository extends CategoryRepository<DatasetCategory> {
 

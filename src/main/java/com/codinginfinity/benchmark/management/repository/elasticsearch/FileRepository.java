@@ -5,8 +5,14 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchCrudReposi
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by andrew on 2016/07/06.
+ * Repository definition for the {@link File} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.elasticsearch.file.File
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface FileRepository extends ElasticsearchCrudRepository<File, String> {
 }

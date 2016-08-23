@@ -7,8 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Created by andrew on 2016/06/15.
+ * Repository definition for the {@link User} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.User
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 

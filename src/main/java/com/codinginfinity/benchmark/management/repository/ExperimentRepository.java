@@ -7,8 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Created by fabio on 2016/08/13.
+ * Repository definition for the {@link Experiment} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.Experiment
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface ExperimentRepository extends JpaRepository<Experiment, Long>{
 

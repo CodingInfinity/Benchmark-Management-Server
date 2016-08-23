@@ -8,8 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by reinhardt on 2016/06/25.
+ * Repository definition for the {@link Algorithm} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.Algorithm
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface AlgorithmRepository extends RepoEntityRepository<Algorithm> {
 

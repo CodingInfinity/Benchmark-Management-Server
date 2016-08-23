@@ -7,8 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Created by andrew on 2016/07/06.
+ * Repository definition for the {@link Archive} object.
+ *
+ * @see com.codinginfinity.benchmark.management.domain.elasticsearch.archive.Archive
+ *
+ * @author Andrew Broekman
+ * @version 1.0.0
  */
+
 @Repository
 public interface ArchiveRepository extends ElasticsearchCrudRepository<Archive, String> {
 
