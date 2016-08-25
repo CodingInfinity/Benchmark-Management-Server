@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.domain;
 
 import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @Data
+@ToString(exclude = "experiment")
 @Entity
 public class Job implements Serializable {
 
