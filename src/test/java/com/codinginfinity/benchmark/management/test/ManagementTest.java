@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.test;
 
 import com.codinginfinity.benchmark.management.ManagementApp;
 import com.codinginfinity.benchmark.management.config.BenchmarkProperties;
+import com.codinginfinity.benchmark.management.config.JacksonConfiguration;
 import com.codinginfinity.benchmark.management.config.ThymeleafConfiguration;
 import com.codinginfinity.benchmark.management.repository.elasticsearch.ArchiveRepository;
 import com.codinginfinity.benchmark.management.repository.elasticsearch.FileRepository;
@@ -33,6 +34,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Import({
         DataSourceAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class,
+        JacksonConfiguration.class,
         MailSenderAutoConfiguration.class,
         PropertyPlaceholderAutoConfiguration.class,
         ThymeleafAutoConfiguration.class,
@@ -69,5 +71,4 @@ public class ManagementTest {
     public ArchiveRepository archiveRepository() {
         return Mockito.mock(ArchiveRepository.class);
     }
-
 }
