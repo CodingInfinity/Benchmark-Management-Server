@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.management.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
 import com.codinginfinity.benchmark.management.service.reporting.request.DownloadResultsRequest;
@@ -60,6 +61,22 @@ public class ExperimentResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addExperiment(@RequestBody CreateExperimentRequest request) throws NonExistentException {
         return new ResponseEntity<>(experimentManagement.createExperiment(request), HttpStatus.OK);
+    }
+
+    /**
+     * GET  /experiments  : Gets all experiment.
+     * <p>
+     * Gets all experiemnets
+     * </p>
+     *
+     * @return the ResponseEntity with status 200 (Okay) and with body of all the experiments
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/experiments",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllExperiments() throws NonExistentException {
+        return new ResponseEntity<>(experimentManagement.getAllExperiments(new GetAllExperimentsResponse()), HttpStatus.OK);
     }
 
     /**

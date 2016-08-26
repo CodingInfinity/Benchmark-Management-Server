@@ -11,6 +11,7 @@ import com.codinginfinity.benchmark.management.service.experimentManagement.requ
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.utils.QueueMessageUtils;
@@ -173,5 +174,20 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             throw new NonExistentRepoEntityException("Experiment doesn't exist");
         }
         return new GetExperimentByIdResponse(experiment.get());
+    }
+
+    /**
+     * getExperimentById returns an experiment
+     * @param request
+     * @return GetExperimentByIdResponse
+     * @throws NonExistentRepoEntityException
+     */
+    @Override
+    public GetAllExperimentsResponse getAllExperiments(GetAllExperimentsResponse request) throws NonExistentRepoEntityException{
+        List<Experiment> experiments = experimentRepository.findAll();
+        if(experiments.isEmpty()){
+            throw new NonExistentRepoEntityException("There are no Experiments");
+        }
+        return new GetAllExperimentsResponse(experiments);
     }
 }
