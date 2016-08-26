@@ -1,9 +1,11 @@
 package com.codinginfinity.benchmark.management.web.rest.experiementManagment;
 
 import com.codinginfinity.benchmark.management.repository.JobRepository;
+import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
 import com.codinginfinity.benchmark.management.service.reporting.request.DownloadResultsRequest;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -50,12 +53,30 @@ public class ExperimentResource {
      * @param request the HTTP request with the json representation of the parameters to be used to create the experiment
      * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
      */
+    @Secured(AuthoritiesConstants.USER)
     @RequestMapping(value = "/experiment",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addExperiment(@RequestBody CreateExperimentRequest request) throws NonExistentException {
         return new ResponseEntity<>(experimentManagement.createExperiment(request), HttpStatus.OK);
+    }
+
+    /**
+     * GET  /experiment/{id}  : Gets a experiment.
+     * <p>
+     * Gets a specified experiemnet by id, throws non existent if the experiment doesnt exist
+     * </p>
+     *
+     * @param id Id of the experiment
+     * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/experiment/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getExperimentById(@PathVariable Long id) throws NonExistentException {
+        return new ResponseEntity<>(experimentManagement.getExperimentById(new GetExperimentByIdRequest(id)), HttpStatus.OK);
     }
 
     /**
@@ -68,6 +89,7 @@ public class ExperimentResource {
      * @param id The id of the job whose results we want to obtain
      * @return ResponseEntity with status 200 (OK), with a String body containing the results in CSV format
      */
+    @Secured(AuthoritiesConstants.USER)
     @RequestMapping(value = "/job/{id}/results",
             method = RequestMethod.GET)
     public ResponseEntity<String> getCSVResults(@PathVariable Long id) throws ProcessingException {

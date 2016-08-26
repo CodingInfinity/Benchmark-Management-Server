@@ -31,7 +31,12 @@ public class QueueMessageUtils {
         jobSpecificationMessage.setMeasurementType(job.getMeasurementType());
 
         jobSpecificationMessage.setAlgorithm(fileRepository.findOne(getRepoEntityPrefix(job.getAlgorithm()) +  job.getAlgorithm().getFilename()).getContents());
-        jobSpecificationMessage.setDataset(fileRepository.findOne(getRepoEntityPrefix(job.getDataset()) + job.getDataset().getFilename()).getContents());
+        if(job.getDataset()==null){
+            byte[] buffer = null;
+            jobSpecificationMessage.setDataset(buffer);
+        }else {
+            jobSpecificationMessage.setDataset(fileRepository.findOne(getRepoEntityPrefix(job.getDataset()) + job.getDataset().getFilename()).getContents());
+        }
         //TODO Thrift generated classes with Long error
         jobSpecificationMessage.setExperimentId(job.getExperiment().getId().intValue());
         jobSpecificationMessage.setJobId(job.getId().intValue());

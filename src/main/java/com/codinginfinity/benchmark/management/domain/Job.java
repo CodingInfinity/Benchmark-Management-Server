@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.domain;
 
 import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -34,6 +35,7 @@ public class Job implements Serializable {
     /**
      * The experiment with which this job is associated with.
      */
+    @JsonIgnore
     private Experiment experiment;
 
     @NotNull
@@ -42,7 +44,7 @@ public class Job implements Serializable {
      */
     private MeasurementType measurementType;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     /**
      * List of measurements made by the monitor applications.
      */
@@ -55,7 +57,6 @@ public class Job implements Serializable {
      */
     private Algorithm algorithm;
 
-    @NotNull
     @OneToOne
     /**
      * The associated dataset supplied to the algorithm.

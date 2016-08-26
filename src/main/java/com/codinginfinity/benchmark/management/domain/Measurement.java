@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Measurement implements Serializable {
     /**
      * Date and time at which the measurement was made.
      */
-    private ZonedDateTime timestamp;
+    private ZonedDateTime timestamp = ZonedDateTime.now();
 
     @NotNull
     /**
@@ -40,6 +41,7 @@ public class Measurement implements Serializable {
 
     @NotNull
     @OneToOne
+    @JsonIgnore
     /**
      * The job on which this measurement was made.
      */

@@ -2,8 +2,10 @@ package com.codinginfinity.benchmark.management.service.experimentManagement;
 
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsResponse;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 
@@ -44,4 +46,16 @@ public interface ExperimentManagement {
      * @since 1.0.0
      */
     CreateExperimentResponse createExperiment(CreateExperimentRequest request) throws NonExistentRepoEntityException, NonExistentException;
+
+    /**
+     * Returns aa experiment by the id of the experiment.
+     *
+     * @param request The request encapsulated as an {@link GetExperimentByIdRequest} object.
+     * @return Returns the result in an encapsulated {@link GetExperimentByIdResponse} object.
+     * @throws NonExistentRepoEntityException Thrown when an invalid repo entity is referenced
+     * in the request.
+     * @since 1.0.0
+     */
+
+    GetExperimentByIdResponse getExperimentById(GetExperimentByIdRequest request) throws NonExistentRepoEntityException;
 }

@@ -36,7 +36,7 @@ public class Experiment implements Serializable {
      */
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     /**
      * List of all job specifications.
      */

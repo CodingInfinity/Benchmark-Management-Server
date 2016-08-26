@@ -8,8 +8,10 @@ import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsResponse;
 import com.codinginfinity.benchmark.management.service.experimentManagement.utils.QueueMessageUtils;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
@@ -34,6 +36,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -86,10 +89,6 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             com.codinginfinity.benchmark.management.domain.Measurement transformedMeasurement = new com.codinginfinity.benchmark.management.domain.Measurement();
             transformedMeasurement.setJob(job);
             transformedMeasurement.setValue((double) measurement.getValue());
-
-            Instant i = Instant.ofEpochSecond(measurement.getTimestamp());
-            ZonedDateTime z = ZonedDateTime.ofInstant( i, ZoneId.of("Africa/Johannesburg"));
-            transformedMeasurement.setTimestamp(z);
             return transformedMeasurement;
         }).collect(Collectors.toList());
 
@@ -130,13 +129,22 @@ public class ExperimentManegementImpl implements ExperimentManagement {
 
         for(int i=0; i< request.getQuantity(); i++){
             for (int type:request.getMeasurementType()) {
-                for (Dataset dataset: datasets) {
+                if(datasets.isEmpty()){
                     Job job = new Job();
                     job.setAlgorithm(algorithm);
-                    job.setDataset(dataset);
                     job.setMeasurementType(MeasurementType.findByValue(type));
                     job.setExperiment(experiment);
                     experiment.getJobs().add(job);
+                }else {
+                    for (Dataset dataset : datasets) {
+                        Job job = new Job();
+                        job.setAlgorithm(algorithm);
+
+                        job.setDataset(dataset);
+                        job.setMeasurementType(MeasurementType.findByValue(type));
+                        job.setExperiment(experiment);
+                        experiment.getJobs().add(job);
+                    }
                 }
             }
         }
@@ -149,5 +157,21 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         });
 
         return new CreateExperimentResponse(experiment.getId());
+    }
+
+    /**
+     * getExperimentById returns an experiment
+     * @param request
+     * @return GetExperimentByIdResponse
+     * @throws NonExistentRepoEntityException
+     */
+    @Override
+    public GetExperimentByIdResponse getExperimentById(GetExperimentByIdRequest request) throws NonExistentRepoEntityException{
+        Optional<Experiment> experiment = experimentRepository.findOneById(request.getId());
+
+        if(!experiment.isPresent()){
+            throw new NonExistentRepoEntityException("Experiment doesn't exist");
+        }
+        return new GetExperimentByIdResponse(experiment.get());
     }
 }

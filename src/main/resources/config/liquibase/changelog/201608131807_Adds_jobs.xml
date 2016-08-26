@@ -27,7 +27,7 @@
             </column>
 
             <column name="dataset_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="measurement_type" type="bigint">
