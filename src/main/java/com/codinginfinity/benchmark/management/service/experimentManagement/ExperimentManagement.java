@@ -1,14 +1,8 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetAllExperimentsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 
 
@@ -22,6 +16,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
  *
  * @author Reinhardt Cromhout
+ * @author Fabio Loreggian
  * @version 1.0.0
  */
 
@@ -72,4 +67,30 @@ public interface ExperimentManagement {
      */
 
     GetAllExperimentsResponse getAllExperiments(GetAllExperimentsResponse request) throws NonExistentRepoEntityException;
+
+    /**
+     * Returns a boolean if the job is still on queue
+     *
+     * @param request The request encapsulated as an {@link IsJobOnQueueRequest} object.
+     * @return Returns the result in an encapsulated {@link IsJobOnQueueResponse} object.
+     * @throws NonExistentRepoEntityException Thrown when an invalid repo entity is referenced
+     * in the request.
+     * @since 1.0.0
+     */
+
+    IsJobOnQueueResponse isJobOnQueue(IsJobOnQueueRequest request) throws NonExistentRepoEntityException;
+
+    /**
+     * Returns all experiments by a specified user
+     *
+     * @param request The request encapsulated as an {@link GetAllUserExperimentsResponse} object.
+     * @return Returns the result in an encapsulated {@link GetAllUserExperimentsRequest} object.
+     * @throws NonExistentRepoEntityException Thrown when an invalid repo entity is referenced
+     * in the request.
+     * @since 1.0.0
+     */
+
+    GetAllUserExperimentsResponse getAllUserExperiments(GetAllUserExperimentsRequest request) throws NonExistentRepoEntityException;
+
+
 }

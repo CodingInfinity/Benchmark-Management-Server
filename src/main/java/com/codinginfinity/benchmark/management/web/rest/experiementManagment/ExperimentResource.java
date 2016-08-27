@@ -1,11 +1,16 @@
 package com.codinginfinity.benchmark.management.web.rest.experiementManagment;
 
+import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
+import com.codinginfinity.benchmark.management.repository.UserRepository;
 import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
+import com.codinginfinity.benchmark.management.security.SecurityUtils;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetAllUserExperimentsRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.IsJobOnQueueRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
@@ -44,6 +49,9 @@ public class ExperimentResource {
     @Inject
     private JobRepository jobRepository;
 
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /experiment  : Creates a new experiment.
      * <p>
@@ -80,6 +88,23 @@ public class ExperimentResource {
     }
 
     /**
+     * GET  /experiments/user  : Gets all experiment by the current user.
+     * <p>
+     * Gets all experiemnets by the current user
+     * </p>
+     *
+     * @return the ResponseEntity with status 200 (Okay) and with body of all the experiments
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/experiments/user",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllCurrentUserExperiments() throws NonExistentException {
+        User currentUser = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername()).get();
+        return new ResponseEntity<>(experimentManagement.getAllUserExperiments(new GetAllUserExperimentsRequest(currentUser)), HttpStatus.OK);
+    }
+
+    /**
      * GET  /experiment/{id}  : Gets a experiment.
      * <p>
      * Gets a specified experiemnet by id, throws non existent if the experiment doesnt exist
@@ -94,6 +119,23 @@ public class ExperimentResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getExperimentById(@PathVariable Long id) throws NonExistentException {
         return new ResponseEntity<>(experimentManagement.getExperimentById(new GetExperimentByIdRequest(id)), HttpStatus.OK);
+    }
+
+    /**
+     * GET  /job/queue/{id}  : Gets boolean if a specified job is on the queue
+     * <p>
+     * Gets if a specified job is on the queue
+     * </p>
+     *
+     * @param id Id of the job
+     * @return the ResponseEntity with status 200 (Okay) and with body the boolean of the job is still on the queue
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/job/onQueue/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> isJobOnQueue(@PathVariable Long id) throws NonExistentException {
+        return new ResponseEntity<>(experimentManagement.isJobOnQueue(new IsJobOnQueueRequest(id)), HttpStatus.OK);
     }
 
     /**

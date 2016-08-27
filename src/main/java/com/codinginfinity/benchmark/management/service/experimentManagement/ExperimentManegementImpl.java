@@ -1,19 +1,12 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
-import com.codinginfinity.benchmark.management.domain.Algorithm;
-import com.codinginfinity.benchmark.management.domain.Dataset;
-import com.codinginfinity.benchmark.management.domain.Experiment;
-import com.codinginfinity.benchmark.management.domain.Job;
+import com.codinginfinity.benchmark.management.domain.*;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
+import com.codinginfinity.benchmark.management.repository.MeasurementRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.SaveJobResultsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.CreateExperimentResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.SaveJobResultsResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
+import com.codinginfinity.benchmark.management.service.experimentManagement.respones.*;
 import com.codinginfinity.benchmark.management.service.experimentManagement.utils.QueueMessageUtils;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
@@ -25,6 +18,7 @@ import com.codinginfinity.benchmark.management.thrift.messages.JobSpecificationM
 import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
 import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import com.codinginfinity.benchmark.management.thrift.messages.ResultMessage;
+import jdk.nashorn.internal.runtime.regexp.joni.encoding.ObjPtr;
 import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -72,6 +66,9 @@ public class ExperimentManegementImpl implements ExperimentManagement {
 
     @Inject
     JobRepository jobRepository;
+
+    @Inject
+    MeasurementRepository measurementRepository;
 
     @EndpointInject(uri="direct:jobs")
     private ProducerTemplate producerTemplate;
@@ -189,5 +186,51 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             throw new NonExistentRepoEntityException("There are no Experiments");
         }
         return new GetAllExperimentsResponse(experiments);
+    }
+
+    /**
+     * isJobOnQueue returns a boolean if the job is still on the queue
+     * @param request
+     * @return IsJobOnQueueResponse
+     * @throws NonExistentRepoEntityException
+     */
+    @Override
+    public IsJobOnQueueResponse isJobOnQueue(IsJobOnQueueRequest request) throws NonExistentRepoEntityException{
+        boolean onQueue;
+
+        Optional<Job> job = jobRepository.findOneById(request.getId());
+        if(!job.isPresent()){
+            throw new NonExistentRepoEntityException("The job does not exist");
+        }
+        List<Measurement> measurements = measurementRepository.findAll();
+        if(!measurements.isEmpty()){
+            onQueue = true;
+            for (Measurement measurement: measurements) {
+                if(measurement.getJob().getId() == job.get().getId()){
+                    onQueue = false;
+                }
+            }
+        }else{
+            onQueue = true;
+        }
+        return new IsJobOnQueueResponse(onQueue);
+    }
+
+
+    /**
+     * getAllUserExperiments returns all experiments by a user
+     * @param request
+     * @return GetAllUserExperimentsResponse
+     * @throws NonExistentRepoEntityException
+     */
+    @Override
+    public GetAllUserExperimentsResponse getAllUserExperiments(GetAllUserExperimentsRequest request) throws NonExistentRepoEntityException{
+        List<Experiment> experiments = experimentRepository.findAllByUser(request.getUser());
+
+        if(experiments.isEmpty()){
+            throw new NonExistentRepoEntityException("There are no experiments uploaded for this user");
+        }
+        return new GetAllUserExperimentsResponse(experiments);
+
     }
 }
