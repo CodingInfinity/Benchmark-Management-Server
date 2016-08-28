@@ -92,5 +92,15 @@ public interface ExperimentManagement {
 
     GetAllUserExperimentsResponse getAllUserExperiments(GetAllUserExperimentsRequest request) throws NonExistentRepoEntityException;
 
+    /**
+     * Returns all experiments by a specified user
+     *
+     * @param request The request encapsulated as an {@link GetAllUserExperimentsResponse} object.
+     * @return Returns the result in an encapsulated {@link GetAllUserExperimentsRequest} object.
+     * @throws NonExistentRepoEntityException Thrown when an invalid repo entity is referenced
+     * in the request.
+     * @since 1.0.0
+     */
 
+    GetExperimentWeeklyReportResponse getExperimentWeeklyReport(GetExperimentWeeklyReportRequest request);
 }

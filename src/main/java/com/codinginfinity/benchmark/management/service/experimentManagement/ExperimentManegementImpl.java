@@ -25,6 +25,7 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -232,5 +233,65 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         }
         return new GetAllUserExperimentsResponse(experiments);
 
+    }
+
+    /**
+     * getExperimentWeeklyReport returns all experiments by a user
+     * @param request
+     * @return GetExperimentWeeklyReportResponse
+     */
+    @Override
+    public GetExperimentWeeklyReportResponse getExperimentWeeklyReport(GetExperimentWeeklyReportRequest request){
+        ZonedDateTime today = ZonedDateTime.now();
+
+        List<Integer> totalExperiments = new ArrayList<>();
+        List<Integer> jobsCompleted = new ArrayList<>();
+        List<Integer> totalWallTime = new ArrayList<>();
+        List<Integer> totalCPU = new ArrayList<>();
+        List<Integer> totalMemory = new ArrayList<>();
+
+        List<Experiment> experiments = experimentRepository.findAll();
+        List<Job> jobs = jobRepository.findAll();
+
+
+        for (int i = 0; i < 7; i++) {
+            totalExperiments.add(0);
+            totalMemory.add(0);
+            jobsCompleted.add(0);
+            totalWallTime.add(0);
+            totalCPU.add(0);
+        }
+        if(!experiments.isEmpty() && !jobs.isEmpty()){
+            for(Experiment experiment: experiments){
+                int weekdayDiff = (today.getDayOfYear() - experiment.getRequestedDate().getDayOfYear());
+                if(weekdayDiff  < 7){
+                    totalExperiments.set(weekdayDiff, totalExperiments.get(weekdayDiff)+1);
+                }
+            }
+
+            for(Job job: jobs){
+                int weekdayDiff = (today.getDayOfYear() - job.getExperiment().getRequestedDate().getDayOfYear());
+                if(weekdayDiff  < 7) {
+                    switch (job.getMeasurementType()) {
+                        case CPU:
+                            totalCPU.set(weekdayDiff, totalCPU.get(weekdayDiff) + 1);
+                            break;
+                        case MEM:
+                            totalMemory.set(weekdayDiff, totalMemory.get(weekdayDiff) + 1);
+                            break;
+                        case TIME:
+                            totalWallTime.set(weekdayDiff, totalWallTime.get(weekdayDiff) + 1);
+                            break;
+
+                    }
+                    if (!job.getMeasurements().isEmpty()) {
+                        jobsCompleted.set(weekdayDiff, jobsCompleted.get(weekdayDiff) + 1);
+                    }
+                }
+            }
+        }
+
+        GetExperimentWeeklyReportResponse response = new GetExperimentWeeklyReportResponse(today.getDayOfWeek(), totalExperiments, jobsCompleted, totalWallTime, totalCPU, totalMemory);
+        return response;
     }
 }

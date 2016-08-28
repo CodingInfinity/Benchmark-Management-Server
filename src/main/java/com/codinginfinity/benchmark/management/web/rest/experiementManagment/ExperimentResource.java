@@ -7,10 +7,7 @@ import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.management.security.SecurityUtils;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetAllUserExperimentsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.IsJobOnQueueRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
@@ -136,6 +133,22 @@ public class ExperimentResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> isJobOnQueue(@PathVariable Long id) throws NonExistentException {
         return new ResponseEntity<>(experimentManagement.isJobOnQueue(new IsJobOnQueueRequest(id)), HttpStatus.OK);
+    }
+
+    /**
+     * GET  /experiments/report/weekly : Gets the weeks data of uploaded experiments
+     * <p>
+     * Gets the weeks data of uploaded experiments
+     * </p>
+     *
+     * @return the ResponseEntity with status 200 (Okay) and with body the boolean of the job is still on the queue
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/experiments/report/weekly",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getWeeklyExperimentReport(){
+        return new ResponseEntity<>(experimentManagement.getExperimentWeeklyReport(new GetExperimentWeeklyReportRequest()), HttpStatus.OK);
     }
 
     /**
