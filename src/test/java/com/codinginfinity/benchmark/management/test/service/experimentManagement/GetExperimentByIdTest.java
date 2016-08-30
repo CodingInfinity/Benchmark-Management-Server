@@ -67,7 +67,7 @@ public class GetExperimentByIdTest {
     private Experiment mockExperiment() {
         Experiment experiment = new Experiment();
         experiment.setId(123L);
-         experiment.setLanguageType(LanguageType.JAVA);
+        experiment.setLanguageType(LanguageType.JAVA);
         experiment.setProbeInterval(60);
         experiment.setTimeout(180);
         return experiment;

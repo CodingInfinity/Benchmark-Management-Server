@@ -66,7 +66,7 @@ public interface ExperimentManagement {
      * @since 1.0.0
      */
 
-    GetAllExperimentsResponse getAllExperiments(GetAllExperimentsResponse request) throws NonExistentRepoEntityException;
+    GetAllExperimentsResponse getAllExperiments(GetAllExperimentsRequest request) throws NonExistentRepoEntityException;
 
     /**
      * Returns a boolean if the job is still on queue

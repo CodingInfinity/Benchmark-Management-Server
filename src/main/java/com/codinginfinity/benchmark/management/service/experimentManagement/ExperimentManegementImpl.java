@@ -65,10 +65,10 @@ public class ExperimentManegementImpl implements ExperimentManagement {
     private QueueMessageUtils queueMessageUtils;
 
     @Inject
-    JobRepository jobRepository;
+    private JobRepository jobRepository;
 
     @Inject
-    MeasurementRepository measurementRepository;
+    private MeasurementRepository measurementRepository;
 
     @EndpointInject(uri="direct:jobs")
     private ProducerTemplate producerTemplate;
@@ -180,7 +180,7 @@ public class ExperimentManegementImpl implements ExperimentManagement {
      * @throws NonExistentRepoEntityException
      */
     @Override
-    public GetAllExperimentsResponse getAllExperiments(GetAllExperimentsResponse request) throws NonExistentRepoEntityException{
+    public GetAllExperimentsResponse getAllExperiments(GetAllExperimentsRequest request) throws NonExistentRepoEntityException{
         List<Experiment> experiments = experimentRepository.findAll();
         if(experiments.isEmpty()){
             throw new NonExistentRepoEntityException("There are no Experiments");

@@ -7,10 +7,7 @@ import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.management.security.SecurityUtils;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.CreateExperimentRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetAllUserExperimentsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.IsJobOnQueueRequest;
+import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
 import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
@@ -84,7 +81,7 @@ public class ExperimentResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllExperiments() throws NonExistentException {
-        return new ResponseEntity<>(experimentManagement.getAllExperiments(new GetAllExperimentsResponse()), HttpStatus.OK);
+        return new ResponseEntity<>(experimentManagement.getAllExperiments(new GetAllExperimentsRequest()), HttpStatus.OK);
     }
 
     /**
