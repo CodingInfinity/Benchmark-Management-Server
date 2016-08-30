@@ -6,7 +6,6 @@ import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.test.service.repositoryManagement.GetRepoEntityByUsernameTest;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +23,17 @@ public class GetAlgorithmByUsernameTest extends GetRepoEntityByUsernameTest<Algo
 
     @Override
     protected Long getExpectedId() {
-        return new Long(12345);
+        return 12345L;
     }
 
     @Override
     protected String getExpectedName() {
-        return new String("Bubble Sort");
+        return "Bubble Sort";
     }
 
     @Override
     protected String getExpectedDescription() {
-        return new String("The standard Bubble Sort Algorithm");
+        return "The standard Bubble Sort Algorithm";
     }
 
     @Override
@@ -54,8 +53,8 @@ public class GetAlgorithmByUsernameTest extends GetRepoEntityByUsernameTest<Algo
     @Override
     protected List<AlgorithmCategory> getExpectedCategories() {
         List<AlgorithmCategory> categories = new ArrayList<AlgorithmCategory>();
-        AlgorithmCategory sorting = new AlgorithmCategory(new Long(1), "Sorting");
-        AlgorithmCategory ai = new AlgorithmCategory(new Long(2), "Artificial Intelligence");
+        AlgorithmCategory sorting = new AlgorithmCategory(1L, "Sorting");
+        AlgorithmCategory ai = new AlgorithmCategory(2L, "Artificial Intelligence");
         categories.add(sorting);
         categories.add(ai);
         return categories;

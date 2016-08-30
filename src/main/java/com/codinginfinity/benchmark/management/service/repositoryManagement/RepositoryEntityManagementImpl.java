@@ -358,6 +358,8 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
         R repository = getRepository();
         User user = userManagement.getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(request.getUsername())).getUser();
         List<T> entities = repository.findByUser(user);
+        if (entities.isEmpty())
+            throw getNonExistentRepoEntityException();
         return new GetRepoEntityByUsernameResponse<>(entities);
     }
 
