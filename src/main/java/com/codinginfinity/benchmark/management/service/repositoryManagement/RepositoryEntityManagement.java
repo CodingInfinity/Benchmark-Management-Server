@@ -101,7 +101,7 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
      * @return Returns the result in an encapsulated {@link GetRepoEntityByCategoryResponse} object.
      * @since 1.0.0
      */
-    GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request);
+    GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request) throws NonExistentRepoEntityException;
 
 
     /**

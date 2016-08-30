@@ -29,7 +29,7 @@ import javax.inject.Inject;
 @Service
 public class DatasetManagementImpl
         extends RepositoryEntityManagementImpl<DatasetCategory, Dataset,DatasetRepository, DatasetCategoryManagement>
-        implements DatasetManagement{
+        implements DatasetManagement {
     @Inject
     DatasetRepository datasetRepository;
 
@@ -55,4 +55,6 @@ public class DatasetManagementImpl
     protected Dataset newRepoEntity() {
         return new Dataset();
     }
+
+
 }

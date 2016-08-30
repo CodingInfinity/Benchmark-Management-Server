@@ -6,7 +6,6 @@ import com.codinginfinity.benchmark.management.domain.User;
 import com.codinginfinity.benchmark.management.repository.AlgorithmRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.test.service.repositoryManagement.GetRepoEntityByCategoryTest;
-import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * Created by andrew on 2016/06/25.
  */
-@Ignore
 public class GetAlgorithmByCategoryTest extends GetRepoEntityByCategoryTest<AlgorithmCategory, Algorithm,
         AlgorithmRepository,
         AlgorithmManagement> {
@@ -26,17 +24,17 @@ public class GetAlgorithmByCategoryTest extends GetRepoEntityByCategoryTest<Algo
 
     @Override
     protected Long getExpectedId() {
-        return new Long(12345);
+        return 12345L;
     }
 
     @Override
     protected String getExpectedName() {
-        return new String("Bubble Sort");
+        return "Bubble Sort";
     }
 
     @Override
     protected String getExpectedDescription() {
-        return new String("The standard Bubble Sort Algorithm");
+        return "The standard Bubble Sort Algorithm";
     }
 
     @Override

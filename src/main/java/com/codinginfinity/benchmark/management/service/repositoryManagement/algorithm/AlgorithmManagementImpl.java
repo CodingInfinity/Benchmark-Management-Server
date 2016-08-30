@@ -29,7 +29,7 @@ import javax.inject.Inject;
 @Service
 public class AlgorithmManagementImpl
     extends RepositoryEntityManagementImpl<AlgorithmCategory, Algorithm, AlgorithmRepository, AlgorithmCategoryManagement>
-    implements AlgorithmManagement{
+    implements AlgorithmManagement {
 
     @Inject
     AlgorithmRepository algorithmRepository;

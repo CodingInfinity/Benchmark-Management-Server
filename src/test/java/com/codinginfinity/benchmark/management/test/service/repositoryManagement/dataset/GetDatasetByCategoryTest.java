@@ -24,17 +24,17 @@ public class GetDatasetByCategoryTest extends GetRepoEntityByCategoryTest<Datase
 
     @Override
     protected Long getExpectedId() {
-        return new Long(12345);
+        return 12345L;
     }
 
     @Override
     protected String getExpectedName() {
-        return new String("Sorting");
+        return "Sorting";
     }
 
     @Override
     protected String getExpectedDescription() {
-        return new String("Numerical Data for Sorting");
+        return "Numerical Data for Sorting";
     }
 
     @Override
@@ -54,8 +54,8 @@ public class GetDatasetByCategoryTest extends GetRepoEntityByCategoryTest<Datase
     @Override
     protected List<DatasetCategory> getExpectedCategories() {
         List<DatasetCategory> categories = new ArrayList<DatasetCategory>();
-        DatasetCategory sorting = new DatasetCategory(new Long(1), "Sorting");
-        DatasetCategory ai = new DatasetCategory(new Long(2), "Artificial Intelligence");
+        DatasetCategory sorting = new DatasetCategory(1L, "Sorting");
+        DatasetCategory ai = new DatasetCategory(2L, "Artificial Intelligence");
         categories.add(sorting);
         categories.add(ai);
         return categories;

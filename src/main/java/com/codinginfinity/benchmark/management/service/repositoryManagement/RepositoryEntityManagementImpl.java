@@ -362,8 +362,12 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     }
 
     @Override
-    public GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request) {
-        return null;
+    public GetRepoEntityByCategoryResponse<T> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<C, T> request) throws NonExistentRepoEntityException {
+        R repository = getRepository();
+        List<T> entities = repository.findByCategory(request.getCategoryId());
+        if (entities.isEmpty())
+            throw getNonExistentRepoEntityException();
+        return new GetRepoEntityByCategoryResponse<>(entities);
     }
 
     @Override

@@ -12,5 +12,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetRepoEntityByCategoryRequest <C extends Category, T extends RepoEntity<C>> extends Request {
-    C category;
+
+    private static final long serialVersionUID = 6404982171023518407L;
+
+    Long categoryId;
 }

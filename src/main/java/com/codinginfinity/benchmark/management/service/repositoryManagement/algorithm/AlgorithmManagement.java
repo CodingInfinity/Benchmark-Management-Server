@@ -28,9 +28,10 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.resp
  * @version 1.0.0
  */
 
-public interface AlgorithmManagement extends RepositoryEntityManagement<AlgorithmCategory, Algorithm>{
+public interface AlgorithmManagement extends RepositoryEntityManagement<AlgorithmCategory, Algorithm> {
+
     @Override
-    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;;
+    AddRepoEntityResponse<Algorithm> addRepoEntity(AddRepoEntityRequest<AlgorithmCategory, Algorithm> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;
 
     @Override
     DeleteRepoEntityResponse<Algorithm> deleteRepoEntity(DeleteRepoEntityRequest<Algorithm> request) throws NonExistentRepoEntityException;
@@ -42,10 +43,10 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
     GetRepoEntityByIdResponse<Algorithm> getRepoEntityById(GetRepoEntityByIdRequest<Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
-    GetRepoEntityByUsernameResponse<Algorithm> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Algorithm> request)throws NonExistentException;
+    GetRepoEntityByUsernameResponse<Algorithm> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Algorithm> request) throws NonExistentException;
 
     @Override
-    GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory, Algorithm> request);
+    GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory, Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
     GetUnusedRepoEntitiesResponse<Algorithm> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<Algorithm> request);
@@ -54,5 +55,5 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
     GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request);
 
     @Override
-    GetAllRepoEntitiesResponse<Algorithm> getAllRepoEntities(GetAllRepoEntitiesRequest<Algorithm> request)throws NonExistentRepoEntityException;
+    GetAllRepoEntitiesResponse<Algorithm> getAllRepoEntities(GetAllRepoEntitiesRequest<Algorithm> request) throws NonExistentRepoEntityException;
 }

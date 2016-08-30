@@ -27,7 +27,8 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.resp
  * @author Andrew Broekman
  * @version 1.0.0
  */
-public interface DatasetManagement extends RepositoryEntityManagement<DatasetCategory, Dataset>{
+public interface DatasetManagement extends RepositoryEntityManagement<DatasetCategory, Dataset> {
+
     @Override
     AddRepoEntityResponse<Dataset> addRepoEntity(AddRepoEntityRequest<DatasetCategory, Dataset> request) throws NoFileUploadedException, NonExistentException, FileFormatNotSupportedException, CorruptedFileException;
 
@@ -41,10 +42,10 @@ public interface DatasetManagement extends RepositoryEntityManagement<DatasetCat
     GetRepoEntityByIdResponse<Dataset> getRepoEntityById(GetRepoEntityByIdRequest<Dataset> request) throws NonExistentRepoEntityException;
 
     @Override
-    GetRepoEntityByUsernameResponse<Dataset> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Dataset> request)throws NonExistentException;
+    GetRepoEntityByUsernameResponse<Dataset> getRepoEntityByUsername(GetRepoEntityByUsernameRequest<Dataset> request) throws NonExistentException;
 
     @Override
-    GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory, Dataset> request);
+    GetRepoEntityByCategoryResponse<Dataset> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<DatasetCategory, Dataset> request) throws NonExistentRepoEntityException;
 
     @Override
     GetUnusedRepoEntitiesResponse<Dataset> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<Dataset> request);
