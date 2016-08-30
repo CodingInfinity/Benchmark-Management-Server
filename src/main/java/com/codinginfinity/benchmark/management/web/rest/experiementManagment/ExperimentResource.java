@@ -164,7 +164,7 @@ public class ExperimentResource {
     @Secured(AuthoritiesConstants.USER)
     @RequestMapping(value = "/job/{id}/results",
             method = RequestMethod.GET)
-    public ResponseEntity<String> getCSVResults(@PathVariable Long id) throws ProcessingException {
+    public ResponseEntity<String> getCSVResults(@PathVariable Long id) throws ProcessingException, NonExistentException {
 
         StringBuilder filename = new StringBuilder()
                                     .append("job-")

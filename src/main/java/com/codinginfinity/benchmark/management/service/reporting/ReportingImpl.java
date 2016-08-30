@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.management.domain.Job;
 import com.codinginfinity.benchmark.management.domain.Measurement;
 import com.codinginfinity.benchmark.management.jackson.mixin.MeasurementFormat;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
 import com.codinginfinity.benchmark.management.service.reporting.request.DownloadResultsRequest;
 import com.codinginfinity.benchmark.management.service.reporting.response.DownloadResultsResponse;
@@ -37,10 +38,13 @@ public class ReportingImpl implements Reporting {
 
     @Override
     @Transactional(readOnly = true)
-    public DownloadResultsResponse downloadResults(DownloadResultsRequest request) throws ProcessingException {
+    public DownloadResultsResponse downloadResults(DownloadResultsRequest request) throws ProcessingException, NonExistentException {
 
         try {
             Job job = jobRepository.findOne(request.getJobId());
+
+            if (job == null)
+                throw new NonExistentException("Job doesn't exist");
 
             CsvMapper mapper = new CsvMapper();
             mapper.registerModule(javaTimeModule);

@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.service.reporting;
 
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
 import com.codinginfinity.benchmark.management.service.reporting.request.DownloadResultsRequest;
 import com.codinginfinity.benchmark.management.service.reporting.response.DownloadResultsResponse;
@@ -26,5 +27,5 @@ public interface Reporting {
      * @throws ProcessingException Thrown when the system could not convert results into a presentable format.
      * @since 1.0.0
      */
-    DownloadResultsResponse downloadResults(DownloadResultsRequest request) throws ProcessingException;
+    DownloadResultsResponse downloadResults(DownloadResultsRequest request) throws ProcessingException, NonExistentException;
 }
