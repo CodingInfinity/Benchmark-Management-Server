@@ -136,6 +136,22 @@ public class ExperimentResource {
     }
 
     /**
+     * GET  /experiments/report/weekly : Gets the weeks data of uploaded experiments
+     * <p>
+     * Gets the weeks data of uploaded experiments
+     * </p>
+     *
+     * @return the ResponseEntity with status 200 (Okay) and with body the boolean of the job is still on the queue
+     */
+    @Secured(AuthoritiesConstants.USER)
+    @RequestMapping(value = "/experiments/report/weekly",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getWeeklyExperimentReport(){
+        return new ResponseEntity<>(experimentManagement.getExperimentWeeklyReport(new GetExperimentWeeklyReportRequest()), HttpStatus.OK);
+    }
+
+    /**
      * GET  /job/{id}/results  : Get the results for job with {id}.
      * <p>
      * Returns the results for the job in a CSV format to be download by the user.
