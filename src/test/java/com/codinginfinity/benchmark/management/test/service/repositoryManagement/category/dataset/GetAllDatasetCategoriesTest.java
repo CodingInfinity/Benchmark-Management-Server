@@ -3,14 +3,14 @@ package com.codinginfinity.benchmark.management.test.service.repositoryManagemen
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
-import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.GetCategoryByIdTest;
+import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.GetAllCategoriesTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Created by andrew on 2016/08/30.
  */
 @SpringApplicationConfiguration(DatasetCategorySpringTest.class)
-public class GetDatasetCategoryByIdTest extends GetCategoryByIdTest<DatasetCategory,
+public class GetAllDatasetCategoriesTest extends GetAllCategoriesTest<DatasetCategory,
         DatasetCategoryRepository,
         DatasetCategoryManagement> {
 

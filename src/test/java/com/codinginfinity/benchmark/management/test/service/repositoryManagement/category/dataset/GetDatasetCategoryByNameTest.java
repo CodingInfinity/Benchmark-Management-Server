@@ -30,6 +30,11 @@ public class GetDatasetCategoryByNameTest extends GetCategoryByNameTest<DatasetC
     }
 
     @Override
+    protected DatasetCategory getNewCategory(Long id, String name) {
+        return new DatasetCategory(id, name);
+    }
+
+    @Override
     protected String getDuplicateCategoryExceptionMessage() {
         return "Duplicate dataset category";
     }

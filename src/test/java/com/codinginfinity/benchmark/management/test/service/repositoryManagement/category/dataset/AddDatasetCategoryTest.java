@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.dataset;
 
+import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
@@ -27,6 +28,11 @@ public class AddDatasetCategoryTest extends AddCategoryTest<DatasetCategory,
     @Override
     protected DatasetCategory getCategory() {
         return new DatasetCategory(getExpectedId(), getExpectedName());
+    }
+
+    @Override
+    protected DatasetCategory getNewCategory(Long id, String name) {
+        return new DatasetCategory(id, name);
     }
 
     @Override

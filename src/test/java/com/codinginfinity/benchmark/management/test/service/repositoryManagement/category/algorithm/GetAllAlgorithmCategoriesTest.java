@@ -3,14 +3,14 @@ package com.codinginfinity.benchmark.management.test.service.repositoryManagemen
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
-import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.AddCategoryTest;
+import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.GetAllCategoriesTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
 /**
- * Created by andrew on 2016/06/25.
+ * Created by andrew on 2016/08/30.
  */
 @SpringApplicationConfiguration(AlgorithmCategorySpringTest.class)
-public class AddAlgorithmCategoryTest extends AddCategoryTest<AlgorithmCategory,
+public class GetAllAlgorithmCategoriesTest extends GetAllCategoriesTest<AlgorithmCategory,
         AlgorithmCategoryRepository,
         AlgorithmCategoryManagement> {
 
@@ -36,11 +36,11 @@ public class AddAlgorithmCategoryTest extends AddCategoryTest<AlgorithmCategory,
 
     @Override
     protected String getDuplicateCategoryExceptionMessage() {
-        return "Duplicate algorithm category";
+        return "Duplicate dataset category";
     }
 
     @Override
     protected String getNonExistentCategoryExceptionMessage() {
-        return "Algorithm category doesn't exist";
+        return "Dataset category doesn't exist";
     }
 }

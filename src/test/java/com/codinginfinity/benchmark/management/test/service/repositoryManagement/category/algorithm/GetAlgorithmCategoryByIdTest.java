@@ -30,6 +30,11 @@ public class GetAlgorithmCategoryByIdTest extends GetCategoryByIdTest<AlgorithmC
     }
 
     @Override
+    protected AlgorithmCategory getNewCategory(Long id, String name) {
+        return new AlgorithmCategory(id, name);
+    }
+
+    @Override
     protected String getDuplicateCategoryExceptionMessage() {
         return "Duplicate algorithm category";
     }

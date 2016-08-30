@@ -19,6 +19,8 @@ public abstract class AbstractCategoryTest<T extends Category> {
 
     protected abstract T getCategory();
 
+    protected abstract T getNewCategory(Long id, String name);
+
     protected abstract String getDuplicateCategoryExceptionMessage();
 
     protected abstract String getNonExistentCategoryExceptionMessage();
