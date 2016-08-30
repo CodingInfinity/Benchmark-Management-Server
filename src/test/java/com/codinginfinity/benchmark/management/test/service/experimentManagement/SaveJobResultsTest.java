@@ -30,6 +30,7 @@ import java.util.List;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(ExperimentManagentConfiguration.class)
+@Ignore
 public class SaveJobResultsTest {
 
     @Inject
@@ -41,7 +42,7 @@ public class SaveJobResultsTest {
     @Inject
     private JobRepository jobRepository;
 
-    @Ignore
+    @Test
     public void saveJobResults() {
         Mockito.when(jobRepository.findOne(1L)).thenReturn(job());
         Mockito.when(jobRepository.save(Mockito.any(Job.class))).then(new Answer() {
