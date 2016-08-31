@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.management.service.experimentManagement.respones;
+package com.codinginfinity.benchmark.management.service.experimentManagement.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

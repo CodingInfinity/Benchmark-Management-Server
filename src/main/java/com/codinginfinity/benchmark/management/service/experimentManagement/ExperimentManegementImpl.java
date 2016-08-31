@@ -6,7 +6,7 @@ import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.repository.MeasurementRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.*;
+import com.codinginfinity.benchmark.management.service.experimentManagement.response.*;
 import com.codinginfinity.benchmark.management.service.experimentManagement.utils.QueueMessageUtils;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
@@ -18,16 +18,12 @@ import com.codinginfinity.benchmark.management.thrift.messages.JobSpecificationM
 import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
 import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
 import com.codinginfinity.benchmark.management.thrift.messages.ResultMessage;
-import jdk.nashorn.internal.runtime.regexp.joni.encoding.ObjPtr;
 import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.time.DayOfWeek;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +35,7 @@ import java.util.stream.Collectors;
  * A reference implementation of the {@link ExperimentManagement} service contract.
  *
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.request
- * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.response
  *
  * @author Fabio Loreggian
  * @author Andrew Broekman

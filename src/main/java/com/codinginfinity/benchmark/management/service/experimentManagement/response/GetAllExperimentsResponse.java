@@ -1,8 +1,10 @@
-package com.codinginfinity.benchmark.management.service.experimentManagement.respones;
+package com.codinginfinity.benchmark.management.service.experimentManagement.response;
 
 import com.codinginfinity.benchmark.management.domain.Experiment;
 import com.codinginfinity.benchmark.management.service.Response;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * Created by fabio on 2016/08/26.
@@ -11,7 +13,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetExperimentByIdResponse  extends Response{
-    Experiment experiment;
+@ToString
+public class GetAllExperimentsResponse extends Response {
+    List<Experiment> experiments;
 }
-

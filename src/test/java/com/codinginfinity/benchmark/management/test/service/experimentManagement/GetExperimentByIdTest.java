@@ -4,7 +4,7 @@ import com.codinginfinity.benchmark.management.domain.Experiment;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.GetExperimentByIdResponse;
+import com.codinginfinity.benchmark.management.service.experimentManagement.response.GetExperimentByIdResponse;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
 import org.junit.*;

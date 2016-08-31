@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.management.service.experimentManagement.respones;
+package com.codinginfinity.benchmark.management.service.experimentManagement.response;
 
 import com.codinginfinity.benchmark.management.domain.Experiment;
 import com.codinginfinity.benchmark.management.service.Response;
@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class GetAllExperimentsResponse extends Response {
+public class GetAllUserExperimentsResponse extends Response {
     List<Experiment> experiments;
 }

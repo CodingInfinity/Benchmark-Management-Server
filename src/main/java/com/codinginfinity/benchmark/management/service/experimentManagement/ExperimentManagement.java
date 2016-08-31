@@ -2,7 +2,7 @@ package com.codinginfinity.benchmark.management.service.experimentManagement;
 
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
-import com.codinginfinity.benchmark.management.service.experimentManagement.respones.*;
+import com.codinginfinity.benchmark.management.service.experimentManagement.response.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 
 
@@ -13,7 +13,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
  * A reference implementation is provided in the {@link ExperimentManegementImpl} class.
  *
  * @see com.codinginfinity.benchmark.management.service.experimentManagement.request
- * @see com.codinginfinity.benchmark.management.service.experimentManagement.respones
+ * @see com.codinginfinity.benchmark.management.service.experimentManagement.response
  *
  * @author Reinhardt Cromhout
  * @author Fabio Loreggian

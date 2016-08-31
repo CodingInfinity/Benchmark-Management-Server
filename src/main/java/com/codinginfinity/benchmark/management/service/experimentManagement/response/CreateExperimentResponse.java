@@ -1,4 +1,4 @@
-package com.codinginfinity.benchmark.management.service.experimentManagement.respones;
+package com.codinginfinity.benchmark.management.service.experimentManagement.response;
 
 /**
  * Created by reinhardt on 2016/08/11.
