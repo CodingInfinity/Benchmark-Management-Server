@@ -453,6 +453,7 @@
                         <exclude>**/http/**/*.class</exclude>
                         <exclude>**/**Exception.class</exclude>
                         <exclude>**/dto/**/*.class</exclude>
+                        <exclude>**/web/rest/**/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
