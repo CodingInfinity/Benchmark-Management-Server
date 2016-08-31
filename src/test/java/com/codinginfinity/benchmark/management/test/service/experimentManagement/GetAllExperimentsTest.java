@@ -53,7 +53,7 @@ public class GetAllExperimentsTest {
     public void nonExistantExperimentTest() throws NonExistentRepoEntityException {
         Mockito.when(experimentRepository.findOneById(Mockito.anyLong())).thenReturn(Optional.empty());
         thrown.expect(NonExistentRepoEntityException.class);
-        experimentManagement.getExperimentById(new GetExperimentByIdRequest(1L));
+        experimentManagement.getAllExperiments(new GetAllExperimentsRequest());
     }
 
     @Test
