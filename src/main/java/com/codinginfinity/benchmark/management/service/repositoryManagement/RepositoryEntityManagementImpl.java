@@ -373,16 +373,6 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
     }
 
     @Override
-    public GetUnusedRepoEntitiesResponse<T> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<T> request) {
-        return null;
-    }
-
-    @Override
-    public GetUnusedRepoEntityByUsernameResponse<T> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<T> request) {
-        return null;
-    }
-
-    @Override
     @Secured(AuthoritiesConstants.USER)
     public GetAllRepoEntitiesResponse<T> getAllRepoEntities(GetAllRepoEntitiesRequest<T> request)throws NonExistentRepoEntityException{
         R repository = getRepository();

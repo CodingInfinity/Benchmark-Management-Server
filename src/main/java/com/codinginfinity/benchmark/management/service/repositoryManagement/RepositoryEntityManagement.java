@@ -105,26 +105,6 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
 
 
     /**
-     * Gets and returns the RepoEntitys that have not been used in any system
-     * benchmarking jobs yet.
-     *
-     * @param request The request encapsulated as an {@link GetUnusedRepoEntitiesRequest} object.
-     * @return Returns the result in an encapsulated {@link GetUnusedRepoEntitiesResponse} object.
-     * @since 1.0.0
-     */
-    GetUnusedRepoEntitiesResponse<T> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<T> request);
-
-    /**
-     * Gets and returns the RepoEntitys that have not been used in any system
-     * benchmarking jobs yet and that belong to s specific user.
-     *
-     * @param request The request encapsulated as an {@link GetUnusedRepoEntityByUsernameRequest} object.
-     * @return Returns the result in an encapsulated {@link GetUnusedRepoEntityByUsernameResponse} object.
-     * @since 1.0.0
-     */
-    GetUnusedRepoEntityByUsernameResponse<T> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<T> request);
-
-    /**
      * Gets and returns all the RepoEntities that belong to a specific user.
      *
      * @param request The request encapsulated as an {@link GetAllRepoEntitiesRequest} object.

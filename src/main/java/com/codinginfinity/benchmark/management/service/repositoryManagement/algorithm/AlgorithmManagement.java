@@ -49,11 +49,5 @@ public interface AlgorithmManagement extends RepositoryEntityManagement<Algorith
     GetRepoEntityByCategoryResponse<Algorithm> getRepoEntityByCategory(GetRepoEntityByCategoryRequest<AlgorithmCategory, Algorithm> request) throws NonExistentRepoEntityException;
 
     @Override
-    GetUnusedRepoEntitiesResponse<Algorithm> getUnusedRepoEntities(GetUnusedRepoEntitiesRequest<Algorithm> request);
-
-    @Override
-    GetUnusedRepoEntityByUsernameResponse<Algorithm> getUnusedRepoEntityByUsername(GetUnusedRepoEntityByUsernameRequest<Algorithm> request);
-
-    @Override
     GetAllRepoEntitiesResponse<Algorithm> getAllRepoEntities(GetAllRepoEntitiesRequest<Algorithm> request) throws NonExistentRepoEntityException;
 }
