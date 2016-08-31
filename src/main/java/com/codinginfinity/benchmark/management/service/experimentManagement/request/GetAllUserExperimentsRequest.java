@@ -13,5 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class GetAllUserExperimentsRequest extends Request{
+
+    private static final long serialVersionUID = 568932794378481460L;
+
     User user;
 }
