@@ -213,7 +213,6 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
     public UpdateUserResponse updateUser(UpdateUserRequest request) throws NonExistentException, EmailAlreadyExistsException {
         Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
         if (!user.isPresent()) {
@@ -245,7 +244,6 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
     public ChangePasswordResponse changePassword(ChangePasswordRequest request) throws NonExistentException {
         Optional<User> user = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername());
         if (!user.isPresent()) {
@@ -290,7 +288,6 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    //ToDo: Find a way to mock static methods under Mockito to be able to write unit tests for this method.
     public GetUserWithAuthoritiesResponse getUserWithAuthorities(GetUserWithAuthoritiesRequest request) throws NonExistentException {
         User user = getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(SecurityUtils.getCurrentUsername())).getUser();
         return new GetUserWithAuthoritiesResponse(user);
