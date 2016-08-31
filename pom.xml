@@ -443,16 +443,17 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/**Exception.class</exclude>
+                        <exclude>**/aop/**/*.class</exclude>
                         <exclude>**/config/**/*.class</exclude>
                         <exclude>**/domain/**/*.class</exclude>
+                        <exclude>**/dto/**/*.class</exclude>
+                        <exclude>**/http/**/*.class</exclude>
+                        <exclude>**/jackson/mixin/**/*.class</exclude>
                         <exclude>**/service/**/exception/*.class</exclude>
                         <exclude>**/service/**/response/*.class</exclude>
                         <exclude>**/service/**/request/*.class</exclude>
                         <exclude>**/thrift/**/*.class</exclude>
-                        <exclude>**/jackson/mixin/**/*.class</exclude>
-                        <exclude>**/http/**/*.class</exclude>
-                        <exclude>**/**Exception.class</exclude>
-                        <exclude>**/dto/**/*.class</exclude>
                         <exclude>**/web/rest/**/*.class</exclude>
                     </excludes>
                 </configuration>
