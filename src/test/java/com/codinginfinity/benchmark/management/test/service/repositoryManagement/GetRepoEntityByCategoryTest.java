@@ -20,7 +20,6 @@ import java.util.List;
 /**
  * Created by reinhardt on 2016/06/28.
  */
-@Ignore
 public abstract class GetRepoEntityByCategoryTest <C extends Category, T extends RepoEntity<C>,
         R extends RepoEntityRepository<T>,
         M extends RepositoryEntityManagement<C,T>> extends AbstractRepositoryManagementTest<C,T> {
@@ -61,6 +60,4 @@ public abstract class GetRepoEntityByCategoryTest <C extends Category, T extends
         Assert.assertEquals(entityIn.getCategories().size(), entityOut.getCategories().size());
         Assert.assertTrue(entityOut.getCategories().contains(getExpectedCategories().get(0)));
     }
-
-
 }
