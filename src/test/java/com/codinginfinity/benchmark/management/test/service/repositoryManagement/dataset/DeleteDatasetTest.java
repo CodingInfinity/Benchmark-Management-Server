@@ -52,8 +52,8 @@ public class DeleteDatasetTest extends DeleteRepoEntityTest<DatasetCategory, Dat
     @Override
     protected List<DatasetCategory> getExpectedCategories() {
         List<DatasetCategory> categories = new ArrayList<DatasetCategory>();
-        DatasetCategory sorting = new DatasetCategory(new Long(1), "Sorting");
-        DatasetCategory ai = new DatasetCategory(new Long(2), "Artificial Intelligence");
+        DatasetCategory sorting = new DatasetCategory(1L, "Sorting");
+        DatasetCategory ai = new DatasetCategory(2L, "Artificial Intelligence");
         categories.add(sorting);
         categories.add(ai);
         return categories;
