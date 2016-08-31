@@ -2,9 +2,9 @@ package com.codinginfinity.benchmark.management.test.service.experimentManagemen
 
 import com.codinginfinity.benchmark.management.domain.Experiment;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
+import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.ExperimentManagement;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetAllExperimentsRequest;
-import com.codinginfinity.benchmark.management.service.experimentManagement.request.GetExperimentByIdRequest;
 import com.codinginfinity.benchmark.management.service.experimentManagement.response.GetAllExperimentsResponse;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
@@ -50,8 +50,8 @@ public class GetAllExperimentsTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void nonExistantExperimentTest() throws NonExistentRepoEntityException {
-        Mockito.when(experimentRepository.findOneById(Mockito.anyLong())).thenReturn(Optional.empty());
+    public void nonExistentExperimentTest() throws NonExistentRepoEntityException {
+        Mockito.when(experimentRepository.findAll()).thenReturn(new ArrayList<>());
         thrown.expect(NonExistentRepoEntityException.class);
         experimentManagement.getAllExperiments(new GetAllExperimentsRequest());
     }
