@@ -14,11 +14,9 @@ import com.codinginfinity.benchmark.management.service.userManagement.request.De
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesByLoginRequest;
 import com.codinginfinity.benchmark.management.service.userManagement.request.UpdateUserRequest;
 import com.codinginfinity.benchmark.management.web.rest.dto.UserDTO;
-import com.codinginfinity.benchmark.management.web.rest.utils.PaginationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -113,8 +111,7 @@ public class UserResource {
         List<UserDTO> managedUserDTOs = page.getContent().stream()
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
-        HttpHeaders headers = PaginationUtils.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+        return new ResponseEntity<>(managedUserDTOs, HttpStatus.OK);
     }
 
     /**
