@@ -22,6 +22,7 @@ import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
@@ -192,6 +193,7 @@ public class ExperimentManegementImpl implements ExperimentManagement {
      * @throws NonExistentRepoEntityException
      */
     @Override
+    @Transactional(readOnly = true)
     public IsJobOnQueueResponse isJobOnQueue(IsJobOnQueueRequest request) throws NonExistentRepoEntityException{
         boolean onQueue;
 
@@ -199,7 +201,7 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         if(!job.isPresent()){
             throw new NonExistentRepoEntityException("The job does not exist");
         }
-        List<Measurement> measurements = measurementRepository.findAll();
+        /*List<Measurement> measurements = measurementRepository.findAll();
         if(!measurements.isEmpty()){
             onQueue = true;
             for (Measurement measurement: measurements) {
@@ -209,8 +211,8 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             }
         }else{
             onQueue = true;
-        }
-        return new IsJobOnQueueResponse(onQueue);
+        }*/
+        return new IsJobOnQueueResponse(job.get().getMeasurements() == null || job.get().getMeasurements().isEmpty());
     }
 
 
