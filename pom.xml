@@ -449,6 +449,10 @@
                         <exclude>**/service/**/response/*.class</exclude>
                         <exclude>**/service/**/request/*.class</exclude>
                         <exclude>**/thrift/**/*.class</exclude>
+                        <exclude>**/jackson/mixin/**/*.class</exclude>
+                        <exclude>**/http/**/*.class</exclude>
+                        <exclude>**/**Exception.class</exclude>
+                        <exclude>**/dto/**/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
