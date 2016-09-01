@@ -11,6 +11,8 @@ import com.codinginfinity.benchmark.management.service.experimentManagement.requ
 import com.codinginfinity.benchmark.management.service.reporting.Reporting;
 import com.codinginfinity.benchmark.management.service.reporting.exception.ProcessingException;
 import com.codinginfinity.benchmark.management.service.reporting.request.DownloadResultsRequest;
+import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
+import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,8 +36,6 @@ import javax.inject.Inject;
 @RequestMapping("/api")
 public class ExperimentResource {
 
-    private final MediaType TEXT_CSV = new MediaType("text", "csv");
-
     @Inject
     private ExperimentManagement experimentManagement;
 
@@ -43,10 +43,7 @@ public class ExperimentResource {
     private Reporting reporting;
 
     @Inject
-    private JobRepository jobRepository;
-
-    @Inject
-    private UserRepository userRepository;
+    private UserManagement userManagement;
 
     /**
      * POST  /experiment  : Creates a new experiment.
@@ -96,7 +93,7 @@ public class ExperimentResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllCurrentUserExperiments() throws NonExistentException {
-        User currentUser = userRepository.findOneByUsername(SecurityUtils.getCurrentUsername()).get();
+        User currentUser = userManagement.getUserWithAuthorities(new GetUserWithAuthoritiesRequest()).getUser();
         return new ResponseEntity<>(experimentManagement.getAllUserExperiments(new GetAllUserExperimentsRequest(currentUser)), HttpStatus.OK);
     }
 
@@ -165,17 +162,14 @@ public class ExperimentResource {
             method = RequestMethod.GET)
     public ResponseEntity<String> getCSVResults(@PathVariable Long id) throws ProcessingException, NonExistentException {
 
-        StringBuilder filename = new StringBuilder()
-                                    .append("job-")
-                                    .append(id)
-                                    .append("-results.csv");
+        String filename = "job-" + id + "-results.csv";
 
         String results = reporting.downloadResults(new DownloadResultsRequest(id)).getResults();
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setContentType(com.codinginfinity.benchmark.management.http.MediaType.TEXT_CSV);
         responseHeaders.setContentLength(results.length());
-        responseHeaders.setContentDispositionFormData("attachment", filename.toString());
+        responseHeaders.setContentDispositionFormData("attachment", filename);
 
         return new ResponseEntity<>(results, responseHeaders, HttpStatus.OK);
     }
