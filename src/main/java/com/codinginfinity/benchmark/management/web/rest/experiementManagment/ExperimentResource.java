@@ -55,7 +55,7 @@ public class ExperimentResource {
      * @param request the HTTP request with the json representation of the parameters to be used to create the experiment
      * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/experiment",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -72,7 +72,7 @@ public class ExperimentResource {
      *
      * @return the ResponseEntity with status 200 (Okay) and with body of all the experiments
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/experiments",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -88,7 +88,7 @@ public class ExperimentResource {
      *
      * @return the ResponseEntity with status 200 (Okay) and with body of all the experiments
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/experiments/user",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -106,7 +106,7 @@ public class ExperimentResource {
      * @param id Id of the experiment
      * @return the ResponseEntity with status 200 (Okay) and with body the new experiment id
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/experiment/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,7 +123,7 @@ public class ExperimentResource {
      * @param id Id of the job
      * @return the ResponseEntity with status 200 (Okay) and with body the boolean of the job is still on the queue
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/job/onQueue/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -139,7 +139,7 @@ public class ExperimentResource {
      *
      * @return the ResponseEntity with status 200 (Okay) and with body the boolean of the job is still on the queue
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/experiments/report/weekly",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -157,7 +157,7 @@ public class ExperimentResource {
      * @param id The id of the job whose results we want to obtain
      * @return ResponseEntity with status 200 (OK), with a String body containing the results in CSV format
      */
-    @Secured(AuthoritiesConstants.USER)
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
     @RequestMapping(value = "/job/{id}/results",
             method = RequestMethod.GET)
     public ResponseEntity<String> getCSVResults(@PathVariable Long id) throws ProcessingException, NonExistentException {

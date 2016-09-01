@@ -12,7 +12,9 @@ import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
 public enum LanguageType implements TEnum {
-  JAVA(0);
+  JAVA(0),
+  CPP(1),
+  PYTHON(2);
 
   private final int value;
 
@@ -35,6 +37,10 @@ public enum LanguageType implements TEnum {
     switch (value) {
       case 0:
         return JAVA;
+      case 1:
+        return CPP;
+      case 2:
+        return PYTHON;
       default:
         return null;
     }
