@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.config;
 
+import com.codinginfinity.benchmark.management.thrift.messages.ThriftHeartbeatMessageDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftJobSpecificationMessageDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftResultMessageDataFormat;
@@ -90,5 +91,10 @@ public class MessagingConfiguration {
     @Bean
     public ThriftResultMessageDataFormat thriftResultMessageDataFormat(){
         return new ThriftResultMessageDataFormat();
+    }
+
+    @Bean
+    public ThriftHeartbeatMessageDataFormat thriftHeartbeatMessageDataFormat() {
+        return new ThriftHeartbeatMessageDataFormat();
     }
 }

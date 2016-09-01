@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.config;
 
+import com.codinginfinity.benchmark.management.thrift.messages.ThriftHeartbeatMessageDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftJobSpecificationMessageDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurementDataFormat;
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftResultMessageDataFormat;
@@ -33,10 +34,14 @@ public class RouterConfiguration extends RouteBuilder {
     @Inject
     private ThriftResultMessageDataFormat thriftResultMessageDataFormat;
 
+    @Inject
+    private ThriftHeartbeatMessageDataFormat thriftHeartbeatMessageDataFormat;
+
     @Override
     public void configure() throws Exception {
         camelContext.addComponent("activemq", activeMQComponent("tcp://localhost:61616"));
         from("direct:jobs").marshal(thriftJobSpecificationMessageDataFormat).to("activemq:jobs");
         from("activemq:results").unmarshal(thriftResultMessageDataFormat).to("direct:results");
+        from("activemq:heartbeat").unmarshal(thriftHeartbeatMessageDataFormat).to("direct:heartbeat");
     }
 }
