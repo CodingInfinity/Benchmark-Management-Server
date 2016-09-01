@@ -53,7 +53,6 @@ public interface ExperimentManagement {
      * in the request.
      * @since 1.0.0
      */
-
     GetExperimentByIdResponse getExperimentById(GetExperimentByIdRequest request) throws NonExistentRepoEntityException;
 
     /**
@@ -65,7 +64,6 @@ public interface ExperimentManagement {
      * in the request.
      * @since 1.0.0
      */
-
     GetAllExperimentsResponse getAllExperiments(GetAllExperimentsRequest request) throws NonExistentRepoEntityException;
 
     /**
@@ -77,7 +75,6 @@ public interface ExperimentManagement {
      * in the request.
      * @since 1.0.0
      */
-
     IsJobOnQueueResponse isJobOnQueue(IsJobOnQueueRequest request) throws NonExistentRepoEntityException;
 
     /**
@@ -89,7 +86,6 @@ public interface ExperimentManagement {
      * in the request.
      * @since 1.0.0
      */
-
     GetAllUserExperimentsResponse getAllUserExperiments(GetAllUserExperimentsRequest request) throws NonExistentRepoEntityException;
 
     /**
@@ -101,6 +97,33 @@ public interface ExperimentManagement {
      * in the request.
      * @since 1.0.0
      */
-
     GetExperimentWeeklyReportResponse getExperimentWeeklyReport(GetExperimentWeeklyReportRequest request);
+
+    /**
+     * Register a node heartbeat with the management system's monitoring system.
+     * @param request The request encapsulated as an {@link RegisterNodeHeartbeatRequest} object.
+     * @return Returns the result in an encapsulated {@link RegisterNodeHeartbeatResponse} object.
+     */
+    RegisterNodeHeartbeatResponse registerNodeHeartbeat(RegisterNodeHeartbeatRequest request);
+
+    /**
+     * Remove a node from the management system's monitoring system.
+     * @param request The request encapsulated as an {@link RemoveNodeRequest} object.
+     * @return Returns the result in an encapsulated {@link RemoveNodeResponse} object.
+     */
+    RemoveNodeResponse removeNode(RemoveNodeRequest request) throws NonExistentException;
+
+    /**
+     * Get the status of a node by it's ID.
+     * @param request The request encapsulated as an {@link GetNodeStatusByIdRequest} object.
+     * @return Returns the result in an encapsulated {@link GetNodeStatusByIdResponse} object.
+     */
+    GetNodeStatusByIdResponse getNodeStatusById(GetNodeStatusByIdRequest request) throws NonExistentException;
+
+    /**
+     * Returns a summary of all nodes registered with the monitoring system.
+     * @param request The request encapsulated as an {@link GetNodesSummaryRequest} object.
+     * @return Returns the result in an encapsulated {@link GetNodesSummaryResponse} object.
+     */
+    GetNodesSummaryResponse getNodesSummary(GetNodesSummaryRequest request);
 }

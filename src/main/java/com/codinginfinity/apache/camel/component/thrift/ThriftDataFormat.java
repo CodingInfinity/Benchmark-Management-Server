@@ -56,12 +56,12 @@ public abstract class ThriftDataFormat<T extends TBase<?,?>, F extends TFieldIdE
          */
         T helper = create();
         //TODO Solve actual problem on c++ qpid
-        if(helper instanceof ResultMessage){
+
             String inputString = IOUtils.toString(inputStream);
             int index = inputString.indexOf("{\"");
             inputString = inputString.substring(index);
             inputStream = new ByteArrayInputStream(inputString.getBytes());
-        }
+
 
         TTransport transport = new TIOStreamTransport(inputStream);
         TProtocol protocol = factory.getProtocol(transport);

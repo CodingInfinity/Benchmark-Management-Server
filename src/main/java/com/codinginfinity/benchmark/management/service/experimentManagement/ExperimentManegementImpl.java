@@ -1,12 +1,18 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
-import com.codinginfinity.benchmark.management.domain.*;
+import com.codinginfinity.benchmark.management.domain.Algorithm;
+import com.codinginfinity.benchmark.management.domain.Dataset;
+import com.codinginfinity.benchmark.management.domain.Experiment;
+import com.codinginfinity.benchmark.management.domain.Job;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.repository.MeasurementRepository;
 import com.codinginfinity.benchmark.management.service.exception.NonExistentException;
 import com.codinginfinity.benchmark.management.service.experimentManagement.request.*;
 import com.codinginfinity.benchmark.management.service.experimentManagement.response.*;
+import com.codinginfinity.benchmark.management.service.experimentManagement.utils.NodePool;
+import com.codinginfinity.benchmark.management.service.experimentManagement.utils.NodeState;
+import com.codinginfinity.benchmark.management.service.experimentManagement.utils.NodeSummary;
 import com.codinginfinity.benchmark.management.service.experimentManagement.utils.QueueMessageUtils;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
@@ -14,10 +20,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityByIdRequest;
 import com.codinginfinity.benchmark.management.service.userManagement.UserManagement;
 import com.codinginfinity.benchmark.management.service.userManagement.request.GetUserWithAuthoritiesRequest;
-import com.codinginfinity.benchmark.management.thrift.messages.JobSpecificationMessage;
-import com.codinginfinity.benchmark.management.thrift.messages.LanguageType;
-import com.codinginfinity.benchmark.management.thrift.messages.MeasurementType;
-import com.codinginfinity.benchmark.management.thrift.messages.ResultMessage;
+import com.codinginfinity.benchmark.management.thrift.messages.*;
 import org.apache.camel.Consume;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -25,6 +28,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +73,8 @@ public class ExperimentManegementImpl implements ExperimentManagement {
     @Inject
     private MeasurementRepository measurementRepository;
 
+    private NodePool nodePool = new NodePool();
+
     @EndpointInject(uri="direct:jobs")
     private ProducerTemplate producerTemplate;
 
@@ -75,6 +82,12 @@ public class ExperimentManegementImpl implements ExperimentManagement {
     public void fetchResultsFromQueue(ResultMessage resultMessage){
         SaveJobResultsRequest saveJobResultsRequest = new SaveJobResultsRequest(resultMessage);
         saveJobResults(saveJobResultsRequest);
+    }
+
+    @Consume(uri="direct:heartbeat")
+    public void fetchHeartbeatFromQueue(Heartbeat heartbeatMessage){
+        RegisterNodeHeartbeatRequest request = new RegisterNodeHeartbeatRequest(heartbeatMessage);
+        registerNodeHeartbeat(request);
     }
 
     @Override
@@ -289,7 +302,54 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             }
         }
 
-        GetExperimentWeeklyReportResponse response = new GetExperimentWeeklyReportResponse(today.getDayOfWeek(), totalExperiments, jobsCompleted, totalWallTime, totalCPU, totalMemory);
-        return response;
+        return new GetExperimentWeeklyReportResponse(today.getDayOfWeek(), totalExperiments, jobsCompleted, totalWallTime, totalCPU, totalMemory);
+    }
+
+    @Override
+    public RegisterNodeHeartbeatResponse registerNodeHeartbeat(RegisterNodeHeartbeatRequest request) {
+        this.nodePool.registerNode(request.getHeartbeat());
+        return new RegisterNodeHeartbeatResponse();
+    }
+
+    @Override
+    public RemoveNodeResponse removeNode(RemoveNodeRequest request) throws NonExistentException {
+        if (!this.nodePool.nodeRegistered(request.getId())) {
+            throw new NonExistentException("Node not registered with monitoring system");
+        }
+
+        this.nodePool.deregisterNode(request.getId());
+        return new RemoveNodeResponse();
+    }
+
+    public GetNodeStatusByIdResponse getNodeStatusById(GetNodeStatusByIdRequest request) throws NonExistentException {
+        if (!this.nodePool.nodeRegistered(request.getId())) {
+            throw new NonExistentException("Node not registered with monitoring system");
+        }
+
+        return new GetNodeStatusByIdResponse(this.nodePool.getNode(request.getId()));
+    }
+
+    public GetNodesSummaryResponse getNodesSummary(GetNodesSummaryRequest request) {
+        ZonedDateTime now = ZonedDateTime.now();
+        List<NodeSummary> overview = this.nodePool.getNodes().stream().map(node -> {
+            NodeSummary summary = new NodeSummary();
+            if (node.getCurrent() == -1 || node.getHeartbeat() == -1) {
+                summary.setState(NodeState.OFFLINE);
+            } else {
+                ZonedDateTime deadTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(node.getCurrent() + 2 * node.getHeartbeat()), ZoneId.of("GMT"));
+                if (deadTime.isAfter(now)) {
+                    if (node.isBusy()) {
+                        summary.setState(NodeState.BUSY);
+                    } else {
+                        summary.setState(NodeState.ONLINE);
+                    }
+                } else {
+                    summary.setState(NodeState.DEAD);
+                }
+            }
+            summary.setId(node.getId());
+            return summary;
+        }).collect(Collectors.toList());
+        return new GetNodesSummaryResponse(overview);
     }
 }
