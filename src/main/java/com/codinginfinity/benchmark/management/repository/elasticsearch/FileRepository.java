@@ -4,6 +4,8 @@ import com.codinginfinity.benchmark.management.domain.elasticsearch.file.File;
 import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Repository definition for the {@link File} object.
  *
@@ -15,4 +17,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FileRepository extends ElasticsearchCrudRepository<File, String> {
+    Optional<File> findOneById(String id);
 }

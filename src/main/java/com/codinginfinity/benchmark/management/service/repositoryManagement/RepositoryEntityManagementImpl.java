@@ -383,4 +383,15 @@ public abstract class RepositoryEntityManagementImpl<C extends Category,
         }
         return new GetAllRepoEntitiesResponse<>(entities);
     }
+
+    @Override
+    @Secured(AuthoritiesConstants.USER)
+    public GetRepoEntityContentResponse getRepoEntityContent(GetRepoEntityContentRequest request) throws NonExistentRepoEntityException{
+        Optional<File> repoEntityFile = fileRepository.findOneById(request.getId());
+        if(!repoEntityFile.isPresent()){
+            throw new NonExistentRepoEntityException("File does not exist");
+        }
+        String contents = new String(repoEntityFile.get().getContents());
+        return new GetRepoEntityContentResponse(contents);
+    }
 }

@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.web.rest.repositoryManagement;
 import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.domain.RepoEntity;
 import com.codinginfinity.benchmark.management.repository.RepoEntityRepository;
+import com.codinginfinity.benchmark.management.repository.elasticsearch.FileRepository;
 import com.codinginfinity.benchmark.management.security.SecurityUtils;
 import com.codinginfinity.benchmark.management.service.exception.CorruptedFileException;
 import com.codinginfinity.benchmark.management.service.exception.FileFormatNotSupportedException;
@@ -13,10 +14,12 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.exce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.*;
 import com.codinginfinity.benchmark.management.web.rest.dto.RepoEntityDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,6 +45,7 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
     protected abstract R getRepository();
 
     protected abstract M getRepositoryEntityManagement();
+
 
     public ResponseEntity<?> addRepoEntity(final String name,
                                            final String description,
@@ -80,5 +84,9 @@ public abstract class RepositoryEntityResource <C extends Category, T extends Re
     {
         List<T> entities = getRepositoryEntityManagement().getAllRepoEntities(new GetAllRepoEntitiesRequest<T>()).getEntities();
         return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getRepoEntityContents(String id)throws NonExistentRepoEntityException{
+        return new ResponseEntity<>(getRepositoryEntityManagement().getRepoEntityContent(new GetRepoEntityContentRequest(id)), HttpStatus.OK);
     }
 }

@@ -112,4 +112,13 @@ public interface RepositoryEntityManagement<C extends Category, T extends RepoEn
      * @since 1.0.0
      */
     GetAllRepoEntitiesResponse<T> getAllRepoEntities(GetAllRepoEntitiesRequest<T> request) throws NonExistentRepoEntityException;
+
+    /**
+     * Gets and returns the contents of a RepoEntity.
+     *
+     * @param request The request encapsulated as an {@link GetRepoEntityContentRequest} object.
+     * @return Returns the result in an encapsulated {@link GetRepoEntityContentResponse} object.
+     * @since 1.0.0
+     */
+    GetRepoEntityContentResponse getRepoEntityContent(GetRepoEntityContentRequest request) throws NonExistentRepoEntityException;
 }
