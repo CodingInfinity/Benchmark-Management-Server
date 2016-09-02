@@ -44,7 +44,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
     private AlgorithmCategoryManagement categoryManagement;
 
     @RequestMapping(value = "/algorithm",
-            method = RequestMethod.PUT,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
@@ -61,7 +61,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
     }
 
     @RequestMapping(value = "/algorithm",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override

@@ -44,7 +44,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
     private DatasetCategoryManagement categoryManagement;
 
     @RequestMapping(value = "/dataset",
-            method = RequestMethod.PUT,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
@@ -61,7 +61,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
     }
 
     @RequestMapping(value = "/dataset",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
