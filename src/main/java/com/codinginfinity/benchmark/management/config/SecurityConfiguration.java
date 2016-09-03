@@ -43,6 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()

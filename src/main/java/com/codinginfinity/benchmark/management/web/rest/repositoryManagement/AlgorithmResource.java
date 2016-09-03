@@ -10,6 +10,7 @@ import com.codinginfinity.benchmark.management.service.exception.NonExistentExce
 import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.exception.NonExistentRepoEntityException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.DeleteRepoEntityRequest;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.request.GetRepoEntityContentRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.request.UpdateRepoEntityMetadataRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -114,5 +115,13 @@ public class AlgorithmResource extends RepositoryEntityResource<AlgorithmCategor
     @Override
     public ResponseEntity<?> getAllRepoEntities()throws NonExistentRepoEntityException{
         return super.getAllRepoEntities();
+    }
+
+    @RequestMapping(value = "/algorithm/content/{id:.+}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Override
+    public ResponseEntity<?> getRepoEntityContents(@PathVariable(value = "id") String id)throws NonExistentRepoEntityException{
+        return super.getRepoEntityContents(id);
     }
 }

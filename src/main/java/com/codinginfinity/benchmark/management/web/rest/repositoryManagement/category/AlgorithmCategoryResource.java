@@ -11,10 +11,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -48,7 +45,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> addCategory(AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
+    public ResponseEntity<?> addCategory(@RequestBody AddCategoryRequest<AlgorithmCategory> request) throws DuplicateCategoryException {
         return super.addCategory(request);
     }
 
@@ -56,7 +53,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> deleteCategory(DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> deleteCategory(@RequestBody DeleteCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
         return super.deleteCategory(request);
     }
 
@@ -65,7 +62,7 @@ public class AlgorithmCategoryResource extends CategoryResource<AlgorithmCategor
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> updateCategory(UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> updateCategory(@RequestBody UpdateCategoryRequest<AlgorithmCategory> request) throws NonExistentCategoryException {
         return super.updateCategory(request);
     }
 

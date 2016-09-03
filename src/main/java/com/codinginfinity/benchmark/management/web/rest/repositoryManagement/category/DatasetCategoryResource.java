@@ -11,10 +11,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.UpdateCategoryRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -48,7 +45,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> addCategory(AddCategoryRequest<DatasetCategory> request) throws DuplicateCategoryException {
+    public ResponseEntity<?> addCategory(@RequestBody AddCategoryRequest<DatasetCategory> request) throws DuplicateCategoryException {
         return super.addCategory(request);
     }
 
@@ -56,7 +53,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> deleteCategory(DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> deleteCategory(@RequestBody DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException {
         return super.deleteCategory(request);
     }
 
@@ -65,7 +62,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> updateCategory(UpdateCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> updateCategory(@RequestBody UpdateCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException {
         return super.updateCategory(request);
     }
 

@@ -5,11 +5,13 @@ import com.codinginfinity.benchmark.management.service.Request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Created by andrew on 2016/06/26.
  */
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeleteCategoryResponse<T extends Category> extends Request {
