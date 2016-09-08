@@ -31,10 +31,7 @@ import javax.inject.Inject;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -158,6 +155,9 @@ public class ExperimentManegementImpl implements ExperimentManagement {
             }
         }
         experimentRepository.save(experiment);
+
+        // Randomize jobs in experiment
+        Collections.shuffle(experiment.getJobs());
 
         //Put the experiment(jobs) on the queue
         experiment.getJobs().forEach(job -> {
