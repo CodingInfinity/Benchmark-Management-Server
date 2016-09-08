@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class Experiment implements Serializable {
     /**
      * Date when request was sent to benchmarking system.
      */
-    private ZonedDateTime requestedDate = ZonedDateTime.now();
+    private ZonedDateTime requestedDate = ZonedDateTime.now(ZoneId.of("Africa/Johannesburg"));
 
     @NotNull
     @Column(name = "timeout", nullable = false)

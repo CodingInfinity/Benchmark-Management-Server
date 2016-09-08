@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
@@ -31,7 +32,7 @@ public class Measurement implements Serializable {
     /**
      * Date and time at which the measurement was made.
      */
-    private ZonedDateTime timestamp = ZonedDateTime.now();
+    private ZonedDateTime timestamp = ZonedDateTime.now(ZoneId.of("Africa/Johannesburg"));
 
     @NotNull
     /**

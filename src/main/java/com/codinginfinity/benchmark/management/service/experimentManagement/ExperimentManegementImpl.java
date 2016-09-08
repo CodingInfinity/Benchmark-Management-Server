@@ -330,7 +330,7 @@ public class ExperimentManegementImpl implements ExperimentManagement {
     }
 
     public GetNodesSummaryResponse getNodesSummary(GetNodesSummaryRequest request) {
-        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Africa/Johannesburg"));
         List<NodeSummary> overview = this.nodePool.getNodes().stream().map(node -> {
             NodeSummary summary = new NodeSummary();
             if (node.getCurrent() == -1 || node.getHeartbeat() == -1) {
