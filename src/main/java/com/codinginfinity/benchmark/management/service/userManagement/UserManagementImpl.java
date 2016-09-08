@@ -273,21 +273,6 @@ public class UserManagementImpl implements UserManagement {
     }
 
     @Override
-    public GetUserWithAuthoritiesByIdResponse getUserWithAuthoritiesById(GetUserWithAuthoritiesByIdRequest request) throws NonExistentException {
-        Optional<User> user = userRepository.findOneById(request.getId());
-        if (!user.isPresent()) {
-            throw new NonExistentException("User does not exist");
-        }
-
-        /*
-         * As this is a many-to-many relationship on the ORM, the mapper will default to lazy initialization. Issue
-         * a request on the object to force ORM to retrieve rest of object graph.
-         */
-        user.get().getAuthorities().size();
-        return new GetUserWithAuthoritiesByIdResponse(user.get());
-    }
-
-    @Override
     public GetUserWithAuthoritiesResponse getUserWithAuthorities(GetUserWithAuthoritiesRequest request) throws NonExistentException {
         User user = getUserWithAuthoritiesByLogin(new GetUserWithAuthoritiesByLoginRequest(SecurityUtils.getCurrentUsername())).getUser();
         return new GetUserWithAuthoritiesResponse(user);

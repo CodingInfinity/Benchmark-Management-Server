@@ -131,15 +131,6 @@ public interface UserManagement {
     GetUserWithAuthoritiesByLoginResponse getUserWithAuthoritiesByLogin(GetUserWithAuthoritiesByLoginRequest request) throws NonExistentException;
 
     /**
-     * Get the roles associated with a specific user ID.
-     * @param request The request encapsulated as an {@link GetUserWithAuthoritiesByIdRequest} object.
-     * @return Returns the result in an encapsulated {@link GetUserWithAuthoritiesByIdResponse} object.
-     * @throws NonExistentException Thrown when the specified user ID can't be found in the system.
-     * @since 1.0.0
-     */
-    GetUserWithAuthoritiesByIdResponse getUserWithAuthoritiesById(GetUserWithAuthoritiesByIdRequest request) throws NonExistentException;
-
-    /**
      * Get the roles associated with the user in the current security context.
      * @param request The request encapsulated as an {@link GetUserWithAuthoritiesRequest} object.
      * @return Returns the result in an encapsulated {@link GetUserWithAuthoritiesResponse} object.
