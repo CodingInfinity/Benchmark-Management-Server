@@ -15,6 +15,9 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class UpdateRepoEntityMetadataRequest<C extends Category, T extends RepoEntity<C>> extends Request {
+
+    private static final long serialVersionUID = 6051758393474349120L;
+
     Long id;
 
     String name;

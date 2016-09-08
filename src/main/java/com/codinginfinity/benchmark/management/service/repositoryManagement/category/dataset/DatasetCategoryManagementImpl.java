@@ -1,5 +1,6 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset;
 
+import com.codinginfinity.benchmark.management.domain.Dataset;
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.CategoryManagementImpl;
@@ -7,6 +8,7 @@ import com.codinginfinity.benchmark.management.service.repositoryManagement.cate
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.exception.NonExistentDatasetCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -27,10 +29,13 @@ import javax.inject.Inject;
  */
 
 @Service
-public class DatasetCategoryManagementImpl extends CategoryManagementImpl<DatasetCategory, DatasetCategoryRepository> implements DatasetCategoryManagement {
+public class DatasetCategoryManagementImpl extends CategoryManagementImpl<DatasetCategory, DatasetCategoryRepository, Dataset, DatasetManagement> implements DatasetCategoryManagement {
 
     @Inject
     private DatasetCategoryRepository repository;
+
+    @Inject
+    private DatasetManagement datasetManagement;
 
     @Override
     protected DatasetCategoryRepository getRepository() {
@@ -40,6 +45,11 @@ public class DatasetCategoryManagementImpl extends CategoryManagementImpl<Datase
     @Override
     protected DatasetCategory newCategory() {
         return new DatasetCategory();
+    }
+
+    @Override
+    protected DatasetManagement getRepositoryManagement() {
+        return this.datasetManagement;
     }
 
     @Override

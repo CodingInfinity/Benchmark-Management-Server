@@ -18,5 +18,6 @@ import java.util.List;
 public class GetAllRepoEntitiesResponse<T extends RepoEntity>extends Response
 {
     private static final long serialVersionUID = -1099271693727229319L;
+
     private List<T> entities;
 }

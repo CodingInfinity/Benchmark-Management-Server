@@ -1,7 +1,9 @@
 package com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm;
 
+import com.codinginfinity.benchmark.management.domain.Algorithm;
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.CategoryManagementImpl;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.exception.DuplicateAlgorithmCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
@@ -26,10 +28,13 @@ import javax.inject.Inject;
  */
 
 @Service
-public class AlgorithmCategoryManagementImpl extends CategoryManagementImpl<AlgorithmCategory, AlgorithmCategoryRepository> implements AlgorithmCategoryManagement {
+public class AlgorithmCategoryManagementImpl extends CategoryManagementImpl<AlgorithmCategory, AlgorithmCategoryRepository, Algorithm, AlgorithmManagement> implements AlgorithmCategoryManagement {
 
     @Inject
     private AlgorithmCategoryRepository repository;
+
+    @Inject
+    private AlgorithmManagement algorithmManagement;
 
     @Override
     protected AlgorithmCategoryRepository getRepository() {
@@ -39,6 +44,11 @@ public class AlgorithmCategoryManagementImpl extends CategoryManagementImpl<Algo
     @Override
     protected AlgorithmCategory newCategory() {
         return new AlgorithmCategory();
+    }
+
+    @Override
+    protected AlgorithmManagement getRepositoryManagement() {
+        return this.algorithmManagement;
     }
 
     @Override

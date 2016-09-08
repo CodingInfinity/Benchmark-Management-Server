@@ -1,6 +1,7 @@
 package com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.algorithm;
 
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagementImpl;
 import org.mockito.Mockito;
@@ -21,5 +22,10 @@ public class AlgorithmCategorySpringTest {
     @Bean
     public AlgorithmCategoryRepository categoryRepository() {
         return Mockito.mock(AlgorithmCategoryRepository.class);
+    }
+
+    @Bean
+    public AlgorithmManagement algorithmManagement() {
+        return Mockito.mock(AlgorithmManagement.class);
     }
 }

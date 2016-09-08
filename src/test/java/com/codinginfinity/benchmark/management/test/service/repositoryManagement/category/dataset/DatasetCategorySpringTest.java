@@ -3,6 +3,8 @@ package com.codinginfinity.benchmark.management.test.service.repositoryManagemen
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagementImpl;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,5 +23,10 @@ public class DatasetCategorySpringTest {
     @Bean
     public DatasetCategoryRepository categoryRepository() {
         return Mockito.mock(DatasetCategoryRepository.class);
+    }
+
+    @Bean
+    public DatasetManagement datasetManagement() {
+        return Mockito.mock(DatasetManagement.class);
     }
 }
