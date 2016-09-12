@@ -1,7 +1,9 @@
 package com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.algorithm;
 
+import com.codinginfinity.benchmark.management.domain.Algorithm;
 import com.codinginfinity.benchmark.management.domain.AlgorithmCategory;
 import com.codinginfinity.benchmark.management.repository.AlgorithmCategoryRepository;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.algorithm.AlgorithmManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.algorithm.AlgorithmCategoryManagement;
 import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.DeleteCategoryTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -12,7 +14,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 @SpringApplicationConfiguration(AlgorithmCategorySpringTest.class)
 public class DeleteAlgorithmCategoryTest extends DeleteCategoryTest<AlgorithmCategory,
         AlgorithmCategoryRepository,
-        AlgorithmCategoryManagement> {
+        AlgorithmCategoryManagement,
+        Algorithm,
+        AlgorithmManagement> {
 
     @Override
     protected Long getExpectedId() {

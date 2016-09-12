@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.management.repository.CategoryRepository;
 import com.codinginfinity.benchmark.management.security.AuthoritiesConstants;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.RepositoryEntityManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.LinkedException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
@@ -54,7 +55,7 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
 
     @Override
     @Transactional
-    public DeleteCategoryResponse<T> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException {
+    public DeleteCategoryResponse<T> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException, LinkedException {
         V repository = getRepository();
 
         Optional<T> categoryExists = repository.findOneById(request.getId());
@@ -65,18 +66,9 @@ public abstract class CategoryManagementImpl<T extends Category, V extends Categ
         ;
         try {
             List<E> repoEntities = getRepositoryManagement().getRepoEntityByCategory(new GetRepoEntityByCategoryRequest<T, E>(categoryExists.get().getId())).getEntities();
-            repoEntities.stream().forEach(repoEntity -> {
-                repoEntity.getCategories().remove(categoryExists.get());
-                try {
-                    getRepositoryManagement().updateRepoEntityMetaData(new UpdateRepoEntityMetadataRequest<T, E>(
-                            repoEntity.getId(),
-                            repoEntity.getName(),
-                            repoEntity.getUser(),
-                            repoEntity.getCategories(),
-                            repoEntity.getDescription()
-                    ));
-                } catch (NonExistentRepoEntityException ignored) { }
-            });
+            if (!repoEntities.isEmpty()) {
+                throw new LinkedException("Category is associated to repository entities");
+            }
 
         } catch (NonExistentRepoEntityException ignored) { }
 

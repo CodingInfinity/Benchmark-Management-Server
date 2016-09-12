@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 
 import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.LinkedException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
@@ -46,7 +47,7 @@ public interface CategoryManagement<T extends Category> {
      *     that doesn't exist.
      * @since 1.0.0
      */
-    DeleteCategoryResponse<T> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException;
+    DeleteCategoryResponse<T> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException, LinkedException;
 
     /**
      * Updates a category's associated metadata.

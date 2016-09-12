@@ -21,7 +21,7 @@ import java.util.List;
 public interface DatasetRepository extends RepoEntityRepository<Dataset> {
 
     @Override
-    @Query("select d.id, d.name, d.description, d.categories from Dataset d " +
+    @Query("select d.id, d.name, d.description from Dataset d " +
             "inner join d.categories dc where dc.id = :categoryId")
     List<Dataset> findByCategory(@Param("categoryId") Long categoryId);
 }

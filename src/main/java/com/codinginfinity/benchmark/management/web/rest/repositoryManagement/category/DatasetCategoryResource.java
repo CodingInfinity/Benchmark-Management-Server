@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.LinkedException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.AddCategoryRequest;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.DeleteCategoryRequest;
@@ -53,7 +54,7 @@ public class DatasetCategoryResource extends CategoryResource<DatasetCategory, D
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public ResponseEntity<?> deleteCategory(@RequestBody DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> deleteCategory(@RequestBody DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException, LinkedException {
         return super.deleteCategory(request);
     }
 

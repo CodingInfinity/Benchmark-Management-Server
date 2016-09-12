@@ -21,7 +21,7 @@ import java.util.List;
 public interface AlgorithmRepository extends RepoEntityRepository<Algorithm> {
 
     @Override
-    @Query("select a.id, a.name, a.description, a.categories from Algorithm a " +
+    @Query("select a.id, a.name, a.description from Algorithm a " +
             "inner join a.categories ac where ac.id = :categoryId")
     List<Algorithm> findByCategory(@Param("categoryId") Long categoryId);
 }

@@ -4,6 +4,7 @@ import com.codinginfinity.benchmark.management.domain.Category;
 import com.codinginfinity.benchmark.management.repository.CategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.LinkedException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public abstract class CategoryResource<T extends Category, S extends CategoryRep
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException {
+    public ResponseEntity<?> deleteCategory(DeleteCategoryRequest<T> request) throws NonExistentCategoryException, LinkedException {
         getCategoryManagement().deleteCategory(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -3,6 +3,7 @@ package com.codinginfinity.benchmark.management.service.repositoryManagement.cat
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.CategoryManagement;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.DuplicateCategoryException;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.LinkedException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.exception.NonExistentCategoryException;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.request.*;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.response.*;
@@ -30,7 +31,7 @@ public interface DatasetCategoryManagement extends CategoryManagement<DatasetCat
     AddCategoryResponse<DatasetCategory> addCategory(AddCategoryRequest<DatasetCategory> request) throws DuplicateCategoryException;
 
     @Override
-    DeleteCategoryResponse<DatasetCategory> deleteCategory(DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException;
+    DeleteCategoryResponse<DatasetCategory> deleteCategory(DeleteCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException, LinkedException;
 
     @Override
     UpdateCategoryResponse<DatasetCategory> updateCategory(UpdateCategoryRequest<DatasetCategory> request) throws NonExistentCategoryException;
@@ -42,5 +43,5 @@ public interface DatasetCategoryManagement extends CategoryManagement<DatasetCat
     GetCategoryByNameResponse<DatasetCategory> getCategoryByName(GetCategoryByNameRequest<DatasetCategory> request) throws NonExistentCategoryException;
 
     @Override
-    GetAllCategoriesResponse<DatasetCategory> getAllCategories(GetAllCategoriesRequest<DatasetCategory> request) throws  NonExistentCategoryException;
+    GetAllCategoriesResponse<DatasetCategory> getAllCategories(GetAllCategoriesRequest<DatasetCategory> request) throws NonExistentCategoryException;
 }

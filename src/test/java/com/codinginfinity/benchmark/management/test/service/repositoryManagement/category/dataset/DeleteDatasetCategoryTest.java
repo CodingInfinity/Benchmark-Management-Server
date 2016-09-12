@@ -1,8 +1,10 @@
 package com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.dataset;
 
+import com.codinginfinity.benchmark.management.domain.Dataset;
 import com.codinginfinity.benchmark.management.domain.DatasetCategory;
 import com.codinginfinity.benchmark.management.repository.DatasetCategoryRepository;
 import com.codinginfinity.benchmark.management.service.repositoryManagement.category.dataset.DatasetCategoryManagement;
+import com.codinginfinity.benchmark.management.service.repositoryManagement.dataset.DatasetManagement;
 import com.codinginfinity.benchmark.management.test.service.repositoryManagement.category.DeleteCategoryTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
@@ -12,7 +14,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 @SpringApplicationConfiguration(DatasetCategorySpringTest.class)
 public class DeleteDatasetCategoryTest extends DeleteCategoryTest<DatasetCategory,
         DatasetCategoryRepository,
-        DatasetCategoryManagement> {
+        DatasetCategoryManagement,
+        Dataset,
+        DatasetManagement> {
 
     @Override
     protected Long getExpectedId() {
