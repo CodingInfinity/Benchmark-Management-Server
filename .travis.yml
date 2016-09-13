@@ -15,7 +15,7 @@ after_success:
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - export REPO=codinginfinity/benchmark-management
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- docker build -f src/main/docker/Dockerfile -t $REPO:$TRAVIS_COMMIT .
+- docker build -t $REPO:$TRAVIS_COMMIT src/main/docker/
 - docker tag $REPO:$TRAVIS_COMMIT $REPO:$TAG
 - docker tag $REPO:$TRAVIS_COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
