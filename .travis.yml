@@ -14,14 +14,10 @@ after_success:
 - ls -al src/main/docker/management-0.1-SNAPSHOT.war
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - export REPO=codinginfinity/benchmark-management
-- echo $REPO
-- echo $TRAVIS_BRANCH
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- echo $TAG
-- echo $COMMIT
-- docker build -f src/main/docker/Dockerfile -t $REPO:$COMMIT
-- docker tag $REPO:$COMMIT $REPO:$TAG
-- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker build -f src/main/docker/Dockerfile -t $REPO:$TRAVIS_COMMIT
+- docker tag $REPO:$TRAVIS_COMMIT $REPO:$TAG
+- docker tag $REPO:$TRAVIS_COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
 
 notifications:
