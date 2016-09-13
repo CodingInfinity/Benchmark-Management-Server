@@ -12,7 +12,7 @@ after_success:
 - mvn clean test jacoco:report coveralls:report
 - ln -s ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
 - ls -al src/main/docker/management-0.1-SNAPSHOT.war
-- docker login -u=$DOCKER_USER -p=$DOCKER_PASS
+- docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - export REPO=codinginfinity/benchmark-management
 - echo $REPO
 - echo $TRAVIS_BRANCH
