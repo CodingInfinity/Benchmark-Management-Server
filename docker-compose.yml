@@ -13,3 +13,26 @@ elasticsearch:
   ports:
       - 9200:9200
       - 9300:9300
+
+postgresql:
+  image: postgres:9.4.9
+  ports:
+      - 5432:5432
+
+benchmark_management:
+  image: codinginfinity/benchmark_management
+  ports:
+      - 8081:8081
+  links:
+      - activemq
+      - elasticsearch
+      - postgresql
+  environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+benchmark_web_interface:
+    image: codinginfinity/web_interface
+    ports:
+        - 80:80
+    links:
+        - benchmark_management

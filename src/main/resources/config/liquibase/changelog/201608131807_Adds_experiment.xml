@@ -45,7 +45,7 @@
                 baseTableName="experiment"
                 constraintName="fk_experiment_user_id"
                 referencedColumnNames="id"
-                referencedTableName="user"/>
+                referencedTableName="users"/>
 
     </changeSet>
 </databaseChangeLog>

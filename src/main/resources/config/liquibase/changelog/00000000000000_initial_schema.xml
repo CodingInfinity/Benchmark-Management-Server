@@ -20,7 +20,7 @@
     -->
     <changeSet id="00000000000001" author="benchmark">
         
-        <createTable tableName="user">
+        <createTable tableName="users">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -44,13 +44,13 @@
         </createTable>
         
         <createIndex indexName="idx_user_username"
-            tableName="user"
+            tableName="users"
             unique="true">
             <column name="username" type="varchar(50)"/>
         </createIndex>
 
         <createIndex indexName="idx_user_email"
-            tableName="user"
+            tableName="users"
             unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
@@ -82,11 +82,11 @@
                                  baseTableName="user_authority"
                                  constraintName="fk_user_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="user"/>
+                                 referencedTableName="users"/>
         <loadData encoding="UTF-8"
                   file="config/liquibase/users.csv"
                   separator=";"
-                  tableName="user">
+                  tableName="users">
             <column name="activated" type="boolean"/>
         </loadData>
 
@@ -131,7 +131,7 @@
             baseTableName="oauth_client_token"
             constraintName="fk_oauth_client_tokn_user_name"
             referencedColumnNames="username"
-            referencedTableName="user"/>
+            referencedTableName="users"/>
 
         <createTable tableName="oauth_access_token">
             <column name="token_id" type="varchar(255)"/>
@@ -149,7 +149,7 @@
             baseTableName="oauth_access_token"
             constraintName="fk_oauth_access_tokn_user_name"
             referencedColumnNames="username"
-            referencedTableName="user"/>
+            referencedTableName="users"/>
 
         <createTable tableName="oauth_refresh_token">
             <column name="token_id" type="varchar(255)"/>

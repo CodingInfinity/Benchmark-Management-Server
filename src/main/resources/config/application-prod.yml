@@ -12,10 +12,9 @@
 
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/postgresql
-        name:
-        username: postgresql
-        password:
+        url: jdbc:postgresql://postgresql:5432/postgres
+        username: postgres
+        password: postgres
     jpa:
         database-platform: org.hibernate.dialect.PostgreSQL82Dialect
         database: POSTGRESQL
@@ -27,13 +26,17 @@ spring:
     data:
         elasticsearch:
             cluster-name:
-            cluster-nodes: localhost:9300
+            cluster-nodes: elasticsearch:9300
     thymeleaf:
         cache: true
     activemq:
-        broker-url: tcp://localhost:61616
+        broker-url: tcp://activemq:61616
         in-memory: false
         pooled: false
+    mail:
+        host: localhost
+        port: 25
+        test-connection: false
 
 liquibase:
     contexts: prod
@@ -50,8 +53,6 @@ server:
 # ===================================================================
 
 benchmark:
-    datasource:
-
     security:
         authentication:
             oauth:

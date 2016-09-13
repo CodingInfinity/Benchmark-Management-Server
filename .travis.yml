@@ -1,8 +1,24 @@
+sudo: required
+
+services:
+  - docker
+
 language: java
+
 jdk:
 - oraclejdk8
+
 after_success:
 - mvn clean test jacoco:report coveralls:report
+- ln -s ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export REPO=codinginfinity/benchmark-management
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- docker build -f src/main/docker/Dockerfile -t $REPO:$COMMIT
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
+
 notifications:
   slack:
     secure: en3ZIdAsMkDDIj+7/mITpmuAox9+uSuf0ZQuhETuiincltobAXdx0Z9cIdIX32MakkCvpVxZU1RPi/MKKkicK4fEBMsRokRmUxozhfPRegoOdGmT2hzEmlrC4DMb88Vt9SdcMHFWUStxReRkX1ONlSAHx1Zir+0883eHQkctBQN8PLZ+nSWM9OxxINjFg3U52p/xv8yIb7baboyTTSPJeGw+O/YjiyeDoCtS9HFe3kiKFobzUBXAkMxW/gamHOS3mDt0sZGH7JhddgU/7FojtxznpYHkb/SIQDKM4Ik6WHHUeRCHgDbbpWhNYKJy7k1cYCl9Qs/xpJbXHr/1nDOcMXLElNYDnoLkJTZPrx/3YpKF1hLJEd8cliBXAAiEgO5v8imMpqJoZk8/mLZaYt4OZJSgNv2QARXJ28nwk1uElo1LWD4oEP0tWFBWEG4zJP57mui4K8dXt44jhbCRp1DG8w9SHdfasdKxy7GZh+uGIeBU9e5v8wYzctOPReLHTPuzLJQQ60yaVCpsBCS+j9U8XVWthtte6CmJs4TbEr1A5SwLi3AjbZAHnijr3PymhOTKcHymkHFuodhCC6uy3Tw+2ykLpOW2RSPXp3sVQ6C7knwxBIRSyy0orHcecsxHaBogXwJLUFIBNj+1fybzoGvpIXkxdE9Cij3Mp2m3+88Bofg=

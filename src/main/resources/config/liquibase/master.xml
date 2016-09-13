@@ -11,7 +11,6 @@
     <include file="classpath:config/liquibase/changelog/201607022224_Adds_dataset.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608131807_Adds_experiment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608131807_Adds_jobs.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/201608131807_Adds_result_entry.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608141945_Adds_experiment_jobs.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608221523_Adds_measurements.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/201608221635_Adds_job_measurements.xml" relativeToChangelogFile="false"/>

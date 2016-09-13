@@ -17,8 +17,6 @@ spring:
        name: Benchmark Management Server
     profiles:
        active: dev
-    datasource:
-        schema: classpath:schema.sql
     h2:
         console:
             enabled: true

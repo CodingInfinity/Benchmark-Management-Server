@@ -69,7 +69,7 @@
                 baseTableName="dataset"
                 constraintName="fk_dataset_user_id"
                 referencedColumnNames="id"
-                referencedTableName="user"/>
+                referencedTableName="users"/>
 
     </changeSet>
 </databaseChangeLog>

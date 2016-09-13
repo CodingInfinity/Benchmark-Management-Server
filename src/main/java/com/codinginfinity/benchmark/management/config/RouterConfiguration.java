@@ -6,6 +6,7 @@ import com.codinginfinity.benchmark.management.thrift.messages.ThriftMeasurement
 import com.codinginfinity.benchmark.management.thrift.messages.ThriftResultMessageDataFormat;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Inject;
@@ -37,9 +38,12 @@ public class RouterConfiguration extends RouteBuilder {
     @Inject
     private ThriftHeartbeatMessageDataFormat thriftHeartbeatMessageDataFormat;
 
+    @Value("${spring.activemq.broker-url}")
+    private String brokerUrl;
+
     @Override
     public void configure() throws Exception {
-        camelContext.addComponent("activemq", activeMQComponent("tcp://localhost:61616"));
+        camelContext.addComponent("activemq", activeMQComponent(brokerUrl));
         from("direct:jobs").marshal(thriftJobSpecificationMessageDataFormat).to("activemq:jobs");
         from("activemq:results").unmarshal(thriftResultMessageDataFormat).to("direct:results");
         from("activemq:heartbeat").unmarshal(thriftHeartbeatMessageDataFormat).to("direct:heartbeat");

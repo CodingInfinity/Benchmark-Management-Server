@@ -233,6 +233,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1203-jdbc42</version>
+        </dependency>
+
         <!-- Springframework Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -488,11 +494,11 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/postgresql</url>
-                    <defaultSchemaName></defaultSchemaName>
-                    <username>postgresql</username>
-                    <password></password>
-                    <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&amp;hibernate.ejb.naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy</referenceUrl>
+                    <url>jdbc:postgresql://postgresql:5432/postgres</url>
+                    <defaultSchemaName/>
+                    <username>postgres</username>
+                    <password>postgres</password>
+                    <referenceUrl>hibernate:spring:com.codinginfinity.benchmark.management.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&amp;hibernate.ejb.naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                     <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>

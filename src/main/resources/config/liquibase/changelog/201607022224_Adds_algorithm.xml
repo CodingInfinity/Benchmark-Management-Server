@@ -69,7 +69,7 @@
                 baseTableName="algorithm"
                 constraintName="fk_algorithm_user_id"
                 referencedColumnNames="id"
-                referencedTableName="user"/>
+                referencedTableName="users"/>
 
     </changeSet>
 </databaseChangeLog>
