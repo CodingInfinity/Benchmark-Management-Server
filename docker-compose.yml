@@ -20,7 +20,7 @@ postgresql:
       - 5432:5432
 
 benchmark_management:
-  image: codinginfinity/benchmark_management
+  image: codinginfinity/benchmark-management
   ports:
       - 8081:8081
   links:
@@ -31,7 +31,7 @@ benchmark_management:
       - SPRING_PROFILES_ACTIVE=prod
 
 benchmark_web_interface:
-    image: codinginfinity/web_interface
+    image: codinginfinity/web-interface
     ports:
         - 80:80
     links:
