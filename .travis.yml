@@ -11,9 +11,13 @@ jdk:
 after_success:
 - mvn clean test jacoco:report coveralls:report
 - ln -s ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
-- docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+- ls -al src/main/docker/management-0.1-SNAPSHOT.war
+- docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - export REPO=codinginfinity/benchmark-management
+- echo $REPO
+- echo $TRAVIS_BRANCH
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- echo $TAG
 - docker build -f src/main/docker/Dockerfile -t $REPO:$COMMIT
 - docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
