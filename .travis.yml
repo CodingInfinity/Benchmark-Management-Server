@@ -9,7 +9,9 @@ jdk:
 - oraclejdk8
 
 after_success:
-- mvn clean test jacoco:report coveralls:report
+- mvn jacoco:report coveralls:report
+- mvn package -DskipTests=true
+- ls -al ./target
 - ln -s ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
 - ls -al src/main/docker/management-0.1-SNAPSHOT.war
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
