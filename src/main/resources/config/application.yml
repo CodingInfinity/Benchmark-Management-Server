@@ -13,10 +13,10 @@
 # ===================================================================
 
 spring:
+    application:
+       name: Benchmark Management Server
     profiles:
        active: dev
-    datasource:
-        schema: classpath:schema.sql
     h2:
         console:
             enabled: true
@@ -63,5 +63,8 @@ benchmark:
         baseUrl: localhost:8080
 
 server:
-    port: 8081
+  port: 8081
 
+multipart:
+  maxFileSize: 10000MB
+  maxRequestSize: 10000MB

@@ -33,6 +33,13 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="filename" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
         </createTable>
 
         <createTable tableName="dataset_dataset_category">
@@ -56,6 +63,13 @@
                                  constraintName="fk_dataset_dataset_category_dataset_id"
                                  referencedColumnNames="id"
                                  referencedTableName="dataset_category"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="dataset"
+                constraintName="fk_dataset_user_id"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
 
     </changeSet>
 </databaseChangeLog>
