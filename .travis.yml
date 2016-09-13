@@ -11,9 +11,7 @@ jdk:
 after_success:
 - mvn jacoco:report coveralls:report
 - mvn package -DskipTests=true
-- ls -al ./target
-- ln -s ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
-- ls -al src/main/docker/management-0.1-SNAPSHOT.war
+- ln ./target/management-0.1-SNAPSHOT.war src/main/docker/management-0.1-SNAPSHOT.war
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - export REPO=codinginfinity/benchmark-management
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
