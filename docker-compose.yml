@@ -35,4 +35,4 @@ benchmark-web-interface:
     ports:
         - 80:80
     links:
-        - benchmark_management
+        - benchmark-management
