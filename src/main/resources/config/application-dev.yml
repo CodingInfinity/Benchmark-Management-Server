@@ -46,6 +46,7 @@ spring:
     thymeleaf:
         cache: false
     activemq:
+        broker-url: tcp://127.0.0.1:61616
         in-memory: true
         pooled: false
 
