@@ -126,4 +126,11 @@ public interface ExperimentManagement {
      * @return Returns the result in an encapsulated {@link GetNodesSummaryResponse} object.
      */
     GetNodesSummaryResponse getNodesSummary(GetNodesSummaryRequest request);
+
+    /**
+     * Returns a list of all experiments that can be compared to the one identifeid by the id
+     * @param request The request encapsulated as an {@link GetCompareExperimentsByIdRequest} object.
+     * @return Returns the result in an encapsulated {@link GetCompareExperimentsByIdResponse} object.
+     */
+    GetCompareExperimentsByIdResponse getCompareExperiments(GetCompareExperimentsByIdRequest request) throws NonExistentException;
 }
