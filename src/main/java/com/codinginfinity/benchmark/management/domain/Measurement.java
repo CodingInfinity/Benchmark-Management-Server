@@ -2,6 +2,7 @@ package com.codinginfinity.benchmark.management.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import java.time.ZonedDateTime;
  */
 
 @Data
+@ToString(exclude = "job")
 @Entity
 public class Measurement implements Serializable {
 

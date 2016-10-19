@@ -360,19 +360,20 @@ public class ExperimentManegementImpl implements ExperimentManagement {
                 List<Dataset> baseDatasets = ExperimentUtils.getAllDatasetsFromExperiment(baseExperiment.get());
 
                 List<Experiment> allExperiments = experimentRepository.findAll();
-                List<Experiment> compareExperiments = allExperiments.stream().map(experiment ->{
-                    if(experiment.getId().equals(baseExperiment.get().getId())){
+                List<Experiment> compareExperiments = allExperiments.stream().filter(experiment ->{
+                    if(!experiment.getId().equals(baseExperiment.get().getId())){
                         if(!experiment.getJobs().isEmpty()){
                             List<AlgorithmCategory> tempAlgorithmCategories = experiment.getJobs().get(0).getAlgorithm().getCategories();
                             List<Dataset> tempDatasets = ExperimentUtils.getAllDatasetsFromExperiment(experiment);
 
                             if(ExperimentUtils.intersectionAlgorithmCategory(tempAlgorithmCategories, baseAlgorithmCategories) && ExperimentUtils.intersectionDataset(tempDatasets, baseDatasets)){
-                                return experiment;
+                                return true;
                             }
                         }
                     }
-                    return null;
+                    return false;
                 }).collect(Collectors.toList());
+                compareExperiments.remove(null);
                 return new GetCompareExperimentsByIdResponse(compareExperiments);
             }else{
                 throw new NonExistentException();

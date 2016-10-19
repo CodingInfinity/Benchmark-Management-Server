@@ -31,7 +31,7 @@ benchmark-management:
       - SPRING_PROFILES_ACTIVE=prod
 
 benchmark-web-interface:
-    image: codinginfinity/web-interface
+    image: codinginfinity/benchmark-web:develop
     ports:
         - 80:80
     links:
