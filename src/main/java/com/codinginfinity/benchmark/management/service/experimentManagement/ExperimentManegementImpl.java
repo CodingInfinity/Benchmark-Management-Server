@@ -1,9 +1,7 @@
 package com.codinginfinity.benchmark.management.service.experimentManagement;
 
-import com.codinginfinity.benchmark.management.domain.Algorithm;
-import com.codinginfinity.benchmark.management.domain.Dataset;
-import com.codinginfinity.benchmark.management.domain.Experiment;
-import com.codinginfinity.benchmark.management.domain.Job;
+import com.codinginfinity.benchmark.management.service.experimentManagement.utils.ExperimentUtils;
+import com.codinginfinity.benchmark.management.domain.*;
 import com.codinginfinity.benchmark.management.repository.ExperimentRepository;
 import com.codinginfinity.benchmark.management.repository.JobRepository;
 import com.codinginfinity.benchmark.management.repository.MeasurementRepository;
@@ -28,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import javax.xml.crypto.Data;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -352,4 +351,38 @@ public class ExperimentManegementImpl implements ExperimentManagement {
         }).collect(Collectors.toList());
         return new GetNodesSummaryResponse(overview);
     }
+
+    public GetCompareExperimentsByIdResponse getCompareExperiments(GetCompareExperimentsByIdRequest request) throws NonExistentException{
+        Optional<Experiment> baseExperiment = experimentRepository.findOneById(request.getId());
+        if(baseExperiment.isPresent()){
+            if(!baseExperiment.get().getJobs().isEmpty()){
+                List<AlgorithmCategory> baseAlgorithmCategories = baseExperiment.get().getJobs().get(0).getAlgorithm().getCategories();
+                List<Dataset> baseDatasets = ExperimentUtils.getAllDatasetsFromExperiment(baseExperiment.get());
+
+                List<Experiment> allExperiments = experimentRepository.findAll();
+                List<Experiment> compareExperiments = allExperiments.stream().filter(experiment ->{
+                    if(!experiment.getId().equals(baseExperiment.get().getId())){
+                        if(!experiment.getJobs().isEmpty()){
+                            List<AlgorithmCategory> tempAlgorithmCategories = experiment.getJobs().get(0).getAlgorithm().getCategories();
+                            List<Dataset> tempDatasets = ExperimentUtils.getAllDatasetsFromExperiment(experiment);
+
+                            if(ExperimentUtils.intersectionAlgorithmCategory(tempAlgorithmCategories, baseAlgorithmCategories) && ExperimentUtils.intersectionDataset(tempDatasets, baseDatasets)){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }).collect(Collectors.toList());
+                compareExperiments.remove(null);
+                return new GetCompareExperimentsByIdResponse(compareExperiments);
+            }else{
+                throw new NonExistentException();
+            }
+
+        }else{
+            throw new NonExistentException();
+        }
+    }
+
+
 }

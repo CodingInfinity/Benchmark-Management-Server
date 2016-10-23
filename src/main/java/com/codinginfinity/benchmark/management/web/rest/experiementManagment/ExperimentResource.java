@@ -173,5 +173,23 @@ public class ExperimentResource {
 
         return new ResponseEntity<>(results, responseHeaders, HttpStatus.OK);
     }
+
+    /**
+     * GET  /experiments/compare/{id}  : Get the experiments to compare to experiment identified by {id}
+     * <p>
+     * Get the experiments to compare to experiment identified by {id}
+     * </p>
+     *
+     * @param id The id of the experiment
+     * @return ResponseEntity with status 200 (OK), with a String body containing the results in CSV format
+     */
+    @Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN})
+    @RequestMapping(value = "experiments/compare/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getCompareExerimentsById(@PathVariable Long id) throws  NonExistentException {
+
+        return new ResponseEntity<>(experimentManagement.getCompareExperiments(new GetCompareExperimentsByIdRequest(id)), HttpStatus.OK);
+    }
 }
 

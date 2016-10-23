@@ -34,7 +34,7 @@ spring:
         in-memory: false
         pooled: false
     mail:
-        host: localhost
+        host: kendy.up.ac.za
         port: 25
         test-connection: false
 
