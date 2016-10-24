@@ -62,5 +62,5 @@ benchmark:
                 tokenValidityInSeconds: 1800
     swagger:
         enabled: false
-  frontend:
-    baseUrl: nzvm1.cs.up.ac.za
+    frontend:
+        baseUrl: nzvm1.cs.up.ac.za
